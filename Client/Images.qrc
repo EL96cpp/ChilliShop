@@ -2,5 +2,8 @@
     <qresource prefix="/">
         <file>Images/header_image.jpg</file>
         <file>Images/backgound.jpg</file>
+        <file>Images/pepper.png</file>
+        <file>Images/cart.png</file>
+        <file>Images/profile.png</file>
     </qresource>
 </RCC>

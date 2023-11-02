@@ -1,27 +1,24 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(ChilliWorld VERSION 0.1 LANGUAGES CXX)
+project(Employee VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup()
 
-qt_add_executable(appChilliWorld
+qt_add_executable(appEmployee
     main.cpp
-    Fonts.qrc
-    Images.qrc
 )
 
-qt_add_qml_module(appChilliWorld
-    URI ChilliWorld
+qt_add_qml_module(appEmployee
+    URI Employee
     VERSION 1.0
-    QML_FILES Main.qml MainPage.qml ProfilePage.qml
+    QML_FILES Main.qml
 )
 
-set_target_properties(appChilliWorld PROPERTIES
+set_target_properties(appEmployee PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -29,11 +26,11 @@ set_target_properties(appChilliWorld PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(appChilliWorld
+target_link_libraries(appEmployee
     PRIVATE Qt6::Quick
 )
 
-install(TARGETS appChilliWorld
+install(TARGETS appEmployee
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
