@@ -7,6 +7,7 @@ import Qt5Compat.GraphicalEffects
 Page {
 
     id: main_page
+    visible: false
 
     Image {
 
@@ -63,12 +64,6 @@ Page {
             id: login_rectangle
             width: login_image.width * 3
             height: header_image.height
-
-            Component.onCompleted: {
-
-                console.log(width + " " + height);
-
-            }
 
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: header_image.right

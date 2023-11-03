@@ -21,7 +21,7 @@ Window {
     StackView {
 
         id: stack_view
-        initialItem: main_page
+        initialItem: profile_page
         anchors.fill: parent
 
         pushEnter: Transition {
