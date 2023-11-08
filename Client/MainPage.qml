@@ -254,7 +254,6 @@ Page {
 
             id: search_column
 
-
         }
     }
 

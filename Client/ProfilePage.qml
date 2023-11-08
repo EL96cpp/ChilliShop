@@ -49,7 +49,6 @@ Page {
         width: main_window.width
         source: "qrc:/Images/header_image.jpg"
 
-
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
 
@@ -93,6 +92,7 @@ Page {
 
             id: menu_text_rectangle
             width: menu_text.paintedWidth * 2
+
             height: profile_header_image.height
             anchors.right: parent.right
             anchors.rightMargin: 100
