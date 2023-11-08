@@ -21,7 +21,7 @@ Window {
     StackView {
 
         id: stack_view
-        initialItem: profile_page
+        initialItem: main_page
         anchors.fill: parent
 
         pushEnter: Transition {
@@ -67,6 +67,8 @@ Window {
     ProfilePage {
         id: profile_page
     }
+
+
 
     FontLoader {
 

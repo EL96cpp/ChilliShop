@@ -18,7 +18,7 @@ qt_add_executable(appChilliWorld
 qt_add_qml_module(appChilliWorld
     URI ChilliWorld
     VERSION 1.0
-    QML_FILES Main.qml MainPage.qml ProfilePage.qml
+    QML_FILES Main.qml MainPage.qml ProfilePage.qml LoginForm.qml RegisterForm.qml
 )
 
 set_target_properties(appChilliWorld PROPERTIES

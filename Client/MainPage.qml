@@ -7,7 +7,18 @@ import Qt5Compat.GraphicalEffects
 Page {
 
     id: main_page
-    visible: false
+    visible: true
+
+    Connections {
+
+        target: profile_page
+        onToMenu: {
+
+            stack_view.pop(main_page);
+
+        }
+
+    }
 
     Image {
 
@@ -289,8 +300,6 @@ Page {
             anchors.topMargin: 15
 
         }
-
-
 
     }
 }
