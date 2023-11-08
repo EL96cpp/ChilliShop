@@ -18,6 +18,8 @@ add_executable(Server
   server.h
   sqlservice.cpp
   sqlservice.h
+  clientconnection.cpp
+  clientconnection.h
 )
 target_link_libraries(Server Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network)
 
