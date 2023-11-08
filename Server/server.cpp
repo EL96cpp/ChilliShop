@@ -5,7 +5,6 @@ Server::Server()
 
 }
 
-void Server::QTcpServer::incomingConnection(qintptr handle)
-{
+void Server::incomingConnection(qintptr handle) {
 
 }
