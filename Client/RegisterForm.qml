@@ -8,7 +8,7 @@ Rectangle {
 
     id: register_rectangle
     width: 500
-    height: 650
+    height: 700
 
     visible: false
 
@@ -18,10 +18,15 @@ Rectangle {
     border.color: "#4e1800"
 
     anchors.top: profile_header_image.bottom
-    anchors.topMargin: 100
+    anchors.topMargin: 70
     anchors.horizontalCenter: parent.horizontalCenter
 
     signal toLoginForm();
+
+    property int text_edits_point_size: 16
+    property int header_texts_point_size: 14
+    property int text_edits_distance: 65
+    property int header_texts_bottom_margin: 10
 
     Rectangle {
 
@@ -53,7 +58,7 @@ Rectangle {
         text: "РЕГИСТРАЦИЯ"
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 25
+        font.pointSize: 20
         font.letterSpacing: 10
         font.bold: true
         anchors.horizontalCenter: parent.horizontalCenter
@@ -91,15 +96,57 @@ Rectangle {
 
     Text {
 
+        id: register_name_title
+        text: "Введите ваше имя"
+        color: "#E2E2E2"
+        font.family: regular_font.name
+        font.pointSize: header_texts_point_size
+        font.wordSpacing: 5
+
+        anchors.bottom: register_name_rect.top
+        anchors.bottomMargin: header_texts_bottom_margin
+        anchors.left: register_name_rect.left
+
+    }
+
+    Rectangle {
+
+        id: register_name_rect
+        width: register_rectangle.width/1.2
+        height: register_phone_edit.paintedHeight * 1.2
+        border.width: 2
+        border.color: "#7a2700"
+        radius: 20
+        color: "#491700"
+        anchors.top: register_title.bottom
+        anchors.topMargin: 90
+        anchors.horizontalCenter: register_rectangle.horizontalCenter
+
+        TextEdit {
+
+            id: register_name_edit
+            color: "#E2E2E2"
+            font.family: regular_font.name
+            font.pointSize: text_edits_point_size
+            font.bold: false
+            anchors.fill: parent
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+
+        }
+    }
+
+    Text {
+
         id: register_phone_title
         text: "Номер телефона"
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: header_texts_point_size
         font.wordSpacing: 5
 
         anchors.bottom: register_phone_rect.top
-        anchors.bottomMargin: 20
+        anchors.bottomMargin: header_texts_bottom_margin
         anchors.left: register_phone_rect.left
 
     }
@@ -113,8 +160,8 @@ Rectangle {
         border.color: "#7a2700"
         radius: 20
         color: "#491700"
-        anchors.top: register_title.bottom
-        anchors.topMargin: 90
+        anchors.top: register_name_rect.bottom
+        anchors.topMargin: text_edits_distance
         anchors.horizontalCenter: register_rectangle.horizontalCenter
 
         TextEdit {
@@ -122,7 +169,7 @@ Rectangle {
             id: register_phone_edit
             color: "#E2E2E2"
             font.family: regular_font.name
-            font.pointSize: 20
+            font.pointSize: text_edits_point_size
             font.bold: false
             anchors.fill: parent
             anchors.left: parent.left
@@ -138,11 +185,11 @@ Rectangle {
         text: "Придумайте пароль"
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: header_texts_point_size
         font.wordSpacing: 5
 
         anchors.bottom: register_password_rect.top
-        anchors.bottomMargin: 20
+        anchors.bottomMargin: header_texts_bottom_margin
         anchors.left: register_password_rect.left
 
     }
@@ -157,7 +204,7 @@ Rectangle {
         border.color: "#7a2700"
         radius: 20
         anchors.top: register_phone_rect.bottom
-        anchors.topMargin: 60
+        anchors.topMargin: text_edits_distance
         anchors.horizontalCenter: register_rectangle.horizontalCenter
 
         TextEdit {
@@ -165,7 +212,7 @@ Rectangle {
             id: register_password_edit
             color: "#E2E2E2"
             font.family: regular_font.name
-            font.pointSize: 20
+            font.pointSize: text_edits_point_size
             font.bold: false
             anchors.fill: parent
             anchors.left: parent.left
@@ -180,11 +227,11 @@ Rectangle {
         text: "Подтвердите  пароль"
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: header_texts_point_size
         font.wordSpacing: 5
 
         anchors.bottom: register_password_confirm_rect.top
-        anchors.bottomMargin: 20
+        anchors.bottomMargin: header_texts_bottom_margin
         anchors.left: register_password_confirm_rect.left
 
     }
@@ -199,7 +246,7 @@ Rectangle {
         border.color: "#7a2700"
         radius: 20
         anchors.top: register_password_rect.bottom
-        anchors.topMargin: 60
+        anchors.topMargin: text_edits_distance
         anchors.horizontalCenter: register_rectangle.horizontalCenter
 
         TextEdit {
@@ -207,7 +254,7 @@ Rectangle {
             id: register_password_confirm_edit
             color: "#E2E2E2"
             font.family: regular_font.name
-            font.pointSize: 20
+            font.pointSize: text_edits_point_size
             font.bold: false
             anchors.fill: parent
             anchors.left: parent.left
@@ -220,18 +267,16 @@ Rectangle {
 
         id: register_button
         width: 200
-        height: 50
+        height: 45
 
-        anchors.right: register_password_confirm_rect.right
-        anchors.top: register_password_confirm_rect.bottom
-        anchors.topMargin: 50
+        anchors.bottom: register_rectangle.bottom
+        anchors.right: register_rectangle.right
+        anchors.margins: 40
 
         background: Rectangle {
 
-            color: register_button.hovered ? "#46271a" : "#310f00"
+            color: register_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
             radius: 20
-            border.width: 2
-            border.color: "#611f00"
 
         }
 
@@ -243,11 +288,10 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name
-            font.pointSize: 12
+            font.pointSize: 10
             font.letterSpacing: 5
             font.bold: true
             color: register_button.hovered ? hover_color : "#E2E2E2"
-
         }
 
     }

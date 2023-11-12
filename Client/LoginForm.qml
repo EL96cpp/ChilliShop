@@ -185,10 +185,8 @@ Rectangle {
 
         background: Rectangle {
 
-            color: login_button.hovered ? "#46271a" : "#310f00"
+            color: login_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
             radius: 20
-            border.width: 2
-            border.color: "#611f00"
 
         }
 

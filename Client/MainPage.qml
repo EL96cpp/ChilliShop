@@ -34,7 +34,6 @@ Page {
         width: main_window.width
         source: "qrc:/Images/header_image.jpg"
 
-
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
 
@@ -44,13 +43,16 @@ Page {
             width: logo.paintedWidth * 1.25
             height: header_image.height
             gradient: Gradient {
+
                 GradientStop { position: 0.0; color: "#30960000" }
                 GradientStop { position: 0.05; color: "#90000000" }
                 GradientStop { position: 0.5; color: "#d0000000" }
                 GradientStop { position: 0.95; color: "#90000000" }
                 GradientStop { position: 1.0; color: "#30960000" }
                 orientation: Gradient.Horizontal
+
             }
+
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -81,12 +83,14 @@ Page {
             anchors.rightMargin: 50
 
             gradient: Gradient {
+
                 GradientStop { position: 0.0; color: "#20960000" }
                 GradientStop { position: 0.05; color: "#40000000" }
                 GradientStop { position: 0.5; color: "#e0000000" }
                 GradientStop { position: 0.95; color: "#40000000" }
                 GradientStop { position: 1.0; color: "#20960000" }
                 orientation: Gradient.Horizontal
+
             }
 
 
@@ -257,15 +261,113 @@ Page {
         }
     }
 
-    GridView {
+    Rectangle {
 
-        id: goods_grid
-        width: header_rect.width
-        height: main_window.height - header_image.height - header_rect.height -
-                header_rect.anchors.topMargin - anchors.margins
+        id: grid_rectangle
+        width: 820
+        height: goods_grid.width
+
+        color: "#00000000"
+
         anchors.top: header_rect.bottom
+        anchors.topMargin: 20
         anchors.left: search_column_rect.right
-        anchors.margins: 10
+        anchors.leftMargin: 30
+
+        Component.onCompleted: {
+
+            console.log(width);
+
+        }
+
+
+        GridView {
+
+            id: goods_grid
+            anchors.fill: parent
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            cellWidth: 410
+            cellHeight: 580
+
+            clip: true
+
+            model: sauces_model
+
+            ListModel {
+
+                id: sauces_model
+
+                property string name
+                property string description
+                property int cost
+                property int items_left
+                property Image image
+
+                Component.onCompleted: {
+
+                    sauces_model.append( {name: "Hot Sauce1", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce2", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce3", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce4", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce5", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce6", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce7", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce8", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce9", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce10", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce11", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce12", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+
+
+                    sauces_model.append( {name: "Hot Sauce1", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce2", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce3", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce4", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce5", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce6", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce7", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce8", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce9", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce10", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce11", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+                    sauces_model.append( {name: "Hot Sauce12", description: "Sauce description", cost: 158000,
+                                          items_left: 10, image: "qrc:/goods_images/large_CK-FIRMA.jpg" } );
+
+                }
+
+
+            }
+
+            delegate: GoodDelegate {
+                id: good_delegate_rectange
+            }
+
+
+        }
 
     }
 
@@ -281,7 +383,8 @@ Page {
 
         anchors.top: header_rect.bottom
         anchors.right: parent.right
-        anchors.margins: 15
+        anchors.rightMargin: 15
+        anchors.topMargin: 20
 
         property bool is_empty: true
 

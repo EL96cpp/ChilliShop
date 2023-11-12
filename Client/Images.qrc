@@ -5,5 +5,8 @@
         <file>Images/pepper.png</file>
         <file>Images/cart.png</file>
         <file>Images/profile.png</file>
+        <file>goods_images/large_CK-FIRMA.jpg</file>
+        <file>goods_images/data.jpeg</file>
+        <file>goods_images/carolina_reaper_powder.jpg</file>
     </qresource>
 </RCC>

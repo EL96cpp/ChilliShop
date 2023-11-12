@@ -11,6 +11,11 @@ Page {
 
     signal toMenu();
 
+    property string button_color: "#290d00"
+    property string button_hovered_color: "#7a2700"
+    property string button_text_color: "#7a2700"
+    property string button_text_hovered_color: "#c23e00"
+
     Connections {
 
         target: login_rectangle
