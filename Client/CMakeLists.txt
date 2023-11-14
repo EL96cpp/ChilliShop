@@ -22,6 +22,7 @@ qt_add_qml_module(appChilliWorld
     VERSION 1.0
     QML_FILES Main.qml MainPage.qml ProfilePage.qml LoginForm.qml RegisterForm.qml
               GoodDelegate.qml SaucesModel.qml SeasoningsModel.qml SeedsModel.qml
+              CartModel.qml Filters.qml CartView.qml GoodsGrid.qml
 )
 
 set_target_properties(appChilliWorld PROPERTIES

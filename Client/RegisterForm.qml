@@ -8,17 +8,17 @@ Rectangle {
 
     id: register_rectangle
     width: 500
-    height: 700
+    height: 650
 
     visible: false
 
-    color: "#A04a1601"
+    color: "#b04a1601"
     radius: 15
     border.width: 5
     border.color: "#4e1800"
 
     anchors.top: profile_header_image.bottom
-    anchors.topMargin: 70
+    anchors.topMargin: 95
     anchors.horizontalCenter: parent.horizontalCenter
 
     signal toLoginForm();
@@ -81,7 +81,7 @@ Rectangle {
 
             var ctx = getContext("2d")
 
-            ctx.strokeStyle = "#6B1F00"
+            ctx.strokeStyle = "#561b00"
             ctx.lineWidth = 10
 
             ctx.beginPath()
@@ -113,11 +113,11 @@ Rectangle {
 
         id: register_name_rect
         width: register_rectangle.width/1.2
-        height: register_phone_edit.paintedHeight * 1.2
+        height: register_phone_edit.paintedHeight
         border.width: 2
-        border.color: "#7a2700"
+        border.color: profile_page.text_edit_border_color
         radius: 20
-        color: "#491700"
+        color: profile_page.text_edit_background_color
         anchors.top: register_title.bottom
         anchors.topMargin: 90
         anchors.horizontalCenter: register_rectangle.horizontalCenter
@@ -125,7 +125,7 @@ Rectangle {
         TextEdit {
 
             id: register_name_edit
-            color: "#E2E2E2"
+            color: profile_page.text_edit_color
             font.family: regular_font.name
             font.pointSize: text_edits_point_size
             font.bold: false
@@ -157,9 +157,9 @@ Rectangle {
         width: register_rectangle.width/1.2
         height: register_phone_edit.paintedHeight * 1.2
         border.width: 2
-        border.color: "#7a2700"
+        border.color: profile_page.text_edit_border_color
         radius: 20
-        color: "#491700"
+        color: profile_page.text_edit_background_color
         anchors.top: register_name_rect.bottom
         anchors.topMargin: text_edits_distance
         anchors.horizontalCenter: register_rectangle.horizontalCenter
@@ -167,7 +167,7 @@ Rectangle {
         TextEdit {
 
             id: register_phone_edit
-            color: "#E2E2E2"
+            color: profile_page.text_edit_color
             font.family: regular_font.name
             font.pointSize: text_edits_point_size
             font.bold: false
@@ -199,9 +199,9 @@ Rectangle {
         id: register_password_rect
         width: register_rectangle.width/1.2
         height: register_password_edit.paintedHeight * 1.2
-        color: "#491700"
+        color: profile_page.text_edit_background_color
         border.width: 2
-        border.color: "#7a2700"
+        border.color: profile_page.text_edit_border_color
         radius: 20
         anchors.top: register_phone_rect.bottom
         anchors.topMargin: text_edits_distance
@@ -210,7 +210,7 @@ Rectangle {
         TextEdit {
 
             id: register_password_edit
-            color: "#E2E2E2"
+            color: profile_page.text_edit_color
             font.family: regular_font.name
             font.pointSize: text_edits_point_size
             font.bold: false
@@ -241,9 +241,9 @@ Rectangle {
         id: register_password_confirm_rect
         width: register_rectangle.width/1.2
         height: register_password_edit.paintedHeight * 1.2
-        color: "#491700"
+        color: profile_page.text_edit_background_color
         border.width: 2
-        border.color: "#7a2700"
+        border.color: profile_page.text_edit_border_color
         radius: 20
         anchors.top: register_password_rect.bottom
         anchors.topMargin: text_edits_distance
@@ -252,7 +252,7 @@ Rectangle {
         TextEdit {
 
             id: register_password_confirm_edit
-            color: "#E2E2E2"
+            color: profile_page.text_edit_color
             font.family: regular_font.name
             font.pointSize: text_edits_point_size
             font.bold: false
@@ -267,11 +267,11 @@ Rectangle {
 
         id: register_button
         width: 200
-        height: 45
+        height: 35
 
         anchors.bottom: register_rectangle.bottom
         anchors.right: register_rectangle.right
-        anchors.margins: 40
+        anchors.margins: 30
 
         background: Rectangle {
 

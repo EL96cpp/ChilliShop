@@ -9,28 +9,18 @@ ListModel {
     id: seeds_model
 
     property string name
-    property string description
+    property var json_description
     property int cost
     property int items_left
     property Image image
+    property bool visible
 
     Component.onCompleted: {
 
-        seeds_model.append( {name: "Pepper Seeds1", description: "Seeds description", cost: 158000,
-                                items_left: 10, image: "qrc:/goods_images/data.jpeg" } );
-        seeds_model.append( {name: "Pepper Seeds2", description: "Seeds description", cost: 158000,
-                                items_left: 10, image: "qrc:/goods_images/data.jpeg" } );
-        seeds_model.append( {name: "Pepper Seeds3", description: "Seeds description", cost: 158000,
-                                items_left: 10, image: "qrc:/goods_images/data.jpeg" } );
-        seeds_model.append( {name: "Pepper Seeds4", description: "Seeds description", cost: 158000,
-                                items_left: 10, image: "qrc:/goods_images/data.jpeg" } );
-        seeds_model.append( {name: "Pepper Seeds5", description: "Seeds description", cost: 158000,
-                                items_left: 10, image: "qrc:/goods_images/data.jpeg" } );
-        seeds_model.append( {name: "Pepper Seeds6", description: "Seeds description", cost: 158000,
-                                items_left: 10, image: "qrc:/goods_images/data.jpeg" } );
-        seeds_model.append( {name: "Pepper Seeds7", description: "Seeds description", cost: 158000,
-                                items_left: 10, image: "qrc:/goods_images/data.jpeg" } );
-        seeds_model.append( {name: "Pepper Seeds8", description: "Seeds description", cost: 158000,
-                                items_left: 10, image: "qrc:/goods_images/data.jpeg" } );
+        seeds_model.append( {name: "Pepper Seeds1", description: {"text" : "Seeds description",
+                                                                  "Number_of_seeds" : "10"},
+                             cost: 158000, items_left: 10, image: "qrc:/goods_images/data.jpeg",
+                             visible: true} );
+
     }
 }

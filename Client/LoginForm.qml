@@ -10,8 +10,7 @@ Rectangle {
     width: 500
     height: 580
 
-
-    color: "#A04a1601"
+    color: "#b04a1601"
     radius: 15
     border.width: 5
     border.color: "#4e1800"
@@ -75,7 +74,7 @@ Rectangle {
 
             var ctx = getContext("2d")
 
-            ctx.strokeStyle = "#6B1F00"
+            ctx.strokeStyle = "#561b00"
             ctx.lineWidth = 10
 
             ctx.beginPath()
@@ -107,11 +106,11 @@ Rectangle {
 
         id: login_phone_rect
         width: login_rectangle.width/1.2
-        height: login_phone_edit.paintedHeight * 1.2
+        height: login_phone_edit.paintedHeight * 1.5
         border.width: 2
-        border.color: "#7a2700"
+        border.color: profile_page.text_edit_border_color
         radius: 20
-        color: "#491700"
+        color: profile_page.text_edit_background_color
         anchors.top: login_title.bottom
         anchors.topMargin: 100
         anchors.horizontalCenter: login_rectangle.horizontalCenter
@@ -119,11 +118,11 @@ Rectangle {
         TextEdit {
 
             id: login_phone_edit
-            color: "#E2E2E2"
+            color: "black"
             font.family: regular_font.name
-            font.pointSize: 25
+            font.pointSize: 18
             font.bold: false
-            anchors.fill: parent
+            anchors.horizontalCenter: parent.horizontalCenter
             anchors.left: parent.left
             anchors.leftMargin: 10
 
@@ -150,10 +149,10 @@ Rectangle {
 
         id: login_password_rect
         width: login_rectangle.width/1.2
-        height: login_password_edit.paintedHeight * 1.2
-        color: "#491700"
+        height: login_password_edit.paintedHeight * 1.5
+        color: profile_page.text_edit_background_color
         border.width: 2
-        border.color: "#7a2700"
+        border.color: profile_page.text_edit_border_color
         radius: 20
         anchors.top: login_phone_rect.bottom
         anchors.topMargin: 70
@@ -162,11 +161,11 @@ Rectangle {
         TextEdit {
 
             id: login_password_edit
-            color: "#E2E2E2"
+            color: profile_page.text_edit_color
             font.family: regular_font.name
-            font.pointSize: 25
+            font.pointSize: 18
             font.bold: false
-            anchors.fill: parent
+            anchors.horizontalCenter: parent.horizontalCenter
             anchors.left: parent.left
             anchors.leftMargin: 10
 

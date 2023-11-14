@@ -18,6 +18,10 @@ Window {
     property string hover_color: "#FF5403"
     property string nonhover_color: "white"
 
+    property string forms_background_color: "#b04a1601"
+    property string forms_border_color: "#4e1800"
+    property string forms_line_color: "#561b00"
+
     StackView {
 
         id: stack_view
@@ -82,6 +86,10 @@ Window {
         id: regular_font
         source: "qrc:/Fonts/RegularFont.otf"
 
+    }
+
+    CartModel {
+        id: cart_model
     }
 
 

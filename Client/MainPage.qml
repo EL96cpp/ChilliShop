@@ -9,6 +9,10 @@ Page {
     id: main_page
     visible: true
 
+    function addToCart(name, description, peppers, cost, scoville, image) {
+
+    }
+
     Connections {
 
         target: profile_page
@@ -67,7 +71,6 @@ Page {
 
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
-
 
             Text {
 
@@ -147,7 +150,6 @@ Page {
         id: header_rect
         width: main_window.width
         height: 100
-        //color: "#4a1601"
 
         anchors.top: header_image.bottom
         anchors.topMargin: filters_column_rect.anchors.margins
@@ -245,182 +247,15 @@ Page {
     }
 
 
-    Rectangle {
-
+    Filters {
         id: filters_column_rect
-        width: (main_window.width - grid_rectangle.width - anchors.margins*4) / 2
-        height: 600
-        //color: "#A04a1601"
-        color: "#a04a1601"
-        radius: 15
-        border.width: 2
-        border.color: "#4e1800"
-
-        anchors.top: header_rect.bottom
-        anchors.left: parent.left
-        anchors.margins: 20
-
-        Image {
-
-            id: filters_pepper_image
-            source: "qrc:/Images/pepper.png"
-            width: 32
-            height: 46
-            anchors.top: parent.top
-            anchors.topMargin: 25
-            anchors.right: filters_title.left
-            anchors.rightMargin: 15
-            visible: false
-
-        }
-
-        Text {
-
-            id: filters_title
-            text: "Фильтры"
-            color: "#E2E2E2"
-            font.family: regular_font.name
-            font.pointSize: 15
-            font.bold: true
-
-            anchors.horizontalCenter: filters_column_rect.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 25
-
-        }
-
-        Canvas
-        {
-            id: filters_column_line
-            width: filters_title.paintedWidth * 2.5
-            height: 100
-            anchors.horizontalCenter: filters_column_rect.horizontalCenter
-            anchors.top: filters_title.bottom
-            anchors.topMargin: 10
-
-            onPaint:
-            {
-
-                var ctx = getContext("2d")
-
-                ctx.strokeStyle = "#6B1F00"
-                ctx.lineWidth = 5
-
-                ctx.beginPath()
-
-                ctx.moveTo(0, 0)
-                ctx.lineTo(width, 0)
-
-                ctx.stroke()
-
-            }
-        }
-
-        Column {
-
-            id: filters_column
-
-        }
     }
 
-    Rectangle {
-
+    GoodsGrid {
         id: grid_rectangle
-        width: 820
-        height: goods_grid.width
-
-        color: "#00000000"
-
-        anchors.top: header_rect.bottom
-        anchors.topMargin: 20
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        Component.onCompleted: {
-
-            console.log(width);
-
-        }
-
-
-        GridView {
-
-            id: goods_grid
-            anchors.fill: parent
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            cellWidth: 410
-            cellHeight: 580
-
-            clip: true
-
-            model: sauces_model
-
-            delegate: GoodDelegate {
-                id: good_delegate_rectange
-            }
-
-
-        }
-
     }
 
-    Rectangle {
-
+    CartView {
         id: cart_rectangle
-        width: (main_window.width - grid_rectangle.width - anchors.margins*4) / 2
-        height: 150
-        color: "#b04a1601"
-        border.width: 2
-        border.color: "#4e1800"
-        radius: 15
-
-        anchors.top: header_rect.bottom
-        anchors.right: parent.right
-        anchors.margins: 20
-
-        property bool is_empty: true
-
-        Text {
-
-            id: cart_title
-            text: "Корзина"
-            color: "#E2E2E2"
-            font.family: regular_font.name
-            font.pointSize: 15
-            font.bold: true
-
-            anchors.horizontalCenter: cart_rectangle.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 15
-
-        }
-
-        Canvas
-        {
-            id: cart_line
-            width: cart_title.paintedWidth * 2.5
-            height: 100
-            anchors.horizontalCenter: cart_rectangle.horizontalCenter
-            anchors.top: cart_title.bottom
-            anchors.topMargin: 10
-
-            onPaint:
-            {
-
-                var ctx = getContext("2d")
-
-                ctx.strokeStyle = "#6B1F00"
-                ctx.lineWidth = 5
-
-                ctx.beginPath()
-
-                ctx.moveTo(0, 0)
-                ctx.lineTo(width, 0)
-
-                ctx.stroke()
-
-            }
-        }
-
     }
 }

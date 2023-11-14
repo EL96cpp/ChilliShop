@@ -14,11 +14,15 @@ Rectangle {
 
     radius: 15
     clip: true
+    visible: model.visible
 
     Layout.minimumWidth: 400
     Layout.minimumHeight: height
     Layout.maximumWidth: 400
     Layout.maximumHeight: height
+
+    signal addToCart();
+
 
     gradient: Gradient {
 
@@ -71,11 +75,11 @@ Rectangle {
         font.pointSize: 15
         font.wordSpacing: 5
         font.bold: true
-        text: model.description
+        text: model.description.text
         anchors.top: good_delegate_title_rect.bottom
         anchors.left: good_delegate_title_rect.left
 
-    }
+    }    
 
     Text {
 
@@ -125,6 +129,12 @@ Rectangle {
             font.wordSpacing: 5
             font.bold: true
             color: add_to_cart_button.hovered ? hover_color : "#E2E2E2"
+        }
+
+        onClicked: {
+
+            addToCart();
+
         }
 
     }

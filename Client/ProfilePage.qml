@@ -16,6 +16,10 @@ Page {
     property string button_text_color: "#7a2700"
     property string button_text_hovered_color: "#c23e00"
 
+    property string text_edit_color: "#000000"
+    property string text_edit_background_color: "#ae5434"
+    property string text_edit_border_color: "#7a2700"
+
     Connections {
 
         target: login_rectangle
