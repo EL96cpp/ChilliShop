@@ -16,7 +16,7 @@ Page {
     Connections {
 
         target: profile_page
-        onToMenu: {
+        function onToMenu() {
 
             stack_view.pop(main_page);
 
@@ -185,7 +185,8 @@ Page {
                 hoverEnabled: true
 
                 onClicked: {
-                    goods_grid.model = sauces_model
+                    grid_rectangle.goods_model = sauces_model
+                    grid_rectangle.filterModel();
                 }
 
             }
@@ -210,7 +211,8 @@ Page {
                 hoverEnabled: true
 
                 onClicked: {
-                    goods_grid.model = seasonings_model
+                    grid_rectangle.goods_model = seasonings_model
+                    grid_rectangle.filterModel();
                 }
 
             }
@@ -236,7 +238,8 @@ Page {
                 hoverEnabled: true
 
                 onClicked: {
-                    goods_grid.model = seeds_model
+                    grid_rectangle.goods_model = seeds_model
+                    grid_rectangle.filterModel();
                 }
 
             }

@@ -83,13 +83,13 @@ Rectangle {
 
     Text {
 
-        id: good_delegate_cost
+        id: good_delegate_price
         color: "#E2E2E2"
         font.family: regular_font.name
         font.pointSize: 20
         font.wordSpacing: 5
         font.bold: true
-        text: model.cost + " ₽"
+        text: model.price + " ₽"
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.margins: 20

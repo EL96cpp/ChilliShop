@@ -23,7 +23,7 @@ Page {
     Connections {
 
         target: login_rectangle
-        onToRegisterForm: {
+        function onToRegisterForm() {
 
             login_rectangle.visible = false;
             register_rectangle.visible = true;
@@ -35,7 +35,7 @@ Page {
     Connections {
 
         target: register_rectangle
-        onToLoginForm: {
+        function onToLoginForm() {
 
             register_rectangle.visible = false;
             login_rectangle.visible = true;

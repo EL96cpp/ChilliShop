@@ -23,13 +23,10 @@ Rectangle {
     property int titles_pointSize: 15
     property int checkboxes_pointSize: 13
 
-    signal limitByPepperSignal(var pepper_name);
-    signal sortByPriceIncreaseSignal();
-    signal sortByPriceDecreaseSignal();
-    signal sortByScovilleIncreaseSignal();
-    signal sortByScovilleDecreaseSignal();
-    signal limitByLowerPriceSignal(var lower_price);
-    signal limitByUpperPriceSignal(var upper_price);
+    signal pepperFilterChangedSignal(var pepper_name, var filter_is_active);
+    signal sortFilterChangedSignal(var sort_type);
+    signal setLowerPriceFilterSignal(var lower_price);
+    signal setUpperPriceFilterSignal(var upper_price);
     signal removeFiltersSignal();
 
     function removeFilters() {
@@ -180,6 +177,7 @@ Rectangle {
 
             contentItem: Text {
 
+                id: carolina_reaper_checkbox_text
                 text: "Carolina Reaper"
                 color: "#E2E2E2"
                 font.family: regular_font.name
@@ -189,6 +187,20 @@ Rectangle {
                 opacity: enabled ? 1.0 : 0.3
                 verticalAlignment: Text.AlignVCenter
                 leftPadding: carolina_reaper_checkbox.indicator.width + carolina_reaper_checkbox.spacing
+
+            }
+
+            onClicked: {
+
+                if (checked) {
+
+                    pepperFilterChangedSignal(carolina_reaper_checkbox_text.text, true);
+
+                } else {
+
+                    pepperFilterChangedSignal(carolina_reaper_checkbox_text.text, false);
+
+                }
 
             }
 
@@ -221,6 +233,7 @@ Rectangle {
 
             contentItem: Text {
 
+                id: scorpion_moruga_checkbox_text
                 text: "Scorpion Moruga"
                 color: "#E2E2E2"
                 font.family: regular_font.name
@@ -230,6 +243,20 @@ Rectangle {
                 opacity: enabled ? 1.0 : 0.3
                 verticalAlignment: Text.AlignVCenter
                 leftPadding: scorpion_moruga_checkbox.indicator.width + scorpion_moruga_checkbox.spacing
+
+            }
+
+            onClicked: {
+
+                if (checked) {
+
+                    pepperFilterChangedSignal(scorpion_moruga_checkbox_text.text, true);
+
+                } else {
+
+                    pepperFilterChangedSignal(scorpion_moruga_checkbox_text.text, false);
+
+                }
 
             }
         }
@@ -261,6 +288,7 @@ Rectangle {
 
             contentItem: Text {
 
+                id: ghost_pepper_checkbox_text
                 text: "Ghost Pepper"
                 color: "#E2E2E2"
                 font.family: regular_font.name
@@ -270,6 +298,20 @@ Rectangle {
                 opacity: enabled ? 1.0 : 0.3
                 verticalAlignment: Text.AlignVCenter
                 leftPadding: ghost_pepper_checkbox.indicator.width + ghost_pepper_checkbox.spacing
+
+            }
+
+            onClicked: {
+
+                if (checked) {
+
+                    pepperFilterChangedSignal(ghost_pepper_checkbox_text.text, true);
+
+                } else {
+
+                    pepperFilterChangedSignal(ghost_pepper_checkbox_text.text, false);
+
+                }
 
             }
         }
@@ -301,7 +343,8 @@ Rectangle {
 
             contentItem: Text {
 
-                text: "Хабанеро"
+                id: habanero_checkbox_text
+                text: "Habanero"
                 color: "#E2E2E2"
                 font.family: regular_font.name
                 font.pointSize: filters_column_rect.checkboxes_pointSize
@@ -309,6 +352,20 @@ Rectangle {
                 opacity: enabled ? 1.0 : 0.3
                 verticalAlignment: Text.AlignVCenter
                 leftPadding: habanero_checkbox.indicator.width + habanero_checkbox.spacing
+
+            }
+
+            onClicked: {
+
+                if (checked) {
+
+                    pepperFilterChangedSignal(habanero_checkbox_text.text, true);
+
+                } else {
+
+                    pepperFilterChangedSignal(habanero_checkbox_text.text, false);
+
+                }
 
             }
         }
@@ -340,7 +397,8 @@ Rectangle {
 
             contentItem: Text {
 
-                text: "Халапеньо"
+                id: jalapeno_checkbox_text
+                text: "Jalapeno"
                 color: "#E2E2E2"
                 font.family: regular_font.name
                 font.pointSize: filters_column_rect.checkboxes_pointSize
@@ -348,6 +406,20 @@ Rectangle {
                 opacity: enabled ? 1.0 : 0.3
                 verticalAlignment: Text.AlignVCenter
                 leftPadding: jalapeno_checkbox.indicator.width + jalapeno_checkbox.spacing
+
+            }
+
+            onClicked: {
+
+                if (checked) {
+
+                    pepperFilterChangedSignal(jalapeno_checkbox_text.text, true);
+
+                } else {
+
+                    pepperFilterChangedSignal(jalapeno_checkbox_text.text, false);
+
+                }
 
             }
         }
@@ -438,9 +510,19 @@ Rectangle {
 
             onClicked: {
 
-                price_decrease_checkbox.checked = false;
-                scoville_decrease_checkbox.checked = false;
-                scoville_increase_checkbox.checked = false;
+                if (checked) {
+
+                    price_decrease_checkbox.checked = false;
+                    scoville_decrease_checkbox.checked = false;
+                    scoville_increase_checkbox.checked = false;
+
+                    sortFilterChangedSignal("price_increase");
+
+                } else {
+
+                    sortFilterChangedSignal("none");
+
+                }
 
             }
 
@@ -487,9 +569,20 @@ Rectangle {
 
             onClicked: {
 
-                price_increase_checkbox.checked = false;
-                scoville_decrease_checkbox.checked = false;
-                scoville_increase_checkbox.checked = false;
+                if (checked) {
+
+                    price_increase_checkbox.checked = false;
+                    scoville_decrease_checkbox.checked = false;
+                    scoville_increase_checkbox.checked = false;
+
+                    sortFilterChangedSignal("price_decrease");
+
+                } else {
+
+                    sortFilterChangedSignal("none");
+
+                }
+
 
             }
         }
@@ -535,9 +628,19 @@ Rectangle {
 
             onClicked: {
 
-                price_decrease_checkbox.checked = false;
-                price_increase_checkbox.checked = false;
-                scoville_decrease_checkbox.checked = false;
+                if (checked) {
+
+                    price_decrease_checkbox.checked = false;
+                    price_increase_checkbox.checked = false;
+                    scoville_decrease_checkbox.checked = false;
+
+                    sortFilterChangedSignal("scoville_increase");
+
+                } else {
+
+                    sortFilterChangedSignal("none");
+
+                }
 
             }
         }
@@ -584,9 +687,19 @@ Rectangle {
 
             onClicked: {
 
-                price_decrease_checkbox.checked = false;
-                price_increase_checkbox.checked = false;
-                scoville_increase_checkbox.checked = false;
+                if (checked) {
+
+                    price_decrease_checkbox.checked = false;
+                    price_increase_checkbox.checked = false;
+                    scoville_increase_checkbox.checked = false;
+
+                    sortFilterChangedSignal("scoville_decrease");
+
+                } else {
+
+                    sortFilterChangedSignal("none");
+
+                }
 
             }
         }
