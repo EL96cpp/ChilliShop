@@ -761,6 +761,20 @@ Rectangle {
             anchors.leftMargin: 5
             anchors.fill: parent
 
+            onTextChanged: {
+
+                if (text === "" || text === "0") {
+
+                    setLowerPriceFilterSignal("0");
+
+                } else {
+
+                    setLowerPriceFilterSignal(text);
+
+                }
+
+            }
+
         }
 
     }
@@ -788,6 +802,20 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 5
             anchors.fill: parent
+
+            onTextChanged: {
+
+                if (text === "") {
+
+                    setUpperPriceFilterSignal("-1");
+
+                } else {
+
+                    setUpperPriceFilterSignal(text);
+
+                }
+
+            }
 
         }
     }

@@ -16,7 +16,9 @@ Rectangle {
     anchors.topMargin: 20
     anchors.horizontalCenter: parent.horizontalCenter
 
+    // Use goods_model_copy to filter and delete it's elements
     property ListModel goods_model: sauces_model
+    property ListModel goods_model_copy: copy_model
 
     property var pepper_filters: []
     property int lower_price_limit: 0
@@ -24,29 +26,169 @@ Rectangle {
     property string order_by: "none"
 
 
-    function filterModel() {
+    function setModelCopy() {
 
-        if (order_by == "price_decrease") {
+        if (goods_model_copy.count !== 0) {
 
-            goods_model.sortByPriceDecrease();
-
-        } else if (order_by == "price_increase") {
-
-            goods_model.sortByPriceIncrease();
-
-        } else if (order_by == "scoville_decrease") {
-
-
-
-        } else if (order_by == "scoville_increase") {
-
-
+            goods_model_copy.clear();
 
         }
 
         for (var i = 0; i < goods_model.count; ++i) {
 
-            console.log(goods_model.get(i).price);
+            goods_model_copy.append(goods_model.get(i));
+
+        }
+
+    }
+
+    function filterByPeppers() {
+
+        // Pepper filters
+        if (pepper_filters.length != 0) {
+
+            var filtered_goods_counter = 0;
+
+            for (var j = 0; j < goods_model_copy.count; ++j) {
+
+                var should_be_visible = true;
+
+                for (var i = 0; i < pepper_filters.length; ++i) {
+
+                    if (goods_model_copy.get(j).description.peppers.indexOf(pepper_filters[i]) === -1) {
+
+                        should_be_visible = false;
+                        break;
+
+                    }
+
+                }
+
+                if (should_be_visible) {
+
+                    goods_model_copy.move(j, filtered_goods_counter, 1);
+                    ++filtered_goods_counter;
+
+                }
+
+
+            }
+
+            if (filtered_goods_counter === 0) {
+
+                goods_model_copy.clear();
+
+            } else if (filtered_goods_counter !== goods_model_copy.count) {
+
+                goods_model_copy.remove(filtered_goods_counter, goods_model_copy.count - filtered_goods_counter);
+
+            }
+
+        }
+
+    }
+
+    function filterByLowerPriceLimit() {
+
+        if (lower_price_limit !== 0) {
+
+            var lower_limit_goods_counter = 0;
+
+            for (var j = 0; j < goods_model_copy.count; ++j) {
+
+                var should_be_visible = true;
+
+                if (goods_model_copy.get(j).price < lower_price_limit) {
+
+                    should_be_visible = false;
+
+                }
+
+                if (should_be_visible) {
+
+                    goods_model_copy.move(j, lower_limit_goods_counter, 1);
+                    ++lower_limit_goods_counter;
+
+                }
+
+            }
+
+            if (lower_limit_goods_counter === 0) {
+
+                goods_model_copy.clear();
+
+            } else if (lower_limit_goods_counter !== goods_model_copy.count) {
+
+                goods_model_copy.remove(lower_limit_goods_counter, goods_model_copy.count - lower_limit_goods_counter);
+
+            }
+
+        }
+
+    }
+
+    function filterByUpperPriceLimit() {
+
+        if (upper_price_limit !== -1) {
+
+            var upper_limit_goods_counter = 0;
+
+            for (var j = 0; j < goods_model_copy.count; ++j) {
+
+                var should_be_visible = true;
+
+                if (goods_model_copy.get(j).price > upper_price_limit) {
+
+                    should_be_visible = false;
+
+                }
+
+                if (should_be_visible) {
+
+                    goods_model_copy.move(j, upper_limit_goods_counter, 1);
+                    ++upper_limit_goods_counter;
+
+                }
+
+            }
+
+            if (upper_limit_goods_counter === 0) {
+
+                goods_model_copy.clear();
+
+            } else if (upper_limit_goods_counter !== goods_model_copy.count) {
+
+                goods_model_copy.remove(upper_limit_goods_counter, goods_model_copy.count - upper_limit_goods_counter);
+
+            }
+
+        }
+    }
+
+
+    function filterModel() {
+
+        // Sort by pepper and price limits
+        filterByPeppers();
+        filterByLowerPriceLimit();
+        filterByUpperPriceLimit();
+
+        // Sort filters
+        if (order_by == "price_decrease") {
+
+            goods_model_copy.sortByPriceDecrease();
+
+        } else if (order_by == "price_increase") {
+
+            goods_model_copy.sortByPriceIncrease();
+
+        } else if (order_by == "scoville_decrease") {
+
+            goods_model_copy.sortByScovilleDecrease();
+
+        } else if (order_by == "scoville_increase") {
+
+            goods_model_copy.sortByScovilleIncrease();
 
         }
 
@@ -61,9 +203,9 @@ Rectangle {
         cellWidth: 410
         cellHeight: 580
 
-        clip: true
+        model: grid_rectangle.goods_model_copy
 
-        model: grid_rectangle.goods_model
+        clip: true
 
         delegate: GoodDelegate {
 
@@ -80,17 +222,12 @@ Rectangle {
 
         function onRemoveFiltersSignal() {
 
-            console.log("remove filters in grid");
             pepper_filters = [];
-            lower_price_limit = 0;
+            upper_price_limit = 0;
             upper_price_limit = -1;
 
-            for (var i = 0; i < goods_model.count; ++i) {
-
-                goods_model.get(i).visible = true;
-                console.log(i);
-
-            }
+            setModelCopy();
+            goods_grid.model = goods_model_copy;
 
         }
 
@@ -102,16 +239,15 @@ Rectangle {
 
         function onPepperFilterChangedSignal(pepper_name, filter_is_active) {
 
-            console.log("grid get pepper signal");
-
             if (filter_is_active) {
 
-                console.log("added filter " + pepper_name);
+                pepper_filters.push(pepper_name);
                 filterModel();
 
             } else {
 
-                console.log("remove filter " + pepper_name);
+                pepper_filters.pop(pepper_name);
+                setModelCopy();
                 filterModel();
 
             }
@@ -127,8 +263,99 @@ Rectangle {
         function onSortFilterChangedSignal(sort_filter_type) {
 
             order_by = sort_filter_type;
-            console.log("sort filter type set " + sort_filter_type);
             filterModel();
+
+        }
+
+    }
+
+    Connections {
+
+        target: filters_column_rect
+
+        function onSetLowerPriceFilterSignal(lower_price) {
+
+            grid_rectangle.lower_price_limit = lower_price;
+            setModelCopy();
+            filterModel();
+
+        }
+
+
+    }
+
+    Connections {
+
+        target: filters_column_rect
+
+        function onSetUpperPriceFilterSignal(upper_price) {
+
+            grid_rectangle.upper_price_limit = upper_price;
+            setModelCopy();
+            filterModel();
+
+        }
+
+    }
+
+    Connections {
+
+        target: header_rect
+
+        function onSetSaucesModelSignal() {
+
+            grid_rectangle.goods_model = sauces_model;
+            setModelCopy();
+
+            for (var j = 0; j < grid_rectangle.goods_model_copy.count; ++j) {
+
+                for (const pepper of grid_rectangle.goods_model_copy.get(j).description.peppers) {
+                    console.log("pepper " + pepper);
+                }
+
+            }
+
+        }
+
+    }
+
+    Connections {
+
+        target: header_rect
+
+        function onSetSeedsModelSignal() {
+
+            grid_rectangle.goods_model = seeds_model;
+            setModelCopy();
+
+            for (var j = 0; j < grid_rectangle.goods_model_copy.count; ++j) {
+
+                for (const pepper of grid_rectangle.goods_model_copy.get(j).description.peppers) {
+                    console.log("pepper " + pepper);
+                }
+
+            }
+
+        }
+
+    }
+
+    Connections {
+
+        target: header_rect
+
+        function onSetSeasoningsModelSignal() {
+
+            grid_rectangle.goods_model = seasonings_model;
+            setModelCopy();
+
+            for (var j = 0; j < grid_rectangle.goods_model_copy.count; ++j) {
+
+                for (const pepper of grid_rectangle.goods_model_copy.get(j).description.peppers) {
+                    console.log("pepper " + pepper);
+                }
+
+            }
 
         }
 

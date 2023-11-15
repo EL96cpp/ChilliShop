@@ -25,15 +25,27 @@ Page {
     }
 
     SeedsModel {
+
         id: seeds_model
+
     }
 
     SeasoningsModel {
+
         id: seasonings_model
+
     }
 
     SaucesModel {
+
         id: sauces_model
+
+    }
+
+    CopyModel {
+
+        id: copy_model
+
     }
 
     Image {
@@ -155,6 +167,10 @@ Page {
         anchors.topMargin: filters_column_rect.anchors.margins
         anchors.horizontalCenter: parent.horizontalCenter
 
+        signal setSaucesModelSignal();
+        signal setSeedsModelSignal();
+        signal setSeasoningsModelSignal();
+
         gradient: Gradient {
 
             GradientStop { position: 0.0; color: "#d01f0800" }
@@ -185,8 +201,9 @@ Page {
                 hoverEnabled: true
 
                 onClicked: {
-                    grid_rectangle.goods_model = sauces_model
-                    grid_rectangle.filterModel();
+
+                    header_rect.setSaucesModelSignal();
+
                 }
 
             }
@@ -211,8 +228,9 @@ Page {
                 hoverEnabled: true
 
                 onClicked: {
-                    grid_rectangle.goods_model = seasonings_model
-                    grid_rectangle.filterModel();
+
+                    header_rect.setSeasoningsModelSignal();
+
                 }
 
             }
@@ -238,8 +256,9 @@ Page {
                 hoverEnabled: true
 
                 onClicked: {
-                    grid_rectangle.goods_model = seeds_model
-                    grid_rectangle.filterModel();
+
+                    header_rect.setSeedsModelSignal();
+
                 }
 
             }

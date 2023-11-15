@@ -10,7 +10,7 @@ Window {
     width: 1600
     height: 1000
     visible: true
-    title: qsTr("Chilli World")
+    title: "Chilli World"
 
     property bool logged_in: false
     property string language

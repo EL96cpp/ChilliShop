@@ -130,8 +130,8 @@ ListModel {
                              visible: true} );
 
         seeds_model.append( {name: "Pepper Seeds2", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10"},
-                                                                  "peppers" : ["Scorpion Moruga"],
+                                                                  "number of seeds" : "10",
+                                                                  "peppers" : ["Scorpion Moruga"]},
                              price: 24, scoville: 2200000, items_left: 10, image: "qrc:/goods_images/data.jpeg",
                              visible: true} );
 
@@ -142,8 +142,8 @@ ListModel {
                              visible: true} );
 
         seeds_model.append( {name: "Pepper Seeds4", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10"},
-                                                                  "peppers" : ["Scorpion Moruga"],
+                                                                  "number of seeds" : "10",
+                                                                  "peppers" : ["Scorpion Moruga"]},
                              price: 94, scoville: 2200000, items_left: 10, image: "qrc:/goods_images/data.jpeg",
                              visible: true} );
 
@@ -154,8 +154,8 @@ ListModel {
                              visible: true} );
 
         seeds_model.append( {name: "Pepper Seeds6", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10"},
-                                                                  "peppers" : ["Scorpion Moruga"],
+                                                                  "number of seeds" : "10",
+                                                                  "peppers" : ["Scorpion Moruga"]},
                              price: 25, scoville: 2200000, items_left: 10, image: "qrc:/goods_images/data.jpeg",
                              visible: true} );
 
@@ -166,8 +166,8 @@ ListModel {
                              visible: true} );
 
         seeds_model.append( {name: "Pepper Seeds8", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10"},
-                                                                  "peppers" : ["Scorpion Moruga"],
+                                                                  "number of seeds" : "10",
+                                                                  "peppers" : ["Scorpion Moruga"]},
                              price: 124, scoville: 2200000, items_left: 10, image: "qrc:/goods_images/data.jpeg",
                              visible: true} );
 

@@ -9,8 +9,9 @@ Rectangle {
     id: good_delegate_rectange
     width: 400
     height: good_delegate_image.paintedHeight + good_delegate_title_rect.height +
-            good_delegate_description.paintedHeight + good_delegate_title.anchors.margins +
-            add_to_cart_button.height + add_to_cart_button.anchors.margins + 30
+            good_delegate_scoville.paintedHeight + good_delegate_description.paintedHeight +
+            good_delegate_title.anchors.margins + add_to_cart_button.height +
+            add_to_cart_button.anchors.margins + 30
 
     radius: 15
     clip: true
@@ -80,6 +81,20 @@ Rectangle {
         anchors.left: good_delegate_title_rect.left
 
     }    
+
+    Text {
+
+        id: good_delegate_scoville
+        color: "#E2E2E2"
+        font.family: regular_font.name
+        font.pointSize: 12
+        font.wordSpacing: 5
+        font.bold: false
+        text: "Острота: " + model.scoville + " shu"
+        anchors.top: good_delegate_description.bottom
+        anchors.left: good_delegate_description.left
+
+    }
 
     Text {
 
