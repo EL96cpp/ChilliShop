@@ -13,7 +13,6 @@ ListModel {
     property int price
     property int items_left
     property Image image
-    property bool visible
 
     function sortByPriceDecrease() {
 
@@ -126,23 +125,23 @@ ListModel {
         sauces_model.append( {name: "Hot Sauce1", description: {"text":"Sauce description",
                                                                  "volume" : "0.5 л",
                                                                 "peppers" : ["Carolina Reaper", "Habanero"]},
-                              price: 3, scoville: 20000, image: "qrc:/goods_images/large_CK-FIRMA.jpg", visible: true} );
+                              price: 3, scoville: 20000, image: "qrc:/goods_images/large_CK-FIRMA.jpg"} );
         sauces_model.append( {name: "Hot Sauce2", description: {"text":"Sauce description",
                                                                  "volume" : "0.5 л",
                                                                 "peppers" : ["Habanero"]},
-                              price: 5, scoville: 200000, image: "qrc:/goods_images/large_CK-FIRMA.jpg", visible: true} );
+                              price: 5, scoville: 200000, image: "qrc:/goods_images/large_CK-FIRMA.jpg"} );
         sauces_model.append( {name: "Hot Sauce3", description: {"text":"Sauce description",
                                                                  "volume" : "0.5 л",
                                                                 "peppers" : ["Jalapeno", "Scorpion Moruga"]},
-                              price: 8, scoville: 120000, image: "qrc:/goods_images/large_CK-FIRMA.jpg", visible: true} );
+                              price: 8, scoville: 120000, image: "qrc:/goods_images/large_CK-FIRMA.jpg"} );
         sauces_model.append( {name: "Hot Sauce4", description: {"text":"Sauce description",
                                                                  "volume" : "0.5 л",
                                                                 "peppers" : ["Ghost Pepper"]},
-                              price: 2, scoville: 100000, image: "qrc:/goods_images/large_CK-FIRMA.jpg", visible: true} );
+                              price: 2, scoville: 100000, image: "qrc:/goods_images/large_CK-FIRMA.jpg"} );
         sauces_model.append( {name: "Hot Sauce5", description: {"text":"Sauce description",
                                                                  "volume" : "0.5 л",
                                                                 "peppers" : ["Scorpion Moruga"]},
-                              price: 1, scoville: 1200000, image: "qrc:/goods_images/large_CK-FIRMA.jpg", visible: true} );
+                              price: 1, scoville: 1200000, image: "qrc:/goods_images/large_CK-FIRMA.jpg"} );
 
     }
 

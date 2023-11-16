@@ -13,7 +13,6 @@ ListModel {
     property int price
     property int items_left
     property Image image
-    property bool visible
 
     function sortByPriceDecrease() {
 

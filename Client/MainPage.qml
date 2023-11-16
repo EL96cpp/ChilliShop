@@ -9,13 +9,10 @@ Page {
     id: main_page
     visible: true
 
-    function addToCart(name, description, peppers, cost, scoville, image) {
-
-    }
-
     Connections {
 
         target: profile_page
+
         function onToMenu() {
 
             stack_view.pop(main_page);
@@ -42,7 +39,7 @@ Page {
 
     }
 
-    CopyModel {
+    SaucesModel {
 
         id: copy_model
 
@@ -280,4 +277,38 @@ Page {
     CartView {
         id: cart_rectangle
     }
+
+    Text {
+
+        id: clear_cart_text
+        text: "Очистить корзину"
+        color: clear_cart_mouse_area.containsMouse ? hover_color : "#E2E2E2"
+        font.family: regular_font.name
+        font.pointSize: 12
+        font.wordSpacing: 5
+        font.bold: true
+
+        anchors.horizontalCenter: cart_rectangle.horizontalCenter
+        anchors.top: cart_rectangle.bottom
+        anchors.topMargin: 10
+
+        signal clearCartModel();
+
+        MouseArea {
+
+            id: clear_cart_mouse_area
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onClicked: {
+
+                clear_cart_text.clearCartModel();
+
+            }
+
+        }
+
+    }
+
+
 }

@@ -15,15 +15,19 @@ Rectangle {
 
     radius: 15
     clip: true
-    visible: model.visible
 
     Layout.minimumWidth: 400
     Layout.minimumHeight: height
     Layout.maximumWidth: 400
     Layout.maximumHeight: height
 
-    signal addToCart();
+    signal addToCartSignal(var name, var json_description, var price, var image);
 
+    Component.onCompleted: {
+
+        addToCartSignal.connect(grid_rectangle.addToCartSignal);
+
+    }
 
     gradient: Gradient {
 
@@ -148,7 +152,7 @@ Rectangle {
 
         onClicked: {
 
-            addToCart();
+            addToCartSignal(model.name, model.description, model.price, model.image);
 
         }
 

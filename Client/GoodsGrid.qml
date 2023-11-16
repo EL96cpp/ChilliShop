@@ -25,6 +25,7 @@ Rectangle {
     property int upper_price_limit: -1
     property string order_by: "none"
 
+    signal addToCartSignal(var name, var json_description, var price, var image);
 
     function setModelCopy() {
 
@@ -43,6 +44,14 @@ Rectangle {
     }
 
     function filterByPeppers() {
+
+        console.log("start filter by peppers:");
+
+        for (const pepper of pepper_filters) {
+
+            console.log(pepper);
+
+        }
 
         // Pepper filters
         if (pepper_filters.length != 0) {
@@ -213,7 +222,6 @@ Rectangle {
 
         }
 
-
     }
 
     Connections {
@@ -246,7 +254,7 @@ Rectangle {
 
             } else {
 
-                pepper_filters.pop(pepper_name);
+                pepper_filters.splice(pepper_filters.indexOf(pepper_name), 1);
                 setModelCopy();
                 filterModel();
 
@@ -306,14 +314,7 @@ Rectangle {
 
             grid_rectangle.goods_model = sauces_model;
             setModelCopy();
-
-            for (var j = 0; j < grid_rectangle.goods_model_copy.count; ++j) {
-
-                for (const pepper of grid_rectangle.goods_model_copy.get(j).description.peppers) {
-                    console.log("pepper " + pepper);
-                }
-
-            }
+            filterModel();
 
         }
 
@@ -327,14 +328,7 @@ Rectangle {
 
             grid_rectangle.goods_model = seeds_model;
             setModelCopy();
-
-            for (var j = 0; j < grid_rectangle.goods_model_copy.count; ++j) {
-
-                for (const pepper of grid_rectangle.goods_model_copy.get(j).description.peppers) {
-                    console.log("pepper " + pepper);
-                }
-
-            }
+            filterModel();
 
         }
 
@@ -348,14 +342,7 @@ Rectangle {
 
             grid_rectangle.goods_model = seasonings_model;
             setModelCopy();
-
-            for (var j = 0; j < grid_rectangle.goods_model_copy.count; ++j) {
-
-                for (const pepper of grid_rectangle.goods_model_copy.get(j).description.peppers) {
-                    console.log("pepper " + pepper);
-                }
-
-            }
+            filterModel();
 
         }
 
