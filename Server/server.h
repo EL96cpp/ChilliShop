@@ -4,6 +4,8 @@
 #include <QTcpServer>
 #include <QObject>
 
+#include "sqlservice.h"
+
 class Server : public QTcpServer
 {
     Q_OBJECT
@@ -13,6 +15,9 @@ public:
 
 private:
     void incomingConnection(qintptr handle);
+
+private:
+    SqlService* sql_service;
 
 };
 

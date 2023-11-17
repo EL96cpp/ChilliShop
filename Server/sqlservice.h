@@ -2,6 +2,10 @@
 #define SQLSERVICE_H
 
 #include <QObject>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QSqlError>
 
 class SqlService : public QObject
 {
@@ -10,6 +14,9 @@ public:
     explicit SqlService(QObject *parent = nullptr);
 
 signals:
+
+private:
+    QSqlDatabase sql_database;
 
 };
 

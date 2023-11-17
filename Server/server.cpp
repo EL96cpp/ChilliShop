@@ -1,6 +1,6 @@
 #include "server.h"
 
-Server::Server()
+Server::Server() : sql_service(new SqlService(this))
 {
 
 }
