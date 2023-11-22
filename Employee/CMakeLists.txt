@@ -10,6 +10,8 @@ qt_standard_project_setup()
 
 qt_add_executable(appEmployee
     main.cpp
+    client.cpp
+    client.h
 )
 
 qt_add_qml_module(appEmployee

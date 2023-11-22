@@ -45,14 +45,6 @@ Rectangle {
 
     function filterByPeppers() {
 
-        console.log("start filter by peppers:");
-
-        for (const pepper of pepper_filters) {
-
-            console.log(pepper);
-
-        }
-
         // Pepper filters
         if (pepper_filters.length != 0) {
 

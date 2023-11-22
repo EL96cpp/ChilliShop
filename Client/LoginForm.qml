@@ -106,7 +106,7 @@ Rectangle {
 
         id: login_phone_rect
         width: login_rectangle.width/1.2
-        height: login_phone_edit.paintedHeight * 1.5
+        height: login_phone_input.font.pixelSize * 2
         border.width: 2
         border.color: profile_page.text_edit_border_color
         radius: 20
@@ -115,9 +115,9 @@ Rectangle {
         anchors.topMargin: 100
         anchors.horizontalCenter: login_rectangle.horizontalCenter
 
-        TextEdit {
+        TextInput {
 
-            id: login_phone_edit
+            id: login_phone_input
             color: "black"
             font.family: regular_font.name
             font.pointSize: 18
@@ -126,7 +126,9 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 10
 
+            validator: RegularExpressionValidator { regularExpression: /^8\d{10}/ }
         }
+
     }
 
 
@@ -149,7 +151,7 @@ Rectangle {
 
         id: login_password_rect
         width: login_rectangle.width/1.2
-        height: login_password_edit.paintedHeight * 1.5
+        height: login_password_edit.font.pixelSize * 2
         color: profile_page.text_edit_background_color
         border.width: 2
         border.color: profile_page.text_edit_border_color
@@ -158,7 +160,7 @@ Rectangle {
         anchors.topMargin: 70
         anchors.horizontalCenter: login_rectangle.horizontalCenter
 
-        TextEdit {
+        TextInput {
 
             id: login_password_edit
             color: profile_page.text_edit_color
@@ -168,6 +170,8 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.left: parent.left
             anchors.leftMargin: 10
+
+            echoMode: TextInput.Password
 
         }
     }
@@ -201,6 +205,13 @@ Rectangle {
             font.letterSpacing: 5
             font.bold: true
             color: login_button.hovered ? hover_color : "#E2E2E2"
+
+        }
+
+        onClicked: {
+
+            Client.onLogin(login_phone_edit.text, login_password_edit.text);
+            console.log("Sent login data to client");
 
         }
 

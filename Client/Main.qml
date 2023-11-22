@@ -12,6 +12,11 @@ Window {
     visible: true
     title: "Chilli World"
 
+    minimumWidth: width
+    minimumHeight: height
+    maximumWidth: width
+    maximumHeight: height
+
     property bool logged_in: false
     property string language
 

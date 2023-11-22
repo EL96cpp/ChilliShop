@@ -25,7 +25,7 @@ Rectangle {
 
     property int text_edits_point_size: 16
     property int header_texts_point_size: 14
-    property int text_edits_distance: 65
+    property int text_edits_distance: 55
     property int header_texts_bottom_margin: 10
 
     Rectangle {
@@ -113,7 +113,7 @@ Rectangle {
 
         id: register_name_rect
         width: register_rectangle.width/1.2
-        height: register_phone_edit.paintedHeight
+        height: register_phone_edit.font.pixelSize * 2
         border.width: 2
         border.color: profile_page.text_edit_border_color
         radius: 20
@@ -122,7 +122,7 @@ Rectangle {
         anchors.topMargin: 90
         anchors.horizontalCenter: register_rectangle.horizontalCenter
 
-        TextEdit {
+        TextInput {
 
             id: register_name_edit
             color: profile_page.text_edit_color
@@ -155,7 +155,7 @@ Rectangle {
 
         id: register_phone_rect
         width: register_rectangle.width/1.2
-        height: register_phone_edit.paintedHeight * 1.2
+        height: register_phone_edit.font.pixelSize * 2
         border.width: 2
         border.color: profile_page.text_edit_border_color
         radius: 20
@@ -164,7 +164,7 @@ Rectangle {
         anchors.topMargin: text_edits_distance
         anchors.horizontalCenter: register_rectangle.horizontalCenter
 
-        TextEdit {
+        TextInput {
 
             id: register_phone_edit
             color: profile_page.text_edit_color
@@ -174,6 +174,8 @@ Rectangle {
             anchors.fill: parent
             anchors.left: parent.left
             anchors.leftMargin: 10
+
+            validator: RegularExpressionValidator { regularExpression: /^8\d{10}/ }
 
         }
     }
@@ -198,7 +200,7 @@ Rectangle {
 
         id: register_password_rect
         width: register_rectangle.width/1.2
-        height: register_password_edit.paintedHeight * 1.2
+        height: register_password_edit.font.pixelSize * 2
         color: profile_page.text_edit_background_color
         border.width: 2
         border.color: profile_page.text_edit_border_color
@@ -207,7 +209,7 @@ Rectangle {
         anchors.topMargin: text_edits_distance
         anchors.horizontalCenter: register_rectangle.horizontalCenter
 
-        TextEdit {
+        TextInput {
 
             id: register_password_edit
             color: profile_page.text_edit_color
@@ -217,6 +219,8 @@ Rectangle {
             anchors.fill: parent
             anchors.left: parent.left
             anchors.leftMargin: 10
+
+            echoMode: TextInput.Password
 
         }
     }
@@ -240,7 +244,7 @@ Rectangle {
 
         id: register_password_confirm_rect
         width: register_rectangle.width/1.2
-        height: register_password_edit.paintedHeight * 1.2
+        height: register_password_edit.font.pixelSize * 2
         color: profile_page.text_edit_background_color
         border.width: 2
         border.color: profile_page.text_edit_border_color
@@ -249,7 +253,7 @@ Rectangle {
         anchors.topMargin: text_edits_distance
         anchors.horizontalCenter: register_rectangle.horizontalCenter
 
-        TextEdit {
+        TextInput {
 
             id: register_password_confirm_edit
             color: profile_page.text_edit_color
@@ -259,6 +263,8 @@ Rectangle {
             anchors.fill: parent
             anchors.left: parent.left
             anchors.leftMargin: 10
+
+            echoMode: TextInput.Password
 
         }
     }

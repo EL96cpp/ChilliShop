@@ -1,26 +1,34 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include <QTcpSocket>
+#include <QSslSocket>
 #include <QObject>
 #include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QByteArray>
 
 class Client : public QObject
 {
     Q_OBJECT
 public:
     Client();
-
-private:
-
     void ConnectToServer(const QString& address, const quint16& port);
-    void Login(const QString& phone_number, const QString& password);
-    void Register(const QString& phone_number, const QString& password, const QString& name);
-    void MakeOrder(const QString& phone_number, const QString& order_datetime, const QJsonObject& order_data);
-    void GetCatalog();
+
+public slots:
+    void onLogin(const QString& phone_number, const QString& password);
+    void onRegister(const QString& phone_number, const QString& password, const QString& name);
+    void onMakeOrder(const QString& phone_number, const QString& order_datetime, const QJsonObject& order_data);
 
 private:
-    QTcpSocket* socket;
+    void GetCatalog();
+    void GetOrdersHistory();
+
+private:
+    QSslSocket* socket;
+    QString phone_number;
+    QString name;
 
 };
 

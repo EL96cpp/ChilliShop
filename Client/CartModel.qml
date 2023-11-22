@@ -21,10 +21,8 @@ ListModel {
 
             if (get(i).name === item_name) {
 
-                console.log("found " + item_name + " index: " + i);
-                console.log("item counter: " + get(i).number_of_items);
                 get(i).number_of_items += value;
-                console.log("item counter: " + get(i).number_of_items);
+
                 if (get(i).number_of_items === 0) {
 
                     remove(i, 1);
