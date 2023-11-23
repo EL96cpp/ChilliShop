@@ -44,6 +44,8 @@ signals:
 private:
     CustomerLoginResult CheckLoginCustomer(const QString& phone_number, const QString& password);
     EmployeeLoginResult CheckLoginEmployee(const QString& name, const QString& position, const QString& password);
+    void AddOrder();
+    void CancelOrder();
 
 private:
     QSqlDatabase sql_database;

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSslSocket>
+#include <QString>
 
 class Client : public QObject
 {
@@ -10,7 +11,11 @@ class Client : public QObject
 public:
     explicit Client(QObject *parent = nullptr);
 
-signals:
+public slots:
+    void onLogin(const QString& name, const QString& surname, const QString& password);
+
+private:
+    void getOrders();
 
 private:
     QSslSocket socket;
