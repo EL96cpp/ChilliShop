@@ -36,6 +36,8 @@ void Client::onLogin(const QString& phone_number, const QString& password) {
 
         qintptr bytes_written = socket->write(byte_array);
         qDebug() << bytes_written;
+        qDebug() << byte_array.toStdString();
+        qDebug() << byte_array.toStdString();
 
     } else {
 

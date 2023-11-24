@@ -8,7 +8,8 @@
 class Product
 {
 public:
-    explicit Product();
+    explicit Product(const int& id, const QString& name, const int& price, const int& scoville,
+                     const QPixmap& image, const QJsonObject& description);
 
 private:
     int id;

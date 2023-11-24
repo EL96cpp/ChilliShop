@@ -8,7 +8,12 @@ Server::Server() : sql_service(new SqlService(this))
 
         qDebug() << "Server started!";
 
+    } else {
+
     }
+
+    catalog_byte_array = sql_service->GetCatalogData();
+
 }
 
 void Server::RespondToMessage(ClientConnection* client, QByteArray &message_byte_array)

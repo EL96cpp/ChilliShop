@@ -151,7 +151,7 @@ Rectangle {
 
         id: login_password_rect
         width: login_rectangle.width/1.2
-        height: login_password_edit.font.pixelSize * 2
+        height: login_password_input.font.pixelSize * 2
         color: profile_page.text_edit_background_color
         border.width: 2
         border.color: profile_page.text_edit_border_color
@@ -162,7 +162,7 @@ Rectangle {
 
         TextInput {
 
-            id: login_password_edit
+            id: login_password_input
             color: profile_page.text_edit_color
             font.family: regular_font.name
             font.pointSize: 18
@@ -210,7 +210,7 @@ Rectangle {
 
         onClicked: {
 
-            Client.onLogin(login_phone_edit.text, login_password_edit.text);
+            Client.onLogin(login_phone_input.text, login_password_input.text);
             console.log("Sent login data to client");
 
         }

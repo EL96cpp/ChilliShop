@@ -8,6 +8,11 @@
 #include <QSqlError>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QByteArray>
+#include <QUrl>
+#include <QImage>
+#include <QBuffer>
+#include <QJsonObject>
 
 enum class CustomerLoginResult {
 
@@ -38,6 +43,7 @@ class SqlService : public QObject
 public:
     explicit SqlService(QObject *parent = nullptr);
     QString GetCustomerName(const QString& phone_number);
+    QByteArray GetCatalogData();
 
 signals:
 
@@ -46,6 +52,7 @@ private:
     EmployeeLoginResult CheckLoginEmployee(const QString& name, const QString& position, const QString& password);
     void AddOrder();
     void CancelOrder();
+    void CreateTablesIfNotExists();
 
 private:
     QSqlDatabase sql_database;
