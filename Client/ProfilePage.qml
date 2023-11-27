@@ -150,16 +150,15 @@ Page {
     }
 
 
-
     LoginForm {
         id: login_rectangle
         visible: true
     }
 
+
     RegisterForm {
         id: register_rectangle
     }
-
 
 
 }

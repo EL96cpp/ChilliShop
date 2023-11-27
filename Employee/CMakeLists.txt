@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(Employee VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
 
@@ -12,12 +13,14 @@ qt_add_executable(appEmployee
     main.cpp
     client.cpp
     client.h
+    Images.qrc
+    Fonts.qrc
 )
 
 qt_add_qml_module(appEmployee
     URI Employee
     VERSION 1.0
-    QML_FILES Main.qml
+    QML_FILES Main.qml LoginPage.qml
 )
 
 set_target_properties(appEmployee PROPERTIES
