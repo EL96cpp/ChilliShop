@@ -260,6 +260,9 @@ Page {
 
             onClicked: {
 
+                Client.onLogin(login_phone_input.text, login_password_input.text);
+                console.log("Sent login data to client");
+
             }
 
         }

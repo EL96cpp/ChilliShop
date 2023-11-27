@@ -14,13 +14,15 @@ public:
     void ConnectToServer(const QString& address, const quint16& port);
 
 public slots:
-    void onLogin(const QString& name, const QString& surname, const QString& password);
+    void onLogin(const QString& name, const QString& surname,
+                 const QString& position, const QString& password);
 
 private:
     void getOrders();
 
 private:
     QSslSocket* socket;
+
 
 };
 

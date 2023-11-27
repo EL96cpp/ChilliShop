@@ -22,8 +22,10 @@ void Client::ConnectToServer(const QString& address, const quint16& port) {
 
 }
 
-void Client::onLogin(const QString &name, const QString &surname, const QString &password)
-{
+void Client::onLogin(const QString &name, const QString &surname,
+                     const QString& position, const QString &password) {
+
+
 
 }
 
