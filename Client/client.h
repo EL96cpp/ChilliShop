@@ -16,6 +16,10 @@ public:
     Client();
     void ConnectToServer(const QString& address, const quint16& port);
 
+signals:
+    void AddProductToGrid(const QString& product_type, const int& id, const QString& name,
+                          const int& price, const int& scoville, const QImage& image);
+
 public slots:
     void onLogin(const QString& phone_number, const QString& password);
     void onRegister(const QString& phone_number, const QString& password, const QString& name);
