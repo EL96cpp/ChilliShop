@@ -11,6 +11,8 @@ class Client : public QObject
 public:
     explicit Client(QObject *parent = nullptr);
 
+    void ConnectToServer(const QString& address, const quint16& port);
+
 public slots:
     void onLogin(const QString& name, const QString& surname, const QString& password);
 
@@ -18,7 +20,7 @@ private:
     void getOrders();
 
 private:
-    QSslSocket socket;
+    QSslSocket* socket;
 
 };
 

@@ -255,7 +255,6 @@ Page {
                 font.letterSpacing: 5
                 font.bold: true
                 color: "#E2E2E2"
-                //color: login_button.hovered ? "#FF5403" : "#E2E2E2"
 
             }
 

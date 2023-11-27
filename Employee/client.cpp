@@ -1,8 +1,24 @@
 #include "client.h"
 
 Client::Client(QObject *parent)
-    : QObject{parent}
+    : QObject{parent}, socket(new QSslSocket)
 {
+
+}
+
+void Client::ConnectToServer(const QString& address, const quint16& port) {
+
+    socket->connectToHost(address, port);
+    qDebug() << socket->state();
+    if (socket->state() == QAbstractSocket::UnconnectedState) {
+
+        qDebug() << "Connection error!";
+
+    } else {
+
+        qDebug() << "Connected!";
+
+    }
 
 }
 
