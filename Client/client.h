@@ -26,6 +26,7 @@ public slots:
     void onMakeOrder(const QString& phone_number, const QString& order_datetime, const QJsonObject& order_data);
 
 private:
+    void SendConnectionType();
     void GetCatalog();
     void GetOrdersHistory();
 

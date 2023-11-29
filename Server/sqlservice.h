@@ -30,7 +30,7 @@ enum class EmployeeLoginResult {
 
 };
 
-enum class RegisterResult {
+enum class CustomerRegisterResult {
 
     SUCCESS,
     PHONE_ALREADY_REGISTERED
@@ -42,16 +42,20 @@ class SqlService : public QObject
     Q_OBJECT
 public:
     explicit SqlService(QObject *parent = nullptr);
-    QString GetCustomerName(const QString& phone_number);
-    QByteArray GetCatalogData();
 
-signals:
+    // Following fucntions must be thread-safe!
+    QByteArray GetCatalogData();
+    QString GetCustomerName(const QString& phone_number);
+    CustomerLoginResult LoginCustomer(const QString& phone_number, const QString& password);
+    CustomerRegisterResult RegisterCustomer(const QString& phone_number, const QString& password, const QString& name);
+    bool CheckIfPhoneNumberExists(const QString& phone_number);
+    bool CheckIfEmployeeExists(const QString& name, const QString& surname, const QString& position);
+    bool AddOrder(const QString& phone_number, const QJsonArray& order_array, const QString& order_code);
+    bool CheckIfOrderExists(const QString& phone_number, const int& order_id);
+    bool CancelOrder(const QString& phone_number, const int& order_id);
 
 private:
-    CustomerLoginResult CheckLoginCustomer(const QString& phone_number, const QString& password);
-    EmployeeLoginResult CheckLoginEmployee(const QString& name, const QString& position, const QString& password);
-    void AddOrder();
-    void CancelOrder();
+
     void CreateTablesIfNotExists();
 
 private:

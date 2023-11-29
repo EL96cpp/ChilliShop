@@ -22,6 +22,7 @@ public:
     void SetPhoneNumber(const QString& phone_number);
     void SetConnectionType(const ConnectionType& connection_type);
     ConnectionType GetConnectionType();
+    void SendMessage(const QByteArray& message_byte_array);
 
 private slots:
     void onReadyRead();
@@ -33,6 +34,7 @@ private:
     QTcpSocket* socket;
     QString phone_number;
     ConnectionType connection_type;
+    bool logged_in;
 
 };
 

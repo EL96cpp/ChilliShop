@@ -67,8 +67,8 @@ Rectangle {
 
     }
 
-    Canvas
-    {
+    Canvas {
+
         id: drawingCanvas
         width: register_title.paintedWidth
         height: 100
@@ -76,8 +76,7 @@ Rectangle {
         anchors.top: register_title.bottom
         anchors.topMargin: 15
 
-        onPaint:
-        {
+        onPaint: {
 
             var ctx = getContext("2d")
 

@@ -29,6 +29,31 @@ Page {
 
         anchors.centerIn: parent
 
+        Rectangle {
+
+            id: circle_rectangle
+            width: parent.width/4
+            height: width
+            radius: width/2
+            color: "#f9a680"
+            border.width: 15
+            border.color: "#c23e00"
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.top
+
+            Image {
+
+                id: circle_pepper_image
+                source: "qrc:/Images/pepper.png"
+                sourceSize.height: circle_rectangle.height/1.5
+                anchors.centerIn: parent
+
+            }
+
+
+        }
+
         Text {
 
             id: authorization_title
@@ -40,13 +65,13 @@ Page {
             color: "white"
 
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 70
+            anchors.top: circle_rectangle.bottom
+            anchors.topMargin: 30
 
         }
 
-        Canvas
-        {
+        Canvas {
+
             id: drawingCanvas
             width: authorization_title.paintedWidth * 1.2
             height: 20
@@ -54,8 +79,7 @@ Page {
             anchors.top: authorization_title.bottom
             anchors.topMargin: 25
 
-            onPaint:
-            {
+            onPaint: {
 
                 var ctx = getContext("2d")
 

@@ -1,19 +1,20 @@
 #include "client.h"
 
-Client::Client() : socket(new QSslSocket)
-{}
+Client::Client() : socket(new QSslSocket) {}
 
 
 void Client::ConnectToServer(const QString& address, const quint16& port) {
 
     socket->connectToHost(address, port);
     qDebug() << socket->state();
+
     if (socket->state() == QAbstractSocket::UnconnectedState) {
 
         qDebug() << "Connection error!";
 
     } else {
 
+        SendConnectionType();
         qDebug() << "Connected!";
 
     }
@@ -74,17 +75,57 @@ void Client::onRegister(const QString& phone_number, const QString& password, co
 
 }
 
-void Client::onMakeOrder(const QString &phone_number, const QString &order_datetime, const QJsonObject &order_data)
-{
+void Client::onMakeOrder(const QString &phone_number, const QString &order_datetime, const QJsonObject &order_data) {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("POST");
+    message[QStringLiteral("Resource")] = QStringLiteral("Order");
 
 }
 
-void Client::GetCatalog()
-{
+void Client::SendConnectionType() {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("POST");
+    message[QStringLiteral("Resource")] = QStringLiteral("Customer_connection");
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    if (socket->state() == QAbstractSocket::ConnectedState) {
+
+        qintptr bytes_written = socket->write(byte_array);
+        qDebug() << bytes_written;
+
+    } else {
+
+        qDebug() << "cant send connection type: disconnected!";
+
+    }
 
 }
 
-void Client::GetOrdersHistory()
-{
+void Client::GetCatalog() {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("GET");
+    message[QStringLiteral("Resource")] = QStringLiteral("Catalog");
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
+
+}
+
+void Client::GetOrdersHistory() {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("GET");
+    message[QStringLiteral("Resource")] = QStringLiteral("Orders_history");
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
 
 }

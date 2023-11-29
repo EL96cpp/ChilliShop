@@ -4,8 +4,8 @@
 
 #include "client.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
+
     QGuiApplication app(argc, argv);
 
     Client client;
@@ -22,4 +22,5 @@ int main(int argc, char *argv[])
     engine.load(url);
 
     return app.exec();
+
 }

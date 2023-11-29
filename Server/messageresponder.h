@@ -17,7 +17,8 @@ class MessageResponder : public QObject, public QRunnable
 {
     Q_OBJECT
 public:
-    MessageResponder(ClientConnection* client, QByteArray& message_byte_array, SqlService* sql_service);
+    MessageResponder(ClientConnection* client, QByteArray& message_byte_array,
+                     QByteArray& catalog_byte_array, SqlService* sql_service);
 
     void run();
     void RespondToCustomer(const QJsonObject& json_message_object);
@@ -27,6 +28,7 @@ private:
     SqlService* sql_service;
     ClientConnection* client;
     QByteArray message_byte_array;
+    QByteArray& catalog_byte_array;
 
 };
 

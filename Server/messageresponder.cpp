@@ -1,17 +1,18 @@
 #include "messageresponder.h"
 
-MessageResponder::MessageResponder(ClientConnection* client, QByteArray& message_byte_array,
+MessageResponder::MessageResponder(ClientConnection* client,
+                                   QByteArray& message_byte_array,
+                                   QByteArray& catalog_byte_array,
                                    SqlService* sql_service) : client(client),
                                                               message_byte_array(message_byte_array),
-                                                              sql_service(sql_service)
-{
+                                                              catalog_byte_array(catalog_byte_array),
+                                                              sql_service(sql_service) {
 
     qDebug() << message_byte_array;
 
 }
 
-void MessageResponder::run()
-{
+void MessageResponder::run() {
 
     // Parse message
     QJsonParseError parse_error;
@@ -28,15 +29,39 @@ void MessageResponder::run()
 
     if (client->GetConnectionType() == ConnectionType::UNKNOWN) {
 
+        QJsonValue method_value = json_message_object.value(QLatin1String("Method"));
         QJsonValue resource_value = json_message_object.value(QLatin1String("Resource"));
 
-        if (resource_value.toString() == "Catalog") {
+        if (method_value.toString() == "POST") {
 
-            client->SetConnectionType(ConnectionType::CUTOMER);
+            if (resource_value.toString() == "Customer_connection") {
 
-        } else if (resource_value.toString() == "Employee_list") {
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("POST");
+                message[QStringLiteral("Resource")] = QStringLiteral("Customer_connection");
+                message[QStringLiteral("Code")] = QStringLiteral("200");
+                QByteArray byte_array = QJsonDocument(message).toJson();
+                byte_array.append("\n");
 
-            client->SetConnectionType(ConnectionType::EMPLOYEE);
+                client->SendMessage(byte_array);
+
+                client->SetConnectionType(ConnectionType::CUTOMER);
+
+
+            } else if (resource_value.toString() == "Employee_connection") {
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("POST");
+                message[QStringLiteral("Resource")] = QStringLiteral("Employee_connection");
+                message[QStringLiteral("Code")] = QStringLiteral("200");
+                QByteArray byte_array = QJsonDocument(message).toJson();
+                byte_array.append("\n");
+
+                client->SendMessage(byte_array);
+
+                client->SetConnectionType(ConnectionType::EMPLOYEE);
+
+            }
 
         }
 
@@ -50,11 +75,10 @@ void MessageResponder::run()
 
     }
 
-
 }
 
-void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
-{
+void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object) {
+
     QJsonValue method_value = json_message_object.value(QLatin1String("Method"));
     QJsonValue resource_value = json_message_object.value(QLatin1String("Resource"));
 
@@ -62,9 +86,16 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
         if (resource_value.toString() == "Login_customer") {
 
+
+
+
         } else if (resource_value.toString() == "Register_customer") {
 
+
+
         } else if (resource_value.toString() == "Order") {
+
+
 
         }
 
@@ -72,7 +103,18 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
         if (resource_value.toString() == "Catalog") {
 
+            QJsonObject message;
+            message[QStringLiteral("Method")] = QStringLiteral("GET");
+            message[QStringLiteral("Resource")] = QStringLiteral("Catalog");
+            message[QStringLiteral("Code")] = QStringLiteral("200");
+            message[QStringLiteral("Catalog")] = catalog_byte_array;
+            QByteArray byte_array = QJsonDocument(message).toJson();
+            byte_array.append("\n");
+
+
         } else if (resource_value.toString() == "Orders_history") {
+
+
 
         }
 
@@ -85,6 +127,7 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
         } else if (resource_value.toString() == "Order") {
 
 
+
         }
 
 
@@ -92,13 +135,16 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
         if (resource_value.toString() == "User_name") {
 
+
+
         }
 
     }
+
 }
 
-void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
-{
+void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object) {
+
     QJsonValue method_value = json_message_object.value(QLatin1String("Method"));
     QJsonValue resource_value = json_message_object.value(QLatin1String("Resource"));
 
@@ -110,9 +156,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
     } else if (method_value.toString() == "GET") {
 
-        if (resource_value.toString() == "Employees_list") {
-
-        } else if (resource_value.toString() == "Orders") {
+        if (resource_value.toString() == "Orders") {
 
         }
 
@@ -121,7 +165,6 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
         if (resource_value.toString() == "Connection") {
 
         }
-
 
     } else if (method_value.toString() == "PUT") {
 
