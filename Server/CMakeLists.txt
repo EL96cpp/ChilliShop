@@ -24,8 +24,8 @@ add_executable(Server
   connectionsvector.h
   messageresponder.cpp
   messageresponder.h
-  product.cpp
-  product.h
+  order.cpp
+  order.h
 
 )
 target_link_libraries(Server Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network

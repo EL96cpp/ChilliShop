@@ -107,7 +107,7 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
             message[QStringLiteral("Method")] = QStringLiteral("GET");
             message[QStringLiteral("Resource")] = QStringLiteral("Catalog");
             message[QStringLiteral("Code")] = QStringLiteral("200");
-            message[QStringLiteral("Catalog")] = catalog_byte_array;
+            message[QStringLiteral("Catalog")] = QString(catalog_byte_array.toBase64());
             QByteArray byte_array = QJsonDocument(message).toJson();
             byte_array.append("\n");
 
@@ -133,7 +133,7 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
     } else if (method_value.toString() == "PUT") {
 
-        if (resource_value.toString() == "User_name") {
+        if (resource_value.toString() == "Change_user_name") {
 
 
 
