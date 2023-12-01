@@ -1,6 +1,6 @@
 #include "server.h"
 
-Server::Server() : sql_service(new SqlService(this)) {
+Server::Server() : sql_service(new SqlService) {
 
     QThreadPool::globalInstance()->setMaxThreadCount(10);
 

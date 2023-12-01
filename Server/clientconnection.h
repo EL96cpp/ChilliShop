@@ -20,9 +20,13 @@ public:
     explicit ClientConnection(QObject *parent);
     void SetSocketDescriptor(qintptr descriptor);
     void SetPhoneNumber(const QString& phone_number);
+    void SetLoggedIn(const bool &logged_in);
     void SetConnectionType(const ConnectionType& connection_type);
     ConnectionType GetConnectionType();
     void SendMessage(const QByteArray& message_byte_array);
+
+    QString GetPhoneNumber();
+    bool IsLoggedIn();
 
 private slots:
     void onReadyRead();

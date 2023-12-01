@@ -37,11 +37,10 @@ enum class CustomerRegisterResult {
 
 };
 
-class SqlService : public QObject
-{
-    Q_OBJECT
+class SqlService {
+
 public:
-    explicit SqlService(QObject *parent = nullptr);
+    explicit SqlService();
 
     // Following fucntions must be thread-safe!
     QByteArray GetCatalogData();
@@ -50,12 +49,12 @@ public:
     CustomerRegisterResult RegisterCustomer(const QString& phone_number, const QString& password, const QString& name);
     bool CheckIfPhoneNumberExists(const QString& phone_number);
     bool CheckIfEmployeeExists(const QString& name, const QString& surname, const QString& position);
-    bool AddOrder(const QString& phone_number, const QJsonArray& order_array, const QString& order_code);
+    bool AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code);
+    bool CheckIfOrderIsCorrect(const QVector<QString>& product_ids);
     bool CheckIfOrderExists(const QString& phone_number, const int& order_id);
     bool CancelOrder(const QString& phone_number, const int& order_id);
 
 private:
-
     void CreateTablesIfNotExists();
 
 private:

@@ -284,7 +284,7 @@ Page {
 
             onClicked: {
 
-                Client.onLogin(login_phone_input.text, login_password_input.text);
+                Client.onLogin(login_name_input.text, login_surname_input.text, login_position_combobox.currentText, login_password_input.text);
                 console.log("Sent login data to client");
 
             }

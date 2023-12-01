@@ -1,7 +1,7 @@
 #include "sqlservice.h"
 
-SqlService::SqlService(QObject *parent)
-    : QObject{parent}, sql_database(QSqlDatabase::addDatabase("QPSQL")) {
+SqlService::SqlService()
+    : sql_database(QSqlDatabase::addDatabase("QPSQL")) {
 
     sql_database.setHostName("127.0.0.1");
     sql_database.setPort(5432);
@@ -62,6 +62,19 @@ CustomerLoginResult SqlService::LoginCustomer(const QString &phone_number, const
 
 }
 
+CustomerRegisterResult SqlService::RegisterCustomer(const QString &phone_number, const QString &password, const QString &name)
+{
+    QMutexLocker locker(&mutex);
+
+    if (CheckIfPhoneNumberExists(phone_number)) {
+
+    } else {
+
+
+    }
+
+}
+
 bool SqlService::CheckIfPhoneNumberExists(const QString &phone_number) {
 
     QMutexLocker locker(&mutex);
@@ -100,17 +113,45 @@ QByteArray SqlService::GetCatalogData() {
 
 }
 
-bool SqlService::AddOrder(const QString &phone_number, const QJsonArray &order_array, const QString &order_code) {
+bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code) {
 
     QMutexLocker locker(&mutex);
 
     QSqlQuery add_order_query;
-    add_order_query.prepare("INSERT INTO oders VALUES (DEFAULT, (?), (?), (?))");
+    add_order_query.prepare("INSERT INTO oders VALUES (DEFAULT, (?), (?), (?), (?))");
     add_order_query.addBindValue(phone_number);
+    add_order_query.addBindValue(timestamp);
     add_order_query.addBindValue(order_code);
     add_order_query.addBindValue(order_array);
 
     return add_order_query.exec();
+
+}
+
+bool SqlService::CheckIfOrderIsCorrect(const QVector<QString> &product_ids) {
+
+    QMutexLocker locker(&mutex);
+
+    for (int i = 0; i < product_ids.size(); ++i) {
+
+        QSqlQuery check_order_query;
+        check_order_query.prepare("SELECT EXISTS (SELECT 1 FROM catalog WHERE id = (?))");
+        check_order_query.addBindValue(product_ids[i]);
+        check_order_query.exec();
+
+        if (check_order_query.next()) {
+
+            if (!check_order_query.value(0).toBool()) {
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+    return true;
 
 }
 
@@ -189,7 +230,7 @@ void SqlService::CreateTablesIfNotExists() {
         if (!check_orders_table_query.value(0).toBool()) {
 
             QSqlQuery orders_table_query("CREATE TABLE IF NOT EXISTS orders (order_id SERIAL, phone_number VARCHAR(11), "
-                                         "receive_code VARCHAR(4), order_data JSON);");
+                                         "timestamp TIMESTAMP, receive_code VARCHAR(4), order_data JSON);");
             orders_table_query.exec();
 
             QSqlQuery set_order_id_query("ALTER SEQUENCE orders_order_id_seq RESTART WITH 100000;");

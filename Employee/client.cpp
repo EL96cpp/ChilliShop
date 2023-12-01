@@ -12,7 +12,7 @@ void Client::ConnectToServer(const QString& address, const quint16& port) {
     socket->connectToHost(address, port);
     qDebug() << socket->state();
 
-    if (socket->state() == QAbstractSocket::UnconnectedState) {
+    if (!socket->waitForConnected(3000)) {
 
         qDebug() << "Connection error!";
 
@@ -25,8 +25,8 @@ void Client::ConnectToServer(const QString& address, const quint16& port) {
 
 }
 
-void Client::onLogin(const QString &name, const QString &surname,
-                     const QString& position, const QString &password) {
+void Client::onLogin(const QString& name, const QString& surname,
+                     const QString& position, const QString& password) {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("POST");
@@ -37,6 +37,9 @@ void Client::onLogin(const QString &name, const QString &surname,
     message[QStringLiteral("Password")] = password;
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
 
 }
 
@@ -148,6 +151,7 @@ void Client::SendConnectionType() {
         qDebug() << "cant send connection type: disconnected!";
 
     }
+
 }
 
 void Client::GetOrders() {

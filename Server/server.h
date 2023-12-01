@@ -13,6 +13,7 @@
 #include "connectionsvector.h"
 #include "messageresponder.h"
 #include "product.h"
+#include "order.h"
 
 class Server : public QTcpServer
 {

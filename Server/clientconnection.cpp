@@ -21,6 +21,11 @@ void ClientConnection::SetPhoneNumber(const QString &phone_number) {
 
 }
 
+void ClientConnection::SetLoggedIn(const bool &logged_in)
+{
+    this->logged_in = logged_in;
+}
+
 void ClientConnection::SetConnectionType(const ConnectionType &connection_type) {
 
     this->connection_type = connection_type;
@@ -36,6 +41,16 @@ ConnectionType ClientConnection::GetConnectionType() {
 void ClientConnection::SendMessage(const QByteArray &message_byte_array)
 {
     socket->write(message_byte_array);
+}
+
+QString ClientConnection::GetPhoneNumber()
+{
+    return phone_number;
+}
+
+bool ClientConnection::IsLoggedIn()
+{
+    return logged_in;
 }
 
 void ClientConnection::onReadyRead() {

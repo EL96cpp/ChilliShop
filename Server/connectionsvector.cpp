@@ -20,3 +20,4 @@ void ConnectionsVector::erase(ClientConnection *client_connection) {
     connections.erase(std::remove(connections.begin(), connections.end(), client_connection), connections.end());
 
 }
+
