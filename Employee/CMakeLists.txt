@@ -20,7 +20,7 @@ qt_add_executable(appEmployee
 qt_add_qml_module(appEmployee
     URI Employee
     VERSION 1.0
-    QML_FILES Main.qml LoginPage.qml
+    QML_FILES Main.qml LoginPage.qml WorkspacePage.qml ErrorMessage.qml
 )
 
 set_target_properties(appEmployee PROPERTIES

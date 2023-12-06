@@ -8,7 +8,6 @@
 #include <QMutexLocker>
 #include <QVector>
 
-#include "sqlservice.h"
 #include "clientconnection.h"
 #include "connectionsvector.h"
 #include "messageresponder.h"
@@ -35,7 +34,7 @@ private:
 private:
     ConnectionsVector connections;
     QByteArray catalog_byte_array;
-    SqlService* sql_service;
+    std::atomic<unsigned long long> sql_connections_counter;
 
 };
 

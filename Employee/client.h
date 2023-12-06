@@ -2,7 +2,7 @@
 #define CLIENT_H
 
 #include <QObject>
-#include <QSslSocket>
+#include <QTcpSocket>
 #include <QString>
 #include <QMap>
 #include <QJsonParseError>
@@ -25,6 +25,7 @@ signals:
     void addOrderToView(const int& order_id, const QString& name, const QString& phone,
                         const QString& order_code, const QMap<int, int>& order_data,
                         const int& total_cost);
+    void showErrorMessage(const QString& error_title, const QString& error_description);
 
 public slots:
     void onLogin(const QString& name, const QString& surname,
@@ -37,7 +38,7 @@ private:
     void GetCatalog();
 
 private:
-    QSslSocket* socket;
+    QTcpSocket* socket;
 
 
 };

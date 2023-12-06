@@ -40,13 +40,15 @@ enum class CustomerRegisterResult {
 class SqlService {
 
 public:
-    explicit SqlService();
+    explicit SqlService(const QString& sql_connections_counter);
+    //~SqlService();
 
     // Following fucntions must be thread-safe!
     QByteArray GetCatalogData();
     QString GetCustomerName(const QString& phone_number);
     CustomerLoginResult LoginCustomer(const QString& phone_number, const QString& password);
     CustomerRegisterResult RegisterCustomer(const QString& phone_number, const QString& password, const QString& name);
+    EmployeeLoginResult LoginEmployee(const QString& name, const QString& surname, const QString& position, const QString& password);
     bool CheckIfPhoneNumberExists(const QString& phone_number);
     bool CheckIfEmployeeExists(const QString& name, const QString& surname, const QString& position);
     bool AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code);
@@ -59,7 +61,6 @@ private:
 
 private:
     QSqlDatabase sql_database;
-    QMutex mutex;
 
 };
 

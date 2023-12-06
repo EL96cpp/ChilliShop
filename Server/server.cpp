@@ -1,6 +1,6 @@
 #include "server.h"
 
-Server::Server() : sql_service(new SqlService) {
+Server::Server() : sql_connections_counter(0) {
 
     QThreadPool::globalInstance()->setMaxThreadCount(10);
 
@@ -12,23 +12,18 @@ Server::Server() : sql_service(new SqlService) {
 
     }
 
-    catalog_byte_array = sql_service->GetCatalogData();
-
 }
 
 void Server::RespondToMessage(ClientConnection* client, QByteArray &message_byte_array) {
 
     qDebug() << "server parses message!";
-    MessageResponder* message_responder = new MessageResponder(client, message_byte_array, catalog_byte_array, sql_service);
-
-    QThreadPool::globalInstance()->start(message_responder);
 
 }
 
 void Server::incomingConnection(qintptr handle) {
 
     qDebug() << "new connection";
-    ClientConnection* connection = new ClientConnection(this);
+    ClientConnection* connection = new ClientConnection(this, sql_connections_counter);
     connection->SetSocketDescriptor(handle);
     connect(connection, &ClientConnection::RespondToMessage, this, &Server::RespondToMessage);
     connections.push(std::move(connection));

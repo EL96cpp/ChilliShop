@@ -6,6 +6,7 @@ import QtQuick.Layouts 1.3
 Page {
 
     id: login_page
+    anchors.centerIn: parent
 
     property int text_input_margins: 80
 
@@ -284,8 +285,8 @@ Page {
 
             onClicked: {
 
-                Client.onLogin(login_name_input.text, login_surname_input.text, login_position_combobox.currentText, login_password_input.text);
-                console.log("Sent login data to client");
+                var employee_position = (login_position_combobox.currentValue === "Оператор") ? "Operator" : "Mannager";
+                Client.onLogin(login_name_input.text, login_surname_input.text, employee_position, login_password_input.text);
 
             }
 

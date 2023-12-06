@@ -1,9 +1,9 @@
 #include "client.h"
 
 Client::Client(QObject *parent)
-    : QObject{parent}, socket(new QSslSocket) {
+    : QObject{parent}, socket(new QTcpSocket) {
 
-    connect(socket, &QSslSocket::readyRead, this, &Client::onReadyRead);
+    connect(socket, &QTcpSocket::readyRead, this, &Client::onReadyRead);
 
 }
 
@@ -78,14 +78,15 @@ void Client::onReadyRead() {
 
             if (code_value.toString() == "200") {
 
+                qDebug() << "Logged in successfully!";
                 GetCatalog();
                 emit loggedIn();
 
-            } else if (code_value.toString() == "400") {
+            } else {
 
                 QJsonValue error_description_value = json_message_object.value(QLatin1String("Error_description"));
-
-                emit errorOccurred(QString::fromLatin1("Login error!"), error_description_value.toString());
+                qDebug() << error_description_value;
+                emit showErrorMessage(QString::fromLatin1("Login error!"), error_description_value.toString());
 
             }
 

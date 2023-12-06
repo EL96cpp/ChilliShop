@@ -1,7 +1,6 @@
 #include "sqlservice.h"
 
-SqlService::SqlService()
-    : sql_database(QSqlDatabase::addDatabase("QPSQL")) {
+SqlService::SqlService(const QString& sql_connections_counter) : sql_database(QSqlDatabase::addDatabase("QPSQL", sql_connections_counter)) {
 
     sql_database.setHostName("127.0.0.1");
     sql_database.setPort(5432);
@@ -9,10 +8,12 @@ SqlService::SqlService()
     sql_database.setUserName("postgres");
     sql_database.setPassword("postgres");
 
+    qDebug() << sql_database.databaseName() << " name";
+    qDebug() << sql_database.connectionName() << " name";
+
     if (sql_database.open()) {
 
         qDebug() << "Databse opened!";
-        CreateTablesIfNotExists();
 
     } else {
 
@@ -22,10 +23,20 @@ SqlService::SqlService()
 
 }
 
+/*
+SqlService::~SqlService() {
+
+    qDebug() << "SqlService will delete " << sql_database.databaseName();
+
+    sql_database.close();
+    sql_database.removeDatabase(sql_database.connectionName());
+
+}
+*/
+
 QString SqlService::GetCustomerName(const QString &phone_number) {
 
-    QMutexLocker locker(&mutex);
-    QSqlQuery get_name_query;
+    QSqlQuery get_name_query(sql_database);
     get_name_query.prepare("SELECT name FROM customers WHERE phone_number = (?)");
     get_name_query.addBindValue(phone_number);
     get_name_query.exec();
@@ -36,21 +47,19 @@ QString SqlService::GetCustomerName(const QString &phone_number) {
 
 CustomerLoginResult SqlService::LoginCustomer(const QString &phone_number, const QString &password) {
 
-    QMutexLocker locker(&mutex);
-
     if (!CheckIfPhoneNumberExists(phone_number)) {
 
         return CustomerLoginResult::NO_PHONE_IN_DATABASE;
 
     }
 
-    QSqlQuery login_customer_query;
+    QSqlQuery login_customer_query(sql_database);
     login_customer_query.prepare("SELECT password FROM cutomers WHERE phone_number = (?)");
     login_customer_query.addBindValue(phone_number);
     login_customer_query.exec();
     QString correct_password = login_customer_query.value(0).toString();
 
-    if (password == correct_password) {
+    if (QString::compare(correct_password, password, Qt::CaseSensitive)) {
 
         return CustomerLoginResult::SUCCESS;
 
@@ -64,12 +73,54 @@ CustomerLoginResult SqlService::LoginCustomer(const QString &phone_number, const
 
 CustomerRegisterResult SqlService::RegisterCustomer(const QString &phone_number, const QString &password, const QString &name)
 {
-    QMutexLocker locker(&mutex);
 
     if (CheckIfPhoneNumberExists(phone_number)) {
 
+        return CustomerRegisterResult::PHONE_ALREADY_REGISTERED;
+
     } else {
 
+        return CustomerRegisterResult::SUCCESS;
+
+    }
+
+}
+
+EmployeeLoginResult SqlService::LoginEmployee(const QString &name, const QString &surname, const QString &position, const QString &password) {
+
+    qDebug() << name << " " << surname << " " << position << " " << password;
+
+    if (!CheckIfEmployeeExists(name, surname, position)) {
+
+        return EmployeeLoginResult::NO_EMPLOYEE_IN_DATABASE;
+
+    } else {
+
+        QSqlQuery check_password_query(sql_database);
+        check_password_query.prepare("SELECT password FROM employees WHERE name = (?) AND surname = (?) AND position = (?)");
+        check_password_query.addBindValue(name);
+        check_password_query.addBindValue(surname);
+        check_password_query.addBindValue(position);
+
+        QString correct_password;
+
+        if (check_password_query.next()) {
+
+            correct_password = check_password_query.value(0).toString();
+            qDebug() << correct_password << " correct password";
+            qDebug() << password << " password";
+
+        }
+
+        if (QString::compare(correct_password, password, Qt::CaseSensitive)) {
+
+            return EmployeeLoginResult::SUCCESS;
+
+        } else {
+
+            return EmployeeLoginResult::INCORRECT_PASSWORD;
+
+        }
 
     }
 
@@ -77,13 +128,12 @@ CustomerRegisterResult SqlService::RegisterCustomer(const QString &phone_number,
 
 bool SqlService::CheckIfPhoneNumberExists(const QString &phone_number) {
 
-    QMutexLocker locker(&mutex);
-    QSqlQuery check_phone_query;
+    QSqlQuery check_phone_query(sql_database);
     check_phone_query.prepare("SELECT EXISTS (SELECT 1 FROM customers WHERE phone_number = (?))");
     check_phone_query.addBindValue(phone_number);
     check_phone_query.exec();
 
-    while(check_phone_query.next()) {
+    if (check_phone_query.next()) {
 
         return check_phone_query.value(0).toBool();
 
@@ -91,9 +141,26 @@ bool SqlService::CheckIfPhoneNumberExists(const QString &phone_number) {
 
 }
 
-QByteArray SqlService::GetCatalogData() {
+bool SqlService::CheckIfEmployeeExists(const QString &name, const QString &surname, const QString &position) {
 
-    QMutexLocker locker(&mutex);
+    QSqlQuery login_query(sql_database);
+    login_query.prepare("SELECT EXISTS (SELECT 1 FROM employees WHERE name = (?) AND surname = (?) AND position = (?))");
+    login_query.addBindValue(name);
+    login_query.addBindValue(surname);
+    login_query.addBindValue(position);
+    login_query.exec();
+
+    if (login_query.next()) {
+
+        bool result = login_query.value(0).toBool();
+        qDebug() << "employee exists " << result;
+        return result;
+
+    }
+
+}
+
+QByteArray SqlService::GetCatalogData() {
 
     const QUrl url = QString::fromLatin1("../Catalog Images/Sauces/data.jpeg");
 
@@ -115,9 +182,7 @@ QByteArray SqlService::GetCatalogData() {
 
 bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code) {
 
-    QMutexLocker locker(&mutex);
-
-    QSqlQuery add_order_query;
+    QSqlQuery add_order_query(sql_database);
     add_order_query.prepare("INSERT INTO oders VALUES (DEFAULT, (?), (?), (?), (?))");
     add_order_query.addBindValue(phone_number);
     add_order_query.addBindValue(timestamp);
@@ -130,11 +195,9 @@ bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp,
 
 bool SqlService::CheckIfOrderIsCorrect(const QVector<QString> &product_ids) {
 
-    QMutexLocker locker(&mutex);
-
     for (int i = 0; i < product_ids.size(); ++i) {
 
-        QSqlQuery check_order_query;
+        QSqlQuery check_order_query(sql_database);
         check_order_query.prepare("SELECT EXISTS (SELECT 1 FROM catalog WHERE id = (?))");
         check_order_query.addBindValue(product_ids[i]);
         check_order_query.exec();
@@ -157,9 +220,7 @@ bool SqlService::CheckIfOrderIsCorrect(const QVector<QString> &product_ids) {
 
 bool SqlService::CheckIfOrderExists(const QString& phone_number, const int& order_id) {
 
-    QMutexLocker locker(&mutex);
-
-    QSqlQuery check_order_query;
+    QSqlQuery check_order_query(sql_database);
     check_order_query.prepare("SELECT EXISTS (SELECT 1 FROM orders WHERE id = (?) AND phone_number = (?))");
     check_order_query.addBindValue(order_id);
     check_order_query.addBindValue(phone_number);
@@ -175,11 +236,9 @@ bool SqlService::CheckIfOrderExists(const QString& phone_number, const int& orde
 
 bool SqlService::CancelOrder(const QString &phone_number, const int &order_id) {
 
-    QMutexLocker locker(&mutex);
-
     if (CheckIfOrderExists(phone_number, order_id)) {
 
-        QSqlQuery cancel_order_query;
+        QSqlQuery cancel_order_query(sql_database);
         cancel_order_query.prepare("DELETE FROM orders WHERE id = (?)");
         cancel_order_query.addBindValue(order_id);
         cancel_order_query.exec();
@@ -196,7 +255,9 @@ bool SqlService::CancelOrder(const QString &phone_number, const int &order_id) {
 void SqlService::CreateTablesIfNotExists() {
 
     // Create customers table if it doesn't exist
-    QSqlQuery check_customers_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'customers');");
+    QSqlQuery check_customers_table_query(sql_database);
+    check_customers_table_query.prepare("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'customers');");
+
     while (check_customers_table_query.next()) {
 
         if (!check_customers_table_query.value(0).toBool()) {
@@ -209,7 +270,9 @@ void SqlService::CreateTablesIfNotExists() {
     }
 
     // Create employees table if it doesn't exist
-    QSqlQuery check_employees_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'employees');");
+    QSqlQuery check_employees_table_query(sql_database);
+    check_employees_table_query.prepare("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'employees');");
+
     while (check_employees_table_query.next()) {
 
         if (!check_employees_table_query.value(0).toBool()) {
@@ -224,7 +287,9 @@ void SqlService::CreateTablesIfNotExists() {
 
 
     // Create orders table and set sequence start value if it doesn't exist
-    QSqlQuery check_orders_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'orders');");
+    QSqlQuery check_orders_table_query(sql_database);
+    check_orders_table_query.prepare("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'orders');");
+
     while (check_orders_table_query.next()) {
 
         if (!check_orders_table_query.value(0).toBool()) {
@@ -242,7 +307,9 @@ void SqlService::CreateTablesIfNotExists() {
 
 
     // Create catalog table and set sequence start value if it doesn't exist
-    QSqlQuery check_catalog_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'catalog');");
+    QSqlQuery check_catalog_table_query(sql_database);
+    check_catalog_table_query.prepare("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'catalog');");
+
     while (check_catalog_table_query.next()) {
 
         if (!check_catalog_table_query.value(0).toBool()) {

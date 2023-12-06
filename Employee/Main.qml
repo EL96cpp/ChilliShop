@@ -7,6 +7,7 @@ Window {
 
     id: main_window
     visibility: "FullScreen"
+
     title: "Chilli World"
 
     property string button_color: "#290d00"
@@ -78,14 +79,36 @@ Window {
         id: login_page
     }
 
-    Page {
-
+    WorkspacePage {
         id: workspace_page
+    }
 
+    ErrorMessage {
+        id: error_rectangle
+    }
 
+    Connections {
 
+        target: Client
+        function onLoggedIn() {
+
+            stack_view.push(workspace_page);
+
+        }
 
     }
 
+    Connections {
+
+        target: Client
+        function onShowErrorMessage(title, description) {
+
+            error_rectangle.title = title;
+            error_rectangle.description = description;
+            error_rectangle.visible = true;
+
+        }
+
+    }
 
 }
