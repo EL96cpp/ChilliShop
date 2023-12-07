@@ -1,8 +1,9 @@
 #include "clientconnection.h"
+#include "connectionsvector.h"
 #include "messageresponder.h"
 
-ClientConnection::ClientConnection(QObject *parent, std::atomic<unsigned long long>& sql_connections_counter)
-    : QObject(parent), socket(new QTcpSocket), sql_connections_counter(sql_connections_counter),
+ClientConnection::ClientConnection(QObject *parent, ConnectionsVector& connections, std::atomic<unsigned long long>& sql_connections_counter)
+    : QObject(parent), connections(connections), socket(new QTcpSocket), sql_connections_counter(sql_connections_counter),
       connection_type(ConnectionType::UNKNOWN), logged_in(false) {
 
     connect(socket, &QTcpSocket::readyRead, this, &ClientConnection::onReadyRead);
@@ -20,6 +21,13 @@ void ClientConnection::SetPhoneNumber(const QString &phone_number) {
 
     this->phone_number = phone_number;
 
+}
+
+void ClientConnection::SetEmployeeData(const QString &name, const QString &surname, const QString &position)
+{
+    this->name = name;
+    this->surname = surname;
+    this->position = position;
 }
 
 void ClientConnection::SetLoggedIn(const bool &logged_in) {

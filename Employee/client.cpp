@@ -134,6 +134,18 @@ void Client::onReadyRead() {
 
 }
 
+void Client::deleteConnection()
+{
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+    message[QStringLiteral("Resource")] = QStringLiteral("Connection");
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
+}
+
 void Client::SendConnectionType() {
 
     QJsonObject message;

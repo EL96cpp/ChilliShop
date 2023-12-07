@@ -31,6 +31,7 @@ public slots:
     void onLogin(const QString& name, const QString& surname,
                  const QString& position, const QString& password);
     void onReadyRead();
+    void deleteConnection();
 
 private:
     void SendConnectionType();

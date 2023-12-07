@@ -37,6 +37,7 @@ signals:
     void MessageResponce(const QByteArray& message_byte_array);
     void SetConnectionType(const ConnectionType& connection_type);
     void CheckIfOrderIsCorrect(const QVector<QString>& order_ids);
+    void DeleteConnection();
 
 private:
     QString GenerateOrderCode();

@@ -174,8 +174,8 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
         if (resource_value.toString() == "Connection") {
 
-
-
+            qDebug() << "customer connection will be deleted!";
+            emit DeleteConnection();
 
         } else if (resource_value.toString() == "Order") {
 
@@ -226,7 +226,8 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
         if (resource_value.toString() == "Connection") {
 
-
+            qDebug() << "employee connection will be deleted!";
+            emit DeleteConnection();
 
         }
 

@@ -23,16 +23,6 @@ SqlService::SqlService(const QString& sql_connections_counter) : sql_database(QS
 
 }
 
-/*
-SqlService::~SqlService() {
-
-    qDebug() << "SqlService will delete " << sql_database.databaseName();
-
-    sql_database.close();
-    sql_database.removeDatabase(sql_database.connectionName());
-
-}
-*/
 
 QString SqlService::GetCustomerName(const QString &phone_number) {
 

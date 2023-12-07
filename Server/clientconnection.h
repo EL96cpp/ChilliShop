@@ -6,6 +6,8 @@
 #include <QByteArray>
 #include <QThreadPool>
 
+class ConnectionsVector;
+
 enum class ConnectionType {
 
     CUSTOMER,
@@ -18,9 +20,10 @@ class ClientConnection : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClientConnection(QObject *parent, std::atomic<unsigned long long>& sql_connections_counter);
+    explicit ClientConnection(QObject *parent, ConnectionsVector& connections, std::atomic<unsigned long long>& sql_connections_counter);
     void SetSocketDescriptor(qintptr descriptor);
     void SetPhoneNumber(const QString& phone_number);
+    void SetEmployeeData(const QString& name, const QString& surname, const QString& position);
     void SetLoggedIn(const bool &logged_in);
     void SetConnectionType(const ConnectionType& connection_type);
     ConnectionType GetConnectionType();
@@ -39,7 +42,11 @@ signals:
 
 private:
     QTcpSocket* socket;
+    ConnectionsVector& connections;
     QString phone_number;
+    QString name;
+    QString surname;
+    QString position;
     ConnectionType connection_type;
     bool logged_in;
     std::atomic<unsigned long long>& sql_connections_counter;

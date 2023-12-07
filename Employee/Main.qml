@@ -16,7 +16,7 @@ Window {
     StackView {
 
         id: stack_view
-        initialItem: login_page
+        initialItem: workspace_page
         anchors.fill: parent
 
         pushEnter: Transition {
@@ -77,12 +77,11 @@ Window {
 
     LoginPage {
         id: login_page
-        visible: true
+        visible: false
     }
 
     WorkspacePage {
         id: workspace_page
-        visible: false
     }
 
     ErrorMessage {
@@ -110,6 +109,12 @@ Window {
             error_rectangle.visible = true;
 
         }
+
+    }
+
+    onClosing: {
+
+        Client.deleteConnection();
 
     }
 
