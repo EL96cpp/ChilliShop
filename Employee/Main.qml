@@ -77,10 +77,12 @@ Window {
 
     LoginPage {
         id: login_page
+        visible: true
     }
 
     WorkspacePage {
         id: workspace_page
+        visible: false
     }
 
     ErrorMessage {

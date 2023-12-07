@@ -11,7 +11,7 @@ Rectangle {
     radius: 10
     color: "#c0c34000"
 
-    visible: true
+    visible: false
 
     anchors.centerIn: parent
 
