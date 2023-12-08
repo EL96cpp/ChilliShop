@@ -93,6 +93,9 @@ Window {
         target: Client
         function onLoggedIn() {
 
+            workspace_page.name = login_name_input.text;
+            workspace_page.surname = login_surname_input.text;
+            workspace_page.position = login_position_input.text;
             stack_view.push(workspace_page);
 
         }

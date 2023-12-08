@@ -52,7 +52,6 @@ Page {
 
             }
 
-
         }
 
         Text {
@@ -285,8 +284,7 @@ Page {
 
             onClicked: {
 
-                var employee_position = (login_position_combobox.currentValue === "Оператор") ? "Operator" : "Mannager";
-                Client.onLogin(login_name_input.text, login_surname_input.text, employee_position, login_password_input.text);
+                Client.onLogin(login_name_input.text, login_surname_input.text, login_position_combobox.currentValue, login_password_input.text);
 
             }
 
