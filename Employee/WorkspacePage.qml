@@ -176,6 +176,8 @@ Page {
             width: employee_position.width + employee_name.anchors.leftMargin*4
             height: employee_name.height*3 + employee_name.anchors.topMargin*4
             color: "#d0480000"
+            border.width: 1
+            border.color: "#7F3A00"
             radius: 10
 
             anchors.top: search_rectangle.top
@@ -225,6 +227,35 @@ Page {
                 anchors.top: employee_surname.bottom
                 anchors.left: employee_surname.left
                 anchors.topMargin: 10
+
+            }
+
+        }
+
+        Text {
+
+            id: exit_workspace_test
+            font.family: regular_font.name
+            font.pointSize: 14
+
+            text: "Выход"
+            color: exit_mouse_area.containsMouse ? "#FF5403" : "white"
+            anchors.horizontalCenter: employee_data_rectangle.horizontalCenter
+            anchors.top: employee_data_rectangle.bottom
+            anchors.topMargin: 10
+
+            MouseArea {
+
+                id: exit_mouse_area
+                anchors.fill: parent
+                hoverEnabled: true
+
+                onClicked: {
+
+                    Client.deleteConnection();
+                    Qt.callLater(Qt.quit);
+
+                }
 
             }
 
