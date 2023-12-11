@@ -21,7 +21,7 @@ public:
 signals:
     void removeOrder(const int& order_id);
     void errorOccurred(const QString& title, const QString& description);
-    void loggedIn();
+    void loggedIn(const QString& name, const QString& surname, const QString& position);
     void addOrderToView(const int& order_id, const QString& name, const QString& phone,
                         const QString& order_code, const QMap<int, int>& order_data,
                         const int& total_cost);
@@ -40,7 +40,9 @@ private:
 
 private:
     QTcpSocket* socket;
-
+    QString name;
+    QString surname;
+    QString position;
 
 };
 

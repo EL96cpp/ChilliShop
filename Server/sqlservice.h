@@ -56,7 +56,6 @@ public:
     bool CheckIfOrderExists(const QString& phone_number, const int& order_id);
     bool CancelOrder(const QString& phone_number, const int& order_id);
 
-private:
     void CreateTablesIfNotExists();
 
 private:

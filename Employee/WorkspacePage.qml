@@ -263,5 +263,17 @@ Page {
 
     }
 
+    Connections {
+
+        target: Client
+        function onLoggedIn(name, surname, position) {
+
+            workspace_page.name = name;
+            workspace_page.surname = surname;
+            workspace_page.position = position;
+
+        }
+
+    }
 
 }

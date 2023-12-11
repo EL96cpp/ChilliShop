@@ -49,7 +49,8 @@ CustomerLoginResult SqlService::LoginCustomer(const QString &phone_number, const
     login_customer_query.exec();
     QString correct_password = login_customer_query.value(0).toString();
 
-    if (QString::compare(correct_password, password, Qt::CaseSensitive)) {
+    // compare method returns 0, if two strings are equal!
+    if (!correct_password.compare(password, Qt::CaseSensitive)) {
 
         return CustomerLoginResult::SUCCESS;
 
@@ -91,10 +92,11 @@ EmployeeLoginResult SqlService::LoginEmployee(const QString &name, const QString
         check_password_query.addBindValue(name);
         check_password_query.addBindValue(surname);
         check_password_query.addBindValue(position);
+        check_password_query.exec();
 
         QString correct_password;
 
-        if (check_password_query.next()) {
+        while (check_password_query.next()) {
 
             correct_password = check_password_query.value(0).toString();
             qDebug() << correct_password << " correct password";
@@ -102,7 +104,8 @@ EmployeeLoginResult SqlService::LoginEmployee(const QString &name, const QString
 
         }
 
-        if (QString::compare(correct_password, password, Qt::CaseSensitive)) {
+        // compare method returns 0, if two strings are equal!
+        if (!correct_password.compare(password, Qt::CaseSensitive)) {
 
             return EmployeeLoginResult::SUCCESS;
 
@@ -244,15 +247,18 @@ bool SqlService::CancelOrder(const QString &phone_number, const int &order_id) {
 
 void SqlService::CreateTablesIfNotExists() {
 
+    qDebug() << "Create tables if not exit";
+
     // Create customers table if it doesn't exist
-    QSqlQuery check_customers_table_query(sql_database);
-    check_customers_table_query.prepare("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'customers');");
+    QSqlQuery check_customers_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'customers')", sql_database);
+    check_customers_table_query.exec();
 
     while (check_customers_table_query.next()) {
 
         if (!check_customers_table_query.value(0).toBool()) {
 
-            QSqlQuery customers_table_query("CREATE TABLE customers (phone_number VARCHAR(11), password TEXT, name VARCHAR(30));");
+            qDebug() << "Create table";
+            QSqlQuery customers_table_query("CREATE TABLE customers (phone_number VARCHAR(11), password TEXT, name VARCHAR(30))", sql_database);
             customers_table_query.exec();
 
         }
@@ -260,15 +266,15 @@ void SqlService::CreateTablesIfNotExists() {
     }
 
     // Create employees table if it doesn't exist
-    QSqlQuery check_employees_table_query(sql_database);
-    check_employees_table_query.prepare("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'employees');");
+    QSqlQuery check_employees_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'employees')", sql_database);
 
     while (check_employees_table_query.next()) {
 
         if (!check_employees_table_query.value(0).toBool()) {
 
+            qDebug() << "Create table";
             QSqlQuery employees_table_query("CREATE TABLE employees (name VARCHAR(30), surname VARCHAR(30), "
-                                            "position VARCHAR(20), password TEXT);");
+                                            "position VARCHAR(20), password TEXT)", sql_database);
             employees_table_query.exec();
 
         }
@@ -276,42 +282,61 @@ void SqlService::CreateTablesIfNotExists() {
     }
 
 
-    // Create orders table and set sequence start value if it doesn't exist
-    QSqlQuery check_orders_table_query(sql_database);
-    check_orders_table_query.prepare("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'orders');");
+    // Create active orders table and set sequence start value if it doesn't exist
+    QSqlQuery check_active_orders_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'active_orders')", sql_database);
+    check_active_orders_table_query.exec();
 
-    while (check_orders_table_query.next()) {
+    while (check_active_orders_table_query.next()) {
 
-        if (!check_orders_table_query.value(0).toBool()) {
+        if (!check_active_orders_table_query.value(0).toBool()) {
 
-            QSqlQuery orders_table_query("CREATE TABLE IF NOT EXISTS orders (order_id SERIAL, phone_number VARCHAR(11), "
-                                         "timestamp TIMESTAMP, receive_code VARCHAR(4), order_data JSON);");
-            orders_table_query.exec();
+            qDebug() << "Create table";
+            QSqlQuery active_orders_table_query("CREATE TABLE IF NOT EXISTS active_orders (order_id SERIAL, phone_number VARCHAR(11), "
+                                         "ordered_timestamp TIMESTAMP, receive_code CHAR(4), order_data JSON)", sql_database);
+            active_orders_table_query.exec();
 
-            QSqlQuery set_order_id_query("ALTER SEQUENCE orders_order_id_seq RESTART WITH 100000;");
+            QSqlQuery set_order_id_query("ALTER SEQUENCE active_orders_order_id_seq RESTART WITH 100000", sql_database);
             set_order_id_query.exec();
 
         }
 
     }
 
+    // Create received orders table and set sequence start value if it doesn't exist
+    QSqlQuery check_received_orders_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'received_orders')", sql_database);
+    check_received_orders_table_query.exec();
+
+    while (check_received_orders_table_query.next()) {
+
+        if (!check_received_orders_table_query.value(0).toBool()) {
+
+            qDebug() << "Create table";
+            QSqlQuery orders_table_query("CREATE TABLE IF NOT EXISTS received_orders (order_id INT, phone_number VARCHAR(11), "
+                                         "ordered_timestamp TIMESTAMP, received_timestamp TIMESTAMP, receive_code CHAR(4), "
+                                         "order_data JSON)", sql_database);
+            orders_table_query.exec();
+
+        }
+
+    }
 
     // Create catalog table and set sequence start value if it doesn't exist
-    QSqlQuery check_catalog_table_query(sql_database);
-    check_catalog_table_query.prepare("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'catalog');");
+    QSqlQuery check_catalog_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'catalog')", sql_database);
+    check_catalog_table_query.exec();
 
     while (check_catalog_table_query.next()) {
 
         if (!check_catalog_table_query.value(0).toBool()) {
 
-            QSqlQuery create_product_enum_query("CREATE TYPE PRODUCT_TYPE AS ENUM ('sauces', 'seasonings', 'seeds');");
+            qDebug() << "Create table";
+            QSqlQuery create_product_enum_query("CREATE TYPE PRODUCT_TYPE AS ENUM ('sauces', 'seasonings', 'seeds')", sql_database);
             create_product_enum_query.exec();
 
-            QSqlQuery catalog_table_query("CREATE TABLE catalog (product_id SERIAL, type PRODUCT_TYPE, product_name TEXT, price INT, "
-                                          "scoville INT, description JSON);");
+            QSqlQuery catalog_table_query("CREATE TABLE catalog (product_id SERIAL, product_type PRODUCT_TYPE, product_name TEXT, price INT, "
+                                          "scoville INT, description JSON)", sql_database);
             catalog_table_query.exec();
 
-            QSqlQuery set_product_id_query("ALTER SEQUENCE catalog_product_id_seq RESTART WITH 10000;");
+            QSqlQuery set_product_id_query("ALTER SEQUENCE catalog_product_id_seq RESTART WITH 10000", sql_database);
             set_product_id_query.exec();
 
         }

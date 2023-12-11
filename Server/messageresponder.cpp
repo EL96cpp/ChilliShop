@@ -28,6 +28,7 @@ void MessageResponder::run() {
     QString sql_connection_name = QString::number(sql_connections_counter);
     sql_service = new SqlService(sql_connection_name);
 
+
     sql_connections_counter++;
 
     // Parse message
@@ -94,6 +95,8 @@ void MessageResponder::run() {
         RespondToEmployee(json_message_object);
 
     }
+
+    sql_service->CreateTablesIfNotExists();
 
     delete sql_service;
 

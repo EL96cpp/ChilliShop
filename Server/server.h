@@ -8,11 +8,15 @@
 #include <QMutexLocker>
 #include <QVector>
 
+#include <QString>
+
 #include "clientconnection.h"
 #include "connectionsvector.h"
 #include "messageresponder.h"
 #include "product.h"
 #include "order.h"
+
+#include "sqlservice.h"
 
 class Server : public QTcpServer
 {

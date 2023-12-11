@@ -28,6 +28,10 @@ void Client::ConnectToServer(const QString& address, const quint16& port) {
 void Client::onLogin(const QString& name, const QString& surname,
                      const QString& position, const QString& password) {
 
+    this->name = name;
+    this->surname = surname;
+    this->position = position;
+
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Login_employee");
@@ -80,7 +84,7 @@ void Client::onReadyRead() {
 
                 qDebug() << "Logged in successfully!";
                 GetCatalog();
-                emit loggedIn();
+                emit loggedIn(name, surname, position);
 
             } else {
 

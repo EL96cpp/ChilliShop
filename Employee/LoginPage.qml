@@ -10,6 +10,8 @@ Page {
 
     property int text_input_margins: 80
 
+    signal showErrorMessage(string error_title, string error_description);
+
     Image {
 
         id: main_background
@@ -130,9 +132,9 @@ Page {
                 font.family: regular_font.name
                 font.pointSize: 20
 
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 10
+                anchors.fill: parent
+                anchors.margins: 10
+                focus: true
 
             }
 
@@ -172,9 +174,9 @@ Page {
                 font.family: regular_font.name
                 font.pointSize: 20
 
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 10
+                anchors.fill: parent
+                anchors.margins: 10
+                focus: true
 
             }
 
@@ -242,9 +244,9 @@ Page {
                 font.pointSize: 20
                 echoMode: TextInput.Password
 
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 10
+                anchors.fill: parent
+                anchors.margins: 10
+                focus: true
 
             }
 
@@ -284,7 +286,15 @@ Page {
 
             onClicked: {
 
-                Client.onLogin(login_name_input.text, login_surname_input.text, login_position_combobox.currentValue, login_password_input.text);
+                if (login_name_input.text === "" || login_surname_input.text === "" || login_password_input.text === "") {
+
+                    showErrorMessage("Login error", "Enter all requierd fileds!");
+
+                } else {
+
+                    Client.onLogin(login_name_input.text, login_surname_input.text, login_position_combobox.currentValue, login_password_input.text);
+
+                }
 
             }
 

@@ -16,7 +16,7 @@ Window {
     StackView {
 
         id: stack_view
-        initialItem: workspace_page
+        initialItem: login_page
         anchors.fill: parent
 
         pushEnter: Transition {
@@ -77,11 +77,11 @@ Window {
 
     LoginPage {
         id: login_page
-        visible: false
     }
 
     WorkspacePage {
         id: workspace_page
+        visible: false
     }
 
     ErrorMessage {
@@ -93,23 +93,7 @@ Window {
         target: Client
         function onLoggedIn() {
 
-            workspace_page.name = login_name_input.text;
-            workspace_page.surname = login_surname_input.text;
-            workspace_page.position = login_position_input.text;
             stack_view.push(workspace_page);
-
-        }
-
-    }
-
-    Connections {
-
-        target: Client
-        function onShowErrorMessage(title, description) {
-
-            error_rectangle.title = title;
-            error_rectangle.description = description;
-            error_rectangle.visible = true;
 
         }
 
