@@ -9,9 +9,9 @@ Rectangle {
     width: main_window.width/4
     height: width/2
     radius: 10
-    color: "#3f1300"
+    color: "#543d33"
     border.width: 2
-    border.color: "#7F3A00"
+    border.color: "#a99e99"
 
     visible: false
 
@@ -20,20 +20,58 @@ Rectangle {
     property string title : "Error title";
     property string description : "Error description";
 
-    Text {
+    Rectangle {
 
-        id: error_title
-        font.family: regular_font.name
-        font.pointSize: 20
-        font.wordSpacing: 10
-        font.bold: true
-        color: "white"
-        text: error_rectangle.title
+        id: error_title_rectangle
+        width: parent.width - 4
+        height: error_title.height * 1.2
+
+        color: "#90000000"
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 30
+        anchors.topMargin: 20
 
+        Text {
+
+            id: error_title
+            font.family: regular_font.name
+            font.pointSize: 20
+            font.wordSpacing: 10
+            font.bold: true
+            color: "white"
+            text: error_rectangle.title
+
+            anchors.centerIn: parent
+
+        }
+
+    }
+
+    Canvas {
+
+        id: lower_line
+        width: parent.width - 4
+        height: 10
+        anchors.horizontalCenter: error_title_rectangle.horizontalCenter
+        anchors.top: error_title_rectangle.bottom
+        anchors.topMargin: 5
+
+        onPaint: {
+
+            var ctx = getContext("2d")
+
+            ctx.strokeStyle = "#90000000"
+            ctx.lineWidth = 10
+
+            ctx.beginPath()
+
+            ctx.moveTo(0, 0)
+            ctx.lineTo(width, 0)
+
+            ctx.stroke()
+
+        }
     }
 
     Text {
@@ -47,24 +85,24 @@ Rectangle {
         text: error_rectangle.description
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: error_title.bottom
-        anchors.topMargin: 25
+        anchors.top: error_title_rectangle.bottom
+        anchors.topMargin: 30
 
     }
 
     Button {
 
         id: exit_error_button
-        width: 200
-        height: 50
+        width: 100
+        height: 40
 
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: 20
+        anchors.margins: 30
 
         background: Rectangle {
 
-            color: exit_error_button.hovered ? main_window.button_hovered_color : main_window.button_color
+            color: exit_error_button.hovered ? "#58504d" : "#100500"
             radius: 20
 
         }
@@ -73,7 +111,8 @@ Rectangle {
 
         contentItem: Text {
 
-            text: "ВХОД"
+            id: button_text
+            text: "OK"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name

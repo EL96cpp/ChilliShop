@@ -13,6 +13,7 @@ SqlService::SqlService(const QString& sql_connections_counter) : sql_database(QS
 
     if (sql_database.open()) {
 
+        CreateTablesIfNotExists();
         qDebug() << "Databse opened!";
 
     } else {
@@ -155,6 +156,61 @@ bool SqlService::CheckIfEmployeeExists(const QString &name, const QString &surna
 
 QByteArray SqlService::GetCatalogData() {
 
+    QSqlQuery get_catalog_query("SELECT product_id, product_type, product_name, price, "
+                                "scoville, description FROM catalog", sql_database);
+    get_catalog_query.exec();
+
+    QJsonObject catalog_message;
+    QJsonArray catalog_array;
+
+    while (get_catalog_query.next()) {
+
+        QJsonObject catalog_position;
+
+        int id = get_catalog_query.value(0).toInt();
+        QString type(get_catalog_query.value(1).toString());
+        QString name(get_catalog_query.value(2).toString());
+        int price = get_catalog_query.value(3).toInt();
+        int scoville = get_catalog_query.value(4).toInt();
+        QJsonObject description = get_catalog_query.value(5).toJsonObject();
+
+        catalog_position[QStringLiteral("product_id")] = id;
+        catalog_position[QStringLiteral("product_type")] = type;
+        catalog_position[QStringLiteral("product_name")] = name;
+        catalog_position[QStringLiteral("price")] = price;
+        catalog_position[QStringLiteral("scoville")] = scoville;
+        catalog_position[QStringLiteral("description")] = description;
+
+        QUrl url;
+
+        if (type.compare(QStringLiteral("Sauce")) == 0) {
+
+            url = QString::fromLatin1("../Catalog Images/Sauces/") + QString::number(id) + QString::fromLatin1(".png");
+
+        } else if (type.compare(QStringLiteral("Seasoning")) == 0) {
+
+            url = QString::fromLatin1("../Catalog Images/Seasonings/") + QString::number(id) + QString::fromLatin1(".png");
+
+        } else if (type.compare(QStringLiteral("Seeds")) == 0) {
+
+            url = QString::fromLatin1("../Catalog Images/Seeds/") + QString::number(id) + QString::fromLatin1(".png");
+
+        }
+
+        QImage myImage(url.path());
+        QBuffer buffer;
+        buffer.open(QIODevice::WriteOnly);
+        myImage.save(&buffer, "PNG");
+        auto const encoded = buffer.data().toBase64();
+        catalog_position[QStringLiteral("image")] = QLatin1String(encoded);
+
+        catalog_array.push_back(catalog_position);
+
+    }
+
+    return QJsonDocument(catalog_array).toJson(QJsonDocument::Compact);
+
+    /*
     const QUrl url = QString::fromLatin1("../Catalog Images/Sauces/data.jpeg");
 
     QJsonObject json_object;
@@ -170,6 +226,7 @@ QByteArray SqlService::GetCatalogData() {
 
     QByteArray ba;
     return ba;
+    */
 
 }
 
@@ -267,6 +324,7 @@ void SqlService::CreateTablesIfNotExists() {
 
     // Create employees table if it doesn't exist
     QSqlQuery check_employees_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'employees')", sql_database);
+    check_employees_table_query.exec();
 
     while (check_employees_table_query.next()) {
 
@@ -332,12 +390,9 @@ void SqlService::CreateTablesIfNotExists() {
             QSqlQuery create_product_enum_query("CREATE TYPE PRODUCT_TYPE AS ENUM ('sauces', 'seasonings', 'seeds')", sql_database);
             create_product_enum_query.exec();
 
-            QSqlQuery catalog_table_query("CREATE TABLE catalog (product_id SERIAL, product_type PRODUCT_TYPE, product_name TEXT, price INT, "
+            QSqlQuery catalog_table_query("CREATE TABLE catalog (product_id INT, product_type PRODUCT_TYPE, product_name TEXT, price INT, "
                                           "scoville INT, description JSON)", sql_database);
             catalog_table_query.exec();
-
-            QSqlQuery set_product_id_query("ALTER SEQUENCE catalog_product_id_seq RESTART WITH 10000", sql_database);
-            set_product_id_query.exec();
 
         }
 

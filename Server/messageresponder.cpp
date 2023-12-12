@@ -96,8 +96,6 @@ void MessageResponder::run() {
 
     }
 
-    sql_service->CreateTablesIfNotExists();
-
     delete sql_service;
 
 }

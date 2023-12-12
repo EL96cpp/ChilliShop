@@ -1,0 +1,64 @@
+10000/'Sauce'/'Hot sauce 1'/120000/1000000/{"text":"Hot sauce from Carolina Reaper","volume":"0.5л","peppers":"[Carolina Reaper]"}
+10001/'Sauce'/'Hot sauce 2'/150000/400000/{"text":"Hot sauce from Scorpion Moruga","volume":"0.75л","peppers":"[Scorpion Moruga]"}
+10002/'Sauce'/'Hot sauce 3'/220000/1200000/{"text":"Hot sauce from Carolina Reaper","volume":"0.75л","peppers":"[Carolina Reaper, Scorpion Moruga]"}
+10003/'Sauce'/'Hot sauce 4'/203000/1100000/{"text":"Hot sauce from Carolina Reaper","volume":"1.5л","peppers":"[Habanero, Carolina Reaper]"}
+10004/'Sauce'/'Hot sauce 5'/110000/700000/{"text":"Hot sauce from Carolina Reaper","volume":"1.5л","peppers":"[Jalapeno]"}
+10005/'Sauce'/'Hot sauce 6'/210000/1600000/{"text":"Hot sauce from Carolina Reaper","volume":"0.5л","peppers":"[Ghost Pepper]"}
+10006/'Sauce'/'Hot sauce 7'/240000/2100000/{"text":"Hot sauce from Carolina Reaper","volume":"0.5л","peppers":"[Carolina Reaper, Ghost Pepper]"}
+10007/'Sauce'/'Hot sauce 8'/155000/800000/{"text":"Hot sauce from Carolina Reaper","volume":"0.35л","peppers":"[Habanero]"}
+10008/'Sauce'/'Hot sauce 9'/235000/1800000/{"text":"Hot sauce from Carolina Reaper","volume":"1.25л","peppers":"[Carolina Reaper, Habanero]"}
+10009/'Sauce'/'Hot sauce 10'/162000/800000/{"text":"Hot sauce from Carolina Reaper","volume":"0.5л","peppers":"[Habanero]"}
+10010/'Sauce'/'Hot sauce 11'/126000/1200000/{"text":"Hot sauce from Carolina Reaper","volume":"0.5л","peppers":"[Carolina Reaper]"}
+10011/'Sauce'/'Hot sauce 12'/84000/70000/{"text":"Hot sauce from Carolina Reaper","volume":"0.5л","peppers":"[Jalapeno]"}
+10012/'Sauce'/'Hot sauce 13'/69900/10000/{"text":"Hot sauce from Carolina Reaper","volume":"0.5л","peppers":"[Jalapeno]"}
+10013/'Sauce'/'Hot sauce 14'/52000/1000/{"text":"Hot sauce from Carolina Reaper","volume":"0.5л","peppers":"[Jalapeno]"}
+10014/'Sauce'/'Hot sauce 15'/57000/12000/{"text":"Hot sauce from Carolina Reaper","volume":"0.5л","peppers":"[Habanero]"}
+10015/'Sauce'/'Hot sauce 16'/100000/300000/{"text":"Hot sauce from Carolina Reaper","volume":"0.5л","peppers":"[Jalapeno,Habanero]"}
+20000/'Seasoning'/'Seasoning 1'/140000/2200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+20001/'Seasoning'/'Seasoning 2'/100000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Scorpion Moruga]"}
+20002/'Seasoning'/'Seasoning 3'/60000/200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Habanero]"}
+20003/'Seasoning'/'Seasoning 4'/42000/100000/{"text":"Seasoning description","weight grams":"150","peppers":"[Jalapeno]"}
+20004/'Seasoning'/'Seasoning 5'/120000/1400000/{"text":"Seasoning description","weight grams":"150","peppers":"[Carolina Reaper]"}
+20005/'Seasoning'/'Seasoning 6'/440000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Ghost Pepper]"}
+20006/'Seasoning'/'Seasoning 7'/150000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+20007/'Seasoning'/'Seasoning 8'/50000/1200000/{"text":"Seasoning description","weight grams":"250","peppers":"[Jalapeno]"}
+20008/'Seasoning'/'Seasoning 9'/36000/1200000/{"text":"Seasoning description","weight grams":"500","peppers":"[Scorpion Moruga]"}
+20009/'Seasoning'/'Seasoning 10'/64000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Ghost Pepper,Scorpion Moruga]"}
+20010/'Seasoning'/'Seasoning 11'/110000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Carolina Reaper,Habanero]"}
+20011/'Seasoning'/'Seasoning 12'/70000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Scorpion Moruga]"}
+20012/'Seasoning'/'Seasoning 13'/125000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Scorpion Moruga]"}
+20013/'Seasoning'/'Seasoning 14'/125000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+20014/'Seasoning'/'Seasoning 15'/75000/1200000/{"text":"Seasoning description","weight grams":"600","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+20015/'Seasoning'/'Seasoning 16'/72000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+20016/'Seasoning'/'Seasoning 17'/63000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Carolina Reaper]"}
+20017/'Seasoning'/'Seasoning 18'/160000/1200000/{"text":"Seasoning description","weight grams":"750","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+20018/'Seasoning'/'Seasoning 19'/275000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Scorpion Moruga]"}
+20019/'Seasoning'/'Seasoning 20'/287000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+20020/'Seasoning'/'Seasoning 21'/43000/1200000/{"text":"Seasoning description","weight grams":"250","peppers":"[Ghost Pepper]"}
+20021/'Seasoning'/'Seasoning 22'/46000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+20022/'Seasoning'/'Seasoning 23'/120000/1200000/{"text":"Seasoning description","weight grams":"450","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+20023/'Seasoning'/'Seasoning 24'/136000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Habanero]"}
+20024/'Seasoning'/'Seasoning 25'/62000/1200000/{"text":"Seasoning description","weight grams":"170","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+20025/'Seasoning'/'Seasoning 26'/74000/1200000/{"text":"Seasoning description","weight grams":"150","peppers":"[Carolina Reaper,Scorpion Moruga]"}
+30000/'Seeds'/'Seeds 1'/34000/2200000/{"text":"Seeds description","number of seeds":"15","peppers":"[Carolina Reaper]"}
+30001/'Seeds'/'Seeds 2'/24000/2000000/{"text":"Seeds description","number of seeds":"10","peppers":"[Scorpion Moruga]"}
+30002/'Seeds'/'Seeds 3'/36000/450000/{"text":"Seeds description","number of seeds":"10","peppers":"[Habanero]"}
+30003/'Seeds'/'Seeds 4'/42000/100000/{"text":"Seeds description","number of seeds":"15","peppers":"[Jalapeno]"}
+30004/'Seeds'/'Seeds 5'/32000/450000/{"text":"Seeds description","number of seeds":"5","peppers":"[Habanero]"}
+30005/'Seeds'/'Seeds 6'/44000/1200000/{"text":"Seeds description","number of seeds":"5","peppers":"[Ghost Pepper]"}
+30006/'Seeds'/'Seeds 7'/25000/2000000/{"text":"Seeds description","number of seeds":"10","peppers":"[Scorpion Moruga]"}
+30007/'Seeds'/'Seeds 8'/23000/100000/{"text":"Seeds description","number of seeds":"25","peppers":"[Jalapeno]"}
+30008/'Seeds'/'Seeds 9'/36000/2000000/{"text":"Seeds description","number of seeds":"5","peppers":"[Scorpion Moruga]"}
+30009/'Seeds'/'Seeds 10'/34000/1200000/{"text":"Seeds description","number of seeds":"15","peppers":"[Ghost Pepper]"}
+30010/'Seeds'/'Seeds 11'/25000/2200000/{"text":"Seeds description","number of seeds":"15","peppers":"[Carolina Reaper]"}
+30011/'Seeds'/'Seeds 12'/37000/2000000/{"text":"Seeds description","number of seeds":"10","peppers":"[Scorpion Moruga]"}
+30012/'Seeds'/'Seeds 13'/22500/2000000/{"text":"Seeds description","number of seeds":"5","peppers":"[Scorpion Moruga]"}
+30013/'Seeds'/'Seeds 14'/335000/2200000/{"text":"Seeds description","number of seeds":"10","peppers":"[Carolina Reaper]"}
+30014/'Seeds'/'Seeds 15'/25500/2000000/{"text":"Seeds description","number of seeds":"6","peppers":"[Scorpion Moruga]"}
+30015/'Seeds'/'Seeds 16'/32000/2200000/{"text":"Seeds description","number of seeds":"15","peppers":"[Carolina Reaper]"}
+30016/'Seeds'/'Seeds 17'/33000/2200000/{"text":"Seeds description","number of seeds":"10","peppers":"[Carolina Reaper]"}
+30017/'Seeds'/'Seeds 18'/26000/2000000/{"text":"Seeds description","number of seeds":"7","peppers":"[Scorpion Moruga]"}
+30018/'Seeds'/'Seeds 19'/27500/2000000/{"text":"Seeds description","number of seeds":"15","peppers":"[Scorpion Moruga]"}
+30019/'Seeds'/'Seeds 20'/28700/2000000/{"text":"Seeds description","number of seeds":"15","peppers":"[Scorpion Moruga]"}
+30020/'Seeds'/'Seeds 21'/43000/1200000/{"text":"Seeds description","number of seeds":"20","peppers":"[Ghost Pepper]"}
+30021/'Seeds'/'Seeds 22'/26000/2000000/{"text":"Seeds description","number of seeds":"10","peppers":"[Scorpion Moruga]"}

@@ -13,6 +13,8 @@
 #include <QImage>
 #include <QBuffer>
 #include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
 
 enum class CustomerLoginResult {
 

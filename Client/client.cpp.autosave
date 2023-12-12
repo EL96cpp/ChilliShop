@@ -129,3 +129,39 @@ void Client::GetOrdersHistory() {
     qDebug() << bytes_written;
 
 }
+
+void Client::onReadyRead() {
+    
+    QByteArray message_byte_array = socket->readAll();
+    
+    // Parse message
+    QJsonParseError parse_error;
+    QJsonDocument json_document_message = QJsonDocument::fromJson(message_byte_array, &parse_error);
+    
+    if (parse_error.error != QJsonParseError::NoError) {
+        
+        qDebug() << "parse error!";
+        qDebug () << parse_error.error;
+        
+    }
+    
+    QJsonObject json_message_object = json_document_message.object();
+    
+    QJsonValue method_value = json_message_object.value(QLatin1String("Method"));
+    QJsonValue resource_value = json_message_object.value(QLatin1String("Resource"));
+    QJsonValue code_value = json_message_object.value(QLatin1String("Code"));
+    
+    if (method_value.toString() == "POST") {
+        
+        if (resource_value.toString() == "Client")
+        
+    } else if (method_value.toString() == "GET") {
+        
+        
+    } else if (method_value.toString() == "PUT") {
+        
+    } else if (method_value.toString() == "DELETE") {
+        
+    }
+    
+}

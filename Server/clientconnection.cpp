@@ -23,11 +23,12 @@ void ClientConnection::SetPhoneNumber(const QString &phone_number) {
 
 }
 
-void ClientConnection::SetEmployeeData(const QString &name, const QString &surname, const QString &position)
-{
+void ClientConnection::SetEmployeeData(const QString &name, const QString &surname, const QString &position) {
+
     this->name = name;
     this->surname = surname;
     this->position = position;
+
 }
 
 void ClientConnection::SetLoggedIn(const bool &logged_in) {
