@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.3
 Page {
 
     id: login_page
-    anchors.centerIn: parent
+    //anchors.centerIn: parent
 
     property int text_input_margins: 80
 

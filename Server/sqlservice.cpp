@@ -154,11 +154,12 @@ bool SqlService::CheckIfEmployeeExists(const QString &name, const QString &surna
 
 }
 
-QByteArray SqlService::GetCatalogData() {
+QJsonArray SqlService::GetCatalogData() {
 
-    QSqlQuery get_catalog_query("SELECT product_id, product_type, product_name, price, "
-                                "scoville, description FROM catalog", sql_database);
-    get_catalog_query.exec();
+    QSqlQuery get_catalog_query(sql_database);
+
+    qDebug() << "Get catalog query: " << get_catalog_query.exec("SELECT product_id, product_type, product_name, price, "
+                                                                "scoville, description FROM catalog;");
 
     QJsonObject catalog_message;
     QJsonArray catalog_array;
@@ -172,61 +173,49 @@ QByteArray SqlService::GetCatalogData() {
         QString name(get_catalog_query.value(2).toString());
         int price = get_catalog_query.value(3).toInt();
         int scoville = get_catalog_query.value(4).toInt();
-        QJsonObject description = get_catalog_query.value(5).toJsonObject();
+        QString description = get_catalog_query.value(5).toString();
 
-        catalog_position[QStringLiteral("product_id")] = id;
+        catalog_position[QStringLiteral("product_id")] = QString::number(id);
         catalog_position[QStringLiteral("product_type")] = type;
         catalog_position[QStringLiteral("product_name")] = name;
-        catalog_position[QStringLiteral("price")] = price;
-        catalog_position[QStringLiteral("scoville")] = scoville;
+        catalog_position[QStringLiteral("price")] = QString::number(price);
+        catalog_position[QStringLiteral("scoville")] = QString::number(scoville);
         catalog_position[QStringLiteral("description")] = description;
 
-        QUrl url;
+        /*
+        QString url;
 
-        if (type.compare(QStringLiteral("Sauce")) == 0) {
+        if (type.compare(QStringLiteral("'Sauce'")) == 0) {
 
-            url = QString::fromLatin1("../Catalog Images/Sauces/") + QString::number(id) + QString::fromLatin1(".png");
+            url = QString::fromLatin1("../Catalog/Sauces/") + QString::number(id) + QString::fromLatin1(".png");
 
-        } else if (type.compare(QStringLiteral("Seasoning")) == 0) {
+        } else if (type.compare(QStringLiteral("'Seasoning'")) == 0) {
 
-            url = QString::fromLatin1("../Catalog Images/Seasonings/") + QString::number(id) + QString::fromLatin1(".png");
+            url = QString::fromLatin1("../Catalog/Seasonings/") + QString::number(id) + QString::fromLatin1(".png");
 
-        } else if (type.compare(QStringLiteral("Seeds")) == 0) {
+        } else if (type.compare(QStringLiteral("'Seeds'")) == 0) {
 
-            url = QString::fromLatin1("../Catalog Images/Seeds/") + QString::number(id) + QString::fromLatin1(".png");
+            url = QString::fromLatin1("../Catalog/Seeds/") + QString::number(id) + QString::fromLatin1(".png");
 
         }
 
-        QImage myImage(url.path());
+        qDebug() << url;
+
+
+        QImage myImage;
+        qDebug() << "Open image " << myImage.load(url);
         QBuffer buffer;
         buffer.open(QIODevice::WriteOnly);
         myImage.save(&buffer, "PNG");
         auto const encoded = buffer.data().toBase64();
         catalog_position[QStringLiteral("image")] = QLatin1String(encoded);
+        */
 
         catalog_array.push_back(catalog_position);
 
     }
 
-    return QJsonDocument(catalog_array).toJson(QJsonDocument::Compact);
-
-    /*
-    const QUrl url = QString::fromLatin1("../Catalog Images/Sauces/data.jpeg");
-
-    QJsonObject json_object;
-
-    QString test = url.path();
-    QImage myImage(test);
-
-    QBuffer buffer;
-    buffer.open(QIODevice::WriteOnly);
-    myImage.save(&buffer, "JPEG");
-    auto const encoded = buffer.data().toBase64();
-    json_object[QStringLiteral("Image")] = QLatin1String(encoded);
-
-    QByteArray ba;
-    return ba;
-    */
+    return catalog_array;
 
 }
 
@@ -387,10 +376,8 @@ void SqlService::CreateTablesIfNotExists() {
         if (!check_catalog_table_query.value(0).toBool()) {
 
             qDebug() << "Create table";
-            QSqlQuery create_product_enum_query("CREATE TYPE PRODUCT_TYPE AS ENUM ('sauces', 'seasonings', 'seeds')", sql_database);
-            create_product_enum_query.exec();
 
-            QSqlQuery catalog_table_query("CREATE TABLE catalog (product_id INT, product_type PRODUCT_TYPE, product_name TEXT, price INT, "
+            QSqlQuery catalog_table_query("CREATE TABLE catalog (product_id INT, product_type TEXT, product_name TEXT, price INT, "
                                           "scoville INT, description JSON)", sql_database);
             catalog_table_query.exec();
 

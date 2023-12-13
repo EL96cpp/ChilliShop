@@ -1,6 +1,10 @@
 #include "client.h"
 
-Client::Client() : socket(new QSslSocket) {}
+Client::Client() : socket(new QSslSocket) {
+
+    connect(socket, &QSslSocket::readyRead, this, &Client::onReadyRead);
+
+}
 
 
 void Client::ConnectToServer(const QString& address, const quint16& port) {
@@ -127,5 +131,130 @@ void Client::GetOrdersHistory() {
 
     qintptr bytes_written = socket->write(byte_array);
     qDebug() << bytes_written;
+
+}
+
+void Client::onReadyRead() {
+
+    QByteArray message_byte_array = socket->readAll();
+
+    // Parse message
+    QJsonParseError parse_error;
+    QJsonDocument json_document_message = QJsonDocument::fromJson(message_byte_array, &parse_error);
+
+    if (parse_error.error != QJsonParseError::NoError) {
+
+        qDebug() << "parse error!";
+        qDebug () << parse_error.errorString();
+
+    }
+
+    QJsonObject json_message_object = json_document_message.object();
+
+    QJsonValue method_value = json_message_object.value(QLatin1String("Method"));
+    QJsonValue resource_value = json_message_object.value(QLatin1String("Resource"));
+    QJsonValue code_value = json_message_object.value(QLatin1String("Code"));
+
+    if (method_value.toString() == "POST") {
+
+        if (resource_value.toString() == "Customer_connection") {
+
+            if (code_value.toString() == "200") {
+
+                qDebug() << "Employee connection accepted";
+                GetCatalog();
+
+            }
+
+        } else if (resource_value.toString() == "Login_customer") {
+
+            if (code_value.toString() == "200") {
+
+            } else if (code_value.toString() == "403") {
+
+            }
+
+        } else if (resource_value.toString() == "Register_customer") {
+
+            if (code_value.toString() == "200") {
+
+            } else if (code_value.toString() == "403") {
+
+            }
+
+        } else if (resource_value.toString() == "Order") {
+
+            if (code_value.toString() == "200") {
+
+            } else if (code_value.toString() == "403") {
+
+            } else if (code_value.toString() == "400") {
+
+            }
+
+        }
+
+    } else if (method_value.toString() == "PUT") {
+
+        if (resource_value.toString() == "Change_customer_name") {
+
+            if (code_value.toString() == "200") {
+
+            } else if (code_value.toString() == "403") {
+
+            }
+
+        }
+
+    } else if (method_value.toString() == "DELETE") {
+
+        if (resource_value.toString() == "Order") {
+
+            if (code_value.toString() == "200") {
+
+            } else if (code_value.toString() == "403") {
+
+            }
+
+        }
+
+    } else if (method_value.toString() == "GET") {
+
+        if (resource_value.toString() == "Order_history") {
+
+            if (code_value.toString() == "200") {
+
+            } else if (code_value.toString() == "403") {
+
+            }
+
+        } else if (resource_value.toString() == "Catalog") {
+
+            if (code_value.toString() == "200") {
+
+
+                QJsonValue json_array_value = json_message_object.value(QLatin1String("Catalog"));
+                QJsonArray json_array = json_array_value.toArray();
+
+                for(int i = 1; i < json_array.size(); ++i) {
+
+                    QJsonObject json = json_array.at(i).toObject();
+                    qDebug() << json.value(QLatin1String("product_id")).toString();
+                    qDebug() << json.value(QLatin1String("product_type")).toString();
+                    qDebug() << json.value(QLatin1String("product_name")).toString();
+                    qDebug() << json.value(QLatin1String("price")).toString();
+                    qDebug() << json.value(QLatin1String("scoville")).toString();
+                    qDebug() << json.value(QLatin1String("description")).toString();
+
+                }
+
+
+            }
+
+        }
+
+    }
+
+
 
 }

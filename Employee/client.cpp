@@ -58,7 +58,7 @@ void Client::onReadyRead() {
     if (parse_error.error != QJsonParseError::NoError) {
 
         qDebug() << "parse error!";
-        qDebug () << parse_error.error;
+        qDebug () << parse_error.errorString();
 
     }
 
@@ -117,7 +117,11 @@ void Client::onReadyRead() {
 
             if (code_value.toString() == "200") {
 
+                qDebug () << "Catalog!";
+
                 QJsonValue catalog_array = json_message_object.value(QLatin1String("Catalog"));
+
+                qDebug() << QJsonDocument(catalog_array.toObject()).toJson();
 
                 GetOrders();
 

@@ -24,6 +24,7 @@ public slots:
     void onLogin(const QString& phone_number, const QString& password);
     void onRegister(const QString& phone_number, const QString& password, const QString& name);
     void onMakeOrder(const QString& phone_number, const QString& order_datetime, const QJsonObject& order_data);
+    void onReadyRead();
 
 private:
     void SendConnectionType();

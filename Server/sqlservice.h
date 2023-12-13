@@ -46,7 +46,7 @@ public:
     //~SqlService();
 
     // Following fucntions must be thread-safe!
-    QByteArray GetCatalogData();
+    QJsonArray GetCatalogData();
     QString GetCustomerName(const QString& phone_number);
     CustomerLoginResult LoginCustomer(const QString& phone_number, const QString& password);
     CustomerRegisterResult RegisterCustomer(const QString& phone_number, const QString& password, const QString& name);
