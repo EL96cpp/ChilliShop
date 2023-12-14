@@ -80,7 +80,7 @@ Rectangle {
         font.pointSize: 15
         font.wordSpacing: 5
         font.bold: true
-        text: model.description.text
+        text: model.text_description
         anchors.top: good_delegate_title_rect.bottom
         anchors.left: good_delegate_title_rect.left
 

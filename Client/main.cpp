@@ -19,6 +19,10 @@ int main(int argc, char *argv[]) {
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
         &app, []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
+
+    // Set application dir path to properly read realive paths to product images
+    engine.rootContext()->setContextProperty("applicationDirPath", QGuiApplication::applicationDirPath());
+
     engine.load(url);
 
     return app.exec();

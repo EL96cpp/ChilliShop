@@ -134,6 +134,49 @@ void Client::GetOrdersHistory() {
 
 }
 
+void Client::AddCatalogDataToModels(const QJsonArray &catalog_json_array) {
+
+    for(int i = 0; i < catalog_json_array.size(); ++i) {
+
+        QJsonObject json = catalog_json_array.at(i).toObject();
+        qDebug() << QJsonDocument(json).toJson();
+
+        QString id = json.value(QLatin1String("product_id")).toString();
+        QString type = json.value(QLatin1String("product_type")).toString();
+        QString name = json.value(QLatin1String("product_name")).toString();
+        QString price = json.value(QLatin1String("price")).toString();
+        QString scoville = json.value(QLatin1String("scoville")).toString();
+        QJsonObject description_json = json.value(QLatin1String("description")).toObject();
+
+
+        if (type.compare(QStringLiteral("Sauce")) == 0) {
+
+            qDebug() << "Sauce added!";
+
+            QString text_description = description_json.value(QLatin1String("text")).toString();
+            QString volume = description_json.value(QLatin1String("volume")).toString();
+            qDebug() << description_json.value(QLatin1String("peppers")).toString();
+            QVector<QString> peppers;
+
+
+
+            emit addSauceProductToModel(id.toInt(), name, price.toInt(), scoville.toInt(), text_description, volume.toFloat(), peppers);
+
+
+        } else if (type.compare(QStringLiteral("Seasoning")) == 0) {
+
+            qDebug() << "Seasoning added!";
+
+        } else if (type.compare(QStringLiteral("Seeds")) == 0) {
+
+            qDebug() << "Seeds added!";
+
+        }
+
+    }
+
+}
+
 void Client::onReadyRead() {
 
     QByteArray message_byte_array = socket->readAll();
@@ -232,22 +275,11 @@ void Client::onReadyRead() {
 
             if (code_value.toString() == "200") {
 
-
+                qDebug() << "Get catalog!!";
                 QJsonValue json_array_value = json_message_object.value(QLatin1String("Catalog"));
-                QJsonArray json_array = json_array_value.toArray();
-
-                for(int i = 1; i < json_array.size(); ++i) {
-
-                    QJsonObject json = json_array.at(i).toObject();
-                    qDebug() << json.value(QLatin1String("product_id")).toString();
-                    qDebug() << json.value(QLatin1String("product_type")).toString();
-                    qDebug() << json.value(QLatin1String("product_name")).toString();
-                    qDebug() << json.value(QLatin1String("price")).toString();
-                    qDebug() << json.value(QLatin1String("scoville")).toString();
-                    qDebug() << json.value(QLatin1String("description")).toString();
-
-                }
-
+                QJsonObject obj = json_array_value.toObject();
+                qDebug() << QJsonDocument(obj).toJson();
+                AddCatalogDataToModels(json_array_value.toArray());
 
             }
 

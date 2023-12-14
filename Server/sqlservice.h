@@ -15,6 +15,10 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QFile>
+#include <QVector>
+
+#include "product.h"
 
 enum class CustomerLoginResult {
 
@@ -43,7 +47,6 @@ class SqlService {
 
 public:
     explicit SqlService(const QString& sql_connections_counter);
-    //~SqlService();
 
     // Following fucntions must be thread-safe!
     QJsonArray GetCatalogData();

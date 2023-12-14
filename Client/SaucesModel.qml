@@ -8,11 +8,15 @@ ListModel {
 
     id: sauces_model
 
+    property int id
     property string name
-    property var json_description
+    property string text_description
+    property double volume
+    property var peppers
     property int price
-    property int items_left
+    property int scoville
     property Image image
+
 
     function sortByPriceDecrease() {
 
@@ -120,12 +124,13 @@ ListModel {
 
     }
 
+    /*
     Component.onCompleted: {
 
-        sauces_model.append( {name: "Hot Sauce1", description: {"text":"Sauce description",
+        sauces_model.append( {id: "10000", name: "Hot Sauce1", description: {"text":"Sauce description",
                                                                  "volume" : "0.5 л",
                                                                 "peppers" : ["Carolina Reaper", "Habanero"]},
-                              price: 3, scoville: 20000, image: "qrc:/goods_images/large_CK-FIRMA.jpg"} );
+                              price: 3, scoville: 20000, image: "file://" + applicationDirPath + "/../Images/Catalog/Sauces/" + id + ".png"} );
         sauces_model.append( {name: "Hot Sauce2", description: {"text":"Sauce description",
                                                                  "volume" : "0.5 л",
                                                                 "peppers" : ["Habanero"]},
@@ -144,6 +149,7 @@ ListModel {
                               price: 1, scoville: 1200000, image: "qrc:/goods_images/large_CK-FIRMA.jpg"} );
 
     }
+    */
 
 }
 

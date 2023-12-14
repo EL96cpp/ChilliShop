@@ -16,9 +16,14 @@ public:
     Client();
     void ConnectToServer(const QString& address, const quint16& port);
 
+
 signals:
-    void AddProductToGrid(const QString& product_type, const int& id, const QString& name,
-                          const int& price, const int& scoville, const QImage& image);
+    void addSauceProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
+                                const QString& text_description, const double& volume, const QVector<QString>& peppers);
+    void addSeasoningProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
+                                    const QString& text_description, const int& weight, const QVector<QString>& peppers);
+    void addSeedsProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
+                                const QString& text_description, const int& number_of_seeds, const QVector<QString>& peppers);
 
 public slots:
     void onLogin(const QString& phone_number, const QString& password);
@@ -30,6 +35,7 @@ private:
     void SendConnectionType();
     void GetCatalog();
     void GetOrdersHistory();
+    void AddCatalogDataToModels(const QJsonArray& catalog_json_array);
 
 private:
     QSslSocket* socket;

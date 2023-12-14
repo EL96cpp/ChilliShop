@@ -152,18 +152,7 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
         if (resource_value.toString() == "Catalog") {
 
-            QJsonArray catalog_json = sql_service->GetCatalogData();
-
-            QJsonObject message;
-            message[QStringLiteral("Method")] = QStringLiteral("GET");
-            message[QStringLiteral("Resource")] = QStringLiteral("Catalog");
-            message[QStringLiteral("Code")] = QStringLiteral("200");
-            message[QStringLiteral("Catalog")] = catalog_json;
-
-            QByteArray message_byte_array = QJsonDocument(message).toJson();
-            message_byte_array.append("\n");
-
-            emit MessageResponce(message_byte_array);
+            emit SendCatalog();
 
         } else if (resource_value.toString() == "Orders_history") {
 

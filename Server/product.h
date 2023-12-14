@@ -2,22 +2,28 @@
 #define PRODUCT_H
 
 #include <QString>
-#include <QJsonObject>
-#include <QPixmap>
 
 class Product
 {
 public:
-    explicit Product(const int& id, const QString& name, const int& price, const int& scoville,
-                     const QPixmap& image, const QJsonObject& description);
+    Product(const QString& id, const QString& type, const QString& name,
+            const QString& price, const QString& scoville, const QString& description);
+
+    QString GetId();
+    QString GetType();
+    QString GetName();
+    QString GetPrice();
+    QString GetScoville();
+    QString GetDescription();
 
 private:
-    int id;
+    QString id;
+    QString type;
     QString name;
-    int price;
-    int scoville;
-    QPixmap image;
-    QJsonObject description;
+    QString price;
+    QString scoville;
+    QString description;
+
 
 };
 

@@ -168,48 +168,19 @@ QJsonArray SqlService::GetCatalogData() {
 
         QJsonObject catalog_position;
 
-        int id = get_catalog_query.value(0).toInt();
+        QString id(get_catalog_query.value(0).toString());
         QString type(get_catalog_query.value(1).toString());
         QString name(get_catalog_query.value(2).toString());
-        int price = get_catalog_query.value(3).toInt();
-        int scoville = get_catalog_query.value(4).toInt();
-        QString description = get_catalog_query.value(5).toString();
+        QString price(get_catalog_query.value(3).toString());
+        QString scoville(get_catalog_query.value(4).toString());
+        QString description(get_catalog_query.value(5).toString());
 
-        catalog_position[QStringLiteral("product_id")] = QString::number(id);
+        catalog_position[QStringLiteral("product_id")] = id;
         catalog_position[QStringLiteral("product_type")] = type;
         catalog_position[QStringLiteral("product_name")] = name;
-        catalog_position[QStringLiteral("price")] = QString::number(price);
-        catalog_position[QStringLiteral("scoville")] = QString::number(scoville);
+        catalog_position[QStringLiteral("price")] = price;
+        catalog_position[QStringLiteral("scoville")] = scoville;
         catalog_position[QStringLiteral("description")] = description;
-
-        /*
-        QString url;
-
-        if (type.compare(QStringLiteral("'Sauce'")) == 0) {
-
-            url = QString::fromLatin1("../Catalog/Sauces/") + QString::number(id) + QString::fromLatin1(".png");
-
-        } else if (type.compare(QStringLiteral("'Seasoning'")) == 0) {
-
-            url = QString::fromLatin1("../Catalog/Seasonings/") + QString::number(id) + QString::fromLatin1(".png");
-
-        } else if (type.compare(QStringLiteral("'Seeds'")) == 0) {
-
-            url = QString::fromLatin1("../Catalog/Seeds/") + QString::number(id) + QString::fromLatin1(".png");
-
-        }
-
-        qDebug() << url;
-
-
-        QImage myImage;
-        qDebug() << "Open image " << myImage.load(url);
-        QBuffer buffer;
-        buffer.open(QIODevice::WriteOnly);
-        myImage.save(&buffer, "PNG");
-        auto const encoded = buffer.data().toBase64();
-        catalog_position[QStringLiteral("image")] = QLatin1String(encoded);
-        */
 
         catalog_array.push_back(catalog_position);
 

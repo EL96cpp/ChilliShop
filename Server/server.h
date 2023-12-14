@@ -28,16 +28,14 @@ public:
 public slots:
     void RespondToMessage(ClientConnection* client, QByteArray& message_byte_array);
 
-signals:
-    void GetCatalogData(QVector<Product*>& catalog);
-
 private:
     void incomingConnection(qintptr handle);
+    void SetCatalogMessageByteArray();
 
 
 private:
     ConnectionsVector connections;
-    QByteArray catalog_byte_array;
+    QByteArray catalog_message_byte_array;
     std::atomic<unsigned long long> sql_connections_counter;
 
 };

@@ -20,7 +20,9 @@ class ClientConnection : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClientConnection(QObject *parent, ConnectionsVector& connections, std::atomic<unsigned long long>& sql_connections_counter);
+    explicit ClientConnection(QObject *parent, ConnectionsVector& connections,
+                              std::atomic<unsigned long long>& sql_connections_counter,
+                              const QByteArray& catalog_byte_array);
     void SetSocketDescriptor(qintptr descriptor);
     void SetPhoneNumber(const QString& phone_number);
     void SetEmployeeData(const QString& name, const QString& surname, const QString& position);
@@ -33,6 +35,7 @@ public:
 
 public slots:
     void OnMessageResponce(const QByteArray& message_byte_array);
+    void OnSendCatalog();
 
 private slots:
     void onReadyRead();
@@ -43,6 +46,7 @@ signals:
 private:
     QTcpSocket* socket;
     ConnectionsVector& connections;
+    const QByteArray& catalog_byte_array;
     QString phone_number;
     QString name;
     QString surname;

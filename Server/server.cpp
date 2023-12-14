@@ -3,6 +3,7 @@
 Server::Server() : sql_connections_counter(0) {
 
     QThreadPool::globalInstance()->setMaxThreadCount(10);
+    SetCatalogMessageByteArray();
 
     if (this->listen(QHostAddress::Any, 60000)) {
 
@@ -20,12 +21,30 @@ void Server::RespondToMessage(ClientConnection* client, QByteArray &message_byte
 
 }
 
+
 void Server::incomingConnection(qintptr handle) {
 
     qDebug() << "new connection";
-    ClientConnection* connection = new ClientConnection(this, connections, sql_connections_counter);
+    ClientConnection* connection = new ClientConnection(this, connections, sql_connections_counter, catalog_message_byte_array);
     connection->SetSocketDescriptor(handle);
     connect(connection, &ClientConnection::RespondToMessage, this, &Server::RespondToMessage);
     connections.push(std::move(connection));
+
+}
+
+void Server::SetCatalogMessageByteArray() {
+
+    SqlService* sql_service = new SqlService(QStringLiteral("server_connection"));
+
+    QJsonArray catalog_array = sql_service->GetCatalogData();
+
+    QJsonObject message;
+    message[QLatin1String("Method")] = QStringLiteral("GET");
+    message[QLatin1String("Resource")] = QStringLiteral("Catalog");
+    message[QLatin1String("Code")] = QStringLiteral("200");
+    message[QLatin1String("Catalog")] = QJsonValue(catalog_array);
+
+    catalog_message_byte_array = QJsonDocument(message).toJson();
+    qDebug() << catalog_message_byte_array;
 
 }

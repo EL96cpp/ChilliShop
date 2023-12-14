@@ -21,6 +21,20 @@ Page {
 
     }
 
+    Connections {
+
+        target: Client
+
+        function onAddSauceProductToModel(id, name, price, scoville, text_description, volume, peppers) {
+
+            sauces_model.append( {id: id, name: name, price: price, scoville: scoville, text_description: text_description,
+                                  image: "file://" + applicationDirPath + "/../Images/Catalog/Sauces/" + id + ".png"} );
+
+        }
+
+    }
+
+
     SeedsModel {
 
         id: seeds_model
