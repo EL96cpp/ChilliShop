@@ -8,10 +8,13 @@ ListModel {
 
     id: seeds_model
 
+    property int id
     property string name
-    property var json_description
+    property string text_description
+    property int number_of_seeds
+    property var peppers: []
     property int price
-    property int items_left
+    property int scoville
     property Image image
 
     function sortByPriceDecrease() {
@@ -120,47 +123,4 @@ ListModel {
 
     }
 
-    Component.onCompleted: {
-
-        seeds_model.append( {name: "Pepper Seeds1", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10",
-                                                                  "peppers" : ["Carolina Reaper"]},
-                             price: 328, scoville: 2500000, items_left: 10, image: "qrc:/goods_images/data.jpeg"} );
-
-        seeds_model.append( {name: "Pepper Seeds2", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10",
-                                                                  "peppers" : ["Scorpion Moruga"]},
-                             price: 24, scoville: 2200000, items_left: 10, image: "qrc:/goods_images/data.jpeg"} );
-
-        seeds_model.append( {name: "Pepper Seeds3", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10",
-                                                                  "peppers" : ["Carolina Reaper"]},
-                             price: 18, scoville: 2500000, items_left: 10, image: "qrc:/goods_images/data.jpeg"} );
-
-        seeds_model.append( {name: "Pepper Seeds4", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10",
-                                                                  "peppers" : ["Scorpion Moruga"]},
-                             price: 94, scoville: 2200000, items_left: 10, image: "qrc:/goods_images/data.jpeg"} );
-
-        seeds_model.append( {name: "Pepper Seeds5", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10",
-                                                                  "peppers" : ["Carolina Reaper"]},
-                             price: 68, scoville: 2500000, items_left: 10, image: "qrc:/goods_images/data.jpeg"} );
-
-        seeds_model.append( {name: "Pepper Seeds6", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10",
-                                                                  "peppers" : ["Scorpion Moruga"]},
-                             price: 25, scoville: 2200000, items_left: 10, image: "qrc:/goods_images/data.jpeg"} );
-
-        seeds_model.append( {name: "Pepper Seeds7", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10",
-                                                                  "peppers" : ["Carolina Reaper"]},
-                             price: 28, scoville: 2500000, items_left: 10, image: "qrc:/goods_images/data.jpeg"} );
-
-        seeds_model.append( {name: "Pepper Seeds8", description: {"text" : "Seeds description",
-                                                                  "number of seeds" : "10",
-                                                                  "peppers" : ["Scorpion Moruga"]},
-                             price: 124, scoville: 2200000, items_left: 10, image: "qrc:/goods_images/data.jpeg"} );
-
-    }
 }

@@ -19,11 +19,11 @@ public:
 
 signals:
     void addSauceProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
-                                const QString& text_description, const double& volume, const QVector<QString>& peppers);
+                                const QString& text_description, const double& volume, const QJsonArray& peppers);
     void addSeasoningProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
-                                    const QString& text_description, const int& weight, const QVector<QString>& peppers);
+                                    const QString& text_description, const int& weight, const QJsonArray& peppers);
     void addSeedsProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
-                                const QString& text_description, const int& number_of_seeds, const QVector<QString>& peppers);
+                                const QString& text_description, const int& number_of_seeds, const QJsonArray& peppers);
 
 public slots:
     void onLogin(const QString& phone_number, const QString& password);

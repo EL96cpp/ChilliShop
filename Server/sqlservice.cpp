@@ -175,14 +175,29 @@ QJsonArray SqlService::GetCatalogData() {
         QString scoville(get_catalog_query.value(4).toString());
         QString description(get_catalog_query.value(5).toString());
 
+        QJsonDocument description_doc = QJsonDocument::fromJson(description.toUtf8());
+
         catalog_position[QStringLiteral("product_id")] = id;
         catalog_position[QStringLiteral("product_type")] = type;
         catalog_position[QStringLiteral("product_name")] = name;
         catalog_position[QStringLiteral("price")] = price;
         catalog_position[QStringLiteral("scoville")] = scoville;
-        catalog_position[QStringLiteral("description")] = description;
+        catalog_position.insert("description", QJsonValue::fromVariant(description.toUtf8()));
 
         catalog_array.push_back(catalog_position);
+
+        /*
+        QString json_string = get_json_query.value(1).toString();
+        QJsonDocument doc = QJsonDocument::fromJson(json_string.toUtf8());
+        QJsonObject obj = doc.object();
+        QJsonArray arr = obj.value(QLatin1String("array")).toArray();
+
+        for (int i = 0; i < arr.size(); ++i) {
+
+            qDebug() << arr.at(i).toString();
+
+        }
+        */
 
     }
 

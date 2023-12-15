@@ -12,7 +12,7 @@ ListModel {
     property string name
     property string text_description
     property double volume
-    property var peppers
+    property var peppers: []
     property int price
     property int scoville
     property Image image

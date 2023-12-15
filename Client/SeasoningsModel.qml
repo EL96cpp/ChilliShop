@@ -8,10 +8,13 @@ ListModel {
 
     id: seasonings_model
 
+    property int id
     property string name
-    property var json_description
+    property string text_description
+    property int weight_gramms
+    property var peppers: []
     property int price
-    property int items_left
+    property int scoville
     property Image image
 
     function sortByPriceDecrease() {
@@ -120,47 +123,4 @@ ListModel {
 
     }
 
-    Component.onCompleted: {
-
-        seasonings_model.append( {name: "Seasoning1", description: {"text" : "Seasoning description",
-                                                                    "weight_grams" : "150",
-                                                                    "peppers" : ["Carolina Reaper", "Habanero"]},
-                                  price: 11, items_left: 10, image: "qrc:/goods_images/carolina_reaper_powder.jpg"} );
-
-        seasonings_model.append( {name: "Seasoning2", description: {"text" : "Seasoning description",
-                                                                    "weight_grams" : "250",
-                                                                    "peppers" : ["Ghost Pepper"]},
-                                  price: 1, items_left: 10, image: "qrc:/goods_images/carolina_reaper_powder.jpg"} );
-
-        seasonings_model.append( {name: "Seasoning3", description: {"text" : "Seasoning description",
-                                                                    "weight_grams" : "150",
-                                                                    "peppers" : ["Carolina Reaper", "Habanero"]},
-                                  price: 5, items_left: 10, image: "qrc:/goods_images/carolina_reaper_powder.jpg"} );
-
-        seasonings_model.append( {name: "Seasoning4", description: {"text" : "Seasoning description",
-                                                                    "weight_grams" : "250",
-                                                                    "peppers" : ["Ghost Pepper"]},
-                                  price: 6, items_left: 10, image: "qrc:/goods_images/carolina_reaper_powder.jpg"} );
-
-        seasonings_model.append( {name: "Seasoning5", description: {"text" : "Seasoning description",
-                                                                    "weight_grams" : "150",
-                                                                    "peppers" : ["Carolina Reaper", "Habanero"]},
-                                  price: 71, items_left: 10, image: "qrc:/goods_images/carolina_reaper_powder.jpg"} );
-
-        seasonings_model.append( {name: "Seasoning6", description: {"text" : "Seasoning description",
-                                                                    "weight_grams" : "250",
-                                                                    "peppers" : ["Ghost Pepper"]},
-                                  price: 5, items_left: 10, image: "qrc:/goods_images/carolina_reaper_powder.jpg"} );
-
-        seasonings_model.append( {name: "Seasoning7", description: {"text" : "Seasoning description",
-                                                                    "weight_grams" : "150",
-                                                                    "peppers" : ["Carolina Reaper", "Habanero"]},
-                                  price: 12, items_left: 10, image: "qrc:/goods_images/carolina_reaper_powder.jpg"} );
-
-        seasonings_model.append( {name: "Seasoning8", description: {"text" : "Seasoning description",
-                                                                    "weight_grams" : "250",
-                                                                    "peppers" : ["Ghost Pepper"]},
-                                  price: 5, items_left: 10, image: "qrc:/goods_images/carolina_reaper_powder.jpg"} );
-
-    }
 }
