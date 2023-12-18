@@ -286,8 +286,13 @@ bool SqlService::CancelOrder(const int &order_id, const QString &phone_number, c
 
 }
 
-bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &new_name)
-{
+bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &new_name) {
+
+    QSqlQuery change_name_query(sql_database);
+    change_name_query.prepare("UPDATE cutomers SET name = (?) WHERE phone_number = (?)");
+    change_name_query.addBindValue(new_name);
+    change_name_query.addBindValue(phone_number);
+    return change_name_query.exec();
 
 }
 
