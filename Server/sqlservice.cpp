@@ -286,6 +286,11 @@ bool SqlService::CancelOrder(const int &order_id, const QString &phone_number, c
 
 }
 
+bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &new_name)
+{
+
+}
+
 AddReceivedOrderResult SqlService::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString &ordered_timestamp, const QString& received_timestamp, const QString &receive_code, const QMap<int, int> &order_data) {
 
     if (!CheckIfOrderExists(order_id, phone_number, receive_code)) {
