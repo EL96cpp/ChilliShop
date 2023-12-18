@@ -155,8 +155,6 @@ void Client::AddCatalogDataToModels(const QJsonArray &catalog_json_array) {
 
         if (type.compare(QStringLiteral("Sauce")) == 0) {
 
-            qDebug() << "Sauce added!";
-
             if (parse_error.error != QJsonParseError::NoError) {
 
                 qDebug() << "parse error!";
@@ -170,22 +168,11 @@ void Client::AddCatalogDataToModels(const QJsonArray &catalog_json_array) {
                 QString volume = description_json_object.value(QLatin1String("volume_liters")).toString();
                 QJsonArray peppers_array = description_json_object.value(QLatin1String("peppers")).toArray();
 
-                QVector<QString> peppers;
-
-                for (int i = 0; i < peppers_array.size(); ++i) {
-
-                    peppers.push_back(peppers_array.at(i).toString());
-                    qDebug() << peppers[i];
-
-                }
-
-                emit addSauceProductToModel(id.toInt(), name, price.toInt(), scoville.toInt(), text_description, volume.toFloat(), peppers_array);
+                emit addSauceProductToModel(id.toInt(), name, price.toFloat(), scoville.toInt(), text_description, volume.toFloat(), peppers_array);
 
             }
 
         } else if (type.compare(QStringLiteral("Seasoning")) == 0) {
-
-            qDebug() << "Seasoning added!";
 
             if (parse_error.error != QJsonParseError::NoError) {
 
@@ -200,23 +187,12 @@ void Client::AddCatalogDataToModels(const QJsonArray &catalog_json_array) {
                 QString weight_gramms = description_json_object.value(QLatin1String("weight_gramms")).toString();
                 QJsonArray peppers_array = description_json_object.value(QLatin1String("peppers")).toArray();
 
-                QVector<QString> peppers;
-
-                for (int i = 0; i < peppers_array.size(); ++i) {
-
-                    peppers.push_back(peppers_array.at(i).toString());
-                    qDebug() << peppers[i];
-
-                }
-
-                emit addSeasoningProductToModel(id.toInt(), name, price.toInt(), scoville.toInt(), text_description, weight_gramms.toInt(), peppers_array);
+                emit addSeasoningProductToModel(id.toInt(), name, price.toFloat(), scoville.toInt(), text_description, weight_gramms.toInt(), peppers_array);
 
             }
 
 
         } else if (type.compare(QStringLiteral("Seeds")) == 0) {
-
-            qDebug() << "Seeds added!";
 
             if (parse_error.error != QJsonParseError::NoError) {
 
@@ -230,15 +206,6 @@ void Client::AddCatalogDataToModels(const QJsonArray &catalog_json_array) {
                 QString text_description = description_json_object.value(QLatin1String("text")).toString();
                 QString number_of_seeds = description_json_object.value(QLatin1String("number_of_seeds")).toString();
                 QJsonArray peppers_array = description_json_object.value(QLatin1String("peppers")).toArray();
-
-                QVector<QString> peppers;
-
-                for (int i = 0; i < peppers_array.size(); ++i) {
-
-                    peppers.push_back(peppers_array.at(i).toString());
-                    qDebug() << peppers[i];
-
-                }
 
                 emit addSeedsProductToModel(id.toInt(), name, price.toInt(), scoville.toInt(), text_description, number_of_seeds.toInt(), peppers_array);
 
@@ -351,7 +318,6 @@ void Client::onReadyRead() {
                 qDebug() << "Get catalog!!";
                 QJsonValue json_array_value = json_message_object.value(QLatin1String("Catalog"));
                 QJsonObject obj = json_array_value.toObject();
-                qDebug() << QJsonDocument(obj).toJson();
                 AddCatalogDataToModels(json_array_value.toArray());
 
             }

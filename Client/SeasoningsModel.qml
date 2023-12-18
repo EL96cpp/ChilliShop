@@ -12,8 +12,8 @@ ListModel {
     property string name
     property string text_description
     property int weight_gramms
-    property var peppers: []
-    property int price
+    property var peppers
+    property double price
     property int scoville
     property Image image
 

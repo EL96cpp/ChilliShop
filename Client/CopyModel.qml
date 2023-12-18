@@ -8,11 +8,14 @@ ListModel {
 
     id: copy_model
 
+    property int id
     property string name
-    property var json_description
-    property int price
-    property int items_left
+    property string text_description
+    property var peppers
+    property double price
+    property int scoville
     property Image image
+
 
     function sortByPriceDecrease() {
 
@@ -117,31 +120,6 @@ ListModel {
 
 
         }
-
-    }
-
-    Component.onCompleted: {
-
-        copy_model.append( {name: "Hot Sauce1", description: {"text":"Sauce description",
-                                                                 "volume" : "0.5 л",
-                                                                "peppers" : ["Carolina Reaper", "Habanero"]},
-                              price: 3, scoville: 20000, image: "qrc:/goods_images/large_CK-FIRMA.jpg", visible: true} );
-        copy_model.append( {name: "Hot Sauce2", description: {"text":"Sauce description",
-                                                                 "volume" : "0.5 л",
-                                                                "peppers" : ["Habanero"]},
-                              price: 5, scoville: 200000, image: "qrc:/goods_images/large_CK-FIRMA.jpg", visible: true} );
-        copy_model.append( {name: "Hot Sauce3", description: {"text":"Sauce description",
-                                                                 "volume" : "0.5 л",
-                                                                "peppers" : ["Jalapeno", "Scorpion Moruga"]},
-                              price: 8, scoville: 120000, image: "qrc:/goods_images/large_CK-FIRMA.jpg", visible: true} );
-        copy_model.append( {name: "Hot Sauce4", description: {"text":"Sauce description",
-                                                                 "volume" : "0.5 л",
-                                                                "peppers" : ["Ghost Pepper"]},
-                              price: 2, scoville: 100000, image: "qrc:/goods_images/large_CK-FIRMA.jpg", visible: true} );
-        copy_model.append( {name: "Hot Sauce5", description: {"text":"Sauce description",
-                                                                 "volume" : "0.5 л",
-                                                                "peppers" : ["Scorpion Moruga"]},
-                              price: 1, scoville: 1200000, image: "qrc:/goods_images/large_CK-FIRMA.jpg", visible: true} );
 
     }
 

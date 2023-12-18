@@ -27,11 +27,24 @@ Page {
 
         function onAddSauceProductToModel(id, name, price, scoville, text_description, volume, peppers) {
 
-            sauces_model.append( {id: id, name: name, price: price, scoville: scoville, text_description: text_description, volume: volume,
-                                  image: "file://" + applicationDirPath + "/../Images/Catalog/Sauces/" + id + ".png", peppers: peppers} );
 
-            copy_model.append( {id: id, name: name, price: price, scoville: scoville, text_description: text_description, volume: volume,
-                                  image: "file://" + applicationDirPath + "/../Images/Catalog/Sauces/" + id + ".png", peppers: peppers} );
+            var peppers_json_array = {"array" : []};
+
+            for (var i = 0; i < peppers.length; ++i) {
+
+                peppers_json_array.array.push(peppers[i]);
+                console.log(peppers[i]);
+
+            }
+
+            sauces_model.append( {id: id, name: name, price: price/100, scoville: scoville, text_description: text_description, volume: volume,
+                                  image: "file://" + applicationDirPath + "/../Images/Catalog/Sauces/" + id + ".png", peppers: peppers_json_array} );
+
+            copy_model.append( {id: id, name: name, price: price/100, scoville: scoville, text_description: text_description, volume: volume,
+                                  image: "file://" + applicationDirPath + "/../Images/Catalog/Sauces/" + id + ".png", peppers: peppers_json_array} );
+
+
+            sauces_model.showPeppers();
 
         }
 
@@ -43,8 +56,17 @@ Page {
 
         function onAddSeasoningProductToModel(id, name, price, scoville, text_description, weight_gramms, peppers) {
 
-            seasonings_model.append( {id: id, name: name, price: price, scoville: scoville, text_description: text_description, weight_gramms: weight_gramms,
-                                  image: "file://" + applicationDirPath + "/../Images/Catalog/Seasonings/" + id + ".png", peppers: peppers} );
+            var peppers_json_array = {"array" : []};
+
+            for (var i = 0; i < peppers.length; ++i) {
+
+                peppers_json_array.array.push(peppers[i]);
+                console.log(peppers[i]);
+
+            }
+
+            seasonings_model.append( {id: id, name: name, price: price/100, scoville: scoville, text_description: text_description, weight_gramms: weight_gramms,
+                                  image: "file://" + applicationDirPath + "/../Images/Catalog/Seasonings/" + id + ".png", peppers: peppers_json_array} );
 
         }
 
@@ -56,8 +78,17 @@ Page {
 
         function onAddSeedsProductToModel(id, name, price, scoville, text_description, number_of_seeds, peppers) {
 
-            seeds_model.append( {id: id, name: name, price: price, scoville: scoville, text_description: text_description, number_of_seeds: number_of_seeds,
-                                  image: "file://" + applicationDirPath + "/../Images/Catalog/Seeds/" + id + ".png", peppers: peppers} );
+            var peppers_json_array = {"array" : []};
+
+            for (var i = 0; i < peppers.length; ++i) {
+
+                peppers_json_array.array.push(peppers[i]);
+                console.log(peppers[i]);
+
+            }
+
+            seeds_model.append( {id: id, name: name, price: price/100, scoville: scoville, text_description: text_description, number_of_seeds: number_of_seeds,
+                                  image: "file://" + applicationDirPath + "/../Images/Catalog/Seeds/" + id + ".png", peppers: peppers_json_array} );
 
         }
 

@@ -56,20 +56,15 @@ Rectangle {
 
                 for (var i = 0; i < pepper_filters.length; ++i) {
 
-                    for (var l = 0; l < goods_model_copy.get(j).peppers.length; ++l) {
 
-                        console.log(goods_model_copy.get(j).peppers[l]);
-
-                    }
-
-                    /*
-                    if (goods_model_copy.get(j).peppers.indexOf(pepper_filters[i]) === -1) {
+                    if (goods_model_copy.get(j).peppers.array.indexOf(pepper_filters[i]) === -1) {
 
                         should_be_visible = false;
                         break;
 
                     }
-                    */
+
+
 
                 }
 
