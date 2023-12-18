@@ -290,6 +290,12 @@ Rectangle {
 
         }
 
+        onClicked: {
+
+            stack_view.push(profile_page);
+
+        }
+
     }
 
     Row {
@@ -329,9 +335,9 @@ Rectangle {
 
         target: grid_rectangle
 
-        function onAddToCartSignal(name, json_description, price, image) {
+        function onAddToCartSignal(id, name, text_description, price, image) {
 
-            cart_model.addToCart(name, json_description, price, image);
+            cart_model.addToCart(id, name, text_description, price, image);
             cart_total_cost_data.text = cart_model.getTotalOrderCost() + " ₽";
 
         }

@@ -271,7 +271,7 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
             message[QStringLiteral("Method")] = QStringLiteral("POST");
             message[QStringLiteral("Resource")] = QStringLiteral("Login_customer");
             message[QStringLiteral("Code")] = QStringLiteral("403");
-            message[QStringLiteral("Error_description")] = QStringLiteral("Phone_is_not_logged");
+            message[QStringLiteral("Error_description")] = QStringLiteral("Phone is not logged");
             QByteArray message_byte_array = QJsonDocument(message).toJson();
             message_byte_array.append("\n");
 
@@ -375,7 +375,7 @@ void MessageResponder::RegisterCustomer(const QString &phone_number, const QStri
         message[QStringLiteral("Method")] = QStringLiteral("POST");
         message[QStringLiteral("Resource")] = QStringLiteral("Register_customer");
         message[QStringLiteral("Code")] = QStringLiteral("403");
-        message[QStringLiteral("Error_description")] = QStringLiteral("Phone_already_registered");
+        message[QStringLiteral("Error_description")] = QStringLiteral("Phone already registered");
         QByteArray message_byte_array = QJsonDocument(message).toJson();
         message_byte_array.append("\n");
 
@@ -390,13 +390,12 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
 
     QJsonArray order_json_array = order_json_value.toArray();
 
-    QVector<QString> order_ids;
+    QVector<int> order_ids;
 
     foreach (const QJsonValue & value, order_json_array) {
 
         QJsonObject obj = value.toObject();
-        order_ids.append(obj["product_id"].toString());
-        order_ids.append(obj["ammount"].toString());
+        order_ids.push_back(obj["product_id"].toInt());
 
     }
 
@@ -422,6 +421,52 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
         message[QStringLiteral("Method")] = QStringLiteral("POST");
         message[QStringLiteral("Resource")] = QStringLiteral("Order");
         message[QStringLiteral("Code")] = QStringLiteral("400");
+        message[QStringLiteral("Error_description")] = QStringLiteral("Order includes incorrect product ID's");
+        QByteArray message_byte_array = QJsonDocument(message).toJson();
+        message_byte_array.append("\n");
+
+        emit MessageResponce(message_byte_array);
+
+    }
+
+}
+
+void MessageResponder::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString &ordered_timestamp, const QString& received_timestamp, const QString &receive_code, const QMap<int, int> &order_data) {
+
+    AddReceivedOrderResult result = sql_service->AddReceivedOrder(order_id, phone_number, ordered_timestamp, received_timestamp, receive_code, order_data);
+
+    if (result == AddReceivedOrderResult::SUCCESS) {
+
+        QJsonObject message;
+        message[QStringLiteral("Method")] = QStringLiteral("PUT");
+        message[QStringLiteral("Resource")] = QStringLiteral("Order_received");
+        message[QStringLiteral("Code")] = QStringLiteral("200");
+        message[QStringLiteral("Order_id")] = QString::number(order_id);
+        QByteArray message_byte_array = QJsonDocument(message).toJson();
+        message_byte_array.append("\n");
+
+        emit MessageResponce(message_byte_array);
+
+    } else if (result == AddReceivedOrderResult::NO_ORDER_IN_DATABASE) {
+
+        QJsonObject message;
+        message[QStringLiteral("Method")] = QStringLiteral("PUT");
+        message[QStringLiteral("Resource")] = QStringLiteral("Order_received");
+        message[QStringLiteral("Code")] = QStringLiteral("403");
+        message[QStringLiteral("Order_id")] = QString::number(order_id);
+        message[QStringLiteral("Error_description")] = QStringLiteral("No order in database");
+        QByteArray message_byte_array = QJsonDocument(message).toJson();
+        message_byte_array.append("\n");
+
+        emit MessageResponce(message_byte_array);
+
+    } else if (result == AddReceivedOrderResult::INCORRECT_PRODUCT_ID) {
+
+        QJsonObject message;
+        message[QStringLiteral("Method")] = QStringLiteral("PUT");
+        message[QStringLiteral("Resource")] = QStringLiteral("Order_received");
+        message[QStringLiteral("Code")] = QStringLiteral("403");
+        message[QStringLiteral("Order_id")] = QString::number(order_id);
         message[QStringLiteral("Error_description")] = QStringLiteral("Order includes incorrect product ID's");
         QByteArray message_byte_array = QJsonDocument(message).toJson();
         message_byte_array.append("\n");

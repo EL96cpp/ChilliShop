@@ -10,6 +10,7 @@ Page {
     visible: false
 
     signal toMenu();
+    signal showErrorMessage(string error_title, string error_description);
 
     property string button_color: "#290d00"
     property string button_hovered_color: "#7a2700"
@@ -19,6 +20,14 @@ Page {
     property string text_edit_color: "#000000"
     property string text_edit_background_color: "#ae5434"
     property string text_edit_border_color: "#7a2700"
+
+    function clearAuthorizationForms() {
+
+        login_rectangle.clearForms();
+        register_rectangle.clearForms();
+
+    }
+
 
     Connections {
 
@@ -39,6 +48,31 @@ Page {
 
             register_rectangle.visible = false;
             login_rectangle.visible = true;
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onLoginSuccess() {
+
+            register_rectangle.visible = false;
+            login_rectangle.visible = false;
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onRegisterSuccess() {
+
+            clearAuthorizationForms();
+            toMenu();
+            showErrorMessage("Register result", "Successfully registered!");
 
         }
 
@@ -90,6 +124,7 @@ Page {
                 font.bold: true
                 text: "Chilli World"
                 color: "white"
+
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
@@ -101,8 +136,8 @@ Page {
 
             id: menu_text_rectangle
             width: menu_text.paintedWidth * 2
-
             height: profile_header_image.height
+
             anchors.right: parent.right
             anchors.rightMargin: 100
             anchors.verticalCenter: parent.verticalCenter
@@ -141,7 +176,6 @@ Page {
                     }
 
                 }
-
 
             }
 

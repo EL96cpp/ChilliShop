@@ -43,6 +43,14 @@ enum class CustomerRegisterResult {
 
 };
 
+enum class AddReceivedOrderResult {
+
+    SUCCESS,
+    NO_ORDER_IN_DATABASE,
+    INCORRECT_PRODUCT_ID
+
+};
+
 class SqlService {
 
 public:
@@ -57,9 +65,10 @@ public:
     bool CheckIfPhoneNumberExists(const QString& phone_number);
     bool CheckIfEmployeeExists(const QString& name, const QString& surname, const QString& position);
     bool AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code);
-    bool CheckIfOrderIsCorrect(const QVector<QString>& product_ids);
-    bool CheckIfOrderExists(const QString& phone_number, const int& order_id);
-    bool CancelOrder(const QString& phone_number, const int& order_id);
+    bool CheckIfOrderIsCorrect(const QVector<int>& product_ids);
+    bool CheckIfOrderExists(const int& order_id, const QString& phone_number, const QString& receive_code);
+    bool CancelOrder(const int &order_id, const QString &phone_number, const QString &receive_code);
+    AddReceivedOrderResult AddReceivedOrder(const int& order_id, const QString& phone_number, const QString& ordered_timestamp, const QString& received_timestamp, const QString& receive_code, const QMap<int, int>& order_data);
 
     void CreateTablesIfNotExists();
 

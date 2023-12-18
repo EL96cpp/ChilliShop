@@ -60,7 +60,7 @@ void Client::onRegister(const QString& phone_number, const QString& password, co
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Register_customer");
-    message[QStringLiteral("Phone number")] = phone_number;
+    message[QStringLiteral("Phone_number")] = phone_number;
     message[QStringLiteral("Password")] = password;
     message[QStringLiteral("Name")] = name;
     QByteArray byte_array = QJsonDocument(message).toJson();
@@ -261,7 +261,12 @@ void Client::onReadyRead() {
 
             if (code_value.toString() == "200") {
 
+                emit registerSuccess();
+
             } else if (code_value.toString() == "403") {
+
+                QJsonValue error_description_value = json_message_object.value(QLatin1String("Error_description"));
+                emit registerError(error_description_value.toString());
 
             }
 

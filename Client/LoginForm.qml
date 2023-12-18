@@ -21,6 +21,13 @@ Rectangle {
 
     signal toRegisterForm();
 
+    function clearForms() {
+
+        login_phone_input.clear();
+        login_password_input.clear();
+
+    }
+
     Rectangle {
 
         id: circle
@@ -69,8 +76,7 @@ Rectangle {
         anchors.top: login_title.bottom
         anchors.topMargin: 15
 
-        onPaint:
-        {
+        onPaint: {
 
             var ctx = getContext("2d")
 
@@ -127,6 +133,7 @@ Rectangle {
             anchors.leftMargin: 10
 
             validator: RegularExpressionValidator { regularExpression: /^8\d{10}/ }
+
         }
 
     }
@@ -210,8 +217,15 @@ Rectangle {
 
         onClicked: {
 
-            Client.onLogin(login_phone_input.text, login_password_input.text);
-            console.log("Sent login data to client");
+            if (login_phone_input.text === "" || login_password_input.text === "") {
+
+                profile_page.showErrorMessage("Login error", "Feel all required fields!");
+
+            } else {
+
+                Client.onLogin(login_phone_input.text, login_password_input.text);
+
+            }
 
         }
 

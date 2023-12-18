@@ -23,7 +23,7 @@ qt_add_qml_module(appChilliWorld
     QML_FILES Main.qml MainPage.qml ProfilePage.qml LoginForm.qml RegisterForm.qml
               GoodDelegate.qml SaucesModel.qml SeasoningsModel.qml SeedsModel.qml
               CopyModel.qml CartModel.qml Filters.qml CartView.qml GoodsGrid.qml
-              CustomSpinbox.qml
+              CustomSpinbox.qml ErrorMessage.qml
 )
 
 set_target_properties(appChilliWorld PROPERTIES

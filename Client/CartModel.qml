@@ -8,12 +8,13 @@ ListModel {
 
     id: cart_model
 
+    property int id
     property string name
-    property var description
+    property string description
     property int price
     property int scoville
     property int number_of_items
-    property Image image
+    property string image
 
     function changeNumberOfItems(item_name, value) {
 
@@ -35,13 +36,13 @@ ListModel {
 
     }
 
-    function addToCart(name, json_description, price, image) {
+    function addToCart(id, name, text_description, price, image) {
 
         var item_already_in_cart = false;
 
         for (var i = 0; i < count; ++i) {
 
-            if (get(i).name === name) {
+            if (get(i).id === id) {
 
                 item_already_in_cart = true;
                 break;
@@ -52,7 +53,7 @@ ListModel {
 
         if (!item_already_in_cart) {
 
-            append( {name: name, description: json_description, price: price, number_of_items: 1, image: image} );
+            append( {id: id, name: name, description: text_description, price: price, number_of_items: 1, image: image} );
 
         }
 

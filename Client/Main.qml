@@ -94,9 +94,20 @@ Window {
     }
 
     CartModel {
+
         id: cart_model
+
     }
 
+    ErrorMessage {
+        id: error_rectangle
+    }
+
+    function showErrorMessage(error_title, error_description) {
+
+        error_rectangle.visible = true;
+
+    }
 
 }
 

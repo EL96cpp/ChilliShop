@@ -24,6 +24,11 @@ signals:
                                     const QString& text_description, const int& weight, const QJsonArray& peppers);
     void addSeedsProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
                                 const QString& text_description, const int& number_of_seeds, const QJsonArray& peppers);
+    void registerSuccess();
+    void registerError(const QString& error_description);
+    void loginSuccess();
+    void loginError(const QString& error_description);
+
 
 public slots:
     void onLogin(const QString& phone_number, const QString& password);

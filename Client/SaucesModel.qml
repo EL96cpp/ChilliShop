@@ -19,24 +19,6 @@ ListModel {
     property Image image
 
 
-    //Debug stuff
-    function showPeppers() {
-
-        for (var i = 0; i < count; ++i) {
-
-            console.log(get(i).name);
-
-            for (var j = 0; j < get(i).peppers.array.length; ++j) {
-
-                console.log(get(i).peppers.array[j]);
-
-            }
-
-        }
-
-    }
-
-
     function sortByPriceDecrease() {
 
         for (var i = 0; i < count; ++i) {

@@ -72,7 +72,18 @@ CustomerRegisterResult SqlService::RegisterCustomer(const QString &phone_number,
 
     } else {
 
-        return CustomerRegisterResult::SUCCESS;
+        qDebug() << phone_number << " " << password << " " << name;
+        QSqlQuery register_customer_query(sql_database);
+        register_customer_query.prepare("INSERT INTO customers VALUES ((?), (?), (?))");
+        register_customer_query.addBindValue(phone_number);
+        register_customer_query.addBindValue(password);
+        register_customer_query.addBindValue(name);
+
+        if (register_customer_query.exec()) {
+
+            return CustomerRegisterResult::SUCCESS;
+
+        }
 
     }
 
@@ -186,19 +197,6 @@ QJsonArray SqlService::GetCatalogData() {
 
         catalog_array.push_back(catalog_position);
 
-        /*
-        QString json_string = get_json_query.value(1).toString();
-        QJsonDocument doc = QJsonDocument::fromJson(json_string.toUtf8());
-        QJsonObject obj = doc.object();
-        QJsonArray arr = obj.value(QLatin1String("array")).toArray();
-
-        for (int i = 0; i < arr.size(); ++i) {
-
-            qDebug() << arr.at(i).toString();
-
-        }
-        */
-
     }
 
     return catalog_array;
@@ -218,7 +216,7 @@ bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp,
 
 }
 
-bool SqlService::CheckIfOrderIsCorrect(const QVector<QString> &product_ids) {
+bool SqlService::CheckIfOrderIsCorrect(const QVector<int> &product_ids) {
 
     for (int i = 0; i < product_ids.size(); ++i) {
 
@@ -243,12 +241,13 @@ bool SqlService::CheckIfOrderIsCorrect(const QVector<QString> &product_ids) {
 
 }
 
-bool SqlService::CheckIfOrderExists(const QString& phone_number, const int& order_id) {
+bool SqlService::CheckIfOrderExists(const int &order_id, const QString &phone_number, const QString &receive_code) {
 
     QSqlQuery check_order_query(sql_database);
-    check_order_query.prepare("SELECT EXISTS (SELECT 1 FROM orders WHERE id = (?) AND phone_number = (?))");
+    check_order_query.prepare("SELECT EXISTS (SELECT 1 FROM orders WHERE id = (?) AND phone_number = (?) AND receive_code = (?))");
     check_order_query.addBindValue(order_id);
     check_order_query.addBindValue(phone_number);
+    check_order_query.addBindValue(receive_code);
     check_order_query.exec();
 
     while(check_order_query.next()) {
@@ -259,9 +258,10 @@ bool SqlService::CheckIfOrderExists(const QString& phone_number, const int& orde
 
 }
 
-bool SqlService::CancelOrder(const QString &phone_number, const int &order_id) {
 
-    if (CheckIfOrderExists(phone_number, order_id)) {
+bool SqlService::CancelOrder(const int &order_id, const QString &phone_number, const QString &receive_code) {
+
+    if (CheckIfOrderExists(order_id, phone_number, receive_code)) {
 
         QSqlQuery cancel_order_query(sql_database);
         cancel_order_query.prepare("DELETE FROM orders WHERE id = (?)");
@@ -272,6 +272,43 @@ bool SqlService::CancelOrder(const QString &phone_number, const int &order_id) {
     } else {
 
         return false;
+
+    }
+
+}
+
+AddReceivedOrderResult SqlService::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString &ordered_timestamp, const QString& received_timestamp, const QString &receive_code, const QMap<int, int> &order_data) {
+
+    if (!CheckIfOrderExists(order_id, phone_number, receive_code)) {
+
+        return AddReceivedOrderResult::NO_ORDER_IN_DATABASE;
+
+    } else {
+
+        QVector<int> product_ids;
+
+        for (auto& id : order_data) {
+
+            product_ids.push_back(id);
+
+        }
+
+        if (!CheckIfOrderIsCorrect(product_ids)) {
+
+            return AddReceivedOrderResult::INCORRECT_PRODUCT_ID;
+
+        } else {
+
+            QSqlQuery add_received_order_query(sql_database);
+            add_received_order_query.exec("INSERT INTO received_orders VALUES (order_id, phone_number, ordered_timestamp, receive_code, order_data)"
+                                          "SELECT order_id, phone_number, ordered_timestamp, receive_code, order_data FROM active_orders");
+            QSqlQuery add_received_timestamp_query;
+            add_received_timestamp_query.prepare("INSERT INTO received_orders (received_timestamp) VALUES (?)");
+            add_received_timestamp_query.addBindValue(received_timestamp);
+            add_received_timestamp_query.exec();
+            return AddReceivedOrderResult::SUCCESS;
+
+        }
 
     }
 

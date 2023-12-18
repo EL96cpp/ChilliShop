@@ -23,6 +23,16 @@ Rectangle {
 
     signal toLoginForm();
 
+    function clearForms() {
+
+        register_name_edit.clear();
+        register_phone_edit.clear();
+        register_password_edit.clear();
+        register_password_confirm_edit.clear();
+
+    }
+
+
     property int text_edits_point_size: 16
     property int header_texts_point_size: 14
     property int text_edits_distance: 55
@@ -297,6 +307,25 @@ Rectangle {
             font.letterSpacing: 5
             font.bold: true
             color: register_button.hovered ? hover_color : "#E2E2E2"
+        }
+
+        onClicked: {
+
+            if (register_name_edit.text === "" || register_phone_edit.text === "" ||
+                register_password_edit.text === "" || register_password_confirm_edit.text === "") {
+
+                profile_page.showErrorMessage("Register error", "Fill all required fields!");
+
+            } else if (register_password_edit.text !== register_password_confirm_edit.text) {
+
+                profile_page.showErrorMessage("Register error", "Password confirmation error!");
+
+            } else {
+
+                Client.onRegister(register_phone_edit.text, register_password_edit.text, register_name_edit.text);
+
+            }
+
         }
 
     }

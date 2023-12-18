@@ -33,7 +33,6 @@ Page {
             for (var i = 0; i < peppers.length; ++i) {
 
                 peppers_json_array.array.push(peppers[i]);
-                console.log(peppers[i]);
 
             }
 
@@ -43,8 +42,6 @@ Page {
             copy_model.append( {id: id, name: name, price: price/100, scoville: scoville, text_description: text_description, volume: volume,
                                   image: "file://" + applicationDirPath + "/../Images/Catalog/Sauces/" + id + ".png", peppers: peppers_json_array} );
 
-
-            sauces_model.showPeppers();
 
         }
 
@@ -61,7 +58,6 @@ Page {
             for (var i = 0; i < peppers.length; ++i) {
 
                 peppers_json_array.array.push(peppers[i]);
-                console.log(peppers[i]);
 
             }
 
@@ -83,7 +79,6 @@ Page {
             for (var i = 0; i < peppers.length; ++i) {
 
                 peppers_json_array.array.push(peppers[i]);
-                console.log(peppers[i]);
 
             }
 
@@ -190,7 +185,6 @@ Page {
                 orientation: Gradient.Horizontal
 
             }
-
 
             MouseArea {
 
