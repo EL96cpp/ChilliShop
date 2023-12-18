@@ -32,7 +32,7 @@ void Client::onLogin(const QString& phone_number, const QString& password) {
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Login_customer");
-    message[QStringLiteral("Phone number")] = phone_number;
+    message[QStringLiteral("Phone_number")] = phone_number;
     message[QStringLiteral("Password")] = password;
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");
@@ -253,7 +253,12 @@ void Client::onReadyRead() {
 
             if (code_value.toString() == "200") {
 
+                emit loginSuccess();
+
             } else if (code_value.toString() == "403") {
+
+                QJsonValue error_value = json_message_object.value(QLatin1String("Error_description"));
+                emit loginError(error_value.toString());
 
             }
 

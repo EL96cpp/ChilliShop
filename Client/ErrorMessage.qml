@@ -160,5 +160,19 @@ Rectangle {
 
     }
 
+    Connections {
+
+        target: Client
+        function onLoginError(error_description) {
+
+            error_rectangle.title = "Login error";
+            error_rectangle.description = error_description;
+            error_rectangle.visible = true;
+
+        }
+
+    }
+
+
 
 }

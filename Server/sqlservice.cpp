@@ -48,16 +48,24 @@ CustomerLoginResult SqlService::LoginCustomer(const QString &phone_number, const
     login_customer_query.prepare("SELECT password FROM cutomers WHERE phone_number = (?)");
     login_customer_query.addBindValue(phone_number);
     login_customer_query.exec();
-    QString correct_password = login_customer_query.value(0).toString();
 
-    // compare method returns 0, if two strings are equal!
-    if (!correct_password.compare(password, Qt::CaseSensitive)) {
+    while (login_customer_query.next()) {
 
-        return CustomerLoginResult::SUCCESS;
+        QString correct_password = login_customer_query.value(0).toString();
 
-    } else {
+        qDebug() << phone_number << " phone number will check password";
+        qDebug() << password << " " << correct_password << " passwords";
 
-        return CustomerLoginResult::INCORRECT_PASSWORD;
+        // compare method returns 0, if two strings are equal!
+        if (!correct_password.compare(password, Qt::CaseSensitive)) {
+
+            return CustomerLoginResult::SUCCESS;
+
+        } else {
+
+            return CustomerLoginResult::INCORRECT_PASSWORD;
+
+        }
 
     }
 
@@ -133,6 +141,7 @@ EmployeeLoginResult SqlService::LoginEmployee(const QString &name, const QString
 
 bool SqlService::CheckIfPhoneNumberExists(const QString &phone_number) {
 
+    qDebug() << "Check exists phone " << phone_number;
     QSqlQuery check_phone_query(sql_database);
     check_phone_query.prepare("SELECT EXISTS (SELECT 1 FROM customers WHERE phone_number = (?))");
     check_phone_query.addBindValue(phone_number);

@@ -250,7 +250,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
 void MessageResponder::LoginCustomer(const QString& phone_number, const QString& password) {
 
-    if (logged_in) {
+    if (!logged_in) {
 
         CustomerLoginResult login_result = sql_service->LoginCustomer(phone_number, password);
 
@@ -271,7 +271,7 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
             message[QStringLiteral("Method")] = QStringLiteral("POST");
             message[QStringLiteral("Resource")] = QStringLiteral("Login_customer");
             message[QStringLiteral("Code")] = QStringLiteral("403");
-            message[QStringLiteral("Error_description")] = QStringLiteral("Phone is not logged");
+            message[QStringLiteral("Error_description")] = QStringLiteral("Phone is not registered");
             QByteArray message_byte_array = QJsonDocument(message).toJson();
             message_byte_array.append("\n");
 
