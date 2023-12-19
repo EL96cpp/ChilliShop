@@ -330,7 +330,7 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
             message[QStringLiteral("Method")] = QStringLiteral("POST");
             message[QStringLiteral("Resource")] = QStringLiteral("Login_customer");
             message[QStringLiteral("Code")] = QStringLiteral("403");
-            message[QStringLiteral("Error_code")] = QStringLiteral("Incorrect_password");
+            message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect_password");
             QByteArray message_byte_array = QJsonDocument(message).toJson();
             message_byte_array.append("\n");
 
@@ -344,7 +344,7 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
         message[QStringLiteral("Method")] = QStringLiteral("POST");
         message[QStringLiteral("Resource")] = QStringLiteral("Login_customer");
         message[QStringLiteral("Code")] = QStringLiteral("403");
-        message[QStringLiteral("Error_code")] = QStringLiteral("User_already_logged");
+        message[QStringLiteral("Error_description")] = QStringLiteral("User_already_logged");
         QByteArray message_byte_array = QJsonDocument(message).toJson();
         message_byte_array.append("\n");
 

@@ -8,7 +8,6 @@ ListModel {
 
     id: sauces_model
 
-
     property int id
     property string name
     property string text_description
@@ -17,7 +16,6 @@ ListModel {
     property double price
     property int scoville
     property Image image
-
 
     function sortByPriceDecrease() {
 

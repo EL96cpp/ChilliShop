@@ -9,6 +9,74 @@ Page {
     id: profile_page
     visible: false
 
+    states: [
+
+        State {
+
+            name: "login_state"
+
+            PropertyChanges {
+                target: login_rectangle
+                visible: true
+            }
+
+            PropertyChanges {
+                target: register_rectangle
+                visible: false
+            }
+
+            PropertyChanges {
+                target: orders_rectanlge
+                visible: false
+            }
+
+        },
+
+        State {
+
+            name: "register_state"
+
+            PropertyChanges {
+                target: login_rectangle
+                visible: false
+            }
+
+            PropertyChanges {
+                target: register_rectangle
+                visible: true
+            }
+
+            PropertyChanges {
+                target: orders_rectanlge
+                visible: false
+            }
+
+        },
+
+        State {
+
+            name: "orders_state"
+
+            PropertyChanges {
+                target: login_rectangle
+                visible: false
+            }
+
+            PropertyChanges {
+                target: register_rectangle
+                visible: false
+            }
+
+            PropertyChanges {
+                target: orders_form
+                visible: true
+            }
+
+        }
+
+    ]
+
+
     signal toMenu();
     signal showErrorMessage(string error_title, string error_description);
 
@@ -34,8 +102,7 @@ Page {
         target: login_rectangle
         function onToRegisterForm() {
 
-            login_rectangle.visible = false;
-            register_rectangle.visible = true;
+            profile_page.state = "register_state"
 
         }
 
@@ -46,8 +113,7 @@ Page {
         target: register_rectangle
         function onToLoginForm() {
 
-            register_rectangle.visible = false;
-            login_rectangle.visible = true;
+            profile_page.state = "login_state"
 
         }
 
@@ -58,8 +124,7 @@ Page {
         target: Client
         function onLoginSuccess() {
 
-            register_rectangle.visible = false;
-            login_rectangle.visible = false;
+            profile_page.state = "orders_state"
 
         }
 
@@ -186,13 +251,15 @@ Page {
 
     LoginForm {
         id: login_rectangle
-        visible: true
     }
-
 
     RegisterForm {
         id: register_rectangle
+        visible: false
     }
 
+    OrdersForm {
+        id: orders_form
+    }
 
 }
