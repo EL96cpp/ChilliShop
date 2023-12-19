@@ -27,6 +27,7 @@ void Client::ConnectToServer(const QString& address, const quint16& port) {
 
 void Client::onLogin(const QString& phone_number, const QString& password) {
 
+    this->phone_number = phone_number;
     qDebug() << "Login try!";
     qDebug() << phone_number << " " << password;
     QJsonObject message;
@@ -253,7 +254,8 @@ void Client::onReadyRead() {
 
             if (code_value.toString() == "200") {
 
-                emit loginSuccess();
+                name = json_message_object.value(QLatin1String("Name")).toString();
+                emit loginSuccess(phone_number, name);
 
             } else if (code_value.toString() == "403") {
 

@@ -26,7 +26,7 @@ signals:
                                 const QString& text_description, const int& number_of_seeds, const QJsonArray& peppers);
     void registerSuccess();
     void registerError(const QString& error_description);
-    void loginSuccess();
+    void loginSuccess(const QString& phone_number, const QString& name);
     void loginError(const QString& error_description);
 
 

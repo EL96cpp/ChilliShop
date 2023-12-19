@@ -196,9 +196,6 @@ Page {
 
                     stack_view.push(profile_page);
 
-                    //Debug!!
-                    profile_page.state = "orders_state"
-
                 }
 
             }

@@ -32,7 +32,11 @@ QString SqlService::GetCustomerName(const QString &phone_number) {
     get_name_query.addBindValue(phone_number);
     get_name_query.exec();
 
-    return get_name_query.value(0).toString();
+    while (get_name_query.next()) {
+
+        return get_name_query.value(0).toString();
+
+    }
 
 }
 

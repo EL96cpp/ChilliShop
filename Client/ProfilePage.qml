@@ -122,8 +122,10 @@ Page {
     Connections {
 
         target: Client
-        function onLoginSuccess() {
+        function onLoginSuccess(phone_number, name) {
 
+            orders_form.phone_number = phone_number;
+            orders_form.name = name;
             profile_page.state = "orders_state"
 
         }
@@ -260,6 +262,7 @@ Page {
 
     OrdersForm {
         id: orders_form
+        visible: false
     }
 
 }

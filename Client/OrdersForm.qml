@@ -12,6 +12,9 @@ Item {
     anchors.topMargin: 20
     anchors.horizontalCenter: parent.horizontalCenter
 
+    property string phone_number: "phone"
+    property string name: "name"
+
     Rectangle {
 
         id: order_header_rectangle
@@ -113,7 +116,7 @@ Item {
 
         id: customer_data_rectangle
         width: 280
-        height: 200
+        height: customer_name_title.height*2 + customer_name_title.anchors.margins*3
         radius: 15
         color: "#907D2201"
         border.width: 2
@@ -122,6 +125,94 @@ Item {
         anchors.top: orders_rectangle.top
         anchors.right: orders_rectangle.left
         anchors.rightMargin: 10
+
+        Text {
+
+            id: customer_name_title
+            text: "Имя: "
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 15
+            font.wordSpacing: 5
+
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.margins: 10
+
+        }
+
+        Text {
+
+            id: customer_name
+            text: orders_form.name
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 15
+            font.wordSpacing: 5
+
+            anchors.top: customer_name_title.top
+            anchors.left: customer_name_title.right
+
+        }
+
+        Text {
+
+            id: customer_phone_title
+            text: "Телефон: "
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 15
+            font.wordSpacing: 5
+
+            anchors.left: customer_name_title.left
+            anchors.top: customer_name.bottom
+            anchors.topMargin: 10
+
+        }
+
+        Text {
+
+            id: customer_phone
+            text: orders_form.phone_number
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 15
+            font.wordSpacing: 5
+
+            anchors.top: customer_phone_title.top
+            anchors.left: customer_phone_title.right
+
+        }
+
+    }
+
+    Text {
+
+        id: change_name_text
+        text: "Сменить имя"
+        color: change_name_mouse_area.containsMouse ? hover_color : "#E2E2E2"
+        font.family: regular_font.name
+        font.pointSize: 12
+        font.wordSpacing: 5
+        font.bold: false
+        anchors.horizontalCenter: customer_data_rectangle.horizontalCenter
+        anchors.top: customer_data_rectangle.bottom
+        anchors.topMargin: 10
+
+
+        MouseArea {
+
+            id: change_name_mouse_area
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onClicked: {
+
+                //toRegisterForm();
+
+            }
+
+        }
 
     }
 

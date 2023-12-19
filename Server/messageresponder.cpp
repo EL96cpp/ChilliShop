@@ -303,10 +303,13 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
 
         if (login_result == CustomerLoginResult::SUCCESS) {
 
+            QString customer_name = sql_service->GetCustomerName(phone_number);
+
             QJsonObject message;
             message[QStringLiteral("Method")] = QStringLiteral("POST");
             message[QStringLiteral("Resource")] = QStringLiteral("Login_customer");
             message[QStringLiteral("Code")] = QStringLiteral("200");
+            message[QStringLiteral("Name")] = customer_name;
             QByteArray message_byte_array = QJsonDocument(message).toJson();
             message_byte_array.append("\n");
 
