@@ -32,7 +32,6 @@ Rectangle {
 
     }
 
-
     property int text_edits_point_size: 16
     property int header_texts_point_size: 14
     property int text_edits_distance: 55

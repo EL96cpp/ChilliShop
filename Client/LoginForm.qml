@@ -67,8 +67,8 @@ Rectangle {
 
     }
 
-    Canvas
-    {
+    Canvas {
+
         id: drawingCanvas
         width: login_title.paintedWidth
         height: 100
