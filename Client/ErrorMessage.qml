@@ -10,7 +10,7 @@ Rectangle {
     width: main_window.width/4
     height: width/1.8
     radius: 10
-    color: "#543d33"
+    color: "#BF3500"
     border.width: 2
     border.color: "#a99e99"
 

@@ -26,7 +26,7 @@ Page {
             }
 
             PropertyChanges {
-                target: orders_rectanlge
+                target: orders_form
                 visible: false
             }
 
@@ -47,7 +47,7 @@ Page {
             }
 
             PropertyChanges {
-                target: orders_rectanlge
+                target: orders_form
                 visible: false
             }
 
@@ -263,6 +263,10 @@ Page {
     OrdersForm {
         id: orders_form
         visible: false
+    }
+
+    ChangeNameForm {
+        id: change_name_rectangle
     }
 
 }
