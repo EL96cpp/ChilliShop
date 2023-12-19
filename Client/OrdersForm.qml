@@ -51,7 +51,7 @@ Item {
 
                 onClicked: {
 
-                    header_rect.setSaucesModelSignal();
+                    //header_rect.setSaucesModelSignal();
 
                 }
 
@@ -80,7 +80,7 @@ Item {
 
                 onClicked: {
 
-                    header_rect.setSaucesModelSignal();
+                    //header_rect.setSaucesModelSignal();
 
                 }
 
@@ -89,6 +89,39 @@ Item {
         }
 
 
+
+    }
+
+    Rectangle {
+
+        id: orders_rectangle
+        width: 1200
+        height: 700
+        radius: 15
+        color: "#909a2901"
+        border.width: 2
+        border.color: forms_border_color
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: order_header_rectangle.bottom
+        anchors.topMargin: 10
+        anchors.horizontalCenterOffset: 100
+
+    }
+
+    Rectangle {
+
+        id: customer_data_rectangle
+        width: 280
+        height: 200
+        radius: 15
+        color: "#907D2201"
+        border.width: 2
+        border.color: forms_border_color
+
+        anchors.top: orders_rectangle.top
+        anchors.right: orders_rectangle.left
+        anchors.rightMargin: 10
 
     }
 

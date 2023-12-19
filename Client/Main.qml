@@ -18,7 +18,6 @@ Window {
     maximumHeight: height
 
     property bool logged_in: false
-    property string language
 
     property string hover_color: "#FF5403"
     property string nonhover_color: "white"
