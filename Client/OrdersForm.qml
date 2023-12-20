@@ -12,8 +12,8 @@ Item {
     anchors.topMargin: 20
     anchors.horizontalCenter: parent.horizontalCenter
 
-    property string phone_number: "phone"
-    property string name: "name"
+    property string phone_number
+    property string name
 
     Rectangle {
 
@@ -208,7 +208,7 @@ Item {
 
             onClicked: {
 
-                //toRegisterForm();
+                change_name_rectangle.visible = true;
 
             }
 

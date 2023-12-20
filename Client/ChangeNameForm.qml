@@ -8,8 +8,10 @@ Rectangle {
 
     id: change_name_rectangle
     width: 400
-    height: 300
-    color: "#BF3500"
+    height: 250
+    color: "#541500"
+    border.width: 2
+    border.color: "#7B1C00"
     radius: 10
 
     anchors.horizontalCenter: parent.horizontalCenter
@@ -103,7 +105,7 @@ Rectangle {
         border.width: 2
         border.color: profile_page.text_edit_border_color
         radius: 20
-        color: profile_page.text_edit_background_color
+        color: "#922300"
         anchors.verticalCenter: change_name_text.verticalCenter
         anchors.left: change_name_text.right
         anchors.leftMargin: 10
@@ -119,7 +121,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 10
 
-            validator: RegularExpressionValidator { regularExpression: /[a-zA-Z]{16}/ }
+            validator: RegularExpressionValidator { regularExpression: /[A-Z]{1}[a-zA-Z]{15}/ }
 
         }
 
@@ -128,12 +130,12 @@ Rectangle {
     Button {
 
         id: exit_button
-        width: 150
-        height: 50
+        width: 170
+        height: 30
 
         anchors.right: parent.right
-        anchors.top: parent.bottom
-        anchors.topMargin: 20
+        anchors.bottom: parent.bottom
+        anchors.margins: 20
 
         background: Rectangle {
 
@@ -146,7 +148,7 @@ Rectangle {
 
         contentItem: Text {
 
-            text: "ВЫХОД"
+            text: "Выход"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name
@@ -169,12 +171,12 @@ Rectangle {
     Button {
 
         id: change_name_button
-        width: 150
-        height: 50
+        width: 170
+        height: 30
 
         anchors.right: parent.right
         anchors.bottom: exit_button.top
-        anchors.topMargin: 20
+        anchors.margins: 20
 
         background: Rectangle {
 
