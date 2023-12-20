@@ -125,4 +125,93 @@ Rectangle {
 
     }
 
+    Button {
+
+        id: exit_button
+        width: 150
+        height: 50
+
+        anchors.right: parent.right
+        anchors.top: parent.bottom
+        anchors.topMargin: 20
+
+        background: Rectangle {
+
+            color: exit_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
+            radius: 20
+
+        }
+
+        hoverEnabled: true
+
+        contentItem: Text {
+
+            text: "ВЫХОД"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.family: regular_font.name
+            font.pointSize: 12
+            font.letterSpacing: 5
+            font.bold: true
+            color: exit_button.hovered ? hover_color : "#E2E2E2"
+
+        }
+
+        onClicked: {
+
+            new_name_input.text = ""
+            change_name_rectangle.visible = false;
+
+        }
+
+    }
+
+    Button {
+
+        id: change_name_button
+        width: 150
+        height: 50
+
+        anchors.right: parent.right
+        anchors.bottom: exit_button.top
+        anchors.topMargin: 20
+
+        background: Rectangle {
+
+            color: change_name_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
+            radius: 20
+
+        }
+
+        hoverEnabled: true
+
+        contentItem: Text {
+
+            text: "Сменить имя"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.family: regular_font.name
+            font.pointSize: 12
+            font.letterSpacing: 5
+            font.bold: true
+            color: change_name_button.hovered ? hover_color : "#E2E2E2"
+
+        }
+
+        onClicked: {
+
+            if (new_name_input.text === "") {
+
+                profile_page.showErrorMessage("Change name error", "Feel all required fields!");
+
+            } else {
+
+                Client.onChangeName(new_name_input.text);
+
+            }
+
+        }
+
+    }
+
 }

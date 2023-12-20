@@ -341,3 +341,17 @@ void Client::onReadyRead() {
 
 
 }
+
+void Client::onChangeName(const QString &new_name) {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("PUT");
+    message[QStringLiteral("Resource")] = QStringLiteral("Change_customer_name");
+    message[QStringLiteral("Name")] = new_name;
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
+
+}

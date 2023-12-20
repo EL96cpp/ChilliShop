@@ -180,13 +180,13 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
     } else if (method_value.toString() == "PUT") {
 
-        if (resource_value.toString() == "Change_user_name") {
+        if (resource_value.toString() == "Change_customer_name") {
 
             if (!logged_in) {
 
                 QJsonObject message;
                 message[QStringLiteral("Method")] = QStringLiteral("PUT");
-                message[QStringLiteral("Resource")] = QStringLiteral("Change_user_name");
+                message[QStringLiteral("Resource")] = QStringLiteral("Change_customer_name");
                 message[QStringLiteral("Code")] = QStringLiteral("403");
                 message[QStringLiteral("Error_description")] = QStringLiteral("Customer is not logged");
                 QByteArray message_byte_array = QJsonDocument(message).toJson();
@@ -203,7 +203,7 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
                     QJsonObject message;
                     message[QStringLiteral("Method")] = QStringLiteral("PUT");
-                    message[QStringLiteral("Resource")] = QStringLiteral("Change_user_name");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Change_customer_name");
                     message[QStringLiteral("Code")] = QStringLiteral("200");
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
@@ -214,7 +214,7 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
                     QJsonObject message;
                     message[QStringLiteral("Method")] = QStringLiteral("PUT");
-                    message[QStringLiteral("Resource")] = QStringLiteral("Change_user_name");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Change_customer_name");
                     message[QStringLiteral("Code")] = QStringLiteral("500");
                     message[QStringLiteral("Error_description")] = QStringLiteral("Database errror");
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
