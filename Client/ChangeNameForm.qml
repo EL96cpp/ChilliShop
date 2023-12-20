@@ -9,7 +9,7 @@ Rectangle {
     id: change_name_rectangle
     width: 400
     height: 250
-    color: "#541500"
+    color: "#431100"
     border.width: 2
     border.color: "#7B1C00"
     radius: 10
@@ -20,16 +20,16 @@ Rectangle {
     Rectangle {
 
         id: change_name_title_rectangle
-        width: change_name_title.width*1.5
+        width: parent.width - 4
         height: change_name_title.height+10
 
         gradient: Gradient {
 
-            GradientStop { position: 0.0; color: "#20960000" }
-            GradientStop { position: 0.05; color: "#40000000" }
+            GradientStop { position: 0.0; color: "#40960000" }
+            GradientStop { position: 0.05; color: "#70000000" }
             GradientStop { position: 0.5; color: "#e0000000" }
-            GradientStop { position: 0.95; color: "#40000000" }
-            GradientStop { position: 1.0; color: "#20960000" }
+            GradientStop { position: 0.95; color: "#70000000" }
+            GradientStop { position: 1.0; color: "#40960000" }
             orientation: Gradient.Horizontal
 
         }
@@ -93,7 +93,7 @@ Rectangle {
 
         anchors.top: lower_line.bottom
         anchors.left: parent.left
-        anchors.margins: 10
+        anchors.margins: 20
 
     }
 
@@ -105,10 +105,10 @@ Rectangle {
         border.width: 2
         border.color: profile_page.text_edit_border_color
         radius: 20
-        color: "#922300"
+        color: "#6F1C00"
         anchors.verticalCenter: change_name_text.verticalCenter
         anchors.left: change_name_text.right
-        anchors.leftMargin: 10
+        anchors.leftMargin: 20
 
         TextInput {
 
@@ -140,6 +140,8 @@ Rectangle {
         background: Rectangle {
 
             color: exit_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
+            border.width: 1
+            border.color: "#7D2000"
             radius: 20
 
         }
@@ -181,6 +183,8 @@ Rectangle {
         background: Rectangle {
 
             color: change_name_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
+            border.width: 1
+            border.color: "#7D2000"
             radius: 20
 
         }

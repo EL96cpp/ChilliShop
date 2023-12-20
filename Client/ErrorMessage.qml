@@ -104,6 +104,8 @@ Rectangle {
         background: Rectangle {
 
             color: exit_error_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
+            border.width: 1
+            border.color: "#7D2000"
             radius: 20
 
         }

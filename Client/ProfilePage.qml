@@ -267,6 +267,7 @@ Page {
 
     ChangeNameForm {
         id: change_name_rectangle
+        visible: false
     }
 
 }
