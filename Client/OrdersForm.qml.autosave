@@ -203,7 +203,6 @@ Item {
         anchors.top: customer_data_rectangle.bottom
         anchors.topMargin: 10
 
-
         MouseArea {
 
             id: change_name_mouse_area
@@ -219,6 +218,5 @@ Item {
         }
 
     }
-
 
 }
