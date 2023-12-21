@@ -97,7 +97,8 @@ Rectangle {
             id: cart_view
             model: cart_model
             anchors.fill: parent
-            spacing: 5
+            spacing: 10
+            clip: true
 
             onCountChanged: {
 

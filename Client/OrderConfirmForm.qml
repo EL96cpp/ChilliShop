@@ -8,7 +8,7 @@ Item {
 
     id: order_confirm_form
 
-    property int total_price: cart_model.getTotalOrderCost();
+    property int total_price
 
     Rectangle {
 
@@ -25,18 +25,24 @@ Item {
 
             id: order_confirm_view
             model: cart_model
-            anchors.fill: parent
+            width: order_confirm_rectangle.width - 10
+            height: 530
+            anchors.top: parent.top
+            anchors.topMargin: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 5
+            clip: true
 
             delegate: Rectangle {
 
                 id: cart_item_delegate
-                width: 300
-                height: 80
+                width: order_confirm_rectangle.width-20
+                height: 120
                 radius: 15
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: "#90713103"
+                color: "#90A84700"
                 border.width: 1
-                border.color: "#7a4620"
+                border.color: "#ecbc99"
 
                 Connections {
 
@@ -53,7 +59,7 @@ Item {
                 Image {
 
                     id: cart_item_image
-                    sourceSize.height: 40
+                    sourceSize.height: 70
                     source: model.image
 
                     anchors.left: parent.left
@@ -105,6 +111,20 @@ Item {
                         font.pointSize: 15
                         font.bold: true
                         anchors.centerIn: parent
+
+                    }
+
+                    Text {
+
+                        id: cart_item_description
+                        text: model.description
+                        color: "white"
+                        font.family: regular_font.name
+                        font.pointSize: 15
+                        font.bold: true
+                        anchors.left: cart_item_name.left
+                        anchors.top: cart_item_name.bottom
+                        anchors.topMargin: 10
 
                     }
 
@@ -190,7 +210,7 @@ Item {
 
         anchors.left: order_confirm_rectangle.left
         anchors.top: order_confirm_rectangle.bottom
-        anchors.topMargin: 10
+        anchors.topMargin: 20
 
     }
 

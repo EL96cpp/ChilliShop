@@ -102,8 +102,8 @@ Item {
         height: 700
         radius: 15
         color: "#909a2901"
-        border.width: 2
-        border.color: forms_border_color
+        border.width: 1
+        border.color: "#de8a4d"
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: order_header_rectangle.bottom
@@ -203,7 +203,6 @@ Item {
         anchors.top: customer_data_rectangle.bottom
         anchors.topMargin: 10
 
-
         MouseArea {
 
             id: change_name_mouse_area
@@ -219,6 +218,5 @@ Item {
         }
 
     }
-
 
 }
