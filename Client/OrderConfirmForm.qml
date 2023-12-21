@@ -101,7 +101,6 @@ Item {
 
                     }
 
-
                     Text {
 
                         id: cart_item_name
@@ -109,6 +108,7 @@ Item {
                         color: "white"
                         font.family: regular_font.name
                         font.pointSize: 15
+                        font.wordSpacing: 5
                         font.bold: true
                         anchors.centerIn: parent
 
@@ -121,6 +121,7 @@ Item {
                         color: "white"
                         font.family: regular_font.name
                         font.pointSize: 15
+                        font.wordSpacing: 5
                         font.bold: true
                         anchors.left: cart_item_name.left
                         anchors.top: cart_item_name.bottom
