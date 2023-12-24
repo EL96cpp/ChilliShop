@@ -80,13 +80,18 @@ void Client::onRegister(const QString& phone_number, const QString& password, co
 
 }
 
-void Client::onMakeOrder(const QString &phone_number, const QString &order_datetime, const QJsonObject &order_data) {
+void Client::onMakeOrder(const QString &phone_number, const QJsonObject &order_data) {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Order");
+    message[QStringLiteral("Phone_number")] = phone_number;
+    message[QStringLiteral("Timestamp")] = QDateTime::currentDateTime().toString();
+    //Important!!!
+    message[QStringLiteral("Order_data")] ;
 
 }
+
 
 void Client::SendConnectionType() {
 

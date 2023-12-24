@@ -199,20 +199,30 @@ Item {
 
     }
 
-    Text {
+    Rectangle {
 
-        id: order_total_title
-        text: "Итого: "
-        color: "white"
-        font.family: regular_font.name
-        font.pointSize: 20
-        font.wordSpacing: 5
-        font.bold: true
+        id: order_total_rectangle
+        width: order_total_title.width*1.2
+        height: order_total_title.height*1.2
+        color: "#a03F1100"
 
         anchors.left: order_confirm_rectangle.left
         anchors.top: order_confirm_rectangle.bottom
         anchors.topMargin: 20
 
+        Text {
+
+            id: order_total_title
+            text: "Итого: "
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 20
+            font.wordSpacing: 5
+            font.bold: true
+
+            anchors.centerIn: parent
+
+        }
     }
 
     Text {
@@ -224,8 +234,8 @@ Item {
         font.pointSize: 20
         font.wordSpacing: 5
 
-        anchors.top: order_total_title.top
-        anchors.left: order_total_title.right
+        anchors.top: order_total_rectangle.top
+        anchors.left: order_total_rectangle.right
         anchors.leftMargin: 10
 
     }
@@ -237,7 +247,7 @@ Item {
         height: 30
 
         anchors.right: order_confirm_rectangle.right
-        anchors.verticalCenter: order_total_title.verticalCenter
+        anchors.verticalCenter: order_total_rectangle.verticalCenter
         anchors.margins: 20
 
         background: Rectangle {
