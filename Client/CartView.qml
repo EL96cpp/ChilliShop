@@ -63,8 +63,7 @@ Rectangle {
         anchors.top: cart_title_rect.bottom
         anchors.topMargin: 5
 
-        onPaint:
-        {
+        onPaint: {
 
             var ctx = getContext("2d")
 
@@ -124,7 +123,7 @@ Rectangle {
                     function onChangeItemCounterSignal(value) {
 
                         cart_model.changeNumberOfItems(model.name, value);
-                        cart_total_cost_data.text = cart_model.getTotalOrderCost() + " ₽";
+                        cart_total_cost_data.text = cart_model.total_price + " ₽";
 
                     }
 
@@ -148,6 +147,7 @@ Rectangle {
                     id: custom_spinbox
                     height: 20
                     width: 70
+                    spinbox_value: model.number_of_items
                     anchors.top: cart_item_image.bottom
                     anchors.topMargin: 5
                     anchors.horizontalCenter: cart_item_image.horizontalCenter
@@ -174,7 +174,6 @@ Rectangle {
 
                     }
 
-
                     Text {
 
                         id: cart_item_name
@@ -198,8 +197,7 @@ Rectangle {
                     anchors.right: parent.right
                     anchors.margins: 15
 
-                    onPaint:
-                    {
+                    onPaint: {
 
                         var ctx = getContext("2d")
 
@@ -226,7 +224,7 @@ Rectangle {
                         onClicked: {
 
                             cart_model.removeFromCart(model.name);
-                            cart_total_cost_data.text = cart_model.getTotalOrderCost() + " ₽";
+                            cart_total_cost_data.text = cart_model.calculateTotalPrice() + " ₽";
 
                         }
 
@@ -249,7 +247,6 @@ Rectangle {
                     anchors.margins: 10
 
                 }
-
 
             }
 
@@ -321,7 +318,7 @@ Rectangle {
         Text {
 
             id: cart_total_cost_data
-            text: cart_model.getTotalOrderCost() + " ₽"
+            text: cart_model.total_price + " ₽"
             color: "white"
             font.family: regular_font.name
             font.pointSize: 14
@@ -339,7 +336,7 @@ Rectangle {
         function onAddToCartSignal(id, name, text_description, price, image) {
 
             cart_model.addToCart(id, name, text_description, price, image);
-            cart_total_cost_data.text = cart_model.getTotalOrderCost() + " ₽";
+            cart_total_cost_data.text = cart_model.total_price + " ₽";
 
         }
 
@@ -357,8 +354,6 @@ Rectangle {
         }
 
     }
-
-
 
 }
 

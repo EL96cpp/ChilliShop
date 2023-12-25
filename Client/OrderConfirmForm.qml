@@ -15,7 +15,7 @@ Item {
         id: order_confirm_rectangle
         width: 700
         height: 550
-        color: "#80481300"
+        color: "#804c1200"
 
         anchors.top: parent.top
         anchors.left: parent.left
@@ -50,7 +50,7 @@ Item {
                     function onChangeItemCounterSignal(value) {
 
                         cart_model.changeNumberOfItems(model.name, value);
-                        total_price = cart_model.getTotalOrderCost();
+                        total_price = cart_model.total_price;
 
                     }
 
@@ -204,7 +204,7 @@ Item {
         id: order_total_rectangle
         width: order_total_title.width*1.2
         height: order_total_title.height*1.2
-        color: "#a03F1100"
+        color: "#d0290A00"
 
         anchors.left: order_confirm_rectangle.left
         anchors.top: order_confirm_rectangle.bottom

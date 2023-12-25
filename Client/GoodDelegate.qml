@@ -57,7 +57,6 @@ Rectangle {
         width: good_delegate_title.paintedWidth + 10
         height: good_delegate_title.paintedHeight
 
-
         Text {
 
             id: good_delegate_title
@@ -70,6 +69,7 @@ Rectangle {
             text: model.name
 
         }
+
     }
 
     Text {

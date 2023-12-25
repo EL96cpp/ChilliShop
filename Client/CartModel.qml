@@ -16,6 +16,22 @@ ListModel {
     property int number_of_items
     property string image
 
+    property int total_price
+
+    signal totalPriceChanged();
+
+    function calculateTotalPrice() {
+
+        total_price = 0;
+
+        for (var i = 0; i < count; ++i) {
+
+            total_price += get(i).price * get(i).number_of_items;
+
+        }
+
+    }
+
     function changeNumberOfItems(item_name, value) {
 
         for (var i = 0; i < count; ++i) {
@@ -30,9 +46,13 @@ ListModel {
 
                 }
 
+                break;
+
             }
 
         }
+
+        calculateTotalPrice();
 
     }
 
@@ -54,6 +74,7 @@ ListModel {
         if (!item_already_in_cart) {
 
             append( {id: id, name: name, description: text_description, price: price, number_of_items: 1, image: image} );
+            calculateTotalPrice();
 
         }
 
@@ -66,28 +87,15 @@ ListModel {
             if (get(i).name === name) {
 
                 remove(i, 1);
+                break;
 
             }
 
         }
 
-    }
-
-    function getTotalOrderCost() {
-
-        var total = 0;
-
-        for (var i = 0; i < count; ++i) {
-
-            total += get(i).price * get(i).number_of_items;
-
-        }
-
-        return total;
+        calculateTotalPrice();
 
     }
-
-
 
 }
 
