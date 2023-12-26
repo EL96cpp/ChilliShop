@@ -181,6 +181,7 @@ Rectangle {
                         color: "white"
                         font.family: regular_font.name
                         font.pointSize: 15
+                        font.wordSpacing: 5
                         font.bold: true
                         anchors.centerIn: parent
 
