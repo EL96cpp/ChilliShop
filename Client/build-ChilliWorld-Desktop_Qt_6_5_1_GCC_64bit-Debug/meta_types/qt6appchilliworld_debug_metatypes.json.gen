@@ -1,0 +1,235 @@
+[
+    {
+        "classes": [
+            {
+                "className": "Client",
+                "object": true,
+                "qualifiedClassName": "Client",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "id",
+                                "type": "int"
+                            },
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "price",
+                                "type": "int"
+                            },
+                            {
+                                "name": "scoville",
+                                "type": "int"
+                            },
+                            {
+                                "name": "text_description",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "volume",
+                                "type": "double"
+                            },
+                            {
+                                "name": "peppers",
+                                "type": "QJsonArray"
+                            }
+                        ],
+                        "name": "addSauceProductToModel",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "id",
+                                "type": "int"
+                            },
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "price",
+                                "type": "int"
+                            },
+                            {
+                                "name": "scoville",
+                                "type": "int"
+                            },
+                            {
+                                "name": "text_description",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "weight",
+                                "type": "int"
+                            },
+                            {
+                                "name": "peppers",
+                                "type": "QJsonArray"
+                            }
+                        ],
+                        "name": "addSeasoningProductToModel",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "id",
+                                "type": "int"
+                            },
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "price",
+                                "type": "int"
+                            },
+                            {
+                                "name": "scoville",
+                                "type": "int"
+                            },
+                            {
+                                "name": "text_description",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "number_of_seeds",
+                                "type": "int"
+                            },
+                            {
+                                "name": "peppers",
+                                "type": "QJsonArray"
+                            }
+                        ],
+                        "name": "addSeedsProductToModel",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "registerSuccess",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "error_description",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "registerError",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "phone_number",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "loginSuccess",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "error_description",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "loginError",
+                        "returnType": "void"
+                    }
+                ],
+                "slots": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "phone_number",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "password",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "onLogin",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "phone_number",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "password",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "onRegister",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "phone_number",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "order_data",
+                                "type": "QJsonObject"
+                            }
+                        ],
+                        "name": "onMakeOrder",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "onReadyRead",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "new_name",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "onChangeName",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "client.h",
+        "outputRevision": 68
+    }
+]

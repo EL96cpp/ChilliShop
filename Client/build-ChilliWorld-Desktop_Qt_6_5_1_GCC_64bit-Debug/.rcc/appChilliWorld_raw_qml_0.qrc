@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="/ChilliWorld/">
+    <file alias="Main.qml">/home/el96/Qt Projects/ChilliShop/Customer/Main.qml</file>
+    <file alias="MainPage.qml">/home/el96/Qt Projects/ChilliShop/Customer/MainPage.qml</file>
+    <file alias="ProfilePage.qml">/home/el96/Qt Projects/ChilliShop/Customer/ProfilePage.qml</file>
+    <file alias="LoginForm.qml">/home/el96/Qt Projects/ChilliShop/Customer/LoginForm.qml</file>
+    <file alias="RegisterForm.qml">/home/el96/Qt Projects/ChilliShop/Customer/RegisterForm.qml</file>
+    <file alias="GoodDelegate.qml">/home/el96/Qt Projects/ChilliShop/Customer/GoodDelegate.qml</file>
+    <file alias="SaucesModel.qml">/home/el96/Qt Projects/ChilliShop/Customer/SaucesModel.qml</file>
+    <file alias="SeasoningsModel.qml">/home/el96/Qt Projects/ChilliShop/Customer/SeasoningsModel.qml</file>
+    <file alias="SeedsModel.qml">/home/el96/Qt Projects/ChilliShop/Customer/SeedsModel.qml</file>
+    <file alias="CopyModel.qml">/home/el96/Qt Projects/ChilliShop/Customer/CopyModel.qml</file>
+    <file alias="CartModel.qml">/home/el96/Qt Projects/ChilliShop/Customer/CartModel.qml</file>
+    <file alias="Filters.qml">/home/el96/Qt Projects/ChilliShop/Customer/Filters.qml</file>
+    <file alias="CartView.qml">/home/el96/Qt Projects/ChilliShop/Customer/CartView.qml</file>
+    <file alias="GoodsGrid.qml">/home/el96/Qt Projects/ChilliShop/Customer/GoodsGrid.qml</file>
+    <file alias="CustomSpinbox.qml">/home/el96/Qt Projects/ChilliShop/Customer/CustomSpinbox.qml</file>
+    <file alias="ErrorMessage.qml">/home/el96/Qt Projects/ChilliShop/Customer/ErrorMessage.qml</file>
+    <file alias="OrdersForm.qml">/home/el96/Qt Projects/ChilliShop/Customer/OrdersForm.qml</file>
+    <file alias="ChangeNameForm.qml">/home/el96/Qt Projects/ChilliShop/Customer/ChangeNameForm.qml</file>
+    <file alias="OrderConfirmForm.qml">/home/el96/Qt Projects/ChilliShop/Customer/OrderConfirmForm.qml</file>
+  </qresource>
+</RCC>
+

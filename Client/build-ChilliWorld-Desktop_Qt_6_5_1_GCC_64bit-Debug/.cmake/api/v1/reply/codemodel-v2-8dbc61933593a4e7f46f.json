@@ -1,0 +1,169 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-748a39e6228df46b3fee.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "ChilliWorld",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint-Debug-8eddb4adfa1bc04f2d35.json",
+					"name" : "all_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_json-Debug-7aa4bb72ecc826f5326f.json",
+					"name" : "all_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_module-Debug-269c7f6e2a323c249632.json",
+					"name" : "all_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmltyperegistrations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmltyperegistrations-Debug-6ccc56f5abb1f781090f.json",
+					"name" : "all_qmltyperegistrations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appChilliWorld::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appChilliWorld-Debug-697cc317c33c68b2ae85.json",
+					"name" : "appChilliWorld",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appChilliWorld_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appChilliWorld_autogen-Debug-1a8379e6950147f76eec.json",
+					"name" : "appChilliWorld_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appChilliWorld_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appChilliWorld_autogen_timestamp_deps-Debug-7cd961687012bd7ae7e8.json",
+					"name" : "appChilliWorld_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appChilliWorld_qmlimportscan::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appChilliWorld_qmlimportscan-Debug-e33d430357d2f41b6315.json",
+					"name" : "appChilliWorld_qmlimportscan",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appChilliWorld_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appChilliWorld_qmllint-Debug-09017d33e7fb3cb34382.json",
+					"name" : "appChilliWorld_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appChilliWorld_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appChilliWorld_qmllint_json-Debug-f5d5a39b4282f5d095db.json",
+					"name" : "appChilliWorld_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appChilliWorld_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appChilliWorld_qmllint_module-Debug-a1347445caae9a5e0027.json",
+					"name" : "appChilliWorld_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appChilliWorld_qmltyperegistration::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appChilliWorld_qmltyperegistration-Debug-b10bd842b882026f156b.json",
+					"name" : "appChilliWorld_qmltyperegistration",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appChilliWorld_tooling::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appChilliWorld_tooling-Debug-64e4b4f8322accf2b270.json",
+					"name" : "appChilliWorld_tooling",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/el96/Qt Projects/ChilliShop/Client/build-ChilliWorld-Desktop_Qt_6_5_1_GCC_64bit-Debug",
+		"source" : "/home/el96/Qt Projects/ChilliShop/Customer"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

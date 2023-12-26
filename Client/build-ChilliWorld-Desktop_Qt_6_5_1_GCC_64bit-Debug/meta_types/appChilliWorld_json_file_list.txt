@@ -1,0 +1,1 @@
+/home/el96/Qt Projects/ChilliShop/Client/build-ChilliWorld-Desktop_Qt_6_5_1_GCC_64bit-Debug/appChilliWorld_autogen/include/../EWIEGA46WW/moc_client.cpp.json
