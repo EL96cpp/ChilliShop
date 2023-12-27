@@ -19,8 +19,9 @@ ListModel {
     property int total_price
 
     signal totalPriceChanged();
+    
 
-    function calculateTotalPrice() {
+    function updateTotalPrice() {
 
         total_price = 0;
 
@@ -29,6 +30,8 @@ ListModel {
             total_price += get(i).price * get(i).number_of_items;
 
         }
+
+        totalPriceChanged();
 
     }
 
@@ -52,7 +55,7 @@ ListModel {
 
         }
 
-        calculateTotalPrice();
+        updateTotalPrice();
 
     }
 
@@ -74,7 +77,7 @@ ListModel {
         if (!item_already_in_cart) {
 
             append( {id: id, name: name, description: text_description, price: price, number_of_items: 1, image: image} );
-            calculateTotalPrice();
+            updateTotalPrice();
 
         }
 
@@ -93,9 +96,10 @@ ListModel {
 
         }
 
-        calculateTotalPrice();
+        updateTotalPrice();
 
     }
+
 
 }
 

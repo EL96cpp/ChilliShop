@@ -332,13 +332,24 @@ Rectangle {
 
     Connections {
 
+        target: cart_model
+
+        function onTotalPriceChanged() {
+
+            cart_total_cost_data.text = cart_model.total_price + " ₽";
+
+        }
+
+    }
+
+    Connections {
+
         target: grid_rectangle
 
         function onAddToCartSignal(id, name, text_description, price, image) {
 
             cart_model.addToCart(id, name, text_description, price, image);
-            cart_total_cost_data.text = cart_model.total_price + " ₽";
-
+            
         }
 
     }

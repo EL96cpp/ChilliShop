@@ -10,6 +10,18 @@ Item {
 
     property int total_price
 
+    Connections {
+
+        target: cart_model
+
+        function onTotalPriceChanged() {
+
+            total_price = cart_model.total_price;
+
+        }
+
+    }
+
     Rectangle {
 
         id: order_confirm_rectangle
