@@ -59,6 +59,7 @@ Item {
                 Connections {
 
                     target: custom_spinbox
+
                     function onChangeItemCounterSignal(value) {
 
                         cart_model.changeNumberOfItems(model.name, value);

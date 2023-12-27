@@ -100,6 +100,14 @@ ListModel {
 
     }
 
+    function clearCart() {
+
+        cart_model.clear();
+
+        updateTotalPrice();
+
+    }
+
 
 }
 

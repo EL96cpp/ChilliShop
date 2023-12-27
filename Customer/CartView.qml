@@ -360,8 +360,7 @@ Rectangle {
 
         function onClearCartModel() {
 
-            cart_total_cost_data.text = "0 ₽";
-            cart_model.clear();
+            cart_model.clearCart();
 
         }
 
