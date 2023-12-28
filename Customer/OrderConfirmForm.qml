@@ -270,8 +270,8 @@ Item {
     Button {
 
         id: confirm_order_button
-        width: 170
-        height: 30
+        width: 210
+        height: 50
 
         anchors.right: order_confirm_rectangle.right
         anchors.verticalCenter: order_total_rectangle.verticalCenter
@@ -294,7 +294,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name
-            font.pointSize: 12
+            font.pointSize: 15
             font.letterSpacing: 5
             font.bold: true
             color: confirm_order_button.hovered ? hover_color : "#E2E2E2"
@@ -314,7 +314,7 @@ Item {
         text: "Очистить корзину"
         color: cancel_order_mouse_area.containsMouse ? hover_color : "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 20
+        font.pointSize: 14
         font.wordSpacing: 5
         font.bold: true
 
