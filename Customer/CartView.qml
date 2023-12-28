@@ -129,18 +129,6 @@ Rectangle {
 
                 }
 
-                Connections {
-
-                    target: custom_spinbox_profile
-
-                    function onChangeItemCounterSignal(value) {
-
-                        cart_model.changeNumberOfItems(model.name, value);
-                        cart_total_cost_data.text = cart_model.total_price + " ₽";
-
-                    }
-
-                }
 
                 Image {
 

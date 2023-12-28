@@ -308,4 +308,34 @@ Item {
 
     }
 
+    Text {
+
+        id: cancel_order_text
+        text: "Очистить корзину"
+        color: cancel_order_mouse_area.containsMouse ? hover_color : "#E2E2E2"
+        font.family: regular_font.name
+        font.pointSize: 20
+        font.wordSpacing: 5
+        font.bold: true
+
+        anchors.top: order_confirm_rectangle.top
+        anchors.left: order_confirm_rectangle.right
+        anchors.leftMargin: 120
+
+        MouseArea {
+
+            id: cancel_order_mouse_area
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onClicked: {
+
+                cart_model.clearCart();
+
+            }
+
+        }
+
+    }
+
 }
