@@ -58,12 +58,11 @@ Item {
 
                 Connections {
 
-                    target: custom_spinbox
+                    target: custom_spinbox_profile
 
                     function onChangeItemCounterSignal(value) {
 
                         cart_model.changeNumberOfItems(model.name, value);
-                        total_price = cart_model.total_price;
 
                     }
 
@@ -84,13 +83,29 @@ Item {
 
                 CustomSpinbox {
 
-                    id: custom_spinbox
+                    id: custom_spinbox_profile
                     height: 20
                     width: 70
                     anchors.top: cart_item_image.bottom
                     anchors.topMargin: 5
                     anchors.horizontalCenter: cart_item_image.horizontalCenter
                     spinbox_value: model.number_of_items
+
+                    Connections {
+
+                        target: cart_model
+
+                        function onSetItemCounter(product_name, number_of_items) {
+
+                            if (model.name === product_name) {
+
+                                custom_spinbox_profile.spinbox_value = number_of_items;
+
+                            }
+
+                        }
+
+                    }
 
                 }
 
@@ -180,7 +195,6 @@ Item {
                         onClicked: {
 
                             cart_model.removeFromCart(model.name);
-                            order_total_value.text = cart_model.getTotalOrderCost() + " ₽";
 
                         }
 

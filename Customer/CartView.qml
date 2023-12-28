@@ -127,7 +127,20 @@ Rectangle {
 
                     }
 
-                }           
+                }
+
+                Connections {
+
+                    target: custom_spinbox_profile
+
+                    function onChangeItemCounterSignal(value) {
+
+                        cart_model.changeNumberOfItems(model.name, value);
+                        cart_total_cost_data.text = cart_model.total_price + " ₽";
+
+                    }
+
+                }
 
                 Image {
 
@@ -151,6 +164,22 @@ Rectangle {
                     anchors.top: cart_item_image.bottom
                     anchors.topMargin: 5
                     anchors.horizontalCenter: cart_item_image.horizontalCenter
+
+                    Connections {
+
+                        target: cart_model
+
+                        function onSetItemCounter(product_name, number_of_items) {
+
+                            if (model.name === product_name) {
+
+                                custom_spinbox.spinbox_value = number_of_items;
+
+                            }
+
+                        }
+
+                    }
 
                 }
 

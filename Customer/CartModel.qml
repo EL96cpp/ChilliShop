@@ -19,6 +19,20 @@ ListModel {
     property int total_price
 
     signal totalPriceChanged();
+    signal updateNumberOfItems();
+    signal setItemCounter(var product_name, var number_of_items);
+
+    function debugOutput() {
+
+        for (var i = 0; i < count; ++i) {
+
+            console.log(get(i).number_of_items + " " + get(i).name);
+
+        }
+
+        console.log("===================================");
+
+    }
     
 
     function updateTotalPrice() {
@@ -32,6 +46,7 @@ ListModel {
         }
 
         totalPriceChanged();
+        debugOutput();
 
     }
 
@@ -42,6 +57,7 @@ ListModel {
             if (get(i).name === item_name) {
 
                 get(i).number_of_items += value;
+                setItemCounter(item_name, get(i).number_of_items);
 
                 if (get(i).number_of_items === 0) {
 

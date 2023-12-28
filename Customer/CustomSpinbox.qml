@@ -53,7 +53,7 @@ Rectangle {
 
                 }
 
-                custom_spinbox.spinbox_value -= 1;
+                //custom_spinbox.spinbox_value -= 1;
                 changeItemCounterSignal(-1);
 
             }
@@ -115,7 +115,7 @@ Rectangle {
 
             onClicked: {
 
-                custom_spinbox.spinbox_value += 1;
+                //custom_spinbox.spinbox_value += 1;
                 changeItemCounterSignal(1);
 
             }
