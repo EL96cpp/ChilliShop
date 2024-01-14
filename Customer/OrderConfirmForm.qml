@@ -10,6 +10,9 @@ Item {
 
     property int total_price
 
+    // add values for order data
+    signal makeOrder(var order_array);
+
     Connections {
 
         target: cart_model

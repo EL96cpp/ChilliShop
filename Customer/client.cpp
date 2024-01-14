@@ -80,15 +80,28 @@ void Client::onRegister(const QString& phone_number, const QString& password, co
 
 }
 
-void Client::onMakeOrder(const QString &phone_number, const QJsonObject &order_data) {
+void Client::onMakeOrder(const QJsonObject &order_data) {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Order");
     message[QStringLiteral("Phone_number")] = phone_number;
     message[QStringLiteral("Timestamp")] = QDateTime::currentDateTime().toString();
-    //Important!!!
-    message[QStringLiteral("Order_data")] ;
+    message[QStringLiteral("Order_data")] = order_data;
+
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    if (socket->state() == QAbstractSocket::ConnectedState) {
+
+        qintptr bytes_written = socket->write(byte_array);
+        qDebug() << bytes_written;
+
+    } else {
+
+        qDebug() << "cant make order: disconnected!";
+
+    }
 
 }
 
