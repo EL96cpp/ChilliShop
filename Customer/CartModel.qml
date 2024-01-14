@@ -34,6 +34,23 @@ ListModel {
 
     }
     
+    function getOrderJson() {
+
+        var order_json = [];
+
+        for (var i = 0; i < count; ++i) {
+
+            var order_position = {};
+            order_position["id"] = get(i).id;
+            order_position["number_of_items"] = get(i).number_of_items;
+
+            order_json.push(order_position);
+
+        }
+
+        return order_json;
+
+    }
 
     function updateTotalPrice() {
 

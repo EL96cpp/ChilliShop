@@ -306,6 +306,8 @@ Item {
 
         onClicked: {
 
+            var order_json = cart_model.getOrderJson();
+            Client.onMakeOrder(order_json);
 
         }
 
