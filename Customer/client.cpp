@@ -86,7 +86,7 @@ void Client::onMakeOrder(const QJsonArray &order_data) {
     message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Order");
     message[QStringLiteral("Phone_number")] = phone_number;
-    message[QStringLiteral("Timestamp")] = QDateTime::currentDateTime().toString();
+    message[QStringLiteral("Timestamp")] = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
     message[QStringLiteral("Order_data")] = order_data;
 
     QByteArray byte_array = QJsonDocument(message).toJson();
