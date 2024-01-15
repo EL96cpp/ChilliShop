@@ -38,6 +38,7 @@ public:
 signals:
     void MessageResponce(const QByteArray& message_byte_array);
     void SetLoggedIn(const bool& logged_in);
+    void SetCustomerData(const QString& phone_number, const QString& name);
     void SendCatalog();
     void SetConnectionType(const ConnectionType& connection_type);
     void CheckIfOrderIsCorrect(const QVector<QString>& order_ids);

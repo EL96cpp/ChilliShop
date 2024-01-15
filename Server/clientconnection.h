@@ -24,7 +24,6 @@ public:
                               std::atomic<unsigned long long>& sql_connections_counter,
                               const QByteArray& catalog_byte_array);
     void SetSocketDescriptor(qintptr descriptor);
-    void SetPhoneNumber(const QString& phone_number);
     void SetEmployeeData(const QString& name, const QString& surname, const QString& position);
     void SetLoggedIn(const bool &logged_in);
     void SetConnectionType(const ConnectionType& connection_type);
@@ -34,6 +33,7 @@ public:
     bool IsLoggedIn();
 
 public slots:
+    void OnSetCustomerData(const QString& phone_number, const QString& name);
     void OnMessageResponce(const QByteArray& message_byte_array);
     void OnSendCatalog();
     void OnSetLoggedIn(const bool& logged_in);

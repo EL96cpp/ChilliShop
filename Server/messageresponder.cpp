@@ -314,6 +314,7 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
             message_byte_array.append("\n");
 
             emit SetLoggedIn(true);
+            emit SetCustomerData(phone_number, customer_name);
             emit MessageResponce(message_byte_array);
 
         } else if (login_result == CustomerLoginResult::NO_PHONE_IN_DATABASE) {

@@ -23,9 +23,10 @@ void ClientConnection::SetSocketDescriptor(qintptr descriptor) {
 
 }
 
-void ClientConnection::SetPhoneNumber(const QString &phone_number) {
+void ClientConnection::OnSetCustomerData(const QString &phone_number, const QString& name) {
 
     this->phone_number = phone_number;
+    this->name = name;
 
 }
 
@@ -97,6 +98,7 @@ void ClientConnection::onReadyRead() {
     connect(message_responder, &MessageResponder::MessageResponce, this, &ClientConnection::OnMessageResponce);
     connect(message_responder, &MessageResponder::SendCatalog, this, &ClientConnection::OnSendCatalog);
     connect(message_responder, &MessageResponder::SetLoggedIn, this, &ClientConnection::OnSetLoggedIn);
+    connect(message_responder, &MessageResponder::SetCustomerData, this, &ClientConnection::OnSetCustomerData);
 
     QThreadPool::globalInstance()->start(message_responder);
 
