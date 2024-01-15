@@ -80,7 +80,7 @@ void Client::onRegister(const QString& phone_number, const QString& password, co
 
 }
 
-void Client::onMakeOrder(const QJsonObject &order_data) {
+void Client::onMakeOrder(const QJsonArray &order_data) {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("POST");
@@ -91,6 +91,8 @@ void Client::onMakeOrder(const QJsonObject &order_data) {
 
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");
+
+    qDebug() << byte_array;
 
     if (socket->state() == QAbstractSocket::ConnectedState) {
 
