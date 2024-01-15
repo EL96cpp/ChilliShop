@@ -308,8 +308,11 @@ Rectangle {
 
         onClicked: {
 
-            stack_view.push(profile_page);
+            if (cart_model.count !== 0) {
 
+                stack_view.push(profile_page);
+
+            }
         }
 
     }
