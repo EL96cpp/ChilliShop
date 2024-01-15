@@ -9,9 +9,10 @@ Rectangle {
     width: main_window.width/4
     height: width/2
     radius: 10
-    color: "#543d33"
+    color: "#431100"
     border.width: 2
-    border.color: "#a99e99"
+    border.color: "#7B1C00"
+
 
     visible: false
 
@@ -102,7 +103,7 @@ Rectangle {
 
         background: Rectangle {
 
-            color: exit_error_button.hovered ? "#58504d" : "#100500"
+            color: exit_error_button.hovered ? main_window.button_hovered_color : main_window.button_color
             radius: 20
 
         }
@@ -119,7 +120,7 @@ Rectangle {
             font.pointSize: 12
             font.letterSpacing: 5
             font.bold: true
-            color: "#E2E2E2"
+            color: exit_error_button.hovered ? main_window.button_text_hovered_color : main_window.button_text_color
 
         }
 
