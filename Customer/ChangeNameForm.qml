@@ -121,7 +121,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 10
 
-            validator: RegularExpressionValidator { regularExpression: /[A-Z]{1}[a-zA-Z]{15}/ }
+            validator: RegularExpressionValidator { regularExpression: /[a-zA-Z]{16}/ }
 
         }
 

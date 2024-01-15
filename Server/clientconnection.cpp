@@ -62,6 +62,12 @@ void ClientConnection::OnSendCatalog() {
 
 }
 
+void ClientConnection::OnSetLoggedIn(const bool &logged_in) {
+
+    this->logged_in = logged_in;
+
+}
+
 void ClientConnection::OnMessageResponce(const QByteArray &message_byte_array) {
 
     qDebug() << message_byte_array;
@@ -90,6 +96,7 @@ void ClientConnection::onReadyRead() {
     connect(message_responder, &MessageResponder::SetConnectionType, this, &ClientConnection::SetConnectionType, Qt::DirectConnection);
     connect(message_responder, &MessageResponder::MessageResponce, this, &ClientConnection::OnMessageResponce);
     connect(message_responder, &MessageResponder::SendCatalog, this, &ClientConnection::OnSendCatalog);
+    connect(message_responder, &MessageResponder::SetLoggedIn, this, &ClientConnection::OnSetLoggedIn);
 
     QThreadPool::globalInstance()->start(message_responder);
 

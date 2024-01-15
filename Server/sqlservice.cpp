@@ -296,7 +296,8 @@ bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &
     change_name_query.prepare("UPDATE cutomers SET name = (?) WHERE phone_number = (?)");
     change_name_query.addBindValue(new_name);
     change_name_query.addBindValue(phone_number);
-    return change_name_query.exec();
+    bool succeed = change_name_query.exec();
+    return succeed;
 
 }
 

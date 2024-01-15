@@ -195,7 +195,6 @@ Page {
                 onClicked: {
 
                     stack_view.push(profile_page);
-                    profile_page.state = "orders_state";
 
                 }
 

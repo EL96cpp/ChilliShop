@@ -313,6 +313,7 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
             QByteArray message_byte_array = QJsonDocument(message).toJson();
             message_byte_array.append("\n");
 
+            emit SetLoggedIn(true);
             emit MessageResponce(message_byte_array);
 
         } else if (login_result == CustomerLoginResult::NO_PHONE_IN_DATABASE) {
@@ -372,6 +373,7 @@ void MessageResponder::LoginEmployee(const QString &name, const QString &surname
 
 
         qDebug() << "login employee 200";
+        emit SetLoggedIn(true);
         emit MessageResponce(message_byte_array);
 
     } else if (login_result == EmployeeLoginResult::NO_EMPLOYEE_IN_DATABASE) {
