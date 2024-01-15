@@ -205,6 +205,7 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
                     message[QStringLiteral("Method")] = QStringLiteral("PUT");
                     message[QStringLiteral("Resource")] = QStringLiteral("Change_customer_name");
                     message[QStringLiteral("Code")] = QStringLiteral("200");
+                    message[QStringLiteral("New_name")] = new_name;
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
 
@@ -309,6 +310,7 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
             message[QStringLiteral("Method")] = QStringLiteral("POST");
             message[QStringLiteral("Resource")] = QStringLiteral("Login_customer");
             message[QStringLiteral("Code")] = QStringLiteral("200");
+            message[QStringLiteral("Phone_number")] = phone_number;
             message[QStringLiteral("Name")] = customer_name;
             QByteArray message_byte_array = QJsonDocument(message).toJson();
             message_byte_array.append("\n");

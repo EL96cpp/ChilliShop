@@ -279,8 +279,7 @@ bool SqlService::CancelOrder(const int &order_id, const QString &phone_number, c
         QSqlQuery cancel_order_query(sql_database);
         cancel_order_query.prepare("DELETE FROM orders WHERE id = (?)");
         cancel_order_query.addBindValue(order_id);
-        cancel_order_query.exec();
-        return true;
+        return cancel_order_query.exec();
 
     } else {
 
@@ -296,8 +295,10 @@ bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &
     change_name_query.prepare("UPDATE cutomers SET name = (?) WHERE phone_number = (?)");
     change_name_query.addBindValue(new_name);
     change_name_query.addBindValue(phone_number);
-    bool succeed = change_name_query.exec();
-    return succeed;
+    change_name_query.exec();
+
+    qDebug() << "Last error " << change_name_query.lastError().text();
+    return false;
 
 }
 

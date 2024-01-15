@@ -275,6 +275,7 @@ void Client::onReadyRead() {
             if (code_value.toString() == "200") {
 
                 name = json_message_object.value(QLatin1String("Name")).toString();
+                phone_number = json_message_object.value(QLatin1String("Phone_number")).toString();
                 emit loginSuccess(phone_number, name);
 
             } else if (code_value.toString() == "403") {
@@ -314,6 +315,8 @@ void Client::onReadyRead() {
         if (resource_value.toString() == "Change_customer_name") {
 
             if (code_value.toString() == "200") {
+
+                name = json_message_object.value(QLatin1String("New_name")).toString();
 
             } else if (code_value.toString() == "403") {
 
@@ -367,6 +370,7 @@ void Client::onChangeName(const QString &new_name) {
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("PUT");
     message[QStringLiteral("Resource")] = QStringLiteral("Change_customer_name");
+    message[QStringLiteral("Phone_number")] = phone_number;
     message[QStringLiteral("Name")] = new_name;
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");
