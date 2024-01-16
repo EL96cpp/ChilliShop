@@ -60,8 +60,6 @@ void MessageResponder::run() {
                 QByteArray byte_array = QJsonDocument(message).toJson();
                 byte_array.append("\n");
 
-                qDebug() << "Customer connection will be set";
-
                 emit SetConnectionType(ConnectionType::CUSTOMER);
                 emit MessageResponce(byte_array);
 
@@ -75,8 +73,6 @@ void MessageResponder::run() {
                 QByteArray byte_array = QJsonDocument(message).toJson();
                 byte_array.append("\n");
 
-                qDebug() << "Employee connection will be set";
-
                 emit SetConnectionType(ConnectionType::EMPLOYEE);
                 emit MessageResponce(byte_array);
 
@@ -86,12 +82,10 @@ void MessageResponder::run() {
 
     } else if (connection_type == ConnectionType::CUSTOMER) {
 
-        qDebug() << "Customer responce will be done";
         RespondToCustomer(json_message_object);
 
     } else if (connection_type == ConnectionType::EMPLOYEE) {
 
-        qDebug() << "Employee responce will be done";
         RespondToEmployee(json_message_object);
 
     }
@@ -128,9 +122,7 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
                 QJsonValue phone_number_value = json_message_object.value(QLatin1String("Phone_number"));
                 QJsonValue timestamp_value = json_message_object.value(QLatin1String("Timestamp"));
-                QJsonValue order_json_value = json_message_object.value(QLatin1String("Order"));
-
-                qDebug() << "Try post new order";
+                QJsonValue order_json_value = json_message_object.value(QLatin1String("Order_data"));
 
                 AddOrder(phone_number_value.toString(), timestamp_value.toString(), order_json_value);
 
@@ -452,7 +444,7 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
     foreach (const QJsonValue & value, order_json_array) {
 
         QJsonObject obj = value.toObject();
-        order_ids.push_back(obj["product_id"].toInt());
+        order_ids.push_back(obj["id"].toInt());
 
     }
 

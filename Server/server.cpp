@@ -45,6 +45,5 @@ void Server::SetCatalogMessageByteArray() {
     message[QLatin1String("Catalog")] = QJsonValue(catalog_array);
 
     catalog_message_byte_array = QJsonDocument(message).toJson();
-    qDebug() << catalog_message_byte_array;
 
 }

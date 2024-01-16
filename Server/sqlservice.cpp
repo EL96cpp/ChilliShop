@@ -218,14 +218,18 @@ QJsonArray SqlService::GetCatalogData() {
 
 bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code) {
 
-    QByteArray order_byte_array = QJsonDocument(order_array).toJson();
+    //Need to figure out, how to insert json values into PSQL from Qt
+
+    QJsonValue json_value(1);
 
     QSqlQuery add_order_query(sql_database);
     add_order_query.prepare("INSERT INTO active_orders VALUES (DEFAULT, (?), (?), (?), (?))");
     add_order_query.addBindValue(phone_number);
     add_order_query.addBindValue(timestamp);
     add_order_query.addBindValue(order_code);
-    add_order_query.addBindValue(order_byte_array);
+    add_order_query.addBindValue(order_array);
+
+    qDebug() << add_order_query.lastError().text();
 
     if (add_order_query.exec()) {
 
@@ -303,23 +307,11 @@ bool SqlService::CancelOrder(const int &order_id, const QString &phone_number, c
 
 bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &new_name) {
 
-    //Get error (phone_number binds as bigint for some reason)!
-
     QSqlQuery change_name_query(sql_database);
     change_name_query.prepare("UPDATE customers SET name = (?) WHERE phone_number = (?)");
     change_name_query.addBindValue(new_name);
     change_name_query.addBindValue(phone_number);
-    if (change_name_query.exec()) {
-
-        qDebug() << change_name_query.lastError().text();
-        return true;
-
-    } else {
-
-        qDebug() << change_name_query.lastError().text();
-        return false;
-
-    }
+    return change_name_query.exec();
 
 }
 
