@@ -213,6 +213,7 @@ Rectangle {
             } else {
 
                 Client.onChangeName(new_name_input.text);
+                change_name_rectangle.visible = false;
 
             }
 

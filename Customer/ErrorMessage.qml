@@ -175,6 +175,19 @@ Rectangle {
 
     }
 
+    Connections {
+
+        target: Client
+        function onChangeNameError(error_description) {
+
+            error_rectangle.title = "Change name error";
+            error_rectangle.description = error_description;
+            error_rectangle.visible = true;
+
+        }
+
+    }
+
 
 
 }

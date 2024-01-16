@@ -29,6 +29,8 @@ signals:
     void registerError(const QString& error_description);
     void loginSuccess(const QString& phone_number, const QString& name);
     void loginError(const QString& error_description);
+    void changeNameSuccess(const QString& new_name);
+    void changeNameError(const QString& error_description);
 
 
 public slots:

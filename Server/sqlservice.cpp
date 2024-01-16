@@ -306,8 +306,7 @@ bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &
     //Get error (phone_number binds as bigint for some reason)!
 
     QSqlQuery change_name_query(sql_database);
-    qDebug() << "prepare " << change_name_query.prepare("UPDATE customers SET name = (?) WHERE phone_number = (?)");
-    qDebug() << change_name_query.lastError().text();
+    change_name_query.prepare("UPDATE customers SET name = (?) WHERE phone_number = (?)");
     change_name_query.addBindValue(new_name);
     change_name_query.addBindValue(phone_number);
     if (change_name_query.exec()) {

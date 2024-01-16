@@ -317,8 +317,12 @@ void Client::onReadyRead() {
             if (code_value.toString() == "200") {
 
                 name = json_message_object.value(QLatin1String("New_name")).toString();
+                emit changeNameSuccess(name);
 
             } else if (code_value.toString() == "403") {
+
+                QString error_description = json_message_object.value(QLatin1String("Error_description")).toString();
+                emit changeNameError(error_description);
 
             }
 

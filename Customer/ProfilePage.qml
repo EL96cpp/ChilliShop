@@ -145,6 +145,18 @@ Page {
 
     }
 
+    Connections {
+
+        target: Client
+        function onChangeNameSuccess(name) {
+
+            orders_form.name = name;
+            showErrorMessage("Change name result", "Successfully changed name!");
+
+        }
+
+    }
+
     Image {
 
         id: profile_background
