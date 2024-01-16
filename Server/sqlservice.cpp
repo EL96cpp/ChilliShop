@@ -199,8 +199,6 @@ QJsonArray SqlService::GetCatalogData() {
         QString scoville(get_catalog_query.value(4).toString());
         QString description(get_catalog_query.value(5).toString());
 
-        QJsonDocument description_doc = QJsonDocument::fromJson(description.toUtf8());
-
         catalog_position[QStringLiteral("product_id")] = id;
         catalog_position[QStringLiteral("product_type")] = type;
         catalog_position[QStringLiteral("product_name")] = name;
@@ -218,16 +216,12 @@ QJsonArray SqlService::GetCatalogData() {
 
 bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code) {
 
-    //Need to figure out, how to insert json values into PSQL from Qt
-
-    QJsonValue json_value(1);
-
     QSqlQuery add_order_query(sql_database);
     add_order_query.prepare("INSERT INTO active_orders VALUES (DEFAULT, (?), (?), (?), (?))");
     add_order_query.addBindValue(phone_number);
     add_order_query.addBindValue(timestamp);
     add_order_query.addBindValue(order_code);
-    add_order_query.addBindValue(order_array);
+    add_order_query.addBindValue(QString(QJsonDocument(order_array).toJson()));
 
     qDebug() << add_order_query.lastError().text();
 
