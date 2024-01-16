@@ -218,14 +218,26 @@ QJsonArray SqlService::GetCatalogData() {
 
 bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code) {
 
+    QByteArray order_byte_array = QJsonDocument(order_array).toJson();
+
     QSqlQuery add_order_query(sql_database);
-    add_order_query.prepare("INSERT INTO oders VALUES (DEFAULT, (?), (?), (?), (?))");
+    add_order_query.prepare("INSERT INTO active_orders VALUES (DEFAULT, (?), (?), (?), (?))");
     add_order_query.addBindValue(phone_number);
     add_order_query.addBindValue(timestamp);
     add_order_query.addBindValue(order_code);
-    add_order_query.addBindValue(order_array);
+    add_order_query.addBindValue(order_byte_array);
 
-    return add_order_query.exec();
+    if (add_order_query.exec()) {
+
+        qDebug() << add_order_query.lastError().text();
+        return true;
+
+    } else {
+
+        qDebug() << add_order_query.lastError().text();
+        return false;
+
+    }
 
 }
 
@@ -257,7 +269,7 @@ bool SqlService::CheckIfOrderIsCorrect(const QVector<int> &product_ids) {
 bool SqlService::CheckIfOrderExists(const int &order_id, const QString &phone_number, const QString &receive_code) {
 
     QSqlQuery check_order_query(sql_database);
-    check_order_query.prepare("SELECT EXISTS (SELECT 1 FROM orders WHERE id = (?) AND phone_number = (?) AND receive_code = (?))");
+    check_order_query.prepare("SELECT EXISTS (SELECT 1 FROM active_orders WHERE id = (?) AND phone_number = (?) AND receive_code = (?))");
     check_order_query.addBindValue(order_id);
     check_order_query.addBindValue(phone_number);
     check_order_query.addBindValue(receive_code);
@@ -277,7 +289,7 @@ bool SqlService::CancelOrder(const int &order_id, const QString &phone_number, c
     if (CheckIfOrderExists(order_id, phone_number, receive_code)) {
 
         QSqlQuery cancel_order_query(sql_database);
-        cancel_order_query.prepare("DELETE FROM orders WHERE id = (?)");
+        cancel_order_query.prepare("DELETE FROM active_orders WHERE id = (?)");
         cancel_order_query.addBindValue(order_id);
         return cancel_order_query.exec();
 
@@ -294,10 +306,21 @@ bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &
     //Get error (phone_number binds as bigint for some reason)!
 
     QSqlQuery change_name_query(sql_database);
-    change_name_query.prepare("UPDATE cutomers SET name = (?) WHERE phone_number = (?)");
+    qDebug() << "prepare " << change_name_query.prepare("UPDATE customers SET name = (?) WHERE phone_number = (?)");
+    qDebug() << change_name_query.lastError().text();
     change_name_query.addBindValue(new_name);
     change_name_query.addBindValue(phone_number);
-    return change_name_query.exec();
+    if (change_name_query.exec()) {
+
+        qDebug() << change_name_query.lastError().text();
+        return true;
+
+    } else {
+
+        qDebug() << change_name_query.lastError().text();
+        return false;
+
+    }
 
 }
 

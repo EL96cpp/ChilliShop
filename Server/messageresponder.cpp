@@ -130,6 +130,8 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
                 QJsonValue timestamp_value = json_message_object.value(QLatin1String("Timestamp"));
                 QJsonValue order_json_value = json_message_object.value(QLatin1String("Order"));
 
+                qDebug() << "Try post new order";
+
                 AddOrder(phone_number_value.toString(), timestamp_value.toString(), order_json_value);
 
             } else {
@@ -456,6 +458,8 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
 
     if (sql_service->CheckIfOrderIsCorrect(order_ids)) {
 
+        qDebug() << "Correct order!";
+
         QString order_code = GenerateOrderCode();
 
         sql_service->AddOrder(phone_number, timestamp, order_json_array, order_code);
@@ -471,6 +475,8 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
         emit MessageResponce(message_byte_array);
 
     } else {
+
+        qDebug() << "Incorrect order id's!";
 
         QJsonObject message;
         message[QStringLiteral("Method")] = QStringLiteral("POST");
