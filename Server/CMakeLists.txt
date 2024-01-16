@@ -22,6 +22,8 @@ add_executable(Server
   clientconnection.h
   connectionsvector.cpp
   connectionsvector.h
+  orderidvector.cpp
+  orderidvector.h
   messageresponder.cpp
   messageresponder.h
   product.cpp
