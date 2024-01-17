@@ -298,8 +298,23 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
 
     if (!logged_in) {
 
-        // Check if customer is already logged!
+        //Checks if user with this phone number is already logged from another device
 
+        if (connections.CheckIfCustomerAlreadyLogged(phone_number)) {
+
+            QJsonObject message;
+            message[QStringLiteral("Method")] = QStringLiteral("POST");
+            message[QStringLiteral("Resource")] = QStringLiteral("Login_customer");
+            message[QStringLiteral("Code")] = QStringLiteral("403");
+            message[QStringLiteral("Error_description")] = QStringLiteral("User_already_logged");
+            QByteArray message_byte_array = QJsonDocument(message).toJson();
+            message_byte_array.append("\n");
+
+            emit MessageResponce(message_byte_array);
+
+            return;
+
+        }
 
         CustomerLoginResult login_result = sql_service->LoginCustomer(phone_number, password);
 
@@ -364,8 +379,25 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
 
 void MessageResponder::LoginEmployee(const QString &name, const QString &surname, const QString &position, const QString &password) {
 
-    // Check logged_in and Check if customer is already logged
-    if (logged_in) {
+    if (!logged_in) {
+
+        // Checks if employee is already logged from another device
+
+        if (connections.CheckIfEmployeeAlreadyLogged(name, surname, position)) {
+
+            QJsonObject message;
+            message[QStringLiteral("Method")] = QStringLiteral("POST");
+            message[QStringLiteral("Resource")] = QStringLiteral("Login_employee");
+            message[QStringLiteral("Code")] = QStringLiteral("403");
+            message[QStringLiteral("Error_description")] = QStringLiteral("User_already_logged");
+            QByteArray message_byte_array = QJsonDocument(message).toJson();
+            message_byte_array.append("\n");
+
+            emit MessageResponce(message_byte_array);
+
+            return;
+
+        }
 
         EmployeeLoginResult login_result = sql_service->LoginEmployee(name, surname, position, password);
 

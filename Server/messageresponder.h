@@ -13,6 +13,7 @@
 #include <QRandomGenerator>
 
 #include "sqlservice.h"
+#include "connectionsvector.h"
 #include "clientconnection.h"
 
 class MessageResponder : public QObject, public QRunnable {
