@@ -142,13 +142,22 @@ void Client::onReadyRead() {
 
 }
 
-void Client::onPutOrderInProcess(const int &order_id)
-{
+void Client::onPutOrderInProcess(const int &order_id) {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("PUT");
+    message[QStringLiteral("Resource")] = QStringLiteral("Processing_order");
+    message[QStringLiteral("Order_id")] = order_id;
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
 
 }
 
-void Client::deleteConnection()
-{
+void Client::deleteConnection() {
+
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("DELETE");
     message[QStringLiteral("Resource")] = QStringLiteral("Connection");
@@ -157,6 +166,7 @@ void Client::deleteConnection()
 
     qintptr bytes_written = socket->write(byte_array);
     qDebug() << bytes_written;
+
 }
 
 void Client::SendConnectionType() {

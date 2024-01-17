@@ -5,10 +5,14 @@
 
 MessageResponder::MessageResponder(QObject* parent,
                                    const QByteArray& message_byte_array,
+                                   ConnectionsVector& connections,
+                                   OrderIDVector& processing_ids,
                                    const ConnectionType& connection_type,
                                    std::atomic<unsigned long long>& sql_connections_counter,
                                    const bool& logged_in) : QObject{parent},
                                                             message_byte_array(message_byte_array),
+                                                            connections(connections),
+                                                            processing_ids(processing_ids),
                                                             connection_type(connection_type),
                                                             sql_connections_counter(sql_connections_counter),
                                                             logged_in(logged_in) {

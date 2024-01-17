@@ -27,10 +27,14 @@ signals:
                         const int& total_cost);
     void showErrorMessage(const QString& error_title, const QString& error_description);
 
+    void putOrderInProcessSuccess();
+    void putOrderInProcessError(const QString& error_description);
+
 public slots:
     void onLogin(const QString& name, const QString& surname,
                  const QString& position, const QString& password);
     void onReadyRead();
+    void onPutOrderInProcess(const int& order_id);
     void deleteConnection();
 
 private:

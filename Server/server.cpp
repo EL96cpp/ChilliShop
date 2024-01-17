@@ -25,7 +25,8 @@ void Server::RespondToMessage(ClientConnection* client, QByteArray &message_byte
 void Server::incomingConnection(qintptr handle) {
 
     qDebug() << "new connection";
-    ClientConnection* connection = new ClientConnection(this, connections, sql_connections_counter, catalog_message_byte_array);
+    ClientConnection* connection = new ClientConnection(this, connections, processing_ids,
+                                                        sql_connections_counter, catalog_message_byte_array);
     connection->SetSocketDescriptor(handle);
     connect(connection, &ClientConnection::RespondToMessage, this, &Server::RespondToMessage);
     connections.push(std::move(connection));

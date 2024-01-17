@@ -2,10 +2,11 @@
 #include "connectionsvector.h"
 #include "messageresponder.h"
 
-ClientConnection::ClientConnection(QObject *parent, ConnectionsVector& connections,
+ClientConnection::ClientConnection(QObject *parent, ConnectionsVector& connections, OrderIDVector& processing_ids,
                                    std::atomic<unsigned long long>& sql_connections_counter,
                                    const QByteArray& catalog_byte_array) : QObject(parent),
                                                                            connections(connections),
+                                                                           processing_ids(processing_ids),
                                                                            socket(new QTcpSocket),
                                                                            sql_connections_counter(sql_connections_counter),
                                                                            connection_type(ConnectionType::UNKNOWN),
@@ -94,8 +95,8 @@ bool ClientConnection::IsLoggedIn() {
 void ClientConnection::onReadyRead() {
 
     QByteArray message_byte_array = socket->readAll();
-    MessageResponder* message_responder = new MessageResponder(this, message_byte_array, connection_type,
-                                                               sql_connections_counter, logged_in);
+    MessageResponder* message_responder = new MessageResponder(this, message_byte_array, connections, processing_ids,
+                                                               connection_type, sql_connections_counter, logged_in);
 
     connect(message_responder, &MessageResponder::SetConnectionType, this, &ClientConnection::SetConnectionType, Qt::DirectConnection);
     connect(message_responder, &MessageResponder::MessageResponce, this, &ClientConnection::OnMessageResponce);

@@ -6,7 +6,7 @@ OrderIDVector::OrderIDVector() {
 
 bool OrderIDVector::push(const int &id) {
 
-    QMutexLocker lock(mutex);
+    QMutexLocker lock(&mutex);
 
     if (ids_vector.contains(id)) {
 
@@ -23,7 +23,7 @@ bool OrderIDVector::push(const int &id) {
 
 bool OrderIDVector::erase(const int &id) {
 
-    QMutexLocker lock(mutex);
+    QMutexLocker lock(&mutex);
 
     if (ids_vector.contains(id)) {
 

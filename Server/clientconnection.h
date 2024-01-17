@@ -6,6 +6,8 @@
 #include <QByteArray>
 #include <QThreadPool>
 
+#include "orderidvector.h"
+
 class ConnectionsVector;
 
 enum class ConnectionType {
@@ -21,6 +23,7 @@ class ClientConnection : public QObject
     Q_OBJECT
 public:
     explicit ClientConnection(QObject *parent, ConnectionsVector& connections,
+                              OrderIDVector& processing_ids,
                               std::atomic<unsigned long long>& sql_connections_counter,
                               const QByteArray& catalog_byte_array);
     void SetSocketDescriptor(qintptr descriptor);
@@ -47,6 +50,7 @@ signals:
 private:
     QTcpSocket* socket;
     ConnectionsVector& connections;
+    OrderIDVector& processing_ids;
     const QByteArray& catalog_byte_array;
     QString phone_number;
     QString name;

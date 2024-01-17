@@ -19,8 +19,8 @@ class MessageResponder : public QObject, public QRunnable {
 
     Q_OBJECT
 public:
-    MessageResponder(QObject* parent, const QByteArray& message_byte_array,
-                     const ConnectionType& connection_type, std::atomic<unsigned long long>& sql_connections_counter,
+    MessageResponder(QObject* parent, const QByteArray& message_byte_array, ConnectionsVector& connections,
+                     OrderIDVector& processing_id, const ConnectionType& connection_type, std::atomic<unsigned long long>& sql_connections_counter,
                      const bool& logged_in);
     ~MessageResponder();
 
@@ -50,6 +50,8 @@ private:
 
 private:
     QByteArray message_byte_array;
+    ConnectionsVector& connections;
+    OrderIDVector& processing_ids;
     ConnectionType connection_type;
     SqlService* sql_service = nullptr;
     std::atomic<unsigned long long>& sql_connections_counter;
