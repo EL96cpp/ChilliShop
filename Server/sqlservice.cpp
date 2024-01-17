@@ -241,6 +241,13 @@ QJsonArray SqlService::GetCustomerActiveOrders(const QString &phone_number) {
 
     }
 
+    return orders_array;
+
+}
+
+QJsonArray SqlService::GetCustomerReceivedOrders(const QString &phone_number) {
+
+
 }
 
 bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code) {

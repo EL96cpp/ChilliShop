@@ -142,16 +142,26 @@ void Client::GetCatalog() {
 
 }
 
-void Client::GetReceivedOrders()
-{
-
-}
-
-void Client::GetOrdersHistory() {
+void Client::GetActiveOrders() {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("GET");
-    message[QStringLiteral("Resource")] = QStringLiteral("Orders_history");
+    message[QStringLiteral("Resource")] = QStringLiteral("Active_orders");
+    message[QStringLiteral("Phone_number")] = phone_number;
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
+
+}
+
+void Client::GetReceivedOrders() {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("GET");
+    message[QStringLiteral("Resource")] = QStringLiteral("Received_orders");
+    message[QStringLiteral("Phone_number")] = phone_number;
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");
 
@@ -347,7 +357,15 @@ void Client::onReadyRead() {
 
     } else if (method_value.toString() == "GET") {
 
-        if (resource_value.toString() == "Order_history") {
+        if (resource_value.toString() == "Active_orders") {
+
+            if (code_value.toString() == "200") {
+
+            } else if (code_value.toString() == "403") {
+
+            }
+
+        } else if (resource_value.toString() == "Received_orders") {
 
             if (code_value.toString() == "200") {
 

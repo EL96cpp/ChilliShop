@@ -22,7 +22,7 @@ class MessageResponder : public QObject, public QRunnable {
 public:
     MessageResponder(QObject* parent, const QByteArray& message_byte_array, ConnectionsVector& connections,
                      OrderIDVector& processing_id, const ConnectionType& connection_type, std::atomic<unsigned long long>& sql_connections_counter,
-                     const bool& logged_in);
+                     const bool& logged_in, const QString& phone_number);
     ~MessageResponder();
 
     void run();
@@ -51,6 +51,7 @@ private:
 
 private:
     QByteArray message_byte_array;
+    QString phone_number;
     ConnectionsVector& connections;
     OrderIDVector& processing_ids;
     ConnectionType connection_type;

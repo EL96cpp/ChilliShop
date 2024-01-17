@@ -102,7 +102,7 @@ void ClientConnection::onReadyRead() {
 
     QByteArray message_byte_array = socket->readAll();
     MessageResponder* message_responder = new MessageResponder(this, message_byte_array, connections, processing_ids,
-                                                               connection_type, sql_connections_counter, logged_in);
+                                                               connection_type, sql_connections_counter, logged_in, phone_number);
 
     connect(message_responder, &MessageResponder::SetConnectionType, this, &ClientConnection::SetConnectionType, Qt::DirectConnection);
     connect(message_responder, &MessageResponder::MessageResponce, this, &ClientConnection::OnMessageResponce);

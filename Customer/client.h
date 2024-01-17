@@ -43,7 +43,8 @@ public slots:
 private:
     void SendConnectionType();
     void GetCatalog();
-    void GetOrdersHistory();
+    void GetActiveOrders();
+    void GetReceivedOrders();
     void AddCatalogDataToModels(const QJsonArray& catalog_json_array);
 
 private:

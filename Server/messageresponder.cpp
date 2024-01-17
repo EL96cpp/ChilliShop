@@ -9,13 +9,15 @@ MessageResponder::MessageResponder(QObject* parent,
                                    OrderIDVector& processing_ids,
                                    const ConnectionType& connection_type,
                                    std::atomic<unsigned long long>& sql_connections_counter,
-                                   const bool& logged_in) : QObject{parent},
-                                                            message_byte_array(message_byte_array),
-                                                            connections(connections),
-                                                            processing_ids(processing_ids),
-                                                            connection_type(connection_type),
-                                                            sql_connections_counter(sql_connections_counter),
-                                                            logged_in(logged_in) {
+                                   const bool& logged_in,
+                                   const QString& phone_number) : QObject{parent},
+                                                                  phone_number(phone_number),
+                                                                  message_byte_array(message_byte_array),
+                                                                  connections(connections),
+                                                                  processing_ids(processing_ids),
+                                                                  connection_type(connection_type),
+                                                                  sql_connections_counter(sql_connections_counter),
+                                                                  logged_in(logged_in) {
 
     qDebug() << message_byte_array;
 
@@ -152,10 +154,43 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
             emit SendCatalog();
 
-        } else if (resource_value.toString() == "Orders_history") {
+        } else if (resource_value.toString() == "Active_orders") {
 
-            if (!logged_in) {
+            QString phone_number_value = json_message_object.value(QLatin1String("Phone_number")).toString();
 
+            if (logged_in) {
+
+                if (phone_number == phone_number_value) {
+
+                    QJsonArray active_orders = sql_service->GetCustomerActiveOrders(phone_number);
+
+                } else {
+
+
+                }
+
+            } else {
+
+
+
+            }
+
+        } else if (resource_value.toString() == "Received_orders") {
+
+            QString phone_number_value = json_message_object.value(QLatin1String("Phone_number")).toString();
+
+            if (logged_in) {
+
+                if (phone_number == phone_number_value) {
+
+                    QJsonArray received_orders = sql_service->GetCustomerActiveOrders(phone_number);
+
+                } else {
+
+
+                }
+
+            } else {
 
 
             }
