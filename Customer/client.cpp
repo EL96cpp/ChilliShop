@@ -142,6 +142,11 @@ void Client::GetCatalog() {
 
 }
 
+void Client::GetReceivedOrders()
+{
+
+}
+
 void Client::GetOrdersHistory() {
 
     QJsonObject message;
