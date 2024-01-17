@@ -142,6 +142,11 @@ void Client::onReadyRead() {
 
 }
 
+void Client::onPutOrderInProcess(const int &order_id)
+{
+
+}
+
 void Client::deleteConnection()
 {
     QJsonObject message;

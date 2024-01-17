@@ -15,7 +15,7 @@
 #include "messageresponder.h"
 #include "product.h"
 #include "order.h"
-
+#include "orderidvector.h"
 #include "sqlservice.h"
 
 class Server : public QTcpServer
@@ -35,6 +35,7 @@ private:
 
 private:
     ConnectionsVector connections;
+    OrderIDVector processing_ids;
     QByteArray catalog_message_byte_array;
     std::atomic<unsigned long long> sql_connections_counter;
 
