@@ -281,6 +281,20 @@ bool SqlService::CheckIfOrderExists(const int &order_id, const QString &phone_nu
 
 }
 
+bool SqlService::CheckIfOrderExists(const int &order_id) {
+
+    QSqlQuery check_order_query(sql_database);
+    check_order_query.prepare("SELECT EXISTS (SELECT 1 FROM active_orders WHERE id = (?))");
+    check_order_query.addBindValue(order_id);
+    check_order_query.exec();
+
+    while(check_order_query.next()) {
+
+        return check_order_query.value(0).toBool();
+
+    }
+}
+
 
 bool SqlService::CancelOrder(const int &order_id, const QString &phone_number, const QString &receive_code) {
 

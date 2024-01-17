@@ -288,6 +288,62 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
 
 
+        } else if (resource_value.toString() == "Processing_order") {
+
+            int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
+
+            if (logged_in) {
+
+                if (sql_service->CheckIfOrderExists(order_id)) {
+
+                    if (processing_ids.push(order_id)) {
+
+                        QJsonObject message;
+                        message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                        message[QStringLiteral("Resource")] = QStringLiteral("Processing_order");
+                        message[QStringLiteral("Code")] = QStringLiteral("409");
+                        message[QStringLiteral("Order_id")] = order_id;
+                        message[QStringLiteral("Error_description")] = QStringLiteral("Order is already processing!");
+
+                        QByteArray message_byte_array = QJsonDocument(message).toJson();
+                        message_byte_array.append("\n");
+
+                        emit MessageResponce(message_byte_array);
+
+                    }
+
+                } else {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Processing_order");
+                    message[QStringLiteral("Code")] = QStringLiteral("404");
+                    message[QStringLiteral("Order_id")] = order_id;
+                    message[QStringLiteral("Error_description")] = QStringLiteral("No such order id!");
+
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
+
+                }
+
+            } else {
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                message[QStringLiteral("Resource")] = QStringLiteral("Processing_order");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Order_id")] = order_id;
+                message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users!");
+
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
+
+            }
+
         }
 
     }

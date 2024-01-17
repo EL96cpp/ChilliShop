@@ -67,6 +67,7 @@ public:
     bool AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code);
     bool CheckIfOrderIsCorrect(const QVector<int>& product_ids);
     bool CheckIfOrderExists(const int& order_id, const QString& phone_number, const QString& receive_code);
+    bool CheckIfOrderExists(const int& order_id);
     bool CancelOrder(const int &order_id, const QString &phone_number, const QString &receive_code);
     bool ChangeCustomerName(const QString& phone_number, const QString& new_name);
     AddReceivedOrderResult AddReceivedOrder(const int& order_id, const QString& phone_number, const QString& ordered_timestamp, const QString& received_timestamp, const QString& receive_code, const QMap<int, int>& order_data);
