@@ -15,6 +15,10 @@ public:
     void push(ClientConnection* client_connection);
     void erase(ClientConnection* client_connection);
 
+    bool CheckIfCustomerAlreadyLogged(const QString& phone_number);
+    bool CheckIfEmployeeAlreadyLogged(const QString& name, const QString& surname, const QString& position);
+
+
 private slots:
 
 

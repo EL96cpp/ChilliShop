@@ -86,6 +86,12 @@ QString ClientConnection::GetPhoneNumber() {
 
 }
 
+bool ClientConnection::CheckIfEmployeeDataIsEqual(const QString &name, const QString &surname, const QString &position) {
+
+    return (this->name == name && this->surname == surname && this->position == position);
+
+}
+
 bool ClientConnection::IsLoggedIn() {
 
     return logged_in;

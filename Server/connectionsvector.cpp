@@ -21,3 +21,64 @@ void ConnectionsVector::erase(ClientConnection *client_connection) {
 
 }
 
+bool ConnectionsVector::CheckIfCustomerAlreadyLogged(const QString &phone_number) {
+
+    QMutexLocker locker(&mutex);
+
+    for (int i = 0; i < connections.size(); ++i) {
+
+        if (connections[i]->GetConnectionType() == ConnectionType::CUSTOMER) {
+
+            if (connections[i]->GetPhoneNumber() == phone_number) {
+
+                return true;
+
+            } else {
+
+                continue;
+
+            }
+
+        } else {
+
+            continue;
+
+        }
+
+    }
+
+    return false;
+
+}
+
+bool ConnectionsVector::CheckIfEmployeeAlreadyLogged(const QString &name, const QString &surname, const QString &position) {
+
+    QMutexLocker locker(&mutex);
+
+    for (int i = 0; i < connections.size(); ++i) {
+
+        if (connections[i]->GetConnectionType() == ConnectionType::EMPLOYEE) {
+
+            if (connections[i]->CheckIfEmployeeDataIsEqual(name, surname, position)) {
+
+                return true;
+
+            } else {
+
+                continue;
+
+            }
+
+        } else {
+
+            continue;
+
+        }
+
+    }
+
+    return false;
+
+
+}
+

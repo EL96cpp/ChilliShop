@@ -33,6 +33,7 @@ public:
     ConnectionType GetConnectionType();
 
     QString GetPhoneNumber();
+    bool CheckIfEmployeeDataIsEqual(const QString& name, const QString& surname, const QString& position);
     bool IsLoggedIn();
 
 public slots:
