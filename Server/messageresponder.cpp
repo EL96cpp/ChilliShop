@@ -298,6 +298,9 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
 
     if (!logged_in) {
 
+        // Check if customer is already logged!
+
+
         CustomerLoginResult login_result = sql_service->LoginCustomer(phone_number, password);
 
         if (login_result == CustomerLoginResult::SUCCESS) {
@@ -361,46 +364,63 @@ void MessageResponder::LoginCustomer(const QString& phone_number, const QString&
 
 void MessageResponder::LoginEmployee(const QString &name, const QString &surname, const QString &position, const QString &password) {
 
-    EmployeeLoginResult login_result = sql_service->LoginEmployee(name, surname, position, password);
+    // Check logged_in and Check if customer is already logged
+    if (logged_in) {
 
-    if (login_result == EmployeeLoginResult::SUCCESS) {
+        EmployeeLoginResult login_result = sql_service->LoginEmployee(name, surname, position, password);
 
-        QJsonObject message;
-        message[QStringLiteral("Method")] = QStringLiteral("POST");
-        message[QStringLiteral("Resource")] = QStringLiteral("Login_employee");
-        message[QStringLiteral("Code")] = QStringLiteral("200");
-        QByteArray message_byte_array = QJsonDocument(message).toJson();
-        message_byte_array.append("\n");
+        if (login_result == EmployeeLoginResult::SUCCESS) {
+
+            QJsonObject message;
+            message[QStringLiteral("Method")] = QStringLiteral("POST");
+            message[QStringLiteral("Resource")] = QStringLiteral("Login_employee");
+            message[QStringLiteral("Code")] = QStringLiteral("200");
+            QByteArray message_byte_array = QJsonDocument(message).toJson();
+            message_byte_array.append("\n");
 
 
-        qDebug() << "login employee 200";
-        emit SetLoggedIn(true);
-        emit MessageResponce(message_byte_array);
+            qDebug() << "login employee 200";
+            emit SetLoggedIn(true);
+            emit MessageResponce(message_byte_array);
 
-    } else if (login_result == EmployeeLoginResult::NO_EMPLOYEE_IN_DATABASE) {
+        } else if (login_result == EmployeeLoginResult::NO_EMPLOYEE_IN_DATABASE) {
 
-        QJsonObject message;
-        message[QStringLiteral("Method")] = QStringLiteral("POST");
-        message[QStringLiteral("Resource")] = QStringLiteral("Login_employee");
-        message[QStringLiteral("Code")] = QStringLiteral("400");
-        message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect employee data");
-        QByteArray message_byte_array = QJsonDocument(message).toJson();
-        message_byte_array.append("\n");
+            QJsonObject message;
+            message[QStringLiteral("Method")] = QStringLiteral("POST");
+            message[QStringLiteral("Resource")] = QStringLiteral("Login_employee");
+            message[QStringLiteral("Code")] = QStringLiteral("400");
+            message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect employee data");
+            QByteArray message_byte_array = QJsonDocument(message).toJson();
+            message_byte_array.append("\n");
 
-        qDebug() << "login employee 400";
-        emit MessageResponce(message_byte_array);
+            qDebug() << "login employee 400";
+            emit MessageResponce(message_byte_array);
 
-    } else if (login_result == EmployeeLoginResult::INCORRECT_PASSWORD) {
+        } else if (login_result == EmployeeLoginResult::INCORRECT_PASSWORD) {
+
+            QJsonObject message;
+            message[QStringLiteral("Method")] = QStringLiteral("POST");
+            message[QStringLiteral("Resource")] = QStringLiteral("Login_employee");
+            message[QStringLiteral("Code")] = QStringLiteral("403");
+            message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect password");
+            QByteArray message_byte_array = QJsonDocument(message).toJson();
+            message_byte_array.append("\n");
+
+            qDebug() << "login employee 403";
+            emit MessageResponce(message_byte_array);
+
+        }
+
+    } else {
 
         QJsonObject message;
         message[QStringLiteral("Method")] = QStringLiteral("POST");
         message[QStringLiteral("Resource")] = QStringLiteral("Login_employee");
         message[QStringLiteral("Code")] = QStringLiteral("403");
-        message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect password");
+        message[QStringLiteral("Error_description")] = QStringLiteral("User_already_logged");
         QByteArray message_byte_array = QJsonDocument(message).toJson();
         message_byte_array.append("\n");
 
-        qDebug() << "login employee 403";
         emit MessageResponce(message_byte_array);
 
     }
