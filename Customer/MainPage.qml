@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
-import Qt5Compat.GraphicalEffects
+
 
 Page {
 
@@ -186,10 +186,16 @@ Page {
 
             }
 
-            MouseArea {
+            Button {
 
-                id: login_mouse_area
-                anchors.fill: login_image
+                id: login_image
+                icon.source:  "qrc:/Images/profile.png"
+                icon.color: login_image.hovered ? hover_color : "#E2E2E2"
+
+                icon.width: logo.paintedHeight / 2.5
+                icon.height: logo.paintedHeight / 2.5
+                anchors.centerIn: parent
+
                 hoverEnabled: true
 
                 onClicked: {
@@ -198,22 +204,11 @@ Page {
 
                 }
 
-            }
+                background: Rectangle {
 
-            Image {
+                    color: "transparent"
 
-                id: login_image
-                source: "qrc:/Images/profile.png"
-                sourceSize.height: logo.paintedHeight / 2.5
-                anchors.centerIn: parent
-
-            }
-
-            ColorOverlay {
-
-                anchors.fill: login_image
-                source: login_image
-                color: login_mouse_area.containsMouse ? hover_color : "#E2E2E2"
+                }
 
             }
 
