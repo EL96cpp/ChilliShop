@@ -294,6 +294,9 @@ void Client::onReadyRead() {
                 phone_number = json_message_object.value(QLatin1String("Phone_number")).toString();
                 emit loginSuccess(phone_number, name);
 
+                GetActiveOrders();
+                GetReceivedOrders();
+
             } else if (code_value.toString() == "403") {
 
                 QJsonValue error_value = json_message_object.value(QLatin1String("Error_description"));

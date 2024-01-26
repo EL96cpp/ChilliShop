@@ -164,14 +164,42 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
                     QJsonArray active_orders = sql_service->GetCustomerActiveOrders(phone_number);
 
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("GET");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Active_orders");
+                    message[QStringLiteral("Code")] = QStringLiteral("200");
+                    message[QStringLiteral("Orders")] = active_orders;
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
+
                 } else {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("GET");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Active_orders");
+                    message[QStringLiteral("Code")] = QStringLiteral("403");
+                    message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect phone number!");
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
 
 
                 }
 
             } else {
 
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("GET");
+                message[QStringLiteral("Resource")] = QStringLiteral("Active_orders");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Error_description")] = QStringLiteral("Customer is not logged!");
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
 
+                emit MessageResponce(message_byte_array);
 
             }
 
@@ -183,15 +211,43 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
                 if (phone_number == phone_number_value) {
 
-                    QJsonArray received_orders = sql_service->GetCustomerActiveOrders(phone_number);
+                    QJsonArray received_orders = sql_service->GetCustomerReceivedOrders(phone_number);
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("GET");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Received_orders");
+                    message[QStringLiteral("Code")] = QStringLiteral("200");
+                    message[QStringLiteral("Orders")] = received_orders;
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
 
                 } else {
 
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("GET");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Received_orders");
+                    message[QStringLiteral("Code")] = QStringLiteral("403");
+                    message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect phone number!");
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
 
                 }
 
             } else {
 
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("GET");
+                message[QStringLiteral("Resource")] = QStringLiteral("Received_orders");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Error_description")] = QStringLiteral("Customer is not logged!");
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
 
             }
 
