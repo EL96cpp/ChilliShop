@@ -25,6 +25,7 @@ signals:
                                     const QString& text_description, const int& weight, const QJsonArray& peppers);
     void addSeedsProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
                                 const QString& text_description, const int& number_of_seeds, const QJsonArray& peppers);
+    void disconnected(const QString& error_description);
     void registerSuccess();
     void registerError(const QString& error_description);
     void loginSuccess(const QString& phone_number, const QString& name);
@@ -39,6 +40,7 @@ public slots:
     void onMakeOrder(const QJsonArray& order_data);
     void onReadyRead();
     void onChangeName(const QString& new_name);
+    void onDisconnected();
 
 private:
     void SendConnectionType();

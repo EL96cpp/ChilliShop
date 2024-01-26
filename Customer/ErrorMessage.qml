@@ -85,6 +85,9 @@ Rectangle {
         color: "white"
         text: error_rectangle.description
 
+        wrapMode: Text.WordWrap
+        width: parent.width - anchors.topMargin*2
+
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: error_title_rectangle.bottom
         anchors.topMargin: 30
@@ -143,6 +146,19 @@ Rectangle {
 
             error_rectangle.title = title;
             error_rectangle.description = description;
+            error_rectangle.visible = true;
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onDisconnected(error_description) {
+
+            error_rectangle.title = "Connection error";
+            error_rectangle.description = error_description;
             error_rectangle.visible = true;
 
         }

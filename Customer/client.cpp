@@ -3,6 +3,7 @@
 Client::Client() : socket(new QSslSocket) {
 
     connect(socket, &QSslSocket::readyRead, this, &Client::onReadyRead);
+    connect(socket, &QSslSocket::disconnected, this, &Client::onDisconnected);
 
 }
 
@@ -404,5 +405,11 @@ void Client::onChangeName(const QString &new_name) {
 
     qintptr bytes_written = socket->write(byte_array);
     qDebug() << bytes_written;
+
+}
+
+void Client::onDisconnected() {
+
+    emit disconnected(QStringLiteral("Connection with the server was lost"));
 
 }
