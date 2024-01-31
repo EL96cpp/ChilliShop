@@ -80,6 +80,9 @@ Page {
     signal toMenu();
     signal showErrorMessage(string error_title, string error_description);
 
+    signal setOrderConfirmState();
+    signal setDeliveriesState();
+
     property string button_color: "#290d00"
     property string button_hovered_color: "#7a2700"
     property string button_text_color: "#7a2700"
@@ -124,9 +127,20 @@ Page {
         target: Client
         function onLoginSuccess(phone_number, name) {
 
+            main_window.logged_in = true;
             orders_form.phone_number = phone_number;
             orders_form.name = name;
-            profile_page.state = "orders_state"
+            profile_page.state = "orders_state";
+
+            if (cart_model.total_price != 0) {
+
+                setOrderConfirmState();
+
+            } else {
+
+                setDeliveriesState();
+
+            }
 
         }
 

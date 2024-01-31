@@ -3,7 +3,6 @@ import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 
-
 Item {
 
     id: order_confirm_form
@@ -208,7 +207,7 @@ Item {
                 Text {
 
                     id: cart_item_total_cost
-                    text: model.price + " ₽"
+                    text: model.price/100 + "." + ((model.price%100 < 10) ? model.price%100 + "0" : model.price%100) + " ₽"
                     color: "white"
                     font.family: regular_font.name
                     font.pointSize: 15
@@ -258,7 +257,7 @@ Item {
     Text {
 
         id: order_total_value
-        text: total_price + " ₽"
+        text: total_price/100 + "." + ((total_price%100 < 10) ? total_price%100 + "0" : total_price%100) + " ₽"
         color: "white"
         font.family: regular_font.name
         font.pointSize: 20
@@ -307,7 +306,7 @@ Item {
         onClicked: {
 
             var order_json = cart_model.getOrderJson();
-            Client.onMakeOrder(order_json);
+            Client.onMakeOrder(order_json, cart_model.total_price);
 
         }
 

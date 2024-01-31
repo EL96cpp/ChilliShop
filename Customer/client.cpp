@@ -81,13 +81,14 @@ void Client::onRegister(const QString& phone_number, const QString& password, co
 
 }
 
-void Client::onMakeOrder(const QJsonArray &order_data) {
+void Client::onMakeOrder(const QJsonArray &order_data, const size_t& total_cost) {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Order");
     message[QStringLiteral("Phone_number")] = phone_number;
     message[QStringLiteral("Timestamp")] = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    message[QStringLiteral("Total_cost")] = QString::number(total_cost);
     message[QStringLiteral("Order_data")] = order_data;
 
     QByteArray byte_array = QJsonDocument(message).toJson();
@@ -391,8 +392,6 @@ void Client::onReadyRead() {
         }
 
     }
-
-
 
 }
 

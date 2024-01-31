@@ -15,6 +15,34 @@ Item {
     property string phone_number
     property string name
 
+    Connections {
+
+        target: profile_page
+
+        function onSetOrderConfirmState() {
+
+            order_confirm_form.visible = true;
+            deliveries_form.visible = false;
+            received_orders_form.visible = false;
+
+        }
+
+    }
+
+    Connections {
+
+        target: profile_page
+
+        function onSetDeliveriesState() {
+
+            order_confirm_form.visible = false;
+            deliveries_form.visible = true;
+            received_orders_form.visible = false;
+
+        }
+
+    }
+
     Rectangle {
 
         id: order_header_rectangle
@@ -110,8 +138,19 @@ Item {
         anchors.topMargin: 10
         anchors.horizontalCenterOffset: 100
 
-        OrderConfirmForm {
+        OrderConfirmForm {            
             id: order_confirm_form
+
+        }
+
+        DeliveriesForm {
+            id: deliveries_form
+            visible: false
+        }
+
+        ReceivedOrdersForm {
+            id: received_orders_form
+            visible: false
         }
 
     }

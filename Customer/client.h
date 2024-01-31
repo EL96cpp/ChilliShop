@@ -37,7 +37,7 @@ signals:
 public slots:
     void onLogin(const QString& phone_number, const QString& password);
     void onRegister(const QString& phone_number, const QString& password, const QString& name);
-    void onMakeOrder(const QJsonArray& order_data);
+    void onMakeOrder(const QJsonArray& order_data, const size_t& total_cost);
     void onReadyRead();
     void onChangeName(const QString& new_name);
     void onDisconnected();

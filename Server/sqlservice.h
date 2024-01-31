@@ -66,13 +66,13 @@ public:
     EmployeeLoginResult LoginEmployee(const QString& name, const QString& surname, const QString& position, const QString& password);
     bool CheckIfPhoneNumberExists(const QString& phone_number);
     bool CheckIfEmployeeExists(const QString& name, const QString& surname, const QString& position);
-    bool AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code);
+    bool AddOrder(const QString& phone_number, const QString& timestamp, const int& total_cost, const QJsonArray& order_array, const QString& order_code);
     bool CheckIfOrderIsCorrect(const QVector<int>& product_ids);
     bool CheckIfOrderExists(const int& order_id, const QString& phone_number, const QString& receive_code);
     bool CheckIfOrderExists(const int& order_id);
     bool CancelOrder(const int &order_id, const QString &phone_number, const QString &receive_code);
     bool ChangeCustomerName(const QString& phone_number, const QString& new_name);
-    AddReceivedOrderResult AddReceivedOrder(const int& order_id, const QString& phone_number, const QString& ordered_timestamp, const QString& received_timestamp, const QString& receive_code, const QMap<int, int>& order_data);
+    AddReceivedOrderResult AddReceivedOrder(const int& order_id, const QString& phone_number, const QString& ordered_timestamp, const QString& received_timestamp, const QString& receive_code, const int& total_cost, const QMap<int, int>& order_data);
 
     void CreateTablesIfNotExists();
 

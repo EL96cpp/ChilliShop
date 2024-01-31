@@ -108,7 +108,7 @@ Rectangle {
         font.pointSize: 20
         font.wordSpacing: 5
         font.bold: true
-        text: model.price + " ₽"
+        text: model.price/100 + "." + ((model.price%100 < 10) ? model.price%100 + "0" : model.price%100) + " ₽"
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.margins: 20

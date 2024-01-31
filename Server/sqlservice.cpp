@@ -250,13 +250,14 @@ QJsonArray SqlService::GetCustomerReceivedOrders(const QString &phone_number) {
 
 }
 
-bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp, const QJsonArray& order_array, const QString& order_code) {
+bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp, const int& total_cost, const QJsonArray& order_array, const QString& order_code) {
 
     QSqlQuery add_order_query(sql_database);
-    add_order_query.prepare("INSERT INTO active_orders VALUES (DEFAULT, (?), (?), (?), (?))");
+    add_order_query.prepare("INSERT INTO active_orders VALUES (DEFAULT, (?), (?), (?), (?), (?))");
     add_order_query.addBindValue(phone_number);
     add_order_query.addBindValue(timestamp);
     add_order_query.addBindValue(order_code);
+    add_order_query.addBindValue(total_cost);
     add_order_query.addBindValue(QString(QJsonDocument(order_array).toJson()));
 
     qDebug() << add_order_query.lastError().text();
@@ -359,7 +360,7 @@ bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &
 
 }
 
-AddReceivedOrderResult SqlService::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString &ordered_timestamp, const QString& received_timestamp, const QString &receive_code, const QMap<int, int> &order_data) {
+AddReceivedOrderResult SqlService::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString &ordered_timestamp, const QString& received_timestamp, const QString &receive_code, const int& total_cost, const QMap<int, int> &order_data) {
 
     if (!CheckIfOrderExists(order_id, phone_number, receive_code)) {
 
@@ -382,8 +383,8 @@ AddReceivedOrderResult SqlService::AddReceivedOrder(const int &order_id, const Q
         } else {
 
             QSqlQuery add_received_order_query(sql_database);
-            add_received_order_query.exec("INSERT INTO received_orders VALUES (order_id, phone_number, ordered_timestamp, receive_code, order_data)"
-                                          "SELECT order_id, phone_number, ordered_timestamp, receive_code, order_data FROM active_orders");
+            add_received_order_query.exec("INSERT INTO received_orders VALUES (order_id, phone_number, ordered_timestamp, receive_code, total_cost, order_data)"
+                                          "SELECT order_id, phone_number, ordered_timestamp, receive_code, total_cost, order_data FROM active_orders");
             QSqlQuery add_received_timestamp_query;
             add_received_timestamp_query.prepare("INSERT INTO received_orders (received_timestamp) VALUES (?)");
             add_received_timestamp_query.addBindValue(received_timestamp);

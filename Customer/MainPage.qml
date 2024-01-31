@@ -36,10 +36,10 @@ Page {
 
             }
 
-            sauces_model.append( {id: id, name: name, price: price/100, scoville: scoville, text_description: text_description, volume: volume,
+            sauces_model.append( {id: id, name: name, price: price, scoville: scoville, text_description: text_description, volume: volume,
                                   image: "file://" + applicationDirPath + "/../Images/Catalog/Sauces/" + id + ".png", peppers: peppers_json_array} );
 
-            copy_model.append( {id: id, name: name, price: price/100, scoville: scoville, text_description: text_description, volume: volume,
+            copy_model.append( {id: id, name: name, price: price, scoville: scoville, text_description: text_description, volume: volume,
                                   image: "file://" + applicationDirPath + "/../Images/Catalog/Sauces/" + id + ".png", peppers: peppers_json_array} );
 
 
@@ -61,7 +61,7 @@ Page {
 
             }
 
-            seasonings_model.append( {id: id, name: name, price: price/100, scoville: scoville, text_description: text_description, weight_gramms: weight_gramms,
+            seasonings_model.append( {id: id, name: name, price: price, scoville: scoville, text_description: text_description, weight_gramms: weight_gramms,
                                   image: "file://" + applicationDirPath + "/../Images/Catalog/Seasonings/" + id + ".png", peppers: peppers_json_array} );
 
         }
@@ -82,7 +82,7 @@ Page {
 
             }
 
-            seeds_model.append( {id: id, name: name, price: price/100, scoville: scoville, text_description: text_description, number_of_seeds: number_of_seeds,
+            seeds_model.append( {id: id, name: name, price: price, scoville: scoville, text_description: text_description, number_of_seeds: number_of_seeds,
                                   image: "file://" + applicationDirPath + "/../Images/Catalog/Seeds/" + id + ".png", peppers: peppers_json_array} );
 
         }
@@ -201,6 +201,26 @@ Page {
                 onClicked: {
 
                     stack_view.push(profile_page);
+
+                    if (logged_in) {
+
+                        profile_page.state = "orders_state";
+
+                        if (cart_model.total_price != 0) {
+
+                            profile_page.setOrderConfirmState();
+
+                        } else {
+
+                            profile_page.setDeliveriesState();
+
+                        }
+
+                    } else {
+
+                        profile_page.state = "login_state";
+
+                    }
 
                 }
 

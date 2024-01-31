@@ -32,9 +32,9 @@ public:
     void LoginCustomer(const QString& phone_number, const QString& password);
     void LoginEmployee(const QString& name, const QString& surname, const QString& position, const QString& password);
     void RegisterCustomer(const QString& phone_number, const QString& password, const QString& name);
-    void AddOrder(const QString& phone_number, const QString& timestamp, const QJsonValue& order_json);
+    void AddOrder(const QString& phone_number, const QString& timestamp, const int& total_cost, const QJsonValue& order_json);
     void AddReceivedOrder(const int& order_id, const QString& phone_number, const QString& ordered_timestamp,
-                          const QString& received_timestamp, const QString& receive_code, const QMap<int, int>& order_data);
+                          const QString& received_timestamp, const QString& receive_code, const int& total_cost, const QMap<int, int>& order_data);
 
 signals:
     void MessageResponce(const QByteArray& message_byte_array);

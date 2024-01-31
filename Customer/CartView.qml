@@ -123,7 +123,9 @@ Rectangle {
                     function onChangeItemCounterSignal(value) {
 
                         cart_model.changeNumberOfItems(model.name, value);
-                        cart_total_cost_data.text = cart_model.total_price + " ₽";
+                        cart_total_cost_data.text = cart_model.total_price/100 + "." +
+                                                    ((cart_model.total_price%100 < 10) ?
+                                                    cart_model.total_price%100 + "0" : cart_model.total_price%100) + " ₽";
 
                     }
 
@@ -253,7 +255,7 @@ Rectangle {
                 Text {
 
                     id: cart_item_total_cost
-                    text: model.price + " ₽"
+                    text: model.price/100 + "." + ((model.price%100 < 10) ? model.price%100 + "0" : model.price%100) + " ₽";
                     color: "white"
                     font.family: regular_font.name
                     font.pointSize: 15
@@ -339,7 +341,9 @@ Rectangle {
         Text {
 
             id: cart_total_cost_data
-            text: cart_model.total_price + " ₽"
+            text: cart_model.total_price/100 + "." +
+                  ((cart_model.total_price%100 < 10) ?
+                  cart_model.total_price%100 + "0" : cart_model.total_price%100) + " ₽";
             color: "white"
             font.family: regular_font.name
             font.pointSize: 14
@@ -356,7 +360,9 @@ Rectangle {
 
         function onTotalPriceChanged() {
 
-            cart_total_cost_data.text = cart_model.total_price + " ₽";
+            cart_total_cost_data.text = cart_model.total_price/100 + "." +
+                                        ((cart_model.total_price%100 < 10) ?
+                                        cart_model.total_price%100 + "0" : cart_model.total_price%100) + " ₽";
 
         }
 

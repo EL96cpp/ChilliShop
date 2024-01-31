@@ -128,9 +128,10 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
                 QJsonValue phone_number_value = json_message_object.value(QLatin1String("Phone_number"));
                 QJsonValue timestamp_value = json_message_object.value(QLatin1String("Timestamp"));
+                QJsonValue total_cost_value = json_message_object.value(QLatin1String("Total_cost"));
                 QJsonValue order_json_value = json_message_object.value(QLatin1String("Order_data"));
 
-                AddOrder(phone_number_value.toString(), timestamp_value.toString(), order_json_value);
+                AddOrder(phone_number_value.toString(), timestamp_value.toString(), total_cost_value.toInt(), order_json_value);
 
             } else {
 
@@ -666,7 +667,7 @@ void MessageResponder::RegisterCustomer(const QString &phone_number, const QStri
 }
 
 
-void MessageResponder::AddOrder(const QString &phone_number, const QString &timestamp, const QJsonValue &order_json_value) {
+void MessageResponder::AddOrder(const QString &phone_number, const QString &timestamp, const int& total_cost, const QJsonValue &order_json_value) {
 
     QJsonArray order_json_array = order_json_value.toArray();
 
@@ -685,7 +686,7 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
 
         QString order_code = GenerateOrderCode();
 
-        sql_service->AddOrder(phone_number, timestamp, order_json_array, order_code);
+        sql_service->AddOrder(phone_number, timestamp, total_cost, order_json_array, order_code);
 
         QJsonObject message;
         message[QStringLiteral("Method")] = QStringLiteral("POST");
@@ -715,9 +716,9 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
 
 }
 
-void MessageResponder::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString &ordered_timestamp, const QString& received_timestamp, const QString &receive_code, const QMap<int, int> &order_data) {
+void MessageResponder::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString &ordered_timestamp, const QString& received_timestamp, const QString &receive_code, const int& total_cost, const QMap<int, int> &order_data) {
 
-    AddReceivedOrderResult result = sql_service->AddReceivedOrder(order_id, phone_number, ordered_timestamp, received_timestamp, receive_code, order_data);
+    AddReceivedOrderResult result = sql_service->AddReceivedOrder(order_id, phone_number, ordered_timestamp, received_timestamp, receive_code, total_cost, order_data);
 
     if (result == AddReceivedOrderResult::SUCCESS) {
 
