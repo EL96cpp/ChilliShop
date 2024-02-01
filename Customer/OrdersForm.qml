@@ -15,6 +15,7 @@ Item {
     property string phone_number
     property string name
 
+
     Connections {
 
         target: profile_page
@@ -78,11 +79,17 @@ Item {
 
                 id: delivery_mouse_area
                 anchors.fill: parent
-                hoverEnabled: true
+                hoverEnabled: cart_model.count === 0
 
                 onClicked: {
 
-                    //header_rect.setSaucesModelSignal();
+                    if (cart_model.total_price == 0) {
+
+                        order_confirm_form.visible = false;
+                        deliveries_form.visible = true;
+                        received_orders_form.visible = false;
+
+                    }
 
                 }
 
@@ -107,11 +114,17 @@ Item {
 
                 id: order_history_mouse_area
                 anchors.fill: parent
-                hoverEnabled: true
+                hoverEnabled: cart_model.count === 0
 
                 onClicked: {
 
-                    //header_rect.setSaucesModelSignal();
+                    if (cart_model.total_price == 0) {
+
+                        order_confirm_form.visible = false;
+                        deliveries_form.visible = false;
+                        received_orders_form.visible = true;
+
+                    }
 
                 }
 

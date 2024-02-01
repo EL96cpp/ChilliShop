@@ -6,6 +6,29 @@ import QtQuick.Layouts 1.3
 
 Item {
 
-    id: received_order_form
+    id: received_orders_form
+
+    Rectangle {
+
+        id: received_orders_rectangle
+
+        width: 700
+        height: 550
+        color: "#804c1200"
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.margins: 30
+
+        Text {
+
+            text: "received orders"
+            color: "white"
+
+            anchors.centerIn: parent
+
+        }
+
+    }
 
 }
