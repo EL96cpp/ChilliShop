@@ -216,6 +216,8 @@ QJsonArray SqlService::GetCatalogData() {
 
 QJsonArray SqlService::GetCustomerActiveOrders(const QString &phone_number) {
 
+    qDebug() << "Try get sql active orders";
+
     QJsonArray orders_array;
 
     QSqlQuery get_active_orders_query(sql_database);
@@ -247,6 +249,34 @@ QJsonArray SqlService::GetCustomerActiveOrders(const QString &phone_number) {
 
 QJsonArray SqlService::GetCustomerReceivedOrders(const QString &phone_number) {
 
+    qDebug() << "Try get sql received orders";
+
+    QJsonArray orders_array;
+
+    QSqlQuery get_received_orders_query(sql_database);
+    get_received_orders_query.prepare("SELECT order_id, ordered_timestamp, receive_code, order_data, total_cost FROM received_orders "
+                                    "WHERE phone_number = (?)");
+    get_received_orders_query.addBindValue(phone_number);
+
+    if (get_received_orders_query.exec()) {
+
+        while (get_received_orders_query.next()) {
+
+            QJsonObject order_json;
+
+            order_json[QStringLiteral("order_id")] = get_received_orders_query.value(0).toInt();
+            order_json[QStringLiteral("ordered_timestamp")] = get_received_orders_query.value(1).toString();
+            order_json[QStringLiteral("receive_code")] = get_received_orders_query.value(2).toString();
+            order_json[QStringLiteral("order_data")] = get_received_orders_query.value(3).toString();
+            order_json[QStringLiteral("total_cost")] = get_received_orders_query.value(4).toInt();
+
+            orders_array.push_back(order_json);
+
+        }
+
+    }
+
+    return orders_array;
 
 }
 

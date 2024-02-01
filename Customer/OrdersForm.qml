@@ -153,7 +153,6 @@ Item {
 
         OrderConfirmForm {            
             id: order_confirm_form
-
         }
 
         DeliveriesForm {

@@ -171,6 +171,30 @@ Page {
 
     }
 
+    Connections {
+
+        target: Client
+        function onAddActiveOrder(order_id, number_of_items, ordered_timestamp, receive_code, total_cost, order_data) {
+
+            deliveries_model.append({ order_id: order_id, number_of_items: number_of_items, ordered_timestamp: ordered_timestamp,
+                                      receive_code: receive_code, total_cost: total_cost, order_data: order_data });
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onAddReceivedOrder(order_id, number_of_items, ordered_timestamp, received_timestamp, receive_code, total_cost, order_data) {
+
+            received_orders_model.append({ order_id: order_id, number_of_items: number_of_items, ordered_timestamp: ordered_timestamp,
+                                           received_timestamp: received_timestamp, receive_code: receive_code, total_cost: total_cost, order_data: order_data });
+
+        }
+
+    }
+
     Image {
 
         id: profile_background
@@ -294,6 +318,14 @@ Page {
     ChangeNameForm {
         id: change_name_rectangle
         visible: false
+    }
+
+    DeliveriesModel {
+        id: deliveries_model
+    }
+
+    ReceivedOrdersModel {
+        id: received_orders_model
     }
 
 }

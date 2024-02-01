@@ -296,7 +296,6 @@ void Client::onReadyRead() {
                 emit loginSuccess(phone_number, name);
 
                 GetActiveOrders();
-                GetReceivedOrders();
 
             } else if (code_value.toString() == "403") {
 
@@ -364,7 +363,28 @@ void Client::onReadyRead() {
 
         if (resource_value.toString() == "Active_orders") {
 
+            qDebug() << "Received active orders responce!";
+
             if (code_value.toString() == "200") {
+
+                QJsonArray orders_array = json_message_object.value(QLatin1String("Orders")).toArray();
+
+                for (int i = 0; i < orders_array.size(); ++i) {
+
+                    size_t order_id = orders_array[i]["id"];
+                    size_t number_of_items = orders_array[i]["number_of_items"];
+                    QString ordered_timestamp = orders_array[i]["ordered_timestamp"];
+                    QString receive_code = orders_array[i]["receive_code"];
+                    size_t total_cost = orders_array[i]["total_cost"];
+                    QJsonArray order_data = orders_array[i]["order_data"];
+
+                    emit addActiveOrder(order_id, number_of_items, ordered_timestamp, receive_code, total_cost, order_data);
+
+                }
+
+
+                GetReceivedOrders();
+
 
             } else if (code_value.toString() == "403") {
 
@@ -372,7 +392,26 @@ void Client::onReadyRead() {
 
         } else if (resource_value.toString() == "Received_orders") {
 
-            if (code_value.toString() == "200") {
+            qDebug() << "Received received orders responce!";
+
+            if (code_value.toString() == "200") {                
+
+                QJsonArray orders_array = json_message_object.value(QLatin1String("Orders")).toArray();
+                qDebug() << QJsonDocument(orders_array).toJson();
+
+                for (int i = 0; i < orders_array.size(); ++i) {
+
+                    size_t order_id = orders_array[i]["id"];
+                    size_t number_of_items = orders_array[i]["number_of_items"];
+                    QString ordered_timestamp = orders_array[i]["ordered_timestamp"];
+                    QString received_timestamp = orders_array[i]["received_timestamp"];
+                    QString receive_code = orders_array[i]["receive_code"];
+                    size_t total_cost = orders_array[i]["total_cost"];
+                    QJsonArray order_data = orders_array[i]["order_data"];
+
+                    emit addReceivedOrder(order_id, number_of_items, ordered_timestamp, received_timestamp, receive_code, total_cost, order_data);
+
+                }
 
             } else if (code_value.toString() == "403") {
 

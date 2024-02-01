@@ -33,6 +33,10 @@ signals:
     void changeNameSuccess(const QString& new_name);
     void changeNameError(const QString& error_description);
 
+    void addActiveOrder(const size_t& order_id, const size_t& number_of_items, const QString& ordered_timestamp,
+                        const QString& receive_code, const size_t& total_cost, const QJsonArray& order_data);
+    void addReceivedOrder(const size_t& order_id, const size_t& number_of_items, const QString& ordered_timestamp,
+                          const QString& received_timestamp, const QString& receive_code, const size_t& total_cost, const QJsonArray& order_data);
 
 public slots:
     void onLogin(const QString& phone_number, const QString& password);

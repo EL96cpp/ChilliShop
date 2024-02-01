@@ -28,7 +28,6 @@ void ClientConnection::OnSetCustomerData(const QString &phone_number, const QStr
 
     qDebug() << "set customer data " << phone_number << " " << name;
 
-
     this->phone_number = phone_number;
     this->name = name;
 
