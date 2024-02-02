@@ -290,11 +290,10 @@ bool SqlService::AddOrder(const QString& phone_number, const QString& timestamp,
     add_order_query.addBindValue(total_cost);
     add_order_query.addBindValue(QString(QJsonDocument(order_array).toJson()));
 
-    qDebug() << add_order_query.lastError().text();
+    qDebug() << "Add order total cost " << total_cost;
 
     if (add_order_query.exec()) {
 
-        qDebug() << add_order_query.lastError().text();
         return true;
 
     } else {

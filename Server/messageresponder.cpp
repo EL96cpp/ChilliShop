@@ -131,7 +131,7 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
                 QJsonValue total_cost_value = json_message_object.value(QLatin1String("Total_cost"));
                 QJsonValue order_json_value = json_message_object.value(QLatin1String("Order_data"));
 
-                AddOrder(phone_number_value.toString(), timestamp_value.toString(), total_cost_value.toInt(), order_json_value);
+                AddOrder(phone_number_value.toString(), timestamp_value.toString(), total_cost_value.toString().toInt(), order_json_value);
 
             } else {
 

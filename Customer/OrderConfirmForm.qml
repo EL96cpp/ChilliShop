@@ -10,7 +10,7 @@ Item {
     property int total_price
 
     // add values for order data
-    signal makeOrder(var order_array);
+    signal makeOrder(var order_array, var total_cost);
 
     Connections {
 
