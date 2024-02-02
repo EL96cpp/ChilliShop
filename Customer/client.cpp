@@ -368,15 +368,16 @@ void Client::onReadyRead() {
             if (code_value.toString() == "200") {
 
                 QJsonArray orders_array = json_message_object.value(QLatin1String("Orders")).toArray();
+                qDebug() << QJsonDocument(orders_array).toJson();
 
                 for (int i = 0; i < orders_array.size(); ++i) {
 
-                    size_t order_id = orders_array[i]["id"];
-                    size_t number_of_items = orders_array[i]["number_of_items"];
-                    QString ordered_timestamp = orders_array[i]["ordered_timestamp"];
-                    QString receive_code = orders_array[i]["receive_code"];
-                    size_t total_cost = orders_array[i]["total_cost"];
-                    QJsonArray order_data = orders_array[i]["order_data"];
+                    size_t order_id = orders_array[i].toObject().value("order_id").toInt();
+                    size_t number_of_items = orders_array[i].toObject().value("number_of_items").toInt();
+                    QString ordered_timestamp = orders_array[i].toObject().value("ordered_timestamp").toString();
+                    QString receive_code = orders_array[i].toObject().value("receive_code").toString();
+                    size_t total_cost = orders_array[i].toObject().value("total_cost").toInt();
+                    QJsonArray order_data = orders_array[i].toObject().value("order_data").toArray();
 
                     emit addActiveOrder(order_id, number_of_items, ordered_timestamp, receive_code, total_cost, order_data);
 
@@ -401,13 +402,13 @@ void Client::onReadyRead() {
 
                 for (int i = 0; i < orders_array.size(); ++i) {
 
-                    size_t order_id = orders_array[i]["id"];
-                    size_t number_of_items = orders_array[i]["number_of_items"];
-                    QString ordered_timestamp = orders_array[i]["ordered_timestamp"];
-                    QString received_timestamp = orders_array[i]["received_timestamp"];
-                    QString receive_code = orders_array[i]["receive_code"];
-                    size_t total_cost = orders_array[i]["total_cost"];
-                    QJsonArray order_data = orders_array[i]["order_data"];
+                    size_t order_id = orders_array[i].toObject().value("id").toInt();
+                    size_t number_of_items = orders_array[i].toObject().value("number_of_items").toInt();
+                    QString ordered_timestamp = orders_array[i].toObject().value("ordered_timestamp").toString();
+                    QString received_timestamp = orders_array[i].toObject().value("received_timestamp").toString();
+                    QString receive_code = orders_array[i].toObject().value("receive_code").toString();
+                    size_t total_cost = orders_array[i].toObject().value("total_cost").toInt();
+                    QJsonArray order_data = orders_array[i].toObject().value("order_data").toArray();
 
                     emit addReceivedOrder(order_id, number_of_items, ordered_timestamp, received_timestamp, receive_code, total_cost, order_data);
 

@@ -179,6 +179,8 @@ Page {
             deliveries_model.append({ order_id: order_id, number_of_items: number_of_items, ordered_timestamp: ordered_timestamp,
                                       receive_code: receive_code, total_cost: total_cost, order_data: order_data });
 
+            console.log("Added active order " + order_id);
+
         }
 
     }
@@ -190,6 +192,8 @@ Page {
 
             received_orders_model.append({ order_id: order_id, number_of_items: number_of_items, ordered_timestamp: ordered_timestamp,
                                            received_timestamp: received_timestamp, receive_code: receive_code, total_cost: total_cost, order_data: order_data });
+
+            console.log("Added received order " + order_id);
 
         }
 
