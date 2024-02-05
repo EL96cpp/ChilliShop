@@ -204,6 +204,20 @@ Rectangle {
 
     }
 
+    Connections {
+
+        target: Client
+        function makeOrderError(error_description) {
+
+            error_rectangle.title = "Order error";
+            error_rectangle.description = error_description;
+            error_rectangle.visible = true;
+
+        }
+
+    }
+
+
 
 
 }

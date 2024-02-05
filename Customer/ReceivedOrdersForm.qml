@@ -22,10 +22,15 @@ Item {
 
         Text {
 
-            text: "received orders"
-            color: "white"
-
+            id: deliveries_empty_title
+            font.family: regular_font.name
+            font.pointSize: 18
+            font.wordSpacing: 7
+            color: "#e4e4e4"
+            text: "Здесь пока пусто..."
             anchors.centerIn: parent
+
+            visible: received_orders_model.count === 0
 
         }
 

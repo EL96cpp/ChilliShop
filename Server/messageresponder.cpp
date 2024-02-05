@@ -686,17 +686,43 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
 
         QString order_code = GenerateOrderCode();
 
-        sql_service->AddOrder(phone_number, timestamp, total_cost, order_json_array, order_code);
+        int order_id = sql_service->AddOrder(phone_number, timestamp, total_cost, order_json_array, order_code);
 
-        QJsonObject message;
-        message[QStringLiteral("Method")] = QStringLiteral("POST");
-        message[QStringLiteral("Resource")] = QStringLiteral("Order");
-        message[QStringLiteral("Code")] = QStringLiteral("200");
-        message[QStringLiteral("Order_code")] = order_code;
-        QByteArray message_byte_array = QJsonDocument(message).toJson();
-        message_byte_array.append("\n");
+        qDebug() << "order id " << order_id;
 
-        emit MessageResponce(message_byte_array);
+        if (order_id != 0) {
+
+            QJsonObject message;
+            message[QStringLiteral("Method")] = QStringLiteral("POST");
+            message[QStringLiteral("Resource")] = QStringLiteral("Order");
+            message[QStringLiteral("Code")] = QStringLiteral("200");
+
+            message[QStringLiteral("order_id")] = order_id;
+            message[QStringLiteral("ordered_timestamp")] = timestamp;
+            message[QStringLiteral("receive_code")] = order_code;
+            message[QStringLiteral("total_cost")] = total_cost;
+            message[QStringLiteral("order_data")] = order_json_array;
+            message[QStringLiteral("is_ready")] = false;
+
+            QByteArray message_byte_array = QJsonDocument(message).toJson();
+            message_byte_array.append("\n");
+
+            emit MessageResponce(message_byte_array);
+
+        } else {
+
+            QJsonObject message;
+            message[QStringLiteral("Method")] = QStringLiteral("POST");
+            message[QStringLiteral("Resource")] = QStringLiteral("Order");
+            message[QStringLiteral("Code")] = QStringLiteral("500");
+            message[QStringLiteral("Error_description")] = QStringLiteral("Database error!");
+
+            QByteArray message_byte_array = QJsonDocument(message).toJson();
+            message_byte_array.append("\n");
+
+            emit MessageResponce(message_byte_array);
+
+        }
 
     } else {
 

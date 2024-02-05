@@ -20,6 +20,8 @@ Rectangle {
 
     property bool is_empty: cart_model.count === 0
 
+    signal setOrderConfirmState();
+
     Rectangle {
 
         id: cart_title_rect
@@ -312,6 +314,7 @@ Rectangle {
 
             if (cart_model.count !== 0) {
 
+                profile_page.setOrderConfirmState();
                 stack_view.push(profile_page);
 
             }

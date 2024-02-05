@@ -174,10 +174,10 @@ Page {
     Connections {
 
         target: Client
-        function onAddActiveOrder(order_id, number_of_items, ordered_timestamp, receive_code, total_cost, order_data) {
+        function onAddActiveOrder(order_id, ordered_timestamp, receive_code, total_cost, order_data, is_ready) {
 
-            deliveries_model.append({ order_id: order_id, number_of_items: number_of_items, ordered_timestamp: ordered_timestamp,
-                                      receive_code: receive_code, total_cost: total_cost, order_data: order_data });
+            active_orders_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
+                                         total_cost: total_cost, order_data: order_data, is_ready: is_ready });
 
             console.log("Added active order " + order_id);
 
@@ -325,7 +325,7 @@ Page {
     }
 
     DeliveriesModel {
-        id: deliveries_model
+        id: active_orders_model
     }
 
     ReceivedOrdersModel {

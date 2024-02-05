@@ -66,7 +66,7 @@ public:
     EmployeeLoginResult LoginEmployee(const QString& name, const QString& surname, const QString& position, const QString& password);
     bool CheckIfPhoneNumberExists(const QString& phone_number);
     bool CheckIfEmployeeExists(const QString& name, const QString& surname, const QString& position);
-    bool AddOrder(const QString& phone_number, const QString& timestamp, const int& total_cost, const QJsonArray& order_array, const QString& order_code);
+    int AddOrder(const QString& phone_number, const QString& timestamp, const int& total_cost, const QJsonArray& order_array, const QString& order_code);
     bool CheckIfOrderIsCorrect(const QVector<int>& product_ids);
     bool CheckIfOrderExists(const int& order_id, const QString& phone_number, const QString& receive_code);
     bool CheckIfOrderExists(const int& order_id);

@@ -44,6 +44,23 @@ Item {
 
     }
 
+    Connections {
+
+        target: Client
+
+        function onOrderAccepted() {
+
+            order_confirm_form.visible = false;
+            deliveries_form.visible = true;
+            received_orders_form.visible = false;
+
+            cart_model.clear();
+            cart_model.updateTotalPrice();
+
+        }
+
+    }
+
     Rectangle {
 
         id: order_header_rectangle
