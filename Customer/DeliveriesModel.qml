@@ -13,6 +13,6 @@ ListModel {
     property string receive_code;
     property int total_cost;
     property var order_data; //json array object
-    property bool is_ready: false;
+    property bool is_ready;
 
 }

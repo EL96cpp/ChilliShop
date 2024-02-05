@@ -25,7 +25,7 @@ qt_add_qml_module(appChilliWorld
               CopyModel.qml CartModel.qml Filters.qml CartView.qml GoodsGrid.qml
               CustomSpinbox.qml ErrorMessage.qml OrdersForm.qml ChangeNameForm.qml
               OrderConfirmForm.qml DeliveriesForm.qml ReceivedOrdersForm.qml DeliveriesModel.qml
-              ReceivedOrdersModel.qml
+              ReceivedOrdersModel.qml OrderView.qml OrderViewModel.qml
 
 )
 

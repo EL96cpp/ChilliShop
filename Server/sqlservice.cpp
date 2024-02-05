@@ -8,9 +8,6 @@ SqlService::SqlService(const QString& sql_connections_counter) : sql_database(QS
     sql_database.setUserName("postgres");
     sql_database.setPassword("postgres");
 
-    qDebug() << sql_database.databaseName() << " name";
-    qDebug() << sql_database.connectionName() << " name";
-
     if (sql_database.open()) {
 
         CreateTablesIfNotExists();
@@ -57,9 +54,6 @@ CustomerLoginResult SqlService::LoginCustomer(const QString &phone_number, const
 
         QString correct_password = login_customer_query.value(0).toString();
 
-        qDebug() << phone_number << " phone number will check password";
-        qDebug() << password << " " << correct_password << " passwords";
-
         // compare method returns 0, if two strings are equal!
         if (!correct_password.compare(password, Qt::CaseSensitive)) {
 
@@ -84,7 +78,6 @@ CustomerRegisterResult SqlService::RegisterCustomer(const QString &phone_number,
 
     } else {
 
-        qDebug() << phone_number << " " << password << " " << name;
         QSqlQuery register_customer_query(sql_database);
         register_customer_query.prepare("INSERT INTO customers VALUES ((?), (?), (?))");
         register_customer_query.addBindValue(phone_number);
@@ -102,8 +95,6 @@ CustomerRegisterResult SqlService::RegisterCustomer(const QString &phone_number,
 }
 
 EmployeeLoginResult SqlService::LoginEmployee(const QString &name, const QString &surname, const QString &position, const QString &password) {
-
-    qDebug() << name << " " << surname << " " << position << " " << password;
 
     if (!CheckIfEmployeeExists(name, surname, position)) {
 
@@ -123,8 +114,6 @@ EmployeeLoginResult SqlService::LoginEmployee(const QString &name, const QString
         while (check_password_query.next()) {
 
             correct_password = check_password_query.value(0).toString();
-            qDebug() << correct_password << " correct password";
-            qDebug() << password << " password";
 
         }
 
@@ -145,7 +134,6 @@ EmployeeLoginResult SqlService::LoginEmployee(const QString &name, const QString
 
 bool SqlService::CheckIfPhoneNumberExists(const QString &phone_number) {
 
-    qDebug() << "Check exists phone " << phone_number;
     QSqlQuery check_phone_query(sql_database);
     check_phone_query.prepare("SELECT EXISTS (SELECT 1 FROM customers WHERE phone_number = (?))");
     check_phone_query.addBindValue(phone_number);
@@ -171,7 +159,6 @@ bool SqlService::CheckIfEmployeeExists(const QString &name, const QString &surna
     if (login_query.next()) {
 
         bool result = login_query.value(0).toBool();
-        qDebug() << "employee exists " << result;
         return result;
 
     }
@@ -182,8 +169,7 @@ QJsonArray SqlService::GetCatalogData() {
 
     QSqlQuery get_catalog_query(sql_database);
 
-    qDebug() << "Get catalog query: " << get_catalog_query.exec("SELECT product_id, product_type, product_name, price, "
-                                                                "scoville, description FROM catalog;");
+    get_catalog_query.exec("SELECT product_id, product_type, product_name, price, scoville, description FROM catalog;");
 
     QJsonObject catalog_message;
     QJsonArray catalog_array;
@@ -216,8 +202,6 @@ QJsonArray SqlService::GetCatalogData() {
 
 QJsonArray SqlService::GetCustomerActiveOrders(const QString &phone_number) {
 
-    qDebug() << "Try get sql active orders";
-
     QJsonArray orders_array;
 
     QSqlQuery get_active_orders_query(sql_database);
@@ -249,8 +233,6 @@ QJsonArray SqlService::GetCustomerActiveOrders(const QString &phone_number) {
 }
 
 QJsonArray SqlService::GetCustomerReceivedOrders(const QString &phone_number) {
-
-    qDebug() << "Try get sql received orders";
 
     QJsonArray orders_array;
 
@@ -291,8 +273,6 @@ int SqlService::AddOrder(const QString& phone_number, const QString& timestamp, 
     add_order_query.addBindValue(total_cost);
     add_order_query.addBindValue(QString(QJsonDocument(order_array).toJson()));
     add_order_query.addBindValue(false);
-
-    qDebug() << "Add order total cost " << total_cost;
 
     if (!add_order_query.exec()) {
 
@@ -438,7 +418,6 @@ AddReceivedOrderResult SqlService::AddReceivedOrder(const int &order_id, const Q
 
 void SqlService::CreateTablesIfNotExists() {
 
-    qDebug() << "Create tables if not exit";
 
     // Create customers table if it doesn't exist
     QSqlQuery check_customers_table_query("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'customers')", sql_database);
@@ -448,7 +427,6 @@ void SqlService::CreateTablesIfNotExists() {
 
         if (!check_customers_table_query.value(0).toBool()) {
 
-            qDebug() << "Create table";
             QSqlQuery customers_table_query("CREATE TABLE customers (phone_number VARCHAR(11), password TEXT, name VARCHAR(30))", sql_database);
             customers_table_query.exec();
 
@@ -464,7 +442,6 @@ void SqlService::CreateTablesIfNotExists() {
 
         if (!check_employees_table_query.value(0).toBool()) {
 
-            qDebug() << "Create table";
             QSqlQuery employees_table_query("CREATE TABLE employees (name VARCHAR(30), surname VARCHAR(30), "
                                             "position VARCHAR(20), password TEXT)", sql_database);
             employees_table_query.exec();
@@ -482,7 +459,6 @@ void SqlService::CreateTablesIfNotExists() {
 
         if (!check_active_orders_table_query.value(0).toBool()) {
 
-            qDebug() << "Create table";
             QSqlQuery active_orders_table_query("CREATE TABLE IF NOT EXISTS active_orders (order_id SERIAL, phone_number VARCHAR(11), "
                                          "ordered_timestamp TIMESTAMP, receive_code CHAR(4), order_data JSON)", sql_database);
             active_orders_table_query.exec();
@@ -502,7 +478,6 @@ void SqlService::CreateTablesIfNotExists() {
 
         if (!check_received_orders_table_query.value(0).toBool()) {
 
-            qDebug() << "Create table";
             QSqlQuery orders_table_query("CREATE TABLE IF NOT EXISTS received_orders (order_id INT, phone_number VARCHAR(11), "
                                          "ordered_timestamp TIMESTAMP, received_timestamp TIMESTAMP, receive_code CHAR(4), "
                                          "order_data JSON)", sql_database);
@@ -519,8 +494,6 @@ void SqlService::CreateTablesIfNotExists() {
     while (check_catalog_table_query.next()) {
 
         if (!check_catalog_table_query.value(0).toBool()) {
-
-            qDebug() << "Create table";
 
             QSqlQuery catalog_table_query("CREATE TABLE catalog (product_id INT, product_type TEXT, product_name TEXT, price INT, "
                                           "scoville INT, description JSON)", sql_database);

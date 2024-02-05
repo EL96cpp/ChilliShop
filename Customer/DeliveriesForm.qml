@@ -8,6 +8,8 @@ Item {
 
     id: deliveries_form
 
+    signal showActiveOrder();
+
     Rectangle {
 
         id: deliveries_rectangle
@@ -182,6 +184,21 @@ Item {
 
                     }
 
+
+                }
+
+                MouseArea {
+
+                    id: deliverie_delegate_mouse_area
+                    anchors.fill: parent
+                    hoverEnabled: true
+
+                    onClicked: {
+
+                        orders_form.showActiveOrderView(model.order_id, model.ordered_timestamp, model.receive_code, model.total_cost,
+                                                        model.order_data, model.is_ready);
+
+                    }
 
                 }
 

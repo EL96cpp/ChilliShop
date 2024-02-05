@@ -332,4 +332,8 @@ Page {
         id: received_orders_model
     }
 
+    OrderViewModel {
+        id: order_view_model
+    }
+
 }

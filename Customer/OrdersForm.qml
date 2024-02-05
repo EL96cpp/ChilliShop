@@ -15,6 +15,17 @@ Item {
     property string phone_number
     property string name
 
+    function showActiveOrderView(order_id, ordered_timestamp, receive_code, order_data, total_price) {
+
+        order_view_model.clear();
+
+        order_confirm_form.visible = false;
+        deliveries_form.visible = false;
+        received_orders_form.visible = false;
+        order_view.visible = true;
+
+    }
+
 
     Connections {
 
@@ -25,6 +36,7 @@ Item {
             order_confirm_form.visible = true;
             deliveries_form.visible = false;
             received_orders_form.visible = false;
+            order_view.visible = false;
 
         }
 
@@ -39,6 +51,7 @@ Item {
             order_confirm_form.visible = false;
             deliveries_form.visible = true;
             received_orders_form.visible = false;
+            order_view.visible = false;
 
         }
 
@@ -53,6 +66,7 @@ Item {
             order_confirm_form.visible = false;
             deliveries_form.visible = true;
             received_orders_form.visible = false;
+            order_view.visible = false;
 
             cart_model.clear();
             cart_model.updateTotalPrice();
@@ -140,6 +154,7 @@ Item {
                         order_confirm_form.visible = false;
                         deliveries_form.visible = false;
                         received_orders_form.visible = true;
+                        order_view.visible = false;
 
                     }
 
@@ -180,6 +195,11 @@ Item {
         ReceivedOrdersForm {
             id: received_orders_form
             visible: false
+        }
+
+        OrderView {
+            id: order_view
+            visible: false;
         }
 
     }

@@ -726,8 +726,6 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
 
     } else {
 
-        qDebug() << "Incorrect order id's!";
-
         QJsonObject message;
         message[QStringLiteral("Method")] = QStringLiteral("POST");
         message[QStringLiteral("Resource")] = QStringLiteral("Order");
@@ -799,7 +797,6 @@ QString MessageResponder::GenerateOrderCode() {
 
     }
 
-    qDebug() << "oder code " << order_code;
     return order_code;
 
 }
