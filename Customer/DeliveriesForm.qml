@@ -195,8 +195,17 @@ Item {
 
                     onClicked: {
 
-                        orders_form.showActiveOrderView(model.order_id, model.ordered_timestamp, model.receive_code, model.total_cost,
-                                                        model.order_data, model.is_ready);
+                        // Problem with model.bla-bla doesn't work! Try to use [i] or at(i) or other
+                        console.log("total cost " + model.total_cost);
+
+                        for (var i = 0; i < order_data.length; ++i) {
+
+                            console.log(i);
+
+                        }
+
+                        orders_form.showActiveOrderView(model.order_id, model.ordered_timestamp, model.receive_code,
+                                                        model.order_data, model.total_cost, model.is_ready);
 
                     }
 

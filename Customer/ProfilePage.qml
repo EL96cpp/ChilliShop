@@ -176,10 +176,16 @@ Page {
         target: Client
         function onAddActiveOrder(order_id, ordered_timestamp, receive_code, total_cost, order_data, is_ready) {
 
-            active_orders_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
-                                         total_cost: total_cost, order_data: order_data, is_ready: is_ready });
+            var orders_json_array = {"order_positions" : []};
 
-            console.log("Added active order " + order_id);
+            for (var i = 0; i < order_data.length; ++i) {
+
+                orders_json_array.order_positions.push(order_data[i]);
+
+            }
+
+            active_orders_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
+                                         total_cost: total_cost, order_data: orders_json_array, is_ready: is_ready });
 
         }
 

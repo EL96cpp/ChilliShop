@@ -42,6 +42,9 @@ ListModel {
 
             var order_position = {};
             order_position["id"] = get(i).id;
+            order_position["name"] = get(i).name;
+            order_position["description"] = get(i).description;
+            order_position["price"] = get(i).price;
             order_position["number_of_items"] = get(i).number_of_items;
 
             order_json.push(order_position);

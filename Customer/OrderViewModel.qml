@@ -15,10 +15,11 @@ ListModel {
     property int number_of_items
     property string image
 
+    property int order_id;
     property string receive_code
     property string ordered_timestamp
     property string received_timestamp
-    property int total_price
-
+    property int total_cost
+    property bool is_ready
 
 }

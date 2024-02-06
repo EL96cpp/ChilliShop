@@ -8,7 +8,7 @@ Item {
 
     id: order_view
 
-    property int total_price
+    property int total_cost
     property bool is_active
 
     Rectangle {
@@ -25,7 +25,7 @@ Item {
         ListView {
 
             id: order_items_view
-            model: cart_model
+            model: order_view_model
             width: order_view_rectangle.width - 10
             height: 530
             anchors.top: parent.top
@@ -49,7 +49,7 @@ Item {
 
                     id: cart_item_image
                     sourceSize.height: 70
-                    source: model.image
+                    //source: model.image
 
                     anchors.left: parent.left
                     anchors.top: parent.top
@@ -64,6 +64,7 @@ Item {
                     id: number_of_items
                     height: 20
                     width: 70
+
                     anchors.top: cart_item_image.bottom
                     anchors.topMargin: 5
                     anchors.horizontalCenter: cart_item_image.horizontalCenter
@@ -75,6 +76,7 @@ Item {
                     id: cart_item_name_rectangle
                     width: cart_item_name.paintedWidth * 1.5
                     height: cart_item_name.paintedHeight
+
                     anchors.left: cart_item_image.right
                     anchors.leftMargin: 15
                     anchors.top: cart_item_image.top
@@ -99,6 +101,7 @@ Item {
                         font.pointSize: 15
                         font.wordSpacing: 5
                         font.bold: true
+
                         anchors.centerIn: parent
 
                     }
@@ -112,6 +115,7 @@ Item {
                         font.pointSize: 15
                         font.wordSpacing: 5
                         font.bold: true
+
                         anchors.left: cart_item_name.left
                         anchors.top: cart_item_name.bottom
                         anchors.topMargin: 10
@@ -173,7 +177,8 @@ Item {
     Text {
 
         id: order_total_value
-        text: total_price/100 + "." + ((total_price%100 < 10) ? total_price%100 + "0" : total_price%100) + " ₽"
+        text: order_view_model.total_cost/100 + "." + ((order_view_model.total_cost%100 < 10) ?
+              order_view_model.total_cost%100 + "0" : order_view_model.total_cost%100) + " ₽"
         color: "white"
         font.family: regular_font.name
         font.pointSize: 20
@@ -185,6 +190,66 @@ Item {
 
     }
 
+    Text {
+
+        id: order_id_title
+        text: "Номер заказа:"
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 18
+        font.wordSpacing: 5
+
+        anchors.top: order_view_rectangle.top
+        anchors.left: order_view_rectangle.right
+        anchors.leftMargin: 20
+
+    }
+
+    Text {
+
+        id: order_id
+        text: order_view_model.order_id
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 18
+        font.wordSpacing: 5
+
+        anchors.verticalCenter: order_id_title.verticalCenter
+        anchors.left: order_id_title.right
+        anchors.leftMargin: 10
+
+    }
+
+    Text {
+
+        id: receive_code_title
+        text: "Код получения:"
+
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 18
+        font.wordSpacing: 5
+
+        anchors.top: order_id_title.bottom
+        anchors.left: order_id_title.left
+        anchors.topMargin: 5
+
+    }
+
+    Text {
+
+        id: receive_code
+        text: order_view_model.receive_code
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 18
+        font.wordSpacing: 5
+
+        anchors.verticalCenter: receive_code_title.verticalCenter
+        anchors.left: receive_code_title.right
+        anchors.leftMargin: 10
+
+    }
 
     Text {
 
@@ -198,7 +263,7 @@ Item {
 
         visible: order_view.is_active
 
-        anchors.top: order_view_rectangle.top
+        anchors.bottom: order_view_rectangle.bottom
         anchors.left: order_view_rectangle.right
         anchors.leftMargin: 120
 
@@ -384,7 +449,7 @@ Item {
 
             onClicked: {
 
-
+                order_cancle_form.visible = false;
 
             }
 

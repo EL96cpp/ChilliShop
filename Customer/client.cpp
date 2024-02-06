@@ -397,12 +397,16 @@ void Client::onReadyRead() {
                     QString ordered_timestamp = orders_array[i].toObject().value("ordered_timestamp").toString();
                     QString receive_code = orders_array[i].toObject().value("receive_code").toString();
                     size_t total_cost = orders_array[i].toObject().value("total_cost").toInt();
-                    QJsonArray order_data = orders_array[i].toObject().value("order_data").toArray();
+                    QString order_data_string = orders_array[i].toObject().value("order_data").toString();
                     bool is_ready = orders_array[i].toObject().value("is_ready").toBool();
 
-                    emit addActiveOrder(order_id, ordered_timestamp, receive_code,
-                                        total_cost, order_data, is_ready);
+                    QJsonArray order_data_array = QJsonDocument::fromJson(order_data_string.toUtf8()).array();
 
+                    qDebug() << order_id << " " << ordered_timestamp << " " << receive_code << " " << total_cost << " "
+                             << order_data_array.size() << " " << is_ready;
+
+                    emit addActiveOrder(order_id, ordered_timestamp, receive_code,
+                                        total_cost, order_data_array, is_ready);
 
                 }
 

@@ -15,9 +15,32 @@ Item {
     property string phone_number
     property string name
 
-    function showActiveOrderView(order_id, ordered_timestamp, receive_code, order_data, total_price) {
+    function showActiveOrderView(order_id, ordered_timestamp, receive_code, order_data, total_cost, is_ready) {
 
         order_view_model.clear();
+
+        order_view.is_active = true;
+
+        for (var i = 0; i < order_data.order_positions.length; ++i) {
+
+            console.log(order_data.order_positions[i].id + " " + order_data.order_positions[i].number_of_items);
+
+            order_view_model.append({ product_id: order_data.order_positions[i].id, name: order_data.order_positions[i].name,
+                                      description: order_data.order_positions[i].description, price: order_data.order_positions[i].price,
+                                      number_of_items: order_data.order_positions[i].number_of_items});
+
+            //image: "file://" + applicationDirPath + "/../Images/Catalog/Seasonings/" + order_data.order_positions[i].id + ".png"
+
+        }
+
+        order_view_model.order_id = order_id;
+        order_view_model.receive_code = receive_code;
+        order_view_model.ordered_timestamp = ordered_timestamp;
+        order_view_model.total_cost = total_cost;
+        order_view_model.is_ready = is_ready;
+
+        console.log(order_view_model.order_id + " " + order_view_model.ordered_timestamp + " " + order_view_model.receive_code +
+                    " " + order_view_model.total_cost + " " + order_view_model.is_ready);
 
         order_confirm_form.visible = false;
         deliveries_form.visible = false;
@@ -119,6 +142,7 @@ Item {
                         order_confirm_form.visible = false;
                         deliveries_form.visible = true;
                         received_orders_form.visible = false;
+                        order_view.visible = false;
 
                     }
 
