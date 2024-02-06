@@ -190,18 +190,29 @@ Item {
 
     }
 
-    Text {
+    Rectangle {
 
-        id: order_id_title
-        text: "Номер заказа:"
-        color: "white"
-        font.family: regular_font.name
-        font.pointSize: 18
-        font.wordSpacing: 5
+        id: order_id_title_rectangle
+        width: order_id_title.paintedWidth + 10
+        height: order_id_title.paintedHeight + 5
+        color: "#d0290A00"
 
         anchors.top: order_view_rectangle.top
         anchors.left: order_view_rectangle.right
         anchors.leftMargin: 20
+
+        Text {
+
+            id: order_id_title
+            text: "Номер заказа:"
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 18
+            font.wordSpacing: 5
+
+            anchors.centerIn: parent
+
+        }
 
     }
 
@@ -214,25 +225,35 @@ Item {
         font.pointSize: 18
         font.wordSpacing: 5
 
-        anchors.verticalCenter: order_id_title.verticalCenter
-        anchors.left: order_id_title.right
+        anchors.verticalCenter: order_id_title_rectangle.verticalCenter
+        anchors.left: order_id_title_rectangle.right
         anchors.leftMargin: 10
 
     }
 
-    Text {
+    Rectangle {
 
-        id: receive_code_title
-        text: "Код получения:"
+        id: receive_code_title_rectangle
+        width: receive_code_title.paintedWidth + 10
+        height: receive_code_title.paintedHeight + 5
+        color: "#d0290A00"
 
-        color: "white"
-        font.family: regular_font.name
-        font.pointSize: 18
-        font.wordSpacing: 5
-
-        anchors.top: order_id_title.bottom
-        anchors.left: order_id_title.left
+        anchors.top: order_id_title_rectangle.bottom
+        anchors.left: order_id_title_rectangle.left
         anchors.topMargin: 5
+
+        Text {
+
+            id: receive_code_title
+            text: "Код получения:"
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 18
+            font.wordSpacing: 5
+
+            anchors.centerIn: parent
+
+        }
 
     }
 
@@ -245,9 +266,73 @@ Item {
         font.pointSize: 18
         font.wordSpacing: 5
 
-        anchors.verticalCenter: receive_code_title.verticalCenter
-        anchors.left: receive_code_title.right
+        anchors.verticalCenter: receive_code_title_rectangle.verticalCenter
+        anchors.left: receive_code_title_rectangle.right
         anchors.leftMargin: 10
+
+    }
+
+    Text {
+
+        id: ordered_timestamp_title
+        text: "Дата заказа:"
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 15
+        font.wordSpacing: 5
+
+        anchors.top: receive_code_title_rectangle.bottom
+        anchors.left: receive_code_title_rectangle.left
+        anchors.topMargin: 10
+
+    }
+
+    Text {
+
+        id: ordered_timestamp
+        text: order_view_model.ordered_timestamp
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 15
+        font.wordSpacing: 5
+
+        anchors.verticalCenter: ordered_timestamp_title.verticalCenter
+        anchors.left: ordered_timestamp_title.right
+        anchors.leftMargin: 5
+
+    }
+
+    Text {
+
+        id: received_timestamp_title
+        text: "Дата получения:"
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 15
+        font.wordSpacing: 5
+
+        visible: !order_view.is_active
+
+        anchors.top: ordered_timestamp_title.bottom
+        anchors.left: ordered_timestamp_title.left
+        anchors.topMargin: 5
+
+    }
+
+    Text {
+
+        id: received_timestamp
+        text: order_view_model.received_timestamp
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 15
+        font.wordSpacing: 5
+
+        visible: !order_view.is_active
+
+        anchors.horizontalCenter: received_timestamp_title.horizontalCenter
+        anchors.left: received_timestamp_title.right
+        anchors.leftMargin: 5
 
     }
 

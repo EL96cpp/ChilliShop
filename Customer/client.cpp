@@ -400,12 +400,12 @@ void Client::onReadyRead() {
                     QString order_data_string = orders_array[i].toObject().value("order_data").toString();
                     bool is_ready = orders_array[i].toObject().value("is_ready").toBool();
 
+                    QString ordered_timestamp_formated = ordered_timestamp.replace("T", " ");
+                    ordered_timestamp_formated = ordered_timestamp_formated.left(16);
+
                     QJsonArray order_data_array = QJsonDocument::fromJson(order_data_string.toUtf8()).array();
 
-                    qDebug() << order_id << " " << ordered_timestamp << " " << receive_code << " " << total_cost << " "
-                             << order_data_array.size() << " " << is_ready;
-
-                    emit addActiveOrder(order_id, ordered_timestamp, receive_code,
+                    emit addActiveOrder(order_id, ordered_timestamp_formated, receive_code,
                                         total_cost, order_data_array, is_ready);
 
                 }
@@ -434,9 +434,16 @@ void Client::onReadyRead() {
                     QString received_timestamp = orders_array[i].toObject().value("received_timestamp").toString();
                     QString receive_code = orders_array[i].toObject().value("receive_code").toString();
                     size_t total_cost = orders_array[i].toObject().value("total_cost").toInt();
-                    QJsonArray order_data = orders_array[i].toObject().value("order_data").toArray();
+                    QString order_data_string = orders_array[i].toObject().value("order_data").toString();
 
-                    emit addReceivedOrder(order_id, ordered_timestamp, received_timestamp, receive_code, total_cost, order_data);
+                    QString ordered_timestamp_formated = ordered_timestamp.replace("T", " ");
+                    ordered_timestamp_formated = ordered_timestamp_formated.left(16);
+                    QString received_timestamp_formated = received_timestamp.replace("T", " ");
+                    received_timestamp_formated = received_timestamp_formated.left(16);
+
+                    QJsonArray order_data_array = QJsonDocument::fromJson(order_data_string.toUtf8()).array();
+
+                    emit addReceivedOrder(order_id, ordered_timestamp_formated, received_timestamp_formated, receive_code, total_cost, order_data_array);
 
                 }
 
