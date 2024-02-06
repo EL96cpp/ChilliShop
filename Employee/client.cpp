@@ -169,6 +169,11 @@ void Client::deleteConnection() {
 
 }
 
+void Client::onDisconnected()
+{
+
+}
+
 void Client::SendConnectionType() {
 
     QJsonObject message;
