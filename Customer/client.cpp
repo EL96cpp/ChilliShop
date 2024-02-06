@@ -488,3 +488,8 @@ void Client::onDisconnected() {
     emit disconnected(QStringLiteral("Connection with the server was lost"));
 
 }
+
+void Client::onCancelOrder(const int &order_id, const QString &receive_code)
+{
+
+}

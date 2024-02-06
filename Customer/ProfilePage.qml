@@ -99,7 +99,6 @@ Page {
 
     }
 
-
     Connections {
 
         target: login_rectangle
