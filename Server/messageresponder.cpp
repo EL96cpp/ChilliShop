@@ -6,7 +6,8 @@
 MessageResponder::MessageResponder(QObject* parent,
                                    const QByteArray& message_byte_array,
                                    ConnectionsVector& connections,
-                                   OrderIDVector& processing_ids,
+                                   OrderIDVector& prepearing_order_ids,
+                                   OrderIDVector& issuing_order_ids,
                                    const ConnectionType& connection_type,
                                    std::atomic<unsigned long long>& sql_connections_counter,
                                    const bool& logged_in,
@@ -14,7 +15,8 @@ MessageResponder::MessageResponder(QObject* parent,
                                                                   phone_number(phone_number),
                                                                   message_byte_array(message_byte_array),
                                                                   connections(connections),
-                                                                  processing_ids(processing_ids),
+                                                                  prepearing_order_ids(prepearing_order_ids),
+                                                                  issuing_order_ids(issuing_order_ids),
                                                                   connection_type(connection_type),
                                                                   sql_connections_counter(sql_connections_counter),
                                                                   logged_in(logged_in) {
@@ -372,13 +374,13 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
             qDebug() << "employee connection will be deleted!";
             emit DeleteConnection();
 
-        } else if (resource_value.toString() == "Processing_order") {
+        } else if (resource_value.toString() == "Prepearing_order") {
 
             int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
 
             if (logged_in) {
 
-                if (processing_ids.erase(order_id)) {
+                if (prepearing_order_ids.erase(order_id)) {
 
 
 
@@ -388,7 +390,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
                 QJsonObject message;
                 message[QStringLiteral("Method")] = QStringLiteral("DELETE");
-                message[QStringLiteral("Resource")] = QStringLiteral("Processing_order");
+                message[QStringLiteral("Resource")] = QStringLiteral("Prepearing_order");
                 message[QStringLiteral("Code")] = QStringLiteral("403");
                 message[QStringLiteral("Order_id")] = order_id;
                 message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users!");
@@ -408,7 +410,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
 
 
-        } else if (resource_value.toString() == "Processing_order") {
+        } else if (resource_value.toString() == "Prepearing_order") {
 
             int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
 
@@ -416,14 +418,14 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
                 if (sql_service->CheckIfOrderExists(order_id)) {
 
-                    if (processing_ids.push(order_id)) {
+                    if (prepearing_order_ids.push(order_id)) {
 
                         QJsonObject message;
                         message[QStringLiteral("Method")] = QStringLiteral("PUT");
-                        message[QStringLiteral("Resource")] = QStringLiteral("Processing_order");
+                        message[QStringLiteral("Resource")] = QStringLiteral("Prepearing_order");
                         message[QStringLiteral("Code")] = QStringLiteral("409");
                         message[QStringLiteral("Order_id")] = order_id;
-                        message[QStringLiteral("Error_description")] = QStringLiteral("Order is already processing!");
+                        message[QStringLiteral("Error_description")] = QStringLiteral("Order is already prepearing!");
 
                         QByteArray message_byte_array = QJsonDocument(message).toJson();
                         message_byte_array.append("\n");
@@ -436,7 +438,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
                     QJsonObject message;
                     message[QStringLiteral("Method")] = QStringLiteral("PUT");
-                    message[QStringLiteral("Resource")] = QStringLiteral("Processing_order");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Prepearing_order");
                     message[QStringLiteral("Code")] = QStringLiteral("404");
                     message[QStringLiteral("Order_id")] = order_id;
                     message[QStringLiteral("Error_description")] = QStringLiteral("No such order id!");
@@ -452,7 +454,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
                 QJsonObject message;
                 message[QStringLiteral("Method")] = QStringLiteral("PUT");
-                message[QStringLiteral("Resource")] = QStringLiteral("Processing_order");
+                message[QStringLiteral("Resource")] = QStringLiteral("Prepearing_order");
                 message[QStringLiteral("Code")] = QStringLiteral("403");
                 message[QStringLiteral("Order_id")] = order_id;
                 message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users!");

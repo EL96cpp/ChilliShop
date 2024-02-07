@@ -35,8 +35,8 @@ private:
 
 private:
     ConnectionsVector connections;
-    OrderIDVector processing_ids;
-    OrderIDVector issuing_ids;
+    OrderIDVector prepearing_order_ids;
+    OrderIDVector issuing_order_ids;
     QByteArray catalog_message_byte_array;
     std::atomic<unsigned long long> sql_connections_counter;
 

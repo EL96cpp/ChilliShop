@@ -23,9 +23,11 @@ class ClientConnection : public QObject
     Q_OBJECT
 public:
     explicit ClientConnection(QObject *parent, ConnectionsVector& connections,
-                              OrderIDVector& processing_ids,
+                              OrderIDVector& prepearing_order_ids,
+                              OrderIDVector& issuing_order_ids,
                               std::atomic<unsigned long long>& sql_connections_counter,
                               const QByteArray& catalog_byte_array);
+
     void SetSocketDescriptor(qintptr descriptor);
     void SetEmployeeData(const QString& name, const QString& surname, const QString& position);
     void SetLoggedIn(const bool &logged_in);
@@ -51,7 +53,8 @@ signals:
 private:
     QTcpSocket* socket;
     ConnectionsVector& connections;
-    OrderIDVector& processing_ids;
+    OrderIDVector& prepearing_order_ids;
+    OrderIDVector& issuing_order_ids;
     const QByteArray& catalog_byte_array;
     QString phone_number;
     QString name;
