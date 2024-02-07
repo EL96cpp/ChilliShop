@@ -202,7 +202,7 @@ Page {
             order_issuing_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
                                          phone_number: phone_number, total_cost: total_cost, order_data: order_data });
 
-            console.log(order_id);
+            console.log(order_id + " to issuing model");
 
         }
 
@@ -216,7 +216,7 @@ Page {
             order_prepearing_model.append({ order_id: order_id, phone_number: phone_number, ordered_timestamp: ordered_timestamp,
                                             total_cost: total_cost, order_data: order_data });
 
-            console.log(order_id);
+            console.log(order_id + " to prepearing model");
 
         }
 

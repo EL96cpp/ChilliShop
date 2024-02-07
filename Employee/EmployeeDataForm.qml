@@ -15,7 +15,7 @@ Rectangle {
 
     anchors.top: order_issuing_form.top
     anchors.left: parent.left
-    anchors.leftMargin: 50
+    anchors.leftMargin: 25
 
     Text {
 

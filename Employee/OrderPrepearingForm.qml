@@ -60,6 +60,136 @@ Item {
                 width: parent.width
                 height: parent.height
 
+                model: order_prepearing_model
+
+                delegate: Rectangle {
+
+                    id: order_prepearing_delegate
+
+                    width: order_prepearing_list_rectangle.width-20
+                    height: 120
+                    radius: 15
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: "#90431000"
+                    border.width: 1
+                    border.color: "#ecbc99"
+
+                    Rectangle {
+
+                        id: order_id_title_rectangle
+                        width: order_id_title.paintedWidth + 10
+                        height: order_id_title.paintedHeight + 5
+                        radius: 5
+                        color: "#a0290A00"
+
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        anchors.margins: 10
+
+                        Text {
+
+                            id: order_id_title
+                            text: "Номер заказа: "
+                            font.family: regular_font.name
+                            font.pointSize: 16
+                            color: "#e4e4e4"
+
+                            anchors.centerIn: parent
+
+                        }
+
+                    }
+
+                    Text {
+
+                        id: order_id
+                        anchors.verticalCenter: order_id_title_rectangle.verticalCenter
+                        anchors.left: order_id_title_rectangle.right
+                        anchors.leftMargin: 10
+
+                        text: model.order_id
+                        font.family: regular_font.name
+                        font.pointSize: 16
+                        color: "#e4e4e4"
+
+                    }
+
+                    Rectangle {
+
+                        id: order_total_cost_rectangle
+
+                        width: order_total_cost_title.paintedWidth + 10
+                        height: order_total_cost_title.paintedHeight + 5
+                        radius: 5
+                        color: "#a0290A00"
+
+                        anchors.verticalCenter: order_total_cost.verticalCenter
+                        anchors.right: order_total_cost.left
+                        anchors.rightMargin: 10
+
+                        Text {
+
+                            id: order_total_cost_title
+
+                            text: "Итого:"
+                            font.family: regular_font.name
+                            font.pointSize: 16
+                            color: "#e4e4e4"
+
+                            anchors.centerIn: parent
+
+                        }
+
+                    }
+
+                    Text {
+
+                        id: order_total_cost
+
+                        anchors.right: parent.right
+                        anchors.top: parent.top
+                        anchors.margins: 10
+
+                        text: model.total_cost/100 + "." + ((model.total_cost%100 < 10) ?
+                              model.total_cost%100 + "0" : model.total_cost%100) + " ₽"
+                        font.family: regular_font.name
+                        font.pointSize: 16
+                        color: "#e4e4e4"
+
+                    }
+
+                    Text {
+
+                        id: order_ready_title
+
+                        text: "Готов к выдаче:"
+                        font.family: regular_font.name
+                        font.pointSize: 16
+                        font.wordSpacing: 5
+                        color: "#e4e4e4"
+
+                        anchors.right: check_box_rectangle.left
+                        anchors.top: order_total_cost.bottom
+                        anchors.topMargin: 25
+                        anchors.rightMargin: 10
+
+                    }
+
+                    MouseArea {
+
+                        id: order_prepearing_delegate_mouse_area
+                        anchors.fill: parent
+                        hoverEnabled: true
+
+                        onClicked: {
+
+
+                        }
+
+                    }
+
+                }
+
 
             }
 
