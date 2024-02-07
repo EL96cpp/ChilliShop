@@ -7,7 +7,7 @@ Item {
 
     id: order_issuing_form
 
-    width: parent.width/2
+    width: parent.width/1.8
     height: parent.height/1.1
 
     anchors.top: parent.top
@@ -16,11 +16,11 @@ Item {
 
     Rectangle {
 
-        id: search_rectangle
+        id: order_issuing_rectangle
         width: parent.width
         height: parent.height
 
-        color: "#491300"
+        color: "#49281d"
         border.width: 1
         border.color: "#7F3A00"
         radius: 15
@@ -29,106 +29,123 @@ Item {
 
         Rectangle {
 
-            id: code_search_rectangle
-            width: code_search_input.font.pixelSize * 5
-            height: code_search_input.font.pixelSize * 2
+            id: search_rectangle
+            width: orders_rectangle.width
+            height: code_search_rectangle.height + code_search_title.paintedHeight +
+                    code_search_rectangle.anchors.topMargin + code_search_title.anchors.topMargin*2
             radius: 10
-            color: "#c66d4d"
-            border.width: 2
-            border.color: "#4E2200"
+            color: "#622510"
+            border.width: 1
+            border.color: "#b66549"
 
-            anchors.left: search_rectangle.left
-            anchors.leftMargin: 15
+            anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: 20
+            anchors.topMargin: 30
 
-            TextInput {
+            Rectangle {
 
-                id: code_search_input
-                font.family: regular_font.name
-                font.pointSize: 20
-                font.letterSpacing: 10
+                id: code_search_rectangle
+                width: code_search_input.font.pixelSize * 5
+                height: code_search_input.font.pixelSize * 2
+                radius: 10
+                color: "#c66d4d"
+                border.width: 2
+                border.color: "#4E2200"
 
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 10
+                anchors.left: search_rectangle.left
+                anchors.top: parent.top
+                anchors.leftMargin: 40
+                anchors.topMargin: 10
 
-                validator: RegularExpressionValidator { regularExpression: /\d{4}/ }
+                TextInput {
+
+                    id: code_search_input
+                    font.family: regular_font.name
+                    font.pointSize: 20
+                    font.letterSpacing: 10
+
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 10
+
+                    validator: RegularExpressionValidator { regularExpression: /\d{4}/ }
+
+                }
 
             }
 
-        }
+            Text {
 
-        Text {
-
-            id: code_search_title
-            font.family: regular_font.name
-            font.pointSize: 10
-            font.wordSpacing: 5
-            color: "white"
-            text: "Код заказа"
-
-            anchors.horizontalCenter: code_search_rectangle.horizontalCenter
-            anchors.top: code_search_rectangle.bottom
-            anchors.topMargin: 5
-
-        }
-
-        Rectangle {
-
-            id: phone_search_rectangle
-            width: phone_search_input.font.pixelSize * 20
-            height: phone_search_input.font.pixelSize * 2
-            radius: 10
-            color: "#c66d4d"
-            border.width: 2
-            border.color: "#4E2200"
-
-            anchors.left: code_search_rectangle.right
-            anchors.leftMargin: 15
-            anchors.top: parent.top
-            anchors.topMargin: 20
-
-            TextInput {
-
-                id: phone_search_input
+                id: code_search_title
                 font.family: regular_font.name
-                font.pointSize: 20
-                font.letterSpacing: 10
+                font.pointSize: 14
+                font.wordSpacing: 5
+                color: "white"
+                text: "Код заказа"
 
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-
-                validator: RegularExpressionValidator { regularExpression: /^8\d{10}/ }
+                anchors.horizontalCenter: code_search_rectangle.horizontalCenter
+                anchors.top: code_search_rectangle.bottom
+                anchors.topMargin: 5
 
             }
 
-        }
+            Rectangle {
 
-        Text {
+                id: phone_search_rectangle
+                width: phone_search_input.font.pixelSize * 20
+                height: phone_search_input.font.pixelSize * 2
+                radius: 10
+                color: "#c66d4d"
+                border.width: 2
+                border.color: "#4E2200"
 
-            id: phone_search_title
-            font.family: regular_font.name
-            font.pointSize: 10
-            color: "white"
-            text: "Телефон"
+                anchors.right: search_rectangle.right
+                anchors.top: parent.top
+                anchors.rightMargin: 40
+                anchors.topMargin: 10
 
-            anchors.horizontalCenter: phone_search_rectangle.horizontalCenter
-            anchors.top: phone_search_rectangle.bottom
-            anchors.topMargin: 5
+                TextInput {
+
+                    id: phone_search_input
+                    font.family: regular_font.name
+                    font.pointSize: 20
+                    font.letterSpacing: 10
+
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 25
+
+                    validator: RegularExpressionValidator { regularExpression: /^8\d{10}/ }
+
+                }
+
+            }
+
+            Text {
+
+                id: phone_search_title
+                font.family: regular_font.name
+                font.pointSize: 14
+                color: "white"
+                text: "Телефон"
+
+                anchors.horizontalCenter: phone_search_rectangle.horizontalCenter
+                anchors.top: phone_search_rectangle.bottom
+                anchors.topMargin: 5
+
+            }
 
         }
 
         Rectangle {
 
             id: orders_rectangle
-            width: parent.width - 50
-            height: parent.height/1.2
+            width: parent.width - 80
+            height: parent.height/1.25
             color: "#c66d4d"
 
-            anchors.top: phone_search_title.bottom
-            anchors.topMargin: 20
+            anchors.top: search_rectangle.bottom
+            anchors.topMargin: 25
             anchors.horizontalCenter: parent.horizontalCenter
 
             ListView {

@@ -7,7 +7,7 @@ Item {
 
     id: order_prepearing_form
 
-    width: parent.width/2
+    width: parent.width/1.8
     height: parent.height/1.1
 
     anchors.top: parent.top
@@ -33,12 +33,35 @@ Item {
             font.family: regular_font.name
             font.pointSize: 20
             font.wordSpacing: 5
-            color: "orange"
+            font.letterSpacing: 3
+            color: "white"
             text: "Заказы"
 
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: 15
+            anchors.topMargin: 25
+
+        }
+
+        Rectangle {
+
+            id: order_prepearing_list_rectangle
+            width: parent.width - 80
+            height: parent.height/1.2
+            color: "#c66d4d"
+
+            anchors.top: orders_title.bottom
+            anchors.topMargin: 35
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            ListView {
+
+                id: orders_listview
+                width: parent.width
+                height: parent.height
+
+
+            }
 
         }
 

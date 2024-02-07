@@ -18,7 +18,7 @@ Window {
     StackView {
 
         id: stack_view
-        initialItem: login_page
+        initialItem: workspace_page //later must be changed to login_page!
         anchors.fill: parent
 
         pushEnter: Transition {
@@ -79,6 +79,7 @@ Window {
 
     LoginPage {
         id: login_page
+        visible: false
     }
 
     WorkspacePage {

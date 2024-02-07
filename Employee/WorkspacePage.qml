@@ -45,17 +45,23 @@ Page {
                 name: "order_issuing_state"
 
                 PropertyChanges {
-
                     target: order_issuing_form
                     visible: true
-
                 }
 
                 PropertyChanges {
-
                     target: order_prepearing_form
                     visible: false
+                }
 
+                PropertyChanges {
+                    target: order_issuing_text
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: order_prepearing_text
+                    visible: true
                 }
 
             },
@@ -65,17 +71,23 @@ Page {
                 name: "order_prepearing_state"
 
                 PropertyChanges {
-
                     target: order_issuing_form
                     visible: false
-
                 }
 
                 PropertyChanges {
-
                     target: order_prepearing_form
                     visible: true
+                }
 
+                PropertyChanges {
+                    target: order_issuing_text
+                    visible: true
+                }
+
+                PropertyChanges {
+                    target: order_prepearing_text
+                    visible: false
                 }
 
             }
@@ -187,13 +199,15 @@ Page {
 
             id: order_prepearing_text
             font.family: regular_font.name
-            font.pointSize: 16
+            font.pointSize: 12
+            font.wordSpacing: 5
             text: "Сборка заказов"
             color: order_prepearing_mouse_area.containsMouse ? "#FF5403" : "white"
 
             anchors.top: employee_data_rectangle.top
             anchors.right: parent.right
-            anchors.rightMargin: 50
+            anchors.topMargin: 20
+            anchors.rightMargin: 150
 
             MouseArea {
 
@@ -204,6 +218,38 @@ Page {
                 onClicked: {
 
                     workspace_rectangle.state = "order_prepearing_state";
+
+                }
+
+            }
+
+        }
+
+        Text {
+
+            id: order_issuing_text
+            font.family: regular_font.name
+            font.pointSize: 12
+            font.wordSpacing: 5
+            text: "Выдача заказов"
+            color: order_issuing_mouse_area.containsMouse ? "#FF5403" : "white"
+
+            visible: false
+
+            anchors.top: employee_data_rectangle.top
+            anchors.right: parent.right
+            anchors.topMargin: 20
+            anchors.rightMargin: 150
+
+            MouseArea {
+
+                id: order_issuing_mouse_area
+                anchors.fill: parent
+                hoverEnabled: true
+
+                onClicked: {
+
+                    workspace_rectangle.state = "order_issuing_state";
 
                 }
 
