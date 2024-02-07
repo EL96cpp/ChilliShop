@@ -143,6 +143,19 @@ void Client::onReadyRead() {
 
 }
 
+void Client::addOrderToOrederIssuingModel(const int& order_id, const QString& ordered_timestamp, const QString& receive_code,
+                                          const QString& phone_number, const int& total_cost, const QJsonArray& order_data) {
+
+
+
+}
+
+void Client::addOrderToOrderPrepearingModel(const int& order_id, const QString& ordered_timestamp, const int& total_cost, const QJsonArray& order_data) {
+
+
+
+}
+
 void Client::onPutOrderInProcess(const int &order_id) {
 
     QJsonObject message;
