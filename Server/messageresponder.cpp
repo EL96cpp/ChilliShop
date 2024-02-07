@@ -433,6 +433,35 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
         if (resource_value.toString() == "Orders") {
 
+            if (logged_in) {
+
+                QJsonArray orders_array = sql_service->GetAllActiveOrders();
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("GET");
+                message[QStringLiteral("Resource")] = QStringLiteral("Orders");
+                message[QStringLiteral("Code")] = QStringLiteral("200");
+                message[QStringLiteral("Orders")] = orders_array;
+
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
+
+            } else {
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("GET");
+                message[QStringLiteral("Resource")] = QStringLiteral("Orders");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users!");
+
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
+
+            }
 
 
         } else if (resource_value.toString() == "Catalog") {

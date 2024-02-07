@@ -8,6 +8,7 @@ ListModel {
     id: order_prepearing_model
 
     property int order_id;
+    property string phone_number;
     property string ordered_timestamp;
     property int total_cost;
     property var order_data; //json array object
