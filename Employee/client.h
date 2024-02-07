@@ -35,7 +35,8 @@ public slots:
     void onLogin(const QString& name, const QString& surname,
                  const QString& position, const QString& password);
     void onReadyRead();
-    void onPutOrderInProcess(const int& order_id);
+    void onStartPrepearingOrder(const int& order_id);
+    void onStartIssuingOrder(const int& order_id);
     void deleteConnection();
     void onDisconnected();
 

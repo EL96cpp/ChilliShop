@@ -60,6 +60,7 @@ public:
     QJsonArray GetCatalogData();
     QJsonArray GetCustomerActiveOrders(const QString& phone_number);
     QJsonArray GetCustomerReceivedOrders(const QString& phone_number);
+    QJsonArray GetAllActiveOrders();
     QString GetCustomerName(const QString& phone_number);
     CustomerLoginResult LoginCustomer(const QString& phone_number, const QString& password);
     CustomerRegisterResult RegisterCustomer(const QString& phone_number, const QString& password, const QString& name);

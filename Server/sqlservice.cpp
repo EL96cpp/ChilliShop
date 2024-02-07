@@ -263,6 +263,36 @@ QJsonArray SqlService::GetCustomerReceivedOrders(const QString &phone_number) {
 
 }
 
+QJsonArray SqlService::GetAllActiveOrders() {
+
+    QJsonArray orders_array;
+
+    QSqlQuery get_active_orders_query(sql_database);
+    get_active_orders_query.prepare("SELECT order_id, phone_number, ordered_timestamp, receive_code, total_cost, order_data, is_ready FROM active_orders");
+
+    if (get_active_orders_query.exec()) {
+
+        while (get_active_orders_query.next()) {
+
+            QJsonObject order_json;
+
+            order_json[QStringLiteral("order_id")] = get_active_orders_query.value(0).toInt();
+            order_json[QStringLiteral("phone_number")] = get_active_orders_query.value(1).toString();
+            order_json[QStringLiteral("ordered_timestamp")] = get_active_orders_query.value(2).toString();
+            order_json[QStringLiteral("receive_code")] = get_active_orders_query.value(3).toString();
+            order_json[QStringLiteral("total_cost")] = get_active_orders_query.value(4).toInt();
+            order_json[QStringLiteral("order_data")] = get_active_orders_query.value(5).toString();
+            order_json[QStringLiteral("is_ready")] = get_active_orders_query.value(6).toBool();
+
+            orders_array.push_back(order_json);
+
+        }
+
+    }
+
+    return orders_array;
+}
+
 int SqlService::AddOrder(const QString& phone_number, const QString& timestamp, const int& total_cost, const QJsonArray& order_array, const QString& order_code) {
 
     QSqlQuery add_order_query(sql_database);

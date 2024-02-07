@@ -194,4 +194,29 @@ Page {
 
     }
 
+    Connections {
+
+        target: Client
+        function onAddOrderToOrederIssuingModel(order_id, ordered_timestamp, receive_code, phone_number, total_cost, order_data) {
+
+            order_issuing_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
+                                         phone_number: phone_number, total_cost: total_cost, order_data: order_data });
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onAddOrderToOrderPrepearingModel(order_id, ordered_timestamp, total_cost, order_data) {
+
+            order_prepearing_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp,
+                                            total_cost: total_cost, order_data: order_data });
+
+        }
+
+    }
+
+
 }

@@ -103,7 +103,37 @@ void Client::onReadyRead() {
 
             if (code_value.toString() == "200") {
 
-                QJsonValue orders_data = json_message_object.value(QLatin1String("Orders"));
+                QJsonArray orders_array = json_message_object.value(QLatin1String("Orders")).toArray();
+
+                for (int i = 0; i < orders_array.size(); ++i) {
+
+                    size_t order_id = orders_array[i].toObject().value("order_id").toInt();
+                    QString ordered_timestamp = orders_array[i].toObject().value("ordered_timestamp").toString();
+                    QString receive_code = orders_array[i].toObject().value("receive_code").toString();
+                    QString phone_number = orders_array[i].toObject().value("phone_number").toString();
+                    size_t total_cost = orders_array[i].toObject().value("total_cost").toInt();
+                    QString order_data_string = orders_array[i].toObject().value("order_data").toString();
+                    bool is_ready = orders_array[i].toObject().value("is_ready").toBool();
+
+                    QString ordered_timestamp_formated = ordered_timestamp.replace("T", " ");
+                    ordered_timestamp_formated = ordered_timestamp_formated.left(16);
+
+                    QJsonArray order_data_array = QJsonDocument::fromJson(order_data_string.toUtf8()).array();
+
+                    if (is_ready) {
+
+                        emit addOrderToOrederIssuingModel(order_id, ordered_timestamp_formated, receive_code,
+                                                          phone_number, total_cost, order_data_array);
+
+                    } else {
+
+                        emit addOrderToOrderPrepearingModel(order_id, ordered_timestamp_formated,
+                                                            total_cost, order_data_array);
+
+                    }
+
+
+                }
 
 
             } else if (code_value.toString() == "503") {
@@ -143,24 +173,11 @@ void Client::onReadyRead() {
 
 }
 
-void Client::addOrderToOrederIssuingModel(const int& order_id, const QString& ordered_timestamp, const QString& receive_code,
-                                          const QString& phone_number, const int& total_cost, const QJsonArray& order_data) {
-
-
-
-}
-
-void Client::addOrderToOrderPrepearingModel(const int& order_id, const QString& ordered_timestamp, const int& total_cost, const QJsonArray& order_data) {
-
-
-
-}
-
-void Client::onPutOrderInProcess(const int &order_id) {
+void Client::onStartPrepearingOrder(const int &order_id) {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("PUT");
-    message[QStringLiteral("Resource")] = QStringLiteral("Processing_order");
+    message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
     message[QStringLiteral("Order_id")] = order_id;
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");
@@ -169,6 +186,21 @@ void Client::onPutOrderInProcess(const int &order_id) {
     qDebug() << bytes_written;
 
 }
+
+void Client::onStartIssuingOrder(const int &order_id) {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("PUT");
+    message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
+    message[QStringLiteral("Order_id")] = order_id;
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
+
+}
+
 
 void Client::deleteConnection() {
 
