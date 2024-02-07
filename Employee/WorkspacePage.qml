@@ -38,136 +38,58 @@ Page {
 
         }
 
-        Rectangle {
+        states:  [
 
-            id: search_rectangle
-            width: parent.width/2
-            height: parent.height/1.1
+            State {
 
-            color: "#491300"
-            border.width: 1
-            border.color: "#7F3A00"
-            radius: 15
+                name: "order_issuing_state"
 
-            anchors.top: parent.top
-            anchors.topMargin: 50
-            anchors.horizontalCenter: parent.horizontalCenter
+                PropertyChanges {
 
-            Rectangle {
+                    target: order_issuing_form
+                    visible: true
 
-                id: code_search_rectangle
-                width: code_search_input.font.pixelSize * 5
-                height: code_search_input.font.pixelSize * 2
-                radius: 10
-                color: "#c66d4d"
-                border.width: 2
-                border.color: "#4E2200"
+                }
 
-                anchors.left: search_rectangle.left
-                anchors.leftMargin: 15
-                anchors.top: parent.top
-                anchors.topMargin: 20
+                PropertyChanges {
 
-                TextInput {
+                    target: order_prepearing_form
+                    visible: false
 
-                    id: code_search_input
-                    font.family: regular_font.name
-                    font.pointSize: 20
-                    font.letterSpacing: 10
+                }
 
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.left: parent.left
-                    anchors.leftMargin: 10
+            },
 
-                    validator: RegularExpressionValidator { regularExpression: /\d{4}/ }
+            State {
+
+                name: "order_prepearing_state"
+
+                PropertyChanges {
+
+                    target: order_issuing_form
+                    visible: false
+
+                }
+
+                PropertyChanges {
+
+                    target: order_prepearing_form
+                    visible: true
 
                 }
 
             }
 
-            Text {
-
-                id: code_search_title
-                font.family: regular_font.name
-                font.pointSize: 10
-                font.wordSpacing: 5
-                color: "white"
-                text: "Код заказа"
-
-                anchors.horizontalCenter: code_search_rectangle.horizontalCenter
-                anchors.top: code_search_rectangle.bottom
-                anchors.topMargin: 5
-
-            }
-
-            Rectangle {
-
-                id: phone_search_rectangle
-                width: phone_search_input.font.pixelSize * 20
-                height: phone_search_input.font.pixelSize * 2
-                radius: 10
-                color: "#c66d4d"
-                border.width: 2
-                border.color: "#4E2200"
-
-                anchors.left: code_search_rectangle.right
-                anchors.leftMargin: 15
-                anchors.top: parent.top
-                anchors.topMargin: 20
-
-                TextInput {
-
-                    id: phone_search_input
-                    font.family: regular_font.name
-                    font.pointSize: 20
-                    font.letterSpacing: 10
-
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.left: parent.left
-                    anchors.leftMargin: 10
-
-                    validator: RegularExpressionValidator { regularExpression: /^8\d{10}/ }
-
-                }
-
-            }
-
-            Text {
-
-                id: phone_search_title
-                font.family: regular_font.name
-                font.pointSize: 10
-                color: "white"
-                text: "Телефон"
-
-                anchors.horizontalCenter: phone_search_rectangle.horizontalCenter
-                anchors.top: phone_search_rectangle.bottom
-                anchors.topMargin: 5
-
-            }
-
-            Rectangle {
-
-                id: orders_rectangle
-                width: parent.width - 50
-                height: parent.height/1.2
-                color: "#c66d4d"
-
-                anchors.top: phone_search_title.bottom
-                anchors.topMargin: 20
-                anchors.horizontalCenter: parent.horizontalCenter
-
-                ListView {
-
-                    id: orders_listview
-                    width: orders_rectangle.width
-                    height: orders_rectangle.height
+        ]
 
 
-                }
+        OrderIssuingForm {
+            id: order_issuing_form
+        }
 
-            }
-
+        OrderPrepearingForm {
+            id: order_prepearing_form
+            visible: false
         }
 
         Rectangle {
@@ -180,7 +102,7 @@ Page {
             border.color: "#7F3A00"
             radius: 10
 
-            anchors.top: search_rectangle.top
+            anchors.top: order_issuing_form.top
             anchors.left: parent.left
             anchors.leftMargin: 50
 
@@ -237,9 +159,9 @@ Page {
             id: exit_workspace_test
             font.family: regular_font.name
             font.pointSize: 14
-
             text: "Выход"
             color: exit_mouse_area.containsMouse ? "#FF5403" : "white"
+
             anchors.horizontalCenter: employee_data_rectangle.horizontalCenter
             anchors.top: employee_data_rectangle.bottom
             anchors.topMargin: 10
@@ -254,6 +176,34 @@ Page {
 
                     Client.deleteConnection();
                     Qt.callLater(Qt.quit);
+
+                }
+
+            }
+
+        }
+
+        Text {
+
+            id: order_prepearing_text
+            font.family: regular_font.name
+            font.pointSize: 16
+            text: "Сборка заказов"
+            color: order_prepearing_mouse_area.containsMouse ? "#FF5403" : "white"
+
+            anchors.top: employee_data_rectangle.top
+            anchors.right: parent.right
+            anchors.rightMargin: 50
+
+            MouseArea {
+
+                id: order_prepearing_mouse_area
+                anchors.fill: parent
+                hoverEnabled: true
+
+                onClicked: {
+
+                    workspace_rectangle.state = "order_prepearing_state";
 
                 }
 

@@ -4,6 +4,7 @@ Client::Client(QObject *parent)
     : QObject{parent}, socket(new QTcpSocket) {
 
     connect(socket, &QTcpSocket::readyRead, this, &Client::onReadyRead);
+    connect(socket, &QTcpSocket::disconnected, this, &Client::onDisconnected);
 
 }
 
@@ -169,8 +170,9 @@ void Client::deleteConnection() {
 
 }
 
-void Client::onDisconnected()
-{
+void Client::onDisconnected() {
+
+    showErrorMessage("Ошибка соединения", "Соединение с сервером прервано");
 
 }
 

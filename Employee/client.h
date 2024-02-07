@@ -36,6 +36,7 @@ public slots:
     void onReadyRead();
     void onPutOrderInProcess(const int& order_id);
     void deleteConnection();
+    void onDisconnected();
 
 private:
     void SendConnectionType();
