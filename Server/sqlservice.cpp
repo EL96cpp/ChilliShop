@@ -399,6 +399,15 @@ bool SqlService::CancelOrder(const int &order_id, const QString &phone_number, c
 
 }
 
+bool SqlService::SetOrderIsReady(const int &order_id) {
+
+    QSqlQuery set_order_is_ready_query(sql_database);
+    set_order_is_ready_query.prepare("UPDATE active_orders SET is_ready = true WHERE order_id = (?)");
+    set_order_is_ready_query.addBindValue(order_id);
+    return set_order_is_ready_query.exec();
+
+}
+
 bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &new_name) {
 
     QSqlQuery change_name_query(sql_database);

@@ -342,6 +342,91 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
             LoginEmployee(name_value.toString(), surname_value.toString(), position_value.toString(), password_value.toString());
 
+        } else if (resource_value.toString() == "Start_prepearing_order") {
+
+            int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
+
+            if (logged_in) {
+
+                if (prepearing_order_ids.push(order_id)) {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("POST");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
+                    message[QStringLiteral("Code")] = QStringLiteral("200");
+
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                } else {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("POST");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
+                    message[QStringLiteral("Code")] = QStringLiteral("403");
+                    message[QStringLiteral("Error_description")] = QStringLiteral("Order is already prepearing by another employee");
+
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                }
+
+            } else {
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("POST");
+                message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users");
+
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+            }
+
+
+        } else if (resource_value.toString() == "Start_issuing_order") {
+
+            int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
+
+            if (logged_in) {
+
+                if (issuing_order_ids.push(order_id)) {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("POST");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
+                    message[QStringLiteral("Code")] = QStringLiteral("200");
+
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                } else {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("POST");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
+                    message[QStringLiteral("Code")] = QStringLiteral("403");
+                    message[QStringLiteral("Error_description")] = QStringLiteral("Order is already issuing by another employee");
+
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                }
+
+            } else {
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("POST");
+                message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users");
+
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+            }
+
         }
 
     } else if (method_value.toString() == "GET") {
@@ -382,7 +467,30 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
                 if (prepearing_order_ids.erase(order_id)) {
 
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Prepearing_order");
+                    message[QStringLiteral("Code")] = QStringLiteral("200");
+                    message[QStringLiteral("Order_id")] = order_id;
 
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
+
+                } else {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Prepearing_order");
+                    message[QStringLiteral("Code")] = QStringLiteral("400");
+                    message[QStringLiteral("Order_id")] = order_id;
+                    message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect order ID");
+
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
 
                 }
 
