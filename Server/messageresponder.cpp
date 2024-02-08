@@ -354,9 +354,12 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                     message[QStringLiteral("Method")] = QStringLiteral("POST");
                     message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
                     message[QStringLiteral("Code")] = QStringLiteral("200");
+                    message[QStringLiteral("Order_id")] = order_id;
 
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
 
                 } else {
 
@@ -364,10 +367,13 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                     message[QStringLiteral("Method")] = QStringLiteral("POST");
                     message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
                     message[QStringLiteral("Code")] = QStringLiteral("403");
+                    message[QStringLiteral("Order_id")] = order_id;
                     message[QStringLiteral("Error_description")] = QStringLiteral("Order is already prepearing by another employee");
 
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
 
                 }
 
@@ -377,10 +383,13 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                 message[QStringLiteral("Method")] = QStringLiteral("POST");
                 message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
                 message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Order_id")] = order_id;
                 message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users");
 
                 QByteArray message_byte_array = QJsonDocument(message).toJson();
                 message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
 
             }
 
@@ -397,9 +406,12 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                     message[QStringLiteral("Method")] = QStringLiteral("POST");
                     message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
                     message[QStringLiteral("Code")] = QStringLiteral("200");
+                    message[QStringLiteral("Order_id")] = order_id;
 
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
 
                 } else {
 
@@ -407,10 +419,13 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                     message[QStringLiteral("Method")] = QStringLiteral("POST");
                     message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
                     message[QStringLiteral("Code")] = QStringLiteral("403");
+                    message[QStringLiteral("Order_id")] = order_id;
                     message[QStringLiteral("Error_description")] = QStringLiteral("Order is already issuing by another employee");
 
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
 
                 }
 
@@ -420,10 +435,13 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                 message[QStringLiteral("Method")] = QStringLiteral("POST");
                 message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
                 message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Order_id")] = order_id;
                 message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users");
 
                 QByteArray message_byte_array = QJsonDocument(message).toJson();
                 message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
 
             }
 

@@ -42,7 +42,7 @@ Page {
 
             State {
 
-                name: "order_issuing_state"
+                name: "issuing_orders_list_state"
 
                 PropertyChanges {
                     target: issuing_orders_list_form
@@ -62,6 +62,52 @@ Page {
                 PropertyChanges {
                     target: order_prepearing_text
                     visible: true
+                }
+
+                PropertyChanges {
+                    target: issuing_order_form
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: prepearing_order_form
+                    visible: false
+                }
+
+            },
+
+            State {
+
+                name: "prepearing_orders_list_state"
+
+                PropertyChanges {
+                    target: issuing_orders_list_form
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: prepearing_orders_list_form
+                    visible: true
+                }
+
+                PropertyChanges {
+                    target: order_issuing_text
+                    visible: true
+                }
+
+                PropertyChanges {
+                    target: order_prepearing_text
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: issuing_order_form
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: prepearing_order_form
+                    visible: false
                 }
 
             },
@@ -77,16 +123,62 @@ Page {
 
                 PropertyChanges {
                     target: prepearing_orders_list_form
-                    visible: true
+                    visible: false
                 }
 
                 PropertyChanges {
                     target: order_issuing_text
-                    visible: true
+                    visible: false
                 }
 
                 PropertyChanges {
                     target: order_prepearing_text
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: issuing_order_form
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: prepearing_order_form
+                    visible: true
+                }
+
+            },
+
+            State {
+
+                name: "order_issuing_state"
+
+                PropertyChanges {
+                    target: issuing_orders_list_form
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: prepearing_orders_list_form
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: order_issuing_text
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: order_prepearing_text
+                    visible: false
+                }
+
+                PropertyChanges {
+                    target: issuing_order_form
+                    visible: true
+                }
+
+                PropertyChanges {
+                    target: prepearing_order_form
                     visible: false
                 }
 
@@ -157,7 +249,7 @@ Page {
 
                 onClicked: {
 
-                    workspace_rectangle.state = "order_prepearing_state";
+                    workspace_rectangle.state = "prepearing_orders_list_state";
 
                 }
 
@@ -189,7 +281,7 @@ Page {
 
                 onClicked: {
 
-                    workspace_rectangle.state = "order_issuing_state";
+                    workspace_rectangle.state = "issuing_orders_list_state";
 
                 }
 
@@ -235,6 +327,99 @@ Page {
                                                   total_cost: total_cost, order_data: order_data });
 
             console.log(order_id + " to prepearing model");
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onStartIssuingOrderConfirmed(order_id) {
+
+            console.log("start issuing inside qml " + order_id);
+
+            for (var i = 0; i < issuing_orders_list_model.count; ++i) {
+
+                console.log(issuing_orders_list_model.get(i).order_id);
+
+                if (issuing_orders_list_model.get(i).order_id === order_id) {
+
+                    console.log("found order_id");
+
+                    issuing_order_model.clear();
+
+                    for (var j = 0; j < issuing_orders_list_model.get(i).order_data.length; ++j) {
+
+                        issuing_order_model.append({ product_id: issuing_orders_list_model.get(i).order_data[j].id,
+                                                     name: issuing_orders_list_model.get(i).order_data[j].name,
+                                                     description: issuing_orders_list_model.get(i).order_data[j].description,
+                                                     price: issuing_orders_list_model.get(i).order_data[j].price,
+                                                     number_of_items: issuing_orders_list_model.get(i).order_data[j].number_of_items,
+                                                        //Add image path!
+                                                   });
+
+                    }
+
+                    issuing_order_model.order_id = issuing_orders_list_model.get(i).order_id;
+                    issuing_order_model.phone_number = issuing_orders_list_model.get(i).phone_number;
+                    issuing_order_model.receive_code = issuing_orders_list_model.get(i).receive_code;
+                    issuing_order_model.ordered_timestamp = issuing_orders_list_model.get(i).ordered_timestamp;
+                    issuing_order_model.total_cost = issuing_orders_list_model.get(i).total_cost;
+
+                    workspace_rectangle.state = "order_issuing_state";
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onStartPrepearingOrderConfirmed(order_id) {
+
+            console.log("start prepearing inside qml " + order_id);
+
+            for (var i = 0; i < prepearing_orders_list_model.count; ++i) {
+
+                console.log(prepearing_orders_list_model.get(i).order_id);
+
+                if (prepearing_orders_list_model.get(i).order_id === order_id) {
+
+                    console.log("found order_id");
+
+                    prepearing_order_model.clear();
+
+                    for (var j = 0; j < prepearing_orders_list_model.get(i).order_data.length; ++j) {
+
+                        prepearing_order_model.append({ product_id: prepearing_orders_list_model.get(i).order_data[j].id,
+                                                     name: prepearing_orders_list_model.get(i).order_data[j].name,
+                                                     description: prepearing_orders_list_model.get(i).order_data[j].description,
+                                                     price: prepearing_orders_list_model.get(i).order_data[j].price,
+                                                     number_of_items: prepearing_orders_list_model.get(i).order_data[j].number_of_items,
+                                                        //Add image path!
+                                                   });
+
+                    }
+
+                    prepearing_order_model.order_id = prepearing_orders_list_model.get(i).order_id;
+                    prepearing_order_model.phone_number = prepearing_orders_list_model.get(i).phone_number;
+                    prepearing_order_model.ordered_timestamp = prepearing_orders_list_model.get(i).ordered_timestamp;
+                    prepearing_order_model.total_cost = prepearing_orders_list_model.get(i).total_cost;
+
+                    workspace_rectangle.state = "order_prepearing_state";
+
+                    break;
+
+                }
+
+            }
 
         }
 

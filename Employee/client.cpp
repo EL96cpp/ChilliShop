@@ -95,19 +95,32 @@ void Client::onReadyRead() {
 
             }
 
-        }
+        } else if (resource_value.toString() == "Start_prepearing_order") {
 
-    } else if (method_value.toString() == "PUT") {
+            if (code_value.toString() == "200") {
 
-        if (resource_value.toString() == "Start_prepearing_order") {
+                int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
 
+                emit startPrepearingOrderConfirmed(order_id);
+
+            }
 
 
         } else if (resource_value.toString() == "Start_issuing_order") {
 
+            if (code_value.toString() == "200") {
 
+                int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
 
-        } else if (resource_value.toString() == "Order_prepeared") {
+                emit startIssuingOrderConfirmed(order_id);
+
+            }
+
+        }
+
+    } else if (method_value.toString() == "PUT") {
+
+        if (resource_value.toString() == "Order_prepeared") {
 
 
 
@@ -197,7 +210,7 @@ void Client::onReadyRead() {
 void Client::onStartPrepearingOrder(const int &order_id) {
 
     QJsonObject message;
-    message[QStringLiteral("Method")] = QStringLiteral("PUT");
+    message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
     message[QStringLiteral("Order_id")] = order_id;
     QByteArray byte_array = QJsonDocument(message).toJson();
@@ -211,7 +224,7 @@ void Client::onStartPrepearingOrder(const int &order_id) {
 void Client::onStartIssuingOrder(const int &order_id) {
 
     QJsonObject message;
-    message[QStringLiteral("Method")] = QStringLiteral("PUT");
+    message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
     message[QStringLiteral("Order_id")] = order_id;
     QByteArray byte_array = QJsonDocument(message).toJson();

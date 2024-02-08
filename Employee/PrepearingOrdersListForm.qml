@@ -168,6 +168,7 @@ Item {
 
                         onClicked: {
 
+                            Client.onStartPrepearingOrder(model.order_id);
 
                         }
 

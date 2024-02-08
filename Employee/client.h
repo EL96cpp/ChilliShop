@@ -26,6 +26,8 @@ signals:
     void addOrderToOrederIssuingModel(const int& order_id, const QString& ordered_timestamp, const QString& receive_code,
                                       const QString& phone_number, const int& total_cost, const QJsonArray& order_data);
     void addOrderToOrderPrepearingModel(const int& order_id, const QString& phone_number, const QString& ordered_timestamp, const int& total_cost, const QJsonArray& order_data);
+    void startPrepearingOrderConfirmed(const int& order_id);
+    void startIssuingOrderConfirmed(const int& order_id);
     void orderPrepearedConfirmed(const int& order_id);
     void orderReceivedConfirmed(const int& order_id, const QString& phone_number, const QString& receive_code);
     void showErrorMessage(const QString& error_title, const QString& error_description);

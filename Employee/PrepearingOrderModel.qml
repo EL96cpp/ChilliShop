@@ -16,6 +16,7 @@ ListModel {
 
     property int order_id;
     property string ordered_timestamp
+    property string phone_number
     property int total_cost
 
 }

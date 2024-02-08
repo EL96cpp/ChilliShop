@@ -279,6 +279,7 @@ Item {
 
                         onClicked: {
 
+                            Client.onStartIssuingOrder(model.order_id);
 
                         }
 
