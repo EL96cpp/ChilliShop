@@ -45,12 +45,12 @@ Page {
                 name: "order_issuing_state"
 
                 PropertyChanges {
-                    target: order_issuing_form
+                    target: issuing_orders_list_form
                     visible: true
                 }
 
                 PropertyChanges {
-                    target: order_prepearing_form
+                    target: prepearing_orders_list_form
                     visible: false
                 }
 
@@ -71,12 +71,12 @@ Page {
                 name: "order_prepearing_state"
 
                 PropertyChanges {
-                    target: order_issuing_form
+                    target: issuing_orders_list_form
                     visible: false
                 }
 
                 PropertyChanges {
-                    target: order_prepearing_form
+                    target: prepearing_orders_list_form
                     visible: true
                 }
 
@@ -95,21 +95,39 @@ Page {
         ]
 
 
-        OrderIssuingForm {
-            id: order_issuing_form
+        IssuingOrdersListForm {
+            id: issuing_orders_list_form
         }
 
-        OrderPrepearingForm {
-            id: order_prepearing_form
+        PrepearingOrdersListForm {
+            id: prepearing_orders_list_form
             visible: false
         }
 
-        OrderIssuingModel {
-            id: order_issuing_model
+        IssuingOrdersListModel {
+            id: issuing_orders_list_model
         }
 
-        OrderPrepearingModel {
-            id: order_prepearing_model
+        PrepearingOrdersListModel {
+            id: prepearing_orders_list_model
+        }
+
+        IssuingOrderForm {
+            id: issuing_order_form
+            visible: false
+        }
+
+        PrepearingOrderForm {
+            id: prepearing_order_form
+            visible: false
+        }
+
+        IssuingOrderModel {
+            id: issuing_order_model
+        }
+
+        PrepearingOrderModel {
+            id: prepearing_order_model
         }
 
         EmployeeDataForm {
@@ -199,8 +217,8 @@ Page {
         target: Client
         function onAddOrderToOrederIssuingModel(order_id, ordered_timestamp, receive_code, phone_number, total_cost, order_data) {
 
-            order_issuing_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
-                                         phone_number: phone_number, total_cost: total_cost, order_data: order_data });
+            issuing_orders_list_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
+                                               phone_number: phone_number, total_cost: total_cost, order_data: order_data });
 
             console.log(order_id + " to issuing model");
 
@@ -213,8 +231,8 @@ Page {
         target: Client
         function onAddOrderToOrderPrepearingModel(order_id, phone_number, ordered_timestamp, total_cost, order_data) {
 
-            order_prepearing_model.append({ order_id: order_id, phone_number: phone_number, ordered_timestamp: ordered_timestamp,
-                                            total_cost: total_cost, order_data: order_data });
+            prepearing_orders_list_model.append({ order_id: order_id, phone_number: phone_number, ordered_timestamp: ordered_timestamp,
+                                                  total_cost: total_cost, order_data: order_data });
 
             console.log(order_id + " to prepearing model");
 
