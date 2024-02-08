@@ -10,6 +10,7 @@ ListModel {
 
     property int product_id
     property string name
+    property string type
     property string description
     property int price
     property int number_of_items

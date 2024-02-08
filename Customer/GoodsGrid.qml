@@ -25,7 +25,7 @@ Rectangle {
     property int upper_price_limit: -1
     property string order_by: "none"
 
-    signal addToCartSignal(var id, var name, var json_description, var price, var image);
+    signal addToCartSignal(var id, var name, var type, var json_description, var price, var image);
 
     function setModelCopy() {
 

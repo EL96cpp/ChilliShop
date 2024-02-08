@@ -375,9 +375,9 @@ Rectangle {
 
         target: grid_rectangle
 
-        function onAddToCartSignal(id, name, text_description, price, image) {
+        function onAddToCartSignal(id, name, type, text_description, price, image) {
 
-            cart_model.addToCart(id, name, text_description, price, image);
+            cart_model.addToCart(id, name, type, text_description, price, image);
             
         }
 

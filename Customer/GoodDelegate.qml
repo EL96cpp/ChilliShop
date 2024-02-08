@@ -21,7 +21,7 @@ Rectangle {
     Layout.maximumWidth: 400
     Layout.maximumHeight: height
 
-    signal addToCartSignal(var id, var name, var text_description, var price, var image);
+    signal addToCartSignal(var id, var name, var type, var text_description, var price, var image);
 
     Component.onCompleted: {
 
@@ -152,7 +152,7 @@ Rectangle {
 
         onClicked: {
 
-            addToCartSignal(model.id, model.name, model.text_description, model.price, model.image);
+            addToCartSignal(model.id, model.name, model.type, model.text_description, model.price, model.image);
 
         }
 

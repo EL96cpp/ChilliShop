@@ -10,6 +10,7 @@ ListModel {
 
     property int id
     property string name
+    property string type
     property string text_description
     property double volume
     property var peppers

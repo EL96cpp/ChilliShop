@@ -19,11 +19,11 @@ public:
 
 
 signals:
-    void addSauceProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
+    void addSauceProductToModel(const int& id, const QString& name, const QString& type, const int& price, const int& scoville,
                                 const QString& text_description, const double& volume, const QJsonArray& peppers);
-    void addSeasoningProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
+    void addSeasoningProductToModel(const int& id, const QString& name, const QString& type, const int& price, const int& scoville,
                                     const QString& text_description, const int& weight, const QJsonArray& peppers);
-    void addSeedsProductToModel(const int& id, const QString& name, const int& price, const int& scoville,
+    void addSeedsProductToModel(const int& id, const QString& name, const QString& type, const int& price, const int& scoville,
                                 const QString& text_description, const int& number_of_seeds, const QJsonArray& peppers);
     void disconnected(const QString& error_description);
     void registerSuccess();
@@ -44,6 +44,7 @@ public slots:
     void onLogin(const QString& phone_number, const QString& password);
     void onRegister(const QString& phone_number, const QString& password, const QString& name);
     void onMakeOrder(const QJsonArray& order_data, const size_t& total_cost);
+    void onCancelOrder(const int &order_id, const QString &receive_code);
     void onReadyRead();
     void onChangeName(const QString& new_name);
     void onDisconnected();

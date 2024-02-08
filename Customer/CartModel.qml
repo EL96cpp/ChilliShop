@@ -10,6 +10,7 @@ ListModel {
 
     property int id
     property string name
+    property string type
     property string description
     property int price
     property int scoville
@@ -43,6 +44,7 @@ ListModel {
             var order_position = {};
             order_position["id"] = get(i).id;
             order_position["name"] = get(i).name;
+            order_position["type"] = get(i).type;
             order_position["description"] = get(i).description;
             order_position["price"] = get(i).price;
             order_position["number_of_items"] = get(i).number_of_items;
@@ -95,7 +97,7 @@ ListModel {
 
     }
 
-    function addToCart(id, name, text_description, price, image) {
+    function addToCart(id, name, type, text_description, price, image) {
 
         var item_already_in_cart = false;
 
@@ -112,7 +114,7 @@ ListModel {
 
         if (!item_already_in_cart) {
 
-            append( {id: id, name: name, description: text_description, price: price, number_of_items: 1, image: image} );
+            append( {id: id, name: name, type: type, description: text_description, price: price, number_of_items: 1, image: image} );
             updateTotalPrice();
 
         }

@@ -206,7 +206,7 @@ void Client::AddCatalogDataToModels(const QJsonArray &catalog_json_array) {
                 QString volume = description_json_object.value(QLatin1String("volume_liters")).toString();
                 QJsonArray peppers_array = description_json_object.value(QLatin1String("peppers")).toArray();
 
-                emit addSauceProductToModel(id.toInt(), name, price.toFloat(), scoville.toInt(), text_description, volume.toFloat(), peppers_array);
+                emit addSauceProductToModel(id.toInt(), name, type, price.toFloat(), scoville.toInt(), text_description, volume.toFloat(), peppers_array);
 
             }
 
@@ -225,7 +225,7 @@ void Client::AddCatalogDataToModels(const QJsonArray &catalog_json_array) {
                 QString weight_gramms = description_json_object.value(QLatin1String("weight_gramms")).toString();
                 QJsonArray peppers_array = description_json_object.value(QLatin1String("peppers")).toArray();
 
-                emit addSeasoningProductToModel(id.toInt(), name, price.toFloat(), scoville.toInt(), text_description, weight_gramms.toInt(), peppers_array);
+                emit addSeasoningProductToModel(id.toInt(), name, type, price.toFloat(), scoville.toInt(), text_description, weight_gramms.toInt(), peppers_array);
 
             }
 
@@ -245,7 +245,7 @@ void Client::AddCatalogDataToModels(const QJsonArray &catalog_json_array) {
                 QString number_of_seeds = description_json_object.value(QLatin1String("number_of_seeds")).toString();
                 QJsonArray peppers_array = description_json_object.value(QLatin1String("peppers")).toArray();
 
-                emit addSeedsProductToModel(id.toInt(), name, price.toInt(), scoville.toInt(), text_description, number_of_seeds.toInt(), peppers_array);
+                emit addSeedsProductToModel(id.toInt(), name, type, price.toInt(), scoville.toInt(), text_description, number_of_seeds.toInt(), peppers_array);
 
             }
 
