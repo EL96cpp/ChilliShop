@@ -24,12 +24,26 @@ Item {
         for (var i = 0; i < order_data.order_positions.length; ++i) {
 
             console.log(order_data.order_positions[i].id + " " + order_data.order_positions[i].number_of_items);
+            var image_directory;
+
+            if (order_data.order_positions[i].type === "Sauce") {
+
+                image_directory = "Sauces";
+
+            } else if (order_data.order_positions[i].type === "Seasoning") {
+
+                image_directory = "Seasonings";
+
+            } else if (order_data.order_positions[i].type === "Seeds") {
+
+                image_directory = "Seeds";
+
+            }
 
             order_view_model.append({ product_id: order_data.order_positions[i].id, name: order_data.order_positions[i].name,
                                       description: order_data.order_positions[i].description, price: order_data.order_positions[i].price,
+                                      image: "file://" + applicationDirPath + "/../Images/Catalog/" + image_directory + "/" + order_data.order_positions[i].id + ".png",
                                       number_of_items: order_data.order_positions[i].number_of_items});
-
-            //image: "file://" + applicationDirPath + "/../Images/Catalog/Seasonings/" + order_data.order_positions[i].id + ".png"
 
         }
 
