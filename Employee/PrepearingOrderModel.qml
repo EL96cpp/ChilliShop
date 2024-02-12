@@ -20,4 +20,20 @@ ListModel {
     property string phone_number
     property int total_cost
 
+    function checkIfAllItemsPrepeared() {
+
+        for (var i = 0; i < count; ++i) {
+
+            if (!get(i).prepeared) {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
 }

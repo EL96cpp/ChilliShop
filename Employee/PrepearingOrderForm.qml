@@ -65,7 +65,7 @@ Rectangle {
                 Rectangle {
 
                     id: number_of_items_rectangle
-                    width: number_of_items.paintedWidth * 2
+                    width: number_of_items.paintedWidth * 4
                     height: number_of_items.paintedHeight + 5
                     radius: 5
                     color: "#903F1100"
@@ -223,6 +223,37 @@ Rectangle {
 
     }
 
+    Text {
+
+        id: to_prepearing_orders_list_text
+        color: to_prepearing_orders_list_mouse_area.containsMouse ? "#FF5403" : "white"
+        font.family: regular_font.name
+        font.pointSize: 18
+        font.wordSpacing: 5
+        font.bold: true
+        text: "К спискy заказов"
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+
+        anchors.top: prepearing_order_form.top
+        anchors.horizontalCenter: set_prepeared_order_button.horizontalCenter
+
+        MouseArea {
+
+            id: to_prepearing_orders_list_mouse_area
+            hoverEnabled: true
+            anchors.fill: parent
+
+            onClicked: {
+
+
+
+            }
+
+        }
+
+    }
+
     Rectangle {
 
         id: order_id_rectangle
@@ -230,9 +261,10 @@ Rectangle {
         height: order_id_title.paintedHeight + 10
         color: "#290A00"
 
-        anchors.top: prepearing_order_form.top
+        anchors.top: to_prepearing_orders_list_text.bottom
         anchors.left: prepearing_order_form.right
-        anchors.leftMargin: 25
+        anchors.topMargin: 25
+        anchors.leftMargin: 10
 
         Text {
 
@@ -387,12 +419,64 @@ Rectangle {
         font.pointSize: 15
         font.wordSpacing: 5
         font.bold: true
-        text: prepearing_order_model.total_cost
+        text: prepearing_order_model.total_cost/100 + "." + ((prepearing_order_model.total_cost%100 < 10) ?
+              prepearing_order_model.total_cost%100 + "0" : prepearing_order_model.total_cost%100) + " ₽"
 
         anchors.verticalCenter: total_cost_rectangle.verticalCenter
         anchors.left: total_cost_rectangle.right
         anchors.leftMargin: 10
 
     }
+
+    Button {
+
+        id: set_prepeared_order_button
+        width: 210
+        height: 50
+
+        anchors.left: prepearing_order_form.right
+        anchors.bottom: prepearing_order_form.bottom
+        anchors.leftMargin: 55
+
+        background: Rectangle {
+
+            color: set_prepeared_order_button.hovered ? "#7a2700" : "#290d00"
+            border.width: 1
+            border.color: "#7D2000"
+            radius: 20
+
+        }
+
+        hoverEnabled: true
+
+        contentItem: Text {
+
+            text: "Заказ собран"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.family: regular_font.name
+            font.pointSize: 15
+            font.wordSpacing: 5
+            font.bold: true
+            color: set_prepeared_order_button.hovered ? "#c23e00" : "#E2E2E2"
+
+        }
+
+        onClicked: {
+
+            if (prepearing_order_model.checkIfAllItemsPrepeared()) {
+
+                console.log("Ok");
+
+            } else {
+
+                console.log("Prepeare all items first!");
+
+            }
+
+        }
+
+    }
+
 
 }
