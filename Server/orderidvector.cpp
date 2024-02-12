@@ -37,3 +37,9 @@ bool OrderIDVector::erase(const int &id) {
     }
 
 }
+
+void OrderIDVector::removeAllEmployeeIDs(const EmployeeData &employee_data) {
+
+    //Remove all id's, added by employee (In case employee got disconnected)
+
+}

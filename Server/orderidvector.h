@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <map>
 
+#include "employeedata.h"
+
 class OrderIDVector
 {
 public:
@@ -14,6 +16,7 @@ public:
 
     bool push(const int& id);
     bool erase(const int& id);
+    void removeAllEmployeeIDs(const EmployeeData& employee_data);
 
 private:
     QVector<int> ids_vector;

@@ -28,6 +28,8 @@ add_executable(Server
   messageresponder.h
   product.cpp
   product.h
+  employeedata.cpp
+  employeedata.h
 
 )
 target_link_libraries(Server Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network
