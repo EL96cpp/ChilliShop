@@ -13,7 +13,8 @@ Rectangle {
     border.color: "#7F3A00"
     radius: 10
 
-    anchors.top: issuing_orders_list_form.top
+    anchors.top: parent.top
+    anchors.topMargin: 30
     anchors.left: parent.left
     anchors.leftMargin: 25
 

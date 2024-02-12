@@ -10,8 +10,7 @@ Item {
     width: parent.width/1.8
     height: parent.height/1.1
 
-    anchors.top: parent.top
-    anchors.topMargin: 50
+    anchors.top: employee_data_rectangle.top
     anchors.horizontalCenter: parent.horizontalCenter
 
     Rectangle {

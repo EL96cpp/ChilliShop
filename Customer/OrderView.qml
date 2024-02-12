@@ -78,7 +78,7 @@ Item {
                         text: model.number_of_items
                         color: "white"
                         font.family: regular_font.name
-                        font.pointSize: 14
+                        font.pointSize: 13
                         font.wordSpacing: 5
                         font.bold: true
 

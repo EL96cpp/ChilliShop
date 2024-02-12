@@ -5,6 +5,7 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QDebug>
+#include <map>
 
 class OrderIDVector
 {

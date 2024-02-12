@@ -13,6 +13,7 @@ ListModel {
     property int price
     property int number_of_items
     property string image
+    property bool prepeared
 
     property int order_id;
     property string ordered_timestamp

@@ -309,8 +309,16 @@ Page {
         target: Client
         function onAddOrderToOrederIssuingModel(order_id, ordered_timestamp, receive_code, phone_number, total_cost, order_data) {
 
+            var order_array = {"order_data" : []};
+
+            for (var i = 0; i < order_data.length; ++i) {
+
+                order_array.order_data.push(order_data[i]);
+
+            }
+
             issuing_orders_list_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
-                                               phone_number: phone_number, total_cost: total_cost, order_data: order_data });
+                                               phone_number: phone_number, total_cost: total_cost, order_data: order_array });
 
             console.log(order_id + " to issuing model");
 
@@ -323,8 +331,16 @@ Page {
         target: Client
         function onAddOrderToOrderPrepearingModel(order_id, phone_number, ordered_timestamp, total_cost, order_data) {
 
+            var order_array = {"order_data" : []};
+
+            for (var i = 0; i < order_data.length; ++i) {
+
+                order_array.order_data.push(order_data[i]);
+
+            }
+
             prepearing_orders_list_model.append({ order_id: order_id, phone_number: phone_number, ordered_timestamp: ordered_timestamp,
-                                                  total_cost: total_cost, order_data: order_data });
+                                                  total_cost: total_cost, order_data: order_array });
 
             console.log(order_id + " to prepearing model");
 
@@ -349,14 +365,31 @@ Page {
 
                     issuing_order_model.clear();
 
-                    for (var j = 0; j < issuing_orders_list_model.get(i).order_data.length; ++j) {
+                    for (var j = 0; j < issuing_orders_list_model.get(i).order_data.order_data.length; ++j) {
 
-                        issuing_order_model.append({ product_id: issuing_orders_list_model.get(i).order_data[j].id,
-                                                     name: issuing_orders_list_model.get(i).order_data[j].name,
-                                                     description: issuing_orders_list_model.get(i).order_data[j].description,
-                                                     price: issuing_orders_list_model.get(i).order_data[j].price,
-                                                     number_of_items: issuing_orders_list_model.get(i).order_data[j].number_of_items,
-                                                        //Add image path!
+                        var image_directory;
+
+                        if (issuing_orders_list_model.get(i).type === "Sauce") {
+
+                            image_directory = "Sauces";
+
+                        } else if (issuing_orders_list_model.get(i).type === "Seasoning") {
+
+                            image_directory = "Seasonings";
+
+                        } else if (issuing_orders_list_model.get(i).type === "Seeds") {
+
+                            image_directory = "Seeds";
+
+                        }
+
+                        issuing_order_model.append({ product_id: issuing_orders_list_model.get(i).order_data.order_data[j].id,
+                                                     name: issuing_orders_list_model.get(i).order_data.order_data[j].name,
+                                                     description: issuing_orders_list_model.get(i).order_data.order_data[j].description,
+                                                     price: issuing_orders_list_model.get(i).order_data.order_data[j].price,
+                                                     number_of_items: issuing_orders_list_model.get(i).order_data.order_data[j].number_of_items,
+                                                     image: "file://" + applicationDirPath + "/../Images/Catalog/" + image_directory + "/" +
+                                                            issuing_orders_list_model.get(i).order_data.order_data[j].id + ".png"
                                                    });
 
                     }
@@ -396,15 +429,34 @@ Page {
 
                     prepearing_order_model.clear();
 
-                    for (var j = 0; j < prepearing_orders_list_model.get(i).order_data.length; ++j) {
+                    for (var j = 0; j < prepearing_orders_list_model.get(i).order_data.order_data.length; ++j) {
 
-                        prepearing_order_model.append({ product_id: prepearing_orders_list_model.get(i).order_data[j].id,
-                                                     name: prepearing_orders_list_model.get(i).order_data[j].name,
-                                                     description: prepearing_orders_list_model.get(i).order_data[j].description,
-                                                     price: prepearing_orders_list_model.get(i).order_data[j].price,
-                                                     number_of_items: prepearing_orders_list_model.get(i).order_data[j].number_of_items,
-                                                        //Add image path!
-                                                   });
+                        var image_directory;
+
+                        if (prepearing_orders_list_model.get(i).order_data.order_data[j].type === "Sauce") {
+
+                            image_directory = "Sauces";
+
+                        } else if (prepearing_orders_list_model.get(i).order_data.order_data[j].type === "Seasoning") {
+
+                            image_directory = "Seasonings";
+
+                        } else if (prepearing_orders_list_model.get(i).order_data.order_data[j].type === "Seeds") {
+
+                            image_directory = "Seeds";
+
+                        }
+
+                        prepearing_order_model.append({ product_id: prepearing_orders_list_model.get(i).order_data.order_data[j].id,
+                                                        name: prepearing_orders_list_model.get(i).order_data.order_data[j].name,
+                                                        description: prepearing_orders_list_model.get(i).order_data.order_data[j].description,
+                                                        price: prepearing_orders_list_model.get(i).order_data.order_data[j].price,
+                                                        number_of_items: prepearing_orders_list_model.get(i).order_data.order_data[j].number_of_items,
+                                                        image: "file://" + applicationDirPath + "/../Images/Catalog/" + image_directory + "/" +
+                                                               prepearing_orders_list_model.get(i).order_data.order_data[j].id + ".png",
+                                                        prepeared: false });
+
+                        console.log(prepearing_orders_list_model.get(i).order_data.order_data[j].id + " id to prepearing model");
 
                     }
 
