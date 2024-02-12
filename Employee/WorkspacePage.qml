@@ -11,6 +11,8 @@ Page {
     property string surname: "surname";
     property string position: "position";
 
+    signal prepeareOrderError();
+
     Image {
 
         id: workspace_background
@@ -475,6 +477,16 @@ Page {
 
         }
 
+    }
+
+    Connections {
+
+        target: prepearing_order_form
+        function onPrepeareOrderError() {
+
+            prepeareOrderError();
+
+        }
     }
 
 

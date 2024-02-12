@@ -84,6 +84,7 @@ Rectangle {
         font.bold: false
         color: "white"
         text: error_rectangle.description
+        horizontalAlignment: Text.AlignHCenter
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: error_title_rectangle.bottom
@@ -154,6 +155,19 @@ Rectangle {
 
             error_rectangle.title = title;
             error_rectangle.description = description;
+            error_rectangle.visible = true;
+
+        }
+
+    }
+
+    Connections {
+
+        target: workspace_page
+        function onPrepeareOrderError() {
+
+            error_rectangle.title = "Ошибка подготовки заказа";
+            error_rectangle.description = "Добавьте все необходимые\nтовары в заказ!";
             error_rectangle.visible = true;
 
         }

@@ -17,6 +17,8 @@ Rectangle {
     anchors.top: employee_data_rectangle.top
     anchors.horizontalCenter: parent.horizontalCenter
 
+    signal prepeareOrderError();
+
     Rectangle {
 
         id: prepearing_order_rectangle
@@ -470,7 +472,7 @@ Rectangle {
 
             } else {
 
-                console.log("Prepeare all items first!");
+                prepeareOrderError();
 
             }
 
