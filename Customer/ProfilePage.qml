@@ -78,7 +78,7 @@ Page {
 
 
     signal toMenu();
-    signal showErrorMessage(string error_title, string error_description);
+    signal showMessage(string message_title, string message_description);
 
     signal setOrderConfirmState();
     signal setDeliveriesState();
@@ -152,7 +152,7 @@ Page {
 
             clearAuthorizationForms();
             toMenu();
-            showErrorMessage("Register result", "Successfully registered!");
+            showMessage("Регистрация", "Регистрация прошла успешно!");
 
         }
 
@@ -164,7 +164,7 @@ Page {
         function onChangeNameSuccess(name) {
 
             orders_form.name = name;
-            showErrorMessage("Change name result", "Successfully changed name!");
+            showMessage("Смена имени", "Имя успешно изменено!");
 
         }
 

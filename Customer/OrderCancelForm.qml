@@ -7,8 +7,8 @@ import QtQuick.Layouts 1.3
 Rectangle {
 
     id: order_cancle_form
-    width: main_window.width/4
-    height: width/1.8
+    width: main_window.width/3.9
+    height: width/1.6
     radius: 10
     color: "#541500"
     border.width: 2
@@ -80,9 +80,8 @@ Rectangle {
         font.wordSpacing: 10
         font.bold: false
         color: "white"
-        text: "Вы действительно хотите отменить заказ?"
-
-        wrapMode: Text.WordWrap
+        text: "Вы действительно хотите\nотменить заказ?"
+        horizontalAlignment: Text.AlignHCenter
         width: parent.width - anchors.topMargin*2
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -115,7 +114,7 @@ Rectangle {
         contentItem: Text {
 
             id: ok_button_text
-            text: "OK"
+            text: "Да"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name

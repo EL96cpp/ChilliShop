@@ -27,18 +27,15 @@ signals:
                                 const QString& text_description, const int& number_of_seeds, const QJsonArray& peppers);
     void disconnected(const QString& error_description);
     void registerSuccess();
-    void registerError(const QString& error_description);
+    void showMessage(const QString& message_title, const QString& message_description);
     void loginSuccess(const QString& phone_number, const QString& name);
-    void loginError(const QString& error_description);
     void changeNameSuccess(const QString& new_name);
-    void changeNameError(const QString& error_description);
 
     void addActiveOrder(const size_t& order_id, const QString& ordered_timestamp, const QString& receive_code,
                         const size_t& total_cost, const QJsonArray& order_data, const bool& is_ready);
     void addReceivedOrder(const size_t& order_id, const QString& ordered_timestamp, const QString& received_timestamp,
                           const QString& receive_code, const size_t& total_cost, const QJsonArray& order_data);
     void orderAccepted();
-    void makeOrderError(const QString& error_description);
 
 public slots:
     void onLogin(const QString& phone_number, const QString& password);

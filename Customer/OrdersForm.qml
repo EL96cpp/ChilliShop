@@ -8,6 +8,7 @@ Item {
 
     id: orders_form
     width: parent.width
+
     anchors.top: profile_header_image.bottom
     anchors.topMargin: 20
     anchors.horizontalCenter: parent.horizontalCenter

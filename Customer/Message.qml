@@ -6,9 +6,11 @@ import QtQuick.Layouts 1.3
 
 Rectangle {
 
-    id: error_rectangle
-    width: main_window.width/4
-    height: width/1.8
+    id: message_rectangle
+    width: main_window.width/3.7
+    height: message_title_rectangle.height + message_title_rectangle.anchors.topMargin +
+            message_description.paintedHeight + message_description.anchors.topMargin +
+            exit_message_button.height + exit_message_button.anchors.topMargin*4
     radius: 10
     color: "#541500"
     border.width: 2
@@ -23,9 +25,9 @@ Rectangle {
 
     Rectangle {
 
-        id: error_title_rectangle
+        id: message_title_rectangle
         width: parent.width - 4
-        height: error_title.height * 1.2
+        height: message_title.height * 1.2
 
         color: "#90000000"
 
@@ -35,13 +37,13 @@ Rectangle {
 
         Text {
 
-            id: error_title
+            id: message_title
             font.family: regular_font.name
             font.pointSize: 20
             font.wordSpacing: 10
             font.bold: true
             color: "white"
-            text: error_rectangle.title
+            text: message_rectangle.title
 
             anchors.centerIn: parent
 
@@ -54,8 +56,8 @@ Rectangle {
         id: lower_line
         width: parent.width - 4
         height: 10
-        anchors.horizontalCenter: error_title_rectangle.horizontalCenter
-        anchors.top: error_title_rectangle.bottom
+        anchors.horizontalCenter: message_title_rectangle.horizontalCenter
+        anchors.top: message_title_rectangle.bottom
         anchors.topMargin: 5
 
         onPaint: {
@@ -77,36 +79,36 @@ Rectangle {
 
     Text {
 
-        id: error_description
+        id: message_description
         font.family: regular_font.name
         font.pointSize: 18
         font.wordSpacing: 10
         font.bold: false
         color: "white"
-        text: error_rectangle.description
-
-        wrapMode: Text.WordWrap
+        text: message_rectangle.description
+        horizontalAlignment: Text.AlignHCenter
         width: parent.width - anchors.topMargin*2
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: error_title_rectangle.bottom
+        anchors.top: message_title_rectangle.bottom
         anchors.topMargin: 30
 
     }
 
     Button {
 
-        id: exit_error_button
+        id: exit_message_button
         width: 100
         height: 40
 
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins: 30
+        anchors.top: message_description.bottom
+        anchors.topMargin: 10
+        anchors.rightMargin: 30
 
         background: Rectangle {
 
-            color: exit_error_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
+            color: exit_message_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
             border.width: 1
             border.color: "#7D2000"
             radius: 20
@@ -125,15 +127,15 @@ Rectangle {
             font.pointSize: 12
             font.letterSpacing: 5
             font.bold: true
-            color: exit_error_button.hovered ? hover_color : "#E2E2E2"
+            color: exit_message_button.hovered ? hover_color : "#E2E2E2"
 
         }
 
         onClicked: {
 
-            error_rectangle.title = "";
-            error_rectangle.description = "";
-            error_rectangle.visible = false;
+            message_rectangle.title = "";
+            message_rectangle.description = "";
+            message_rectangle.visible = false;
 
         }
 
@@ -142,24 +144,11 @@ Rectangle {
     Connections {
 
         target: profile_page
-        function onShowErrorMessage(title, description) {
+        function onShowMessage(title, description) {
 
-            error_rectangle.title = title;
-            error_rectangle.description = description;
-            error_rectangle.visible = true;
-
-        }
-
-    }
-
-    Connections {
-
-        target: Client
-        function onDisconnected(error_description) {
-
-            error_rectangle.title = "Connection error";
-            error_rectangle.description = error_description;
-            error_rectangle.visible = true;
+            message_rectangle.title = title;
+            message_rectangle.description = description;
+            message_rectangle.visible = true;
 
         }
 
@@ -168,56 +157,14 @@ Rectangle {
     Connections {
 
         target: Client
-        function onRegisterError(error_description) {
+        function onShowMessage(title, description) {
 
-            error_rectangle.title = "Register error";
-            error_rectangle.description = error_description;
-            error_rectangle.visible = true;
-
-        }
-
-    }
-
-    Connections {
-
-        target: Client
-        function onLoginError(error_description) {
-
-            error_rectangle.title = "Login error";
-            error_rectangle.description = error_description;
-            error_rectangle.visible = true;
+            message_rectangle.title = title;
+            message_rectangle.description = description;
+            message_rectangle.visible = true;
 
         }
 
     }
-
-    Connections {
-
-        target: Client
-        function onChangeNameError(error_description) {
-
-            error_rectangle.title = "Change name error";
-            error_rectangle.description = error_description;
-            error_rectangle.visible = true;
-
-        }
-
-    }
-
-    Connections {
-
-        target: Client
-        function makeOrderError(error_description) {
-
-            error_rectangle.title = "Order error";
-            error_rectangle.description = error_description;
-            error_rectangle.visible = true;
-
-        }
-
-    }
-
-
-
 
 }

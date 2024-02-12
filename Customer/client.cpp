@@ -300,7 +300,7 @@ void Client::onReadyRead() {
             } else if (code_value.toString() == "403") {
 
                 QJsonValue error_value = json_message_object.value(QLatin1String("Error_description"));
-                emit loginError(error_value.toString());
+                emit showMessage("Oшибка логирования", error_value.toString());
 
             }
 
@@ -313,7 +313,7 @@ void Client::onReadyRead() {
             } else if (code_value.toString() == "403") {
 
                 QJsonValue error_description_value = json_message_object.value(QLatin1String("Error_description"));
-                emit registerError(error_description_value.toString());
+                emit showMessage("Oшибка регистрации", error_description_value.toString());
 
             }
 
@@ -334,17 +334,17 @@ void Client::onReadyRead() {
             } else if (code_value.toString() == "403") {
 
                 QString error_description = json_message_object.value(QLatin1String("Error_description")).toString();
-                emit makeOrderError(error_description);
+                emit showMessage("Ошибка заказа", error_description);
 
             } else if (code_value.toString() == "400") {
 
                 QString error_description = json_message_object.value(QLatin1String("Error_description")).toString();
-                emit makeOrderError(error_description);
+                emit showMessage("Ошибка заказа", error_description);
 
             } else if (code_value.toString() == "500") {
 
                 QString error_description = json_message_object.value(QLatin1String("Error_description")).toString();
-                emit makeOrderError(error_description);
+                emit showMessage("Ошибка заказа", error_description);
 
             }
 
@@ -362,7 +362,7 @@ void Client::onReadyRead() {
             } else if (code_value.toString() == "403") {
 
                 QString error_description = json_message_object.value(QLatin1String("Error_description")).toString();
-                emit changeNameError(error_description);
+                emit showMessage("Ошибка смены имени", error_description);
 
             }
 
@@ -375,6 +375,9 @@ void Client::onReadyRead() {
             if (code_value.toString() == "200") {
 
             } else if (code_value.toString() == "403") {
+
+                QString error_description = json_message_object.value(QLatin1String("Error_description")).toString();
+                emit showMessage("Ошибка отмены заказа", error_description);
 
             }
 
@@ -416,6 +419,9 @@ void Client::onReadyRead() {
 
             } else if (code_value.toString() == "403") {
 
+                QString error_description = json_message_object.value(QLatin1String("Error_description")).toString();
+                emit showMessage("Ошибка получения доставок", error_description);
+
             }
 
         } else if (resource_value.toString() == "Received_orders") {
@@ -448,6 +454,9 @@ void Client::onReadyRead() {
                 }
 
             } else if (code_value.toString() == "403") {
+
+                QString error_description = json_message_object.value(QLatin1String("Error_description")).toString();
+                emit showMessage("Ошибка получения заказов", error_description);
 
             }
 

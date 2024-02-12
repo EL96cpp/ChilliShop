@@ -313,11 +313,11 @@ Rectangle {
             if (register_name_edit.text === "" || register_phone_edit.text === "" ||
                 register_password_edit.text === "" || register_password_confirm_edit.text === "") {
 
-                profile_page.showErrorMessage("Register error", "Fill all required fields!");
+                profile_page.showMessage("Ошибка регистрации", "Заполните все необходимые\nполя!");
 
             } else if (register_password_edit.text !== register_password_confirm_edit.text) {
 
-                profile_page.showErrorMessage("Register error", "Password confirmation error!");
+                profile_page.showMessage("Ошибка регистрации", "Пароли не совпадают!");
 
             } else {
 

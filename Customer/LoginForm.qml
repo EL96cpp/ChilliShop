@@ -219,7 +219,7 @@ Rectangle {
 
             if (login_phone_input.text === "" || login_password_input.text === "") {
 
-                profile_page.showErrorMessage("Login error", "Feel all required fields!");
+                profile_page.showMessage("Ошибка логирования", "Заполните все необходимые\nполя!");
 
             } else {
 

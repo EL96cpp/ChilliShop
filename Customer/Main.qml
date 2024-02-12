@@ -97,13 +97,13 @@ Window {
 
     }
 
-    ErrorMessage {
-        id: error_rectangle
+    Message {
+        id: message_rectangle
     }
 
-    function showErrorMessage(error_title, error_description) {
+    function showMessage(message_title, message_description) {
 
-        error_rectangle.visible = true;
+        message_rectangle.visible = true;
 
     }
 
