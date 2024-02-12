@@ -145,6 +145,63 @@ Rectangle {
 
                 Text {
 
+                    id: prepeared_text_title
+                    text: "Добавлен\nв заказ"
+                    color: "white"
+                    font.family: regular_font.name
+                    font.pointSize: 12
+                    font.wordSpacing: 5
+                    font.bold: true
+
+                    anchors.verticalCenter: prepeared_check_box_rectangle.verticalCenter
+                    anchors.right: prepeared_check_box_rectangle.left
+                    anchors.rightMargin: 15
+
+                }
+
+                Rectangle {
+
+                    id: prepeared_check_box_rectangle
+                    width: 30
+                    height: 30
+                    radius: 5
+                    color: "#290A00"
+
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+                    anchors.margins: 10
+
+                    Image {
+
+                        id: prepeared_check_box_image
+                        source: "qrc:/Images/check_box_mark.png"
+                        width: parent.width-5
+                        height: parent.height-5
+                        visible: model.prepeared
+
+                        anchors.centerIn: parent
+
+
+                    }
+
+                    MouseArea {
+
+                        id: prepeared_check_box_mouse_area
+                        anchors.fill: parent
+                        hoverEnabled: true
+
+                        onClicked: {
+
+                            model.prepeared = !model.prepeared;
+
+                        }
+
+                    }
+
+                }
+
+                Text {
+
                     id: prepearing_item_price
                     text: model.price/100 + "." + ((model.price%100 < 10) ? model.price%100 + "0" : model.price%100) + " ₽"
                     color: "white"

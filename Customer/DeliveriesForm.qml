@@ -184,7 +184,6 @@ Item {
 
                     }
 
-
                 }
 
                 MouseArea {
