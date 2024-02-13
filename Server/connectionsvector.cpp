@@ -1,10 +1,6 @@
 #include "connectionsvector.h"
 
-ConnectionsVector::ConnectionsVector() {
-
-
-
-}
+ConnectionsVector::ConnectionsVector(QObject* parent) : QObject{parent} {}
 
 void ConnectionsVector::push(ClientConnection *client_connection) {
 
@@ -82,7 +78,7 @@ bool ConnectionsVector::CheckIfEmployeeAlreadyLogged(const QString &name, const 
 
 }
 
-void ConnectionsVector::SendToAllEmployees(const QByteArray &message_byte_array) {
+void ConnectionsVector::onSendToAllEmployees(const QByteArray &message_byte_array) {
 
     QMutexLocker locker(&mutex);
 
@@ -98,7 +94,7 @@ void ConnectionsVector::SendToAllEmployees(const QByteArray &message_byte_array)
 
 }
 
-void ConnectionsVector::SendToCustomer(const QString &phone_number, const QByteArray &message_byte_array) {
+void ConnectionsVector::onSendToCustomer(const QString &phone_number, const QByteArray &message_byte_array) {
 
     QMutexLocker locker(&mutex);
 

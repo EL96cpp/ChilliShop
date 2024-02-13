@@ -315,7 +315,6 @@ Page {
 
             for (var i = 0; i < order_data.length; ++i) {
 
-                console.log(order_data[i].type + " add type to issuing model");
                 order_array.order_data.push(order_data[i]);
 
             }
@@ -371,8 +370,6 @@ Page {
                     for (var j = 0; j < issuing_orders_list_model.get(i).order_data.order_data.length; ++j) {
 
                         var image_directory;
-
-                        console.log(issuing_orders_list_model.get(i).order_data.order_data[j].type + " type of issuing product");
 
                         if (issuing_orders_list_model.get(i).order_data.order_data[j].type === "Sauce") {
 
@@ -509,7 +506,11 @@ Page {
         target: Client
         function onOrderPrepearedConfirmed(order_id) {
 
-            for (var i = 0; i < prepearing_orders_list_model.length; ++i) {
+            console.log(prepearing_orders_list_model.count);
+
+            for (var i = 0; i < prepearing_orders_list_model.count; ++i) {
+
+                console.log("Search for " + order_id + " in prepearing list " + prepearing_orders_list_model.get(i).order_id);
 
                 if (prepearing_orders_list_model.get(i).order_id === order_id) {
 
@@ -520,7 +521,7 @@ Page {
                                                        total_cost: prepearing_orders_list_model.get(i).total_cost,
                                                        order_data: prepearing_orders_list_model.get(i).order_array });
 
-                    console.log(order_id + " to issuing model");
+                    console.log(order_id + " to issuing model after prepeared confirmed");
 
                     prepearing_orders_list_model.remove(i);
 

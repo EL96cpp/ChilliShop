@@ -124,6 +124,7 @@ void Client::onReadyRead() {
 
             if (code_value.toString() == "200") {
 
+                qDebug() << "Order prepeared confirmed ";
                 emit orderPrepearedConfirmed(json_message_object.value(QLatin1String("Order_id")).toInt());
 
             }

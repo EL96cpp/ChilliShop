@@ -1,6 +1,7 @@
 #ifndef CONNECTIONSVECTOR_H
 #define CONNECTIONSVECTOR_H
 
+#include <QObject>
 #include <QVector>
 #include <QMutex>
 #include <QMutexLocker>
@@ -8,21 +9,18 @@
 
 #include "clientconnection.h"
 
-class ConnectionsVector
-{
+class ConnectionsVector : public QObject {
 public:
-    ConnectionsVector();
+    ConnectionsVector(QObject* parent = nullptr);
     void push(ClientConnection* client_connection);
     void erase(ClientConnection* client_connection);
 
     bool CheckIfCustomerAlreadyLogged(const QString& phone_number);
     bool CheckIfEmployeeAlreadyLogged(const QString& name, const QString& surname, const QString& position);
-    void SendToAllEmployees(const QByteArray& message_byte_array);
-    void SendToCustomer(const QString& phone_number, const QByteArray& message_byte_array);
 
-
-private slots:
-
+public slots:
+    void onSendToAllEmployees(const QByteArray& message_byte_array);
+    void onSendToCustomer(const QString& phone_number, const QByteArray& message_byte_array);
 
 
 private:

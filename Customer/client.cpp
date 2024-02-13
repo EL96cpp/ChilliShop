@@ -368,7 +368,7 @@ void Client::onReadyRead() {
 
         } else if (resource_value.toString() == "Order_prepeared") {
 
-            emit setOrderPrepeared(json_message_object.value(QLatin1String("Order_id").toInt()));
+            emit setOrderPrepeared(json_message_object.value(QLatin1String("Order_id")).toInt());
 
         }
 

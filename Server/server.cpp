@@ -1,6 +1,6 @@
 #include "server.h"
 
-Server::Server() : sql_connections_counter(0) {
+Server::Server() : sql_connections_counter(0), connections(this) {
 
     QThreadPool::globalInstance()->setMaxThreadCount(10);
     SetCatalogMessageByteArray();
@@ -32,7 +32,6 @@ void Server::onOrderReceived(const int &order_id, const QString &phone_number) {
 
 
 }
-
 
 void Server::incomingConnection(qintptr handle) {
 

@@ -591,8 +591,8 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                             QByteArray message_byte_array = QJsonDocument(message).toJson();
                             message_byte_array.append("\n");
 
-                            emit MessageResponce(message_byte_array);
-                            connections.SendToAllEmployees(message_byte_array);
+                            //emit MessageResponce(message_byte_array);
+                            emit SendToAllEmployees(message_byte_array);
 
 
                             QJsonObject customer_message;
@@ -602,7 +602,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                             QByteArray customer_message_byte_array = QJsonDocument(customer_message).toJson();
                             customer_message_byte_array.append("\n");
 
-                            connections.SendToCustomer(phone_number, customer_message_byte_array);
+                            emit SendToCustomer(phone_number, customer_message_byte_array);
 
 
                         } else {
