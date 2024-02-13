@@ -164,10 +164,10 @@ Rectangle {
     Connections {
 
         target: workspace_page
-        function onPrepeareOrderError() {
+        function onShowMessage(message_title, message_description) {
 
-            error_rectangle.title = "Ошибка подготовки заказа";
-            error_rectangle.description = "Добавьте все необходимые\nтовары в заказ!";
+            error_rectangle.title = message_title;
+            error_rectangle.description = message_description;
             error_rectangle.visible = true;
 
         }

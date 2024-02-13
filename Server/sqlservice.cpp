@@ -372,7 +372,7 @@ bool SqlService::CheckIfOrderExists(const int &order_id, const QString &phone_nu
 bool SqlService::CheckIfOrderExists(const int &order_id) {
 
     QSqlQuery check_order_query(sql_database);
-    check_order_query.prepare("SELECT EXISTS (SELECT 1 FROM active_orders WHERE id = (?))");
+    check_order_query.prepare("SELECT EXISTS (SELECT 1 FROM active_orders WHERE order_id = (?))");
     check_order_query.addBindValue(order_id);
     check_order_query.exec();
 
@@ -387,7 +387,7 @@ bool SqlService::CheckIfOrderExists(const int &order_id) {
 bool SqlService::CheckIfOrderPrepeared(const int &order_id) {
 
     QSqlQuery check_order_query(sql_database);
-    check_order_query.prepare("SELECT is_ready FROM active_orders WHERE id = (?)");
+    check_order_query.prepare("SELECT is_ready FROM active_orders WHERE order_id = (?)");
     check_order_query.addBindValue(order_id);
     check_order_query.exec();
 
@@ -402,18 +402,12 @@ bool SqlService::CheckIfOrderPrepeared(const int &order_id) {
 
 bool SqlService::CancelOrder(const int &order_id, const QString &phone_number, const QString &receive_code) {
 
-    if (CheckIfOrderExists(order_id, phone_number, receive_code)) {
-
-        QSqlQuery cancel_order_query(sql_database);
-        cancel_order_query.prepare("DELETE FROM active_orders WHERE id = (?)");
-        cancel_order_query.addBindValue(order_id);
-        return cancel_order_query.exec();
-
-    } else {
-
-        return false;
-
-    }
+    QSqlQuery cancel_order_query(sql_database);
+    cancel_order_query.prepare("DELETE FROM active_orders WHERE order_id = (?) AND phone_number = (?) AND receive_code = (?)");
+    cancel_order_query.addBindValue(order_id);
+    cancel_order_query.addBindValue(phone_number);
+    cancel_order_query.addBindValue(receive_code);
+    return cancel_order_query.exec();
 
 }
 

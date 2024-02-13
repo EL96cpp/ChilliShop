@@ -43,12 +43,13 @@ bool OrderIDVector::erase(const EmployeeData& employee_data, const int& id) {
 
 }
 
+
 void OrderIDVector::removeAllEmployeeIDs(const EmployeeData &employee_data) {
 
-    qDebug() << "Before remove all employee IDs " << ids_vector.size();
+    QMutexLocker lock(&mutex);
+
     ids_vector.erase(std::remove_if(ids_vector.begin(), ids_vector.end(),
                      [&employee_data](const std::pair<EmployeeData, int>& pair) { return pair.first == employee_data; }),
                      ids_vector.end());
-    qDebug() << "After remove all employee IDs " << ids_vector.size();
 
 }

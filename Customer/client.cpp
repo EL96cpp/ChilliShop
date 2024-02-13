@@ -502,7 +502,20 @@ void Client::onDisconnected() {
 
 }
 
-void Client::onCancelOrder(const int &order_id, const QString &receive_code)
-{
+void Client::onCancelOrder(const int &order_id, const QString& phone_number, const QString &receive_code) {
+
+    qDebug() << "Trying send cancel order";
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+    message[QStringLiteral("Resource")] = QStringLiteral("Order");
+    message[QStringLiteral("Order_id")] = order_id;
+    message[QStringLiteral("Phone_number")] = phone_number;
+    message[QStringLiteral("Receive_code")] = receive_code;
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
 
 }

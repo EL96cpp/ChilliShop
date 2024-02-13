@@ -16,7 +16,7 @@ Rectangle {
 
     visible: false
 
-    signal cancelOrder(var order_id, var receive_code);
+    signal cancelOrder(var order_id, var phone_number, var receive_code);
 
     Rectangle {
 
@@ -127,8 +127,7 @@ Rectangle {
 
         onClicked: {
 
-            console.log("Cancle order " + order_view_model.order_id + " " + order_view_model.receive_code);
-            cancelOrder(order_view_model.order_id, order_view_model.receive_code);
+            Client.onCancelOrder(order_view_model.order_id, orders_form.phone_number, order_view_model.receive_code);
 
         }
 

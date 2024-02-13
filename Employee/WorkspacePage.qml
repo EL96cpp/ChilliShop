@@ -11,7 +11,7 @@ Page {
     property string surname: "surname";
     property string position: "position";
 
-    signal prepeareOrderError();
+    signal showMessage(var messate_title, var message_description);
 
     Image {
 
@@ -485,10 +485,11 @@ Page {
         target: prepearing_order_form
         function onPrepeareOrderError() {
 
-            prepeareOrderError();
+            showMessage("Ошибка подготовки заказа","Добавьте все необходимые\nтовары в заказ!");
 
         }
     }
+
 
     Connections {
 
@@ -504,13 +505,86 @@ Page {
     Connections {
 
         target: Client
+        function onRemoveOrder(order_id) {
+
+            if (issuing_order_model.order_id === order_id) {
+
+                Client.onStopIssuingOrder(order_id);
+                issuing_order_model.clear();
+                showMessage("Отмена заказа", "Пользователь отменил данный заказ!");
+                workspace_rectangle.state = "issuing_orders_list_state";
+
+            } else if (prepearing_order_model.order_id === order_id) {
+
+                Client.onStopPrepearingOrder(order_id);
+                prepearing_order_model.clear();
+                showMessage("Отмена заказа", "Пользователь отменил данный заказ!");
+                workspace_rectangle.state = "prepearing_orders_list_state";
+
+            }
+
+            for (var i = 0; i < issuing_orders_list_model.count; ++i) {
+
+                if (issuing_orders_list_model.get(i).order_id === order_id) {
+
+                    issuing_orders_list_model.remove(i);
+                    return;
+
+                }
+
+            }
+
+            for (var j = 0; j < prepearing_orders_list_model.count; ++j) {
+
+                if (prepearing_orders_list_model.get(j).order_id === order_id) {
+
+                    prepearing_orders_list_model.remove(j);
+                    return;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onOrderReceivedConfirmed(order_id, phone_number, receive_code) {
+
+            if (issuing_order_model.order_id === order_id &&
+                issuing_order_model.phone_number === phone_number &&
+                issuing_order_model.receive_code === receive_code) {
+
+                issuing_order_model.clear();
+
+            }
+
+            for (var i = 0; i < issuing_orders_list_model.count; ++i) {
+
+                if (issuing_orders_list_model.get(i).order_id === order_id) {
+
+                    issuing_orders_list_model.remove(i);
+
+                }
+
+            }
+
+            workspace_rectangle.state = "issuing_orders_list_state";
+
+        }
+
+    }
+
+
+    Connections {
+
+        target: Client
         function onOrderPrepearedConfirmed(order_id) {
 
-            console.log(prepearing_orders_list_model.count);
-
             for (var i = 0; i < prepearing_orders_list_model.count; ++i) {
-
-                console.log("Search for " + order_id + " in prepearing list " + prepearing_orders_list_model.get(i).order_id);
 
                 if (prepearing_orders_list_model.get(i).order_id === order_id) {
 
@@ -520,8 +594,6 @@ Page {
                                                        phone_number: prepearing_orders_list_model.get(i).phone_number,
                                                        total_cost: prepearing_orders_list_model.get(i).total_cost,
                                                        order_data: prepearing_orders_list_model.get(i).order_array });
-
-                    console.log(order_id + " to issuing model after prepeared confirmed");
 
                     prepearing_orders_list_model.remove(i);
 

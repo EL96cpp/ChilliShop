@@ -161,6 +161,79 @@ Rectangle {
 
             }
         }
+
+        Text {
+
+            id: to_issuing_orders_list_text
+            color: to_issuing_orders_list_mouse_area.containsMouse ? "#FF5403" : "white"
+            font.family: regular_font.name
+            font.pointSize: 18
+            font.wordSpacing: 5
+            font.bold: true
+            text: "К спискy заказов"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+
+            anchors.top: issuing_order_form.top
+            anchors.horizontalCenter: issue_order_button.horizontalCenter
+
+            MouseArea {
+
+                id: to_issuing_orders_list_mouse_area
+                hoverEnabled: true
+                anchors.fill: parent
+
+                onClicked: {
+
+                    Client.onStopIssuingOrder(issuing_order_model.order_id);
+
+                }
+
+            }
+
+        }
+
+        Button {
+
+            id: issue_order_button
+            width: 210
+            height: 50
+
+            anchors.left: issuing_order_form.right
+            anchors.bottom: issuing_order_form.bottom
+            anchors.leftMargin: 55
+
+            background: Rectangle {
+
+                color: issue_order_button.hovered ? "#7a2700" : "#290d00"
+                border.width: 1
+                border.color: "#7D2000"
+                radius: 20
+
+            }
+
+            hoverEnabled: true
+
+            contentItem: Text {
+
+                text: "Выдать заказ"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.family: regular_font.name
+                font.pointSize: 15
+                font.wordSpacing: 5
+                font.bold: true
+                color: issue_order_button.hovered ? "#c23e00" : "#E2E2E2"
+
+            }
+
+            onClicked: {
+
+                Client.onOrderReceivedMessage(issuing_order_model.order_id, issuing_order_model.phone_number, issuing_order_model.receive_code);
+
+            }
+
+        }
     }
 
 }

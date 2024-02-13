@@ -267,7 +267,81 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
         } else if (resource_value.toString() == "Order") {
 
+            qDebug() << "Trying to cancel order!";
 
+            if (logged_in) {
+
+                int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
+                QString phone_number = json_message_object.value(QLatin1String("Phone_number")).toString();
+                QString receive_code = json_message_object.value(QLatin1String("Receive_code")).toString();
+
+                if (sql_service->CheckIfOrderExists(order_id, phone_number, receive_code)) {
+
+                    if (sql_service->CancelOrder(order_id, phone_number, receive_code)) {
+
+                        QJsonObject message;
+                        message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+                        message[QStringLiteral("Resource")] = QStringLiteral("Order");
+                        message[QStringLiteral("Code")] = QStringLiteral("200");
+                        message[QStringLiteral("Order_id")] = order_id;
+                        QByteArray message_byte_array = QJsonDocument(message).toJson();
+                        message_byte_array.append("\n");
+
+                        emit MessageResponce(message_byte_array);
+
+                        QJsonObject employees_message;
+                        employees_message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+                        employees_message[QStringLiteral("Resource")] = QStringLiteral("Order");
+                        employees_message[QStringLiteral("Order_id")] = order_id;
+                        QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
+                        employees_message_byte_array.append("\n");
+
+                        emit SendToAllEmployees(employees_message_byte_array);
+
+
+                    } else {
+
+                        QJsonObject message;
+                        message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+                        message[QStringLiteral("Resource")] = QStringLiteral("Order");
+                        message[QStringLiteral("Code")] = QStringLiteral("500");
+                        message[QStringLiteral("Error_description")] = QStringLiteral("Server error!");
+                        QByteArray message_byte_array = QJsonDocument(message).toJson();
+                        message_byte_array.append("\n");
+
+                        emit MessageResponce(message_byte_array);
+
+                    }
+
+                } else {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Order");
+                    message[QStringLiteral("Code")] = QStringLiteral("403");
+                    message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect order ID!");
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
+
+                }
+
+
+            } else {
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+                message[QStringLiteral("Resource")] = QStringLiteral("Order");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users!");
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
+
+
+            }
 
         }
 
