@@ -14,7 +14,7 @@ ListModel {
     property int number_of_items
     property string image
 
-    property int order_id;
+    property int order_id
     property string phone_number
     property string receive_code
     property string ordered_timestamp

@@ -33,6 +33,7 @@ public:
     void SetLoggedIn(const bool &logged_in);
     void SetConnectionType(const ConnectionType& connection_type);
     ConnectionType GetConnectionType();
+    void SendMessage(const QByteArray& message_byte_array);
 
     QString GetPhoneNumber();
     EmployeeData GetEmployeeData();

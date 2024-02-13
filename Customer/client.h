@@ -36,6 +36,7 @@ signals:
     void addReceivedOrder(const size_t& order_id, const QString& ordered_timestamp, const QString& received_timestamp,
                           const QString& receive_code, const size_t& total_cost, const QJsonArray& order_data);
     void orderAccepted();
+    void setOrderPrepeared(const int& order_id);
 
 public slots:
     void onLogin(const QString& phone_number, const QString& password);

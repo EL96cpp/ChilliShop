@@ -15,4 +15,19 @@ ListModel {
     property var order_data; //json array object
     property bool is_ready;
 
+    function setOrderPrepeared(order_id) {
+
+        for (var i = 0; i < count; ++i) {
+
+            if (get(i).order_id === order_id) {
+
+                get(i).is_ready = true;
+                break;
+
+            }
+
+        }
+
+    }
+
 }

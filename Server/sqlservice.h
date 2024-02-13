@@ -71,6 +71,7 @@ public:
     bool CheckIfOrderIsCorrect(const QVector<int>& product_ids);
     bool CheckIfOrderExists(const int& order_id, const QString& phone_number, const QString& receive_code);
     bool CheckIfOrderExists(const int& order_id);
+    bool CheckIfOrderPrepeared(const int& order_id);
     bool CancelOrder(const int &order_id, const QString &phone_number, const QString &receive_code);
     bool SetOrderIsReady(const int& order_id);
     bool ChangeCustomerName(const QString& phone_number, const QString& new_name);

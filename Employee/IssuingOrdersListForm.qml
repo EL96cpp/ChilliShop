@@ -253,23 +253,6 @@ Item {
 
                     }
 
-                    Text {
-
-                        id: order_ready_title
-
-                        text: "Готов к выдаче:"
-                        font.family: regular_font.name
-                        font.pointSize: 16
-                        font.wordSpacing: 5
-                        color: "#e4e4e4"
-
-                        anchors.right: check_box_rectangle.left
-                        anchors.top: order_total_cost.bottom
-                        anchors.topMargin: 25
-                        anchors.rightMargin: 10
-
-                    }
-
                     MouseArea {
 
                         id: order_issuing_delegate_mouse_area

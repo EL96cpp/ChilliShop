@@ -204,6 +204,17 @@ Page {
 
     }
 
+    Connections {
+
+        target: Client
+        function onSetOrderPrepeared(order_id) {
+
+            active_orders_model.setOrderPrepeared(order_id);
+
+        }
+
+    }
+
     Image {
 
         id: profile_background

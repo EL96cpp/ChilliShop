@@ -58,6 +58,13 @@ ConnectionType ClientConnection::GetConnectionType() {
 
 }
 
+void ClientConnection::SendMessage(const QByteArray &message_byte_array) {
+
+    qDebug() << message_byte_array;
+    qDebug() << socket->write(message_byte_array);
+
+}
+
 void ClientConnection::OnSendCatalog() {
 
     qDebug() << socket->write(catalog_byte_array);

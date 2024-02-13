@@ -569,6 +569,109 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
 
 
+        } else if (resource_value.toString() == "Order_prepeared") {
+
+            int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
+            QString phone_number = json_message_object.value(QLatin1String("Phone_number")).toString();
+            QString receive_code = json_message_object.value(QLatin1String("Receive_code")).toString();
+
+            if (logged_in) {
+
+                if (sql_service->CheckIfOrderExists(order_id, phone_number, receive_code)) {
+
+                    if (!sql_service->CheckIfOrderPrepeared(order_id)) {
+
+                        if (sql_service->SetOrderIsReady(order_id)) {
+
+                            QJsonObject message;
+                            message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                            message[QStringLiteral("Resource")] = QStringLiteral("Order_prepeared");
+                            message[QStringLiteral("Code")] = QStringLiteral("200");
+                            message[QStringLiteral("Order_id")] = order_id;
+                            QByteArray message_byte_array = QJsonDocument(message).toJson();
+                            message_byte_array.append("\n");
+
+                            emit MessageResponce(message_byte_array);
+                            connections.SendToAllEmployees(message_byte_array);
+
+
+                            QJsonObject customer_message;
+                            customer_message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                            message[QStringLiteral("Resource")] = QStringLiteral("Order_prepeared");
+                            customer_message[QStringLiteral("Order_id")] = order_id;
+                            QByteArray customer_message_byte_array = QJsonDocument(customer_message).toJson();
+                            customer_message_byte_array.append("\n");
+
+                            connections.SendToCustomer(phone_number, customer_message_byte_array);
+
+
+                        } else {
+
+                            QJsonObject message;
+                            message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                            message[QStringLiteral("Resource")] = QStringLiteral("Order_prepeared");
+                            message[QStringLiteral("Code")] = QStringLiteral("500");
+                            message[QStringLiteral("Order_id")] = order_id;
+                            message[QStringLiteral("Error_description")] = QStringLiteral("Database error!");
+
+                            QByteArray message_byte_array = QJsonDocument(message).toJson();
+                            message_byte_array.append("\n");
+
+                            emit MessageResponce(message_byte_array);
+
+                        }
+
+                    } else {
+
+                        QJsonObject message;
+                        message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                        message[QStringLiteral("Resource")] = QStringLiteral("Order_prepeared");
+                        message[QStringLiteral("Code")] = QStringLiteral("403");
+                        message[QStringLiteral("Order_id")] = order_id;
+                        message[QStringLiteral("Error_description")] = QStringLiteral("Order is already prepeared!");
+
+                        QByteArray message_byte_array = QJsonDocument(message).toJson();
+                        message_byte_array.append("\n");
+
+                        emit MessageResponce(message_byte_array);
+
+                    }
+
+
+                } else {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Order_prepeared");
+                    message[QStringLiteral("Code")] = QStringLiteral("403");
+                    message[QStringLiteral("Order_id")] = order_id;
+                    message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect order ID!");
+
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
+
+                }
+
+
+            } else {
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                message[QStringLiteral("Resource")] = QStringLiteral("Order_prepeared");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Order_id")] = order_id;
+                message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users!");
+
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
+
+            }
+
+
         } else if (resource_value.toString() == "Prepearing_order") {
 
             int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();

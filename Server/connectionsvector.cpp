@@ -82,3 +82,36 @@ bool ConnectionsVector::CheckIfEmployeeAlreadyLogged(const QString &name, const 
 
 }
 
+void ConnectionsVector::SendToAllEmployees(const QByteArray &message_byte_array) {
+
+    QMutexLocker locker(&mutex);
+
+    for (int i = 0; i < connections.size(); ++i) {
+
+        if (connections[i]->GetConnectionType() == ConnectionType::EMPLOYEE) {
+
+            connections[i]->SendMessage(message_byte_array);
+
+        }
+
+    }
+
+}
+
+void ConnectionsVector::SendToCustomer(const QString &phone_number, const QByteArray &message_byte_array) {
+
+    QMutexLocker locker(&mutex);
+
+    for (int i = 0; i < connections.size(); ++i) {
+
+        if (connections[i]->GetPhoneNumber() == phone_number) {
+
+            connections[i]->SendMessage(message_byte_array);
+            break;
+
+        }
+
+    }
+
+}
+

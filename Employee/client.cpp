@@ -122,7 +122,11 @@ void Client::onReadyRead() {
 
         if (resource_value.toString() == "Order_prepeared") {
 
+            if (code_value.toString() == "200") {
 
+                emit orderPrepearedConfirmed(json_message_object.value(QLatin1String("Order_id")).toInt());
+
+            }
 
         } else if (resource_value.toString() == "Order_received") {
 
@@ -161,11 +165,10 @@ void Client::onReadyRead() {
 
                     } else {
 
-                        emit addOrderToOrderPrepearingModel(order_id, phone_number, ordered_timestamp_formated,
+                        emit addOrderToOrderPrepearingModel(order_id, phone_number, receive_code, ordered_timestamp_formated,
                                                             total_cost, order_data_array);
 
                     }
-
 
                 }
 
@@ -207,8 +210,11 @@ void Client::onReadyRead() {
 
                 emit stopPrepearingOrderConfirmed();
 
-            }
+            } else {
 
+                emit showErrorMessage("Ошибка подготовки заказа", json_message_object.value(QLatin1String("Error_description")).toString());
+
+            }
 
         } else if (resource_value.toString() == "Issuing_order") {
 
@@ -216,11 +222,17 @@ void Client::onReadyRead() {
 
                 emit stopIssuingOrderConfirmed();
 
+            } else {
+
+                emit showErrorMessage("Ошибка выдачи заказа", json_message_object.value(QLatin1String("Error_description")).toString());
+
             }
 
         }
 
+
     }
+
 
 }
 
@@ -280,13 +292,14 @@ void Client::onStopIssuingOrder(const int &order_id) {
 
 }
 
-void Client::onOrderPrepearedMessage(const int &order_id, const QString &phone_number) {
+void Client::onOrderPrepearedMessage(const int &order_id, const QString &phone_number, const QString& receive_code) {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("PUT");
     message[QStringLiteral("Resource")] = QStringLiteral("Order_prepeared");
     message[QStringLiteral("Order_id")] = order_id;
     message[QStringLiteral("Phone_number")] = phone_number;
+    message[QStringLiteral("Receive_code")] = receive_code;
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");
 

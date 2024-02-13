@@ -17,6 +17,8 @@ public:
 
     bool CheckIfCustomerAlreadyLogged(const QString& phone_number);
     bool CheckIfEmployeeAlreadyLogged(const QString& name, const QString& surname, const QString& position);
+    void SendToAllEmployees(const QByteArray& message_byte_array);
+    void SendToCustomer(const QString& phone_number, const QByteArray& message_byte_array);
 
 
 private slots:

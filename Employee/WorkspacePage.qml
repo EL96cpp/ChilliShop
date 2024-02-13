@@ -315,6 +315,7 @@ Page {
 
             for (var i = 0; i < order_data.length; ++i) {
 
+                console.log(order_data[i].type + " add type to issuing model");
                 order_array.order_data.push(order_data[i]);
 
             }
@@ -331,7 +332,7 @@ Page {
     Connections {
 
         target: Client
-        function onAddOrderToOrderPrepearingModel(order_id, phone_number, ordered_timestamp, total_cost, order_data) {
+        function onAddOrderToOrderPrepearingModel(order_id, phone_number, receive_code, ordered_timestamp, total_cost, order_data) {
 
             var order_array = {"order_data" : []};
 
@@ -341,8 +342,8 @@ Page {
 
             }
 
-            prepearing_orders_list_model.append({ order_id: order_id, phone_number: phone_number, ordered_timestamp: ordered_timestamp,
-                                                  total_cost: total_cost, order_data: order_array });
+            prepearing_orders_list_model.append({ order_id: order_id, phone_number: phone_number, receive_code: receive_code,
+                                                  ordered_timestamp: ordered_timestamp, total_cost: total_cost, order_data: order_array });
 
             console.log(order_id + " to prepearing model");
 
@@ -371,15 +372,17 @@ Page {
 
                         var image_directory;
 
-                        if (issuing_orders_list_model.get(i).type === "Sauce") {
+                        console.log(issuing_orders_list_model.get(i).order_data.order_data[j].type + " type of issuing product");
+
+                        if (issuing_orders_list_model.get(i).order_data.order_data[j].type === "Sauce") {
 
                             image_directory = "Sauces";
 
-                        } else if (issuing_orders_list_model.get(i).type === "Seasoning") {
+                        } else if (issuing_orders_list_model.get(i).order_data.order_data[j].type === "Seasoning") {
 
                             image_directory = "Seasonings";
 
-                        } else if (issuing_orders_list_model.get(i).type === "Seeds") {
+                        } else if (issuing_orders_list_model.get(i).order_data.order_data[j].type === "Seeds") {
 
                             image_directory = "Seeds";
 
@@ -463,6 +466,7 @@ Page {
                     }
 
                     prepearing_order_model.order_id = prepearing_orders_list_model.get(i).order_id;
+                    prepearing_order_model.receive_code = prepearing_orders_list_model.get(i).receive_code;
                     prepearing_order_model.phone_number = prepearing_orders_list_model.get(i).phone_number;
                     prepearing_order_model.ordered_timestamp = prepearing_orders_list_model.get(i).ordered_timestamp;
                     prepearing_order_model.total_cost = prepearing_orders_list_model.get(i).total_cost;
@@ -500,5 +504,34 @@ Page {
 
     }
 
+    Connections {
+
+        target: Client
+        function onOrderPrepearedConfirmed(order_id) {
+
+            for (var i = 0; i < prepearing_orders_list_model.length; ++i) {
+
+                if (prepearing_orders_list_model.get(i).order_id === order_id) {
+
+                    issuing_orders_list_model.append({ order_id: prepearing_orders_list_model.get(i).order_id,
+                                                       ordered_timestamp: prepearing_orders_list_model.get(i).ordered_timestamp,
+                                                       receive_code: prepearing_orders_list_model.get(i).receive_code,
+                                                       phone_number: prepearing_orders_list_model.get(i).phone_number,
+                                                       total_cost: prepearing_orders_list_model.get(i).total_cost,
+                                                       order_data: prepearing_orders_list_model.get(i).order_array });
+
+                    console.log(order_id + " to issuing model");
+
+                    prepearing_orders_list_model.remove(i);
+
+                    workspace_rectangle.state = "prepearing_orders_list_state";
+
+                }
+
+            }
+
+        }
+
+    }
 
 }

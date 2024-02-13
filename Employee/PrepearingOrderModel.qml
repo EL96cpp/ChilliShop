@@ -15,7 +15,8 @@ ListModel {
     property string image
     property bool prepeared
 
-    property int order_id;
+    property int order_id
+    property string receive_code
     property string ordered_timestamp
     property string phone_number
     property int total_cost

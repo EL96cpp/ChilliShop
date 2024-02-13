@@ -468,7 +468,7 @@ Rectangle {
 
             if (prepearing_order_model.checkIfAllItemsPrepeared()) {
 
-
+                Client.onOrderPrepearedMessage(prepearing_order_model.order_id, prepearing_order_model.phone_number, prepearing_order_model.receive_code);
 
             } else {
 
