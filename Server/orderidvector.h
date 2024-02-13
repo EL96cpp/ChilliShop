@@ -14,12 +14,12 @@ class OrderIDVector
 public:
     OrderIDVector();
 
-    bool push(const int& id);
-    bool erase(const int& id);
+    bool push(const EmployeeData& employee_data, const int& id);
+    bool erase(const EmployeeData& employee_data, const int& id);
     void removeAllEmployeeIDs(const EmployeeData& employee_data);
 
 private:
-    QVector<int> ids_vector;
+    QVector<std::pair<EmployeeData, int>> ids_vector;
     QMutex mutex;
 
 };

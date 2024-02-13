@@ -11,15 +11,17 @@ MessageResponder::MessageResponder(QObject* parent,
                                    const ConnectionType& connection_type,
                                    std::atomic<unsigned long long>& sql_connections_counter,
                                    const bool& logged_in,
-                                   const QString& phone_number) : QObject{parent},
-                                                                  phone_number(phone_number),
-                                                                  message_byte_array(message_byte_array),
-                                                                  connections(connections),
-                                                                  prepearing_order_ids(prepearing_order_ids),
-                                                                  issuing_order_ids(issuing_order_ids),
-                                                                  connection_type(connection_type),
-                                                                  sql_connections_counter(sql_connections_counter),
-                                                                  logged_in(logged_in) {
+                                   const QString& phone_number,
+                                   const EmployeeData& employee_data) : QObject{parent},
+                                                                        phone_number(phone_number),
+                                                                        employee_data(employee_data),
+                                                                        message_byte_array(message_byte_array),
+                                                                        connections(connections),
+                                                                        prepearing_order_ids(prepearing_order_ids),
+                                                                        issuing_order_ids(issuing_order_ids),
+                                                                        connection_type(connection_type),
+                                                                        sql_connections_counter(sql_connections_counter),
+                                                                        logged_in(logged_in) {
 
     qDebug() << message_byte_array;
 
@@ -348,7 +350,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
             if (logged_in) {
 
-                if (prepearing_order_ids.push(order_id)) {
+                if (prepearing_order_ids.push(employee_data, order_id)) {
 
                     QJsonObject message;
                     message[QStringLiteral("Method")] = QStringLiteral("POST");
@@ -400,7 +402,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
             if (logged_in) {
 
-                if (issuing_order_ids.push(order_id)) {
+                if (issuing_order_ids.push(employee_data, order_id)) {
 
                     QJsonObject message;
                     message[QStringLiteral("Method")] = QStringLiteral("POST");
@@ -504,6 +506,8 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
         if (resource_value.toString() == "Connection") {
 
             qDebug() << "employee connection will be deleted!";
+            prepearing_order_ids.removeAllEmployeeIDs(employee_data);
+            issuing_order_ids.removeAllEmployeeIDs(employee_data);
             emit DeleteConnection();
 
         } else if (resource_value.toString() == "Prepearing_order") {
@@ -512,7 +516,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
             if (logged_in) {
 
-                if (prepearing_order_ids.erase(order_id)) {
+                if (prepearing_order_ids.erase(employee_data, order_id)) {
 
                     QJsonObject message;
                     message[QStringLiteral("Method")] = QStringLiteral("DELETE");
@@ -573,7 +577,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
                 if (sql_service->CheckIfOrderExists(order_id)) {
 
-                    if (prepearing_order_ids.push(order_id)) {
+                    if (prepearing_order_ids.push(employee_data, order_id)) {
 
                         QJsonObject message;
                         message[QStringLiteral("Method")] = QStringLiteral("PUT");

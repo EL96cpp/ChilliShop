@@ -489,5 +489,16 @@ Page {
         }
     }
 
+    Connections {
+
+        target: Client
+        function onStopPrepearingOrderConfirmed(order_id) {
+
+            workspace_rectangle.state = "prepearing_orders_list_state";
+
+        }
+
+    }
+
 
 }

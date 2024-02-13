@@ -1,5 +1,7 @@
 #include "employeedata.h"
 
+EmployeeData::EmployeeData() {}
+
 EmployeeData::EmployeeData(const QString& name,
                            const QString& surname,
                            const QString& position) : name(name), surname(surname), position(position) {}

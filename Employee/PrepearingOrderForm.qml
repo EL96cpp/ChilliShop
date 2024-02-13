@@ -248,7 +248,7 @@ Rectangle {
 
             onClicked: {
 
-
+                Client.onStopPrepearingOrder(prepearing_order_model.order_id);
 
             }
 
@@ -468,7 +468,7 @@ Rectangle {
 
             if (prepearing_order_model.checkIfAllItemsPrepeared()) {
 
-                console.log("Ok");
+
 
             } else {
 

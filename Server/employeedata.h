@@ -6,6 +6,7 @@
 class EmployeeData {
 
 public:
+    EmployeeData();
     EmployeeData(const QString& name, const QString& surname, const QString& position);
 
     bool operator == (const EmployeeData& other) const;

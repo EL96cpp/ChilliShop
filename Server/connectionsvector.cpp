@@ -59,7 +59,7 @@ bool ConnectionsVector::CheckIfEmployeeAlreadyLogged(const QString &name, const 
 
         if (connections[i]->GetConnectionType() == ConnectionType::EMPLOYEE) {
 
-            if (connections[i]->CheckIfEmployeeDataIsEqual(name, surname, position)) {
+            if (connections[i]->CheckIfEmployeeDataIsEqual(EmployeeData(name, surname, position))) {
 
                 return true;
 

@@ -7,6 +7,7 @@
 #include <QThreadPool>
 
 #include "orderidvector.h"
+#include "employeedata.h"
 
 class ConnectionsVector;
 
@@ -29,17 +30,18 @@ public:
                               const QByteArray& catalog_byte_array);
 
     void SetSocketDescriptor(qintptr descriptor);
-    void SetEmployeeData(const QString& name, const QString& surname, const QString& position);
     void SetLoggedIn(const bool &logged_in);
     void SetConnectionType(const ConnectionType& connection_type);
     ConnectionType GetConnectionType();
 
     QString GetPhoneNumber();
-    bool CheckIfEmployeeDataIsEqual(const QString& name, const QString& surname, const QString& position);
+    EmployeeData GetEmployeeData();
+    bool CheckIfEmployeeDataIsEqual(const EmployeeData& employee_data);
     bool IsLoggedIn();
 
 public slots:
     void OnSetCustomerData(const QString& phone_number, const QString& name);
+    void OnSetEmployeeData(const EmployeeData& employee_data);
     void OnMessageResponce(const QByteArray& message_byte_array);
     void OnSendCatalog();
     void OnSetLoggedIn(const bool& logged_in);
@@ -58,8 +60,7 @@ private:
     const QByteArray& catalog_byte_array;
     QString phone_number;
     QString name;
-    QString surname;
-    QString position;
+    EmployeeData employee_data;
     ConnectionType connection_type;
     bool logged_in;
     std::atomic<unsigned long long>& sql_connections_counter;

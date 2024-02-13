@@ -201,6 +201,23 @@ void Client::onReadyRead() {
             QJsonValue order_id_value = json_message_object.value(QLatin1String("Order_id"));
             emit removeOrder(order_id_value.toInt());
 
+        } else if (resource_value.toString() == "Prepearing_order") {
+
+            if (code_value.toString() == "200") {
+
+                emit stopPrepearingOrderConfirmed();
+
+            }
+
+
+        } else if (resource_value.toString() == "Issuing_order") {
+
+            if (code_value.toString() == "200") {
+
+                emit stopIssuingOrderConfirmed();
+
+            }
+
         }
 
     }
@@ -226,6 +243,34 @@ void Client::onStartIssuingOrder(const int &order_id) {
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
+    message[QStringLiteral("Order_id")] = order_id;
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
+
+}
+
+void Client::onStopPrepearingOrder(const int &order_id) {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+    message[QStringLiteral("Resource")] = QStringLiteral("Prepearing_order");
+    message[QStringLiteral("Order_id")] = order_id;
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
+
+}
+
+void Client::onStopIssuingOrder(const int &order_id) {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+    message[QStringLiteral("Resource")] = QStringLiteral("Issuing_order");
     message[QStringLiteral("Order_id")] = order_id;
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");

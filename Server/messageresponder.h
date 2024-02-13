@@ -15,6 +15,7 @@
 #include "sqlservice.h"
 #include "connectionsvector.h"
 #include "clientconnection.h"
+#include "employeedata.h"
 
 class MessageResponder : public QObject, public QRunnable {
 
@@ -22,7 +23,7 @@ class MessageResponder : public QObject, public QRunnable {
 public:
     MessageResponder(QObject* parent, const QByteArray& message_byte_array, ConnectionsVector& connections, OrderIDVector& prepearing_order_ids,
                      OrderIDVector& issuing_order_ids, const ConnectionType& connection_type, std::atomic<unsigned long long>& sql_connections_counter,
-                     const bool& logged_in, const QString& phone_number);
+                     const bool& logged_in, const QString& phone_number, const EmployeeData& employee_data);
     ~MessageResponder();
 
     void run();
@@ -40,6 +41,7 @@ signals:
     void MessageResponce(const QByteArray& message_byte_array);
     void SetLoggedIn(const bool& logged_in);
     void SetCustomerData(const QString& phone_number, const QString& name);
+    void SetEmployeeData(const EmployeeData& employee_data);
     void SendCatalog();
     void SetConnectionType(const ConnectionType& connection_type);
     void CheckIfOrderIsCorrect(const QVector<QString>& order_ids);
@@ -52,6 +54,7 @@ private:
 private:
     QByteArray message_byte_array;
     QString phone_number;
+    EmployeeData employee_data;
     ConnectionsVector& connections;
     OrderIDVector& prepearing_order_ids;
     OrderIDVector& issuing_order_ids;

@@ -34,11 +34,9 @@ void ClientConnection::OnSetCustomerData(const QString &phone_number, const QStr
 
 }
 
-void ClientConnection::SetEmployeeData(const QString &name, const QString &surname, const QString &position) {
+void ClientConnection::OnSetEmployeeData(const EmployeeData& employee_data) {
 
-    this->name = name;
-    this->surname = surname;
-    this->position = position;
+    this->employee_data = employee_data;
 
 }
 
@@ -86,9 +84,15 @@ QString ClientConnection::GetPhoneNumber() {
 
 }
 
-bool ClientConnection::CheckIfEmployeeDataIsEqual(const QString &name, const QString &surname, const QString &position) {
+EmployeeData ClientConnection::GetEmployeeData() {
 
-    return (this->name == name && this->surname == surname && this->position == position);
+    return employee_data;
+
+}
+
+bool ClientConnection::CheckIfEmployeeDataIsEqual(const EmployeeData& employee_data) {
+
+    return this->employee_data == employee_data;
 
 }
 
@@ -102,13 +106,14 @@ void ClientConnection::onReadyRead() {
 
     QByteArray message_byte_array = socket->readAll();
     MessageResponder* message_responder = new MessageResponder(this, message_byte_array, connections, prepearing_order_ids, issuing_order_ids,
-                                                               connection_type, sql_connections_counter, logged_in, phone_number);
+                                                               connection_type, sql_connections_counter, logged_in, phone_number, employee_data);
 
     connect(message_responder, &MessageResponder::SetConnectionType, this, &ClientConnection::SetConnectionType, Qt::DirectConnection);
     connect(message_responder, &MessageResponder::MessageResponce, this, &ClientConnection::OnMessageResponce);
     connect(message_responder, &MessageResponder::SendCatalog, this, &ClientConnection::OnSendCatalog);
     connect(message_responder, &MessageResponder::SetLoggedIn, this, &ClientConnection::OnSetLoggedIn);
     connect(message_responder, &MessageResponder::SetCustomerData, this, &ClientConnection::OnSetCustomerData);
+    connect(message_responder, &MessageResponder::SetEmployeeData, this, &ClientConnection::OnSetEmployeeData);
 
     QThreadPool::globalInstance()->start(message_responder);
 
