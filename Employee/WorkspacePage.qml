@@ -202,6 +202,10 @@ Page {
             id: issuing_orders_list_model
         }
 
+        IssuingOrdersListCopyModel {
+            id: issuing_orders_list_model_copy
+        }
+
         PrepearingOrdersListModel {
             id: prepearing_orders_list_model
         }
@@ -321,6 +325,15 @@ Page {
 
             issuing_orders_list_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
                                                phone_number: phone_number, total_cost: total_cost, order_data: order_array });
+
+            issuing_orders_list_model_copy.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
+                                               phone_number: phone_number, total_cost: total_cost, order_data: order_array });
+
+            if (issuing_orders_list_model_copy.code_mask.length !== 0 || issuing_orders_list_model_copy.phone_mask.length !== 0) {
+
+                issuing_orders_list_form.updateCopyModel();
+
+            }
 
             console.log(order_id + " to issuing model");
 
@@ -497,6 +510,17 @@ Page {
         function onStopPrepearingOrderConfirmed(order_id) {
 
             workspace_rectangle.state = "prepearing_orders_list_state";
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onStopIssuingOrderConfirmed(order_id) {
+
+            workspace_rectangle.state = "issuing_orders_list_state";
 
         }
 

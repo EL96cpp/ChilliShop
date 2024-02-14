@@ -635,7 +635,59 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
             }
 
+        } else if (resource_value.toString() == "Issuing_order") {
+
+            int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
+
+            if (logged_in) {
+
+                if (issuing_order_ids.erase(employee_data, order_id)) {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Issuing_order");
+                    message[QStringLiteral("Code")] = QStringLiteral("200");
+                    message[QStringLiteral("Order_id")] = order_id;
+
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
+
+                } else {
+
+                    QJsonObject message;
+                    message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+                    message[QStringLiteral("Resource")] = QStringLiteral("Issuing_order");
+                    message[QStringLiteral("Code")] = QStringLiteral("400");
+                    message[QStringLiteral("Order_id")] = order_id;
+                    message[QStringLiteral("Error_description")] = QStringLiteral("Incorrect order ID");
+
+                    QByteArray message_byte_array = QJsonDocument(message).toJson();
+                    message_byte_array.append("\n");
+
+                    emit MessageResponce(message_byte_array);
+
+                }
+
+            } else {
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+                message[QStringLiteral("Resource")] = QStringLiteral("Issuing_order");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Order_id")] = order_id;
+                message[QStringLiteral("Error_description")] = QStringLiteral("Forbidden for non-logged users!");
+
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
+
+            }
+
         }
+
 
     } else if (method_value.toString() == "PUT") {
 

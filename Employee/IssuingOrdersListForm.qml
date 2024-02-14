@@ -13,6 +13,95 @@ Item {
     anchors.top: employee_data_rectangle.top
     anchors.horizontalCenter: parent.horizontalCenter
 
+    function setModelCopy() {
+
+        if (issuing_orders_list_model_copy.count !== 0) {
+
+            issuing_orders_list_model_copy.clear();
+
+        }
+
+        for (var i = 0; i < issuing_orders_list_model.count; ++i) {
+
+            issuing_orders_list_model_copy.append(issuing_orders_list_model.get(i));
+
+        }
+
+    }
+
+    function updateCopyModel() {
+
+        setModelCopy();
+        filterByReceiveCode();
+        filterByPhoneNumber();
+
+    }
+
+    function filterByReceiveCode() {
+
+        if (issuing_orders_list_model_copy.code_mask.length !== 0) {
+
+            var filtered_orders_counter = 0;
+
+            for (var j = 0; j < issuing_orders_list_model_copy.count; ++j) {
+
+                if (issuing_orders_list_model_copy.get(j).receive_code.startsWith(issuing_orders_list_model_copy.code_mask)) {
+
+                    issuing_orders_list_model_copy.move(j, filtered_orders_counter, 1);
+                    ++filtered_orders_counter;
+
+                }
+
+            }
+
+            if (filtered_orders_counter === 0) {
+
+                issuing_orders_list_model_copy.clear();
+
+            } else if (filtered_orders_counter !== issuing_orders_list_model_copy.count) {
+
+                issuing_orders_list_model_copy.remove(filtered_orders_counter, issuing_orders_list_model_copy.count - filtered_orders_counter);
+
+            }
+
+        }
+
+    }
+
+    function filterByPhoneNumber() {
+
+        if (issuing_orders_list_model_copy.phone_mask.length !== 0) {
+
+            var filtered_orders_counter = 0;
+
+            for (var j = 0; j < issuing_orders_list_model_copy.count; ++j) {
+
+                if (issuing_orders_list_model_copy.get(j).phone_number.startsWith(issuing_orders_list_model_copy.phone_mask)) {
+
+                    issuing_orders_list_model_copy.move(j, filtered_orders_counter, 1);
+                    ++filtered_orders_counter;
+
+                }
+
+            }
+
+            if (filtered_orders_counter === 0) {
+
+                issuing_orders_list_model_copy.clear();
+
+            } else if (filtered_orders_counter !== issuing_orders_list_model_copy.count) {
+
+                issuing_orders_list_model_copy.remove(filtered_orders_counter, issuing_orders_list_model_copy.count - filtered_orders_counter);
+
+            }
+
+        }
+
+    }
+
+
+
+
     Rectangle {
 
         id: order_issuing_rectangle
@@ -69,6 +158,13 @@ Item {
 
                     validator: RegularExpressionValidator { regularExpression: /\d{4}/ }
 
+                    onTextChanged: {
+
+                        issuing_orders_list_model_copy.code_mask = code_search_input.text;
+                        updateCopyModel();
+
+                    }
+
                 }
 
             }
@@ -116,6 +212,13 @@ Item {
 
                     validator: RegularExpressionValidator { regularExpression: /^8\d{10}/ }
 
+                    onTextChanged: {
+
+                        issuing_orders_list_model_copy.phone_mask = phone_search_input.text;
+                        updateCopyModel();
+
+                    }
+
                 }
 
             }
@@ -154,15 +257,17 @@ Item {
 
                 width: orders_rectangle.width
                 height: orders_rectangle.height
+                spacing: 5
 
-                model: issuing_orders_list_model
+                model: issuing_orders_list_model_copy
 
                 delegate: Rectangle {
 
                     id: order_issuing_delegate
 
                     width: orders_rectangle.width-20
-                    height: 120
+                    height: order_id_title_rectangle.height + order_id_title_rectangle.anchors.margins +
+                            phone_number_title_rectangle.height + phone_number_title_rectangle.anchors.topMargin*2
                     radius: 15
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: "#90431000"
@@ -187,6 +292,7 @@ Item {
                             text: "Номер заказа: "
                             font.family: regular_font.name
                             font.pointSize: 16
+                            font.wordSpacing: 5
                             color: "#e4e4e4"
 
                             anchors.centerIn: parent
@@ -205,6 +311,49 @@ Item {
                         text: model.order_id
                         font.family: regular_font.name
                         font.pointSize: 16
+                        font.wordSpacing: 5
+                        color: "#e4e4e4"
+
+                    }
+
+                    Rectangle {
+
+                        id: phone_number_title_rectangle
+                        width: phone_number_title.paintedWidth + 10
+                        height: phone_number_title.paintedHeight + 5
+                        radius: 5
+                        color: "#a0290A00"
+
+                        anchors.left: order_id_title_rectangle.left
+                        anchors.top: order_id_title_rectangle.bottom
+                        anchors.topMargin: 10
+
+                        Text {
+
+                            id: phone_number_title
+                            text: "Номер телефона: "
+                            font.family: regular_font.name
+                            font.pointSize: 16
+                            font.wordSpacing: 5
+                            color: "#e4e4e4"
+
+                            anchors.centerIn: parent
+
+                        }
+
+                    }
+
+                    Text {
+
+                        id: phone_number
+                        anchors.verticalCenter: phone_number_title_rectangle.verticalCenter
+                        anchors.left: phone_number_title_rectangle.right
+                        anchors.leftMargin: 10
+
+                        text: model.phone_number
+                        font.family: regular_font.name
+                        font.pointSize: 16
+                        font.wordSpacing: 5
                         color: "#e4e4e4"
 
                     }
@@ -229,6 +378,7 @@ Item {
                             text: "Итого:"
                             font.family: regular_font.name
                             font.pointSize: 16
+                            font.wordSpacing: 5
                             color: "#e4e4e4"
 
                             anchors.centerIn: parent
@@ -249,6 +399,7 @@ Item {
                               model.total_cost%100 + "0" : model.total_cost%100) + " ₽"
                         font.family: regular_font.name
                         font.pointSize: 16
+                        font.wordSpacing: 5
                         color: "#e4e4e4"
 
                     }

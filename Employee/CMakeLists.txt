@@ -22,7 +22,7 @@ qt_add_qml_module(appEmployee
     VERSION 1.0
     QML_FILES Main.qml LoginPage.qml WorkspacePage.qml ErrorMessage.qml IssuingOrdersListForm.qml PrepearingOrdersListForm.qml
     IssuingOrdersListModel.qml PrepearingOrdersListModel.qml EmployeeDataForm.qml IssuingOrderForm.qml PrepearingOrderForm.qml
-    IssuingOrderModel.qml PrepearingOrderModel.qml
+    IssuingOrderModel.qml PrepearingOrderModel.qml IssuingOrdersListCopyModel.qml
 
 )
 
