@@ -8,7 +8,10 @@ Rectangle {
 
     id: cart_rectangle
     width: (main_window.width - grid_rectangle.width - anchors.margins*4) / 2
-    height: 630
+    height: cart_title_rect.height + cart_title_rect.anchors.topMargin + cart_line.height + cart_line.anchors.topMargin +
+            cart_list_rectangle.height + cart_list_rectangle.anchors.topMargin + order_button.height +
+            order_button.anchors.topMargin + cart_total_row.height + cart_total_row.anchors.bottomMargin*2
+
     color: main_window.forms_background_color
     border.width: 2
     border.color: main_window.forms_border_color
@@ -90,8 +93,25 @@ Rectangle {
         anchors.top: cart_line.bottom
         anchors.topMargin: 10
         anchors.horizontalCenter: cart_line.horizontalCenter
-        color: "#80481300"
+        color: "#90481300"
         clip: true
+
+        state: "hidden"
+        states: [
+            State {
+                name: "shown"
+                when: cart_model.count !== 0
+                PropertyChanges { target: cart_list_rectangle; height: 420 }
+            },
+            State {
+                name: "hidden"
+                when: cart_model.count === 0
+                PropertyChanges { target: cart_list_rectangle; height: 0 }
+            }
+        ]
+        transitions: Transition {
+            PropertyAnimation { property: "height"; duration: 700; easing.type: Easing.InOutCubic }
+        }
 
         ListView {
 
@@ -153,6 +173,7 @@ Rectangle {
                     height: 20
                     width: 70
                     spinbox_value: model.number_of_items
+
                     anchors.top: cart_item_image.bottom
                     anchors.topMargin: 5
                     anchors.horizontalCenter: cart_item_image.horizontalCenter
@@ -180,6 +201,7 @@ Rectangle {
                     id: cart_item_name_rectangle
                     width: cart_item_name.paintedWidth * 1.5
                     height: cart_item_name.paintedHeight
+
                     anchors.left: cart_item_image.right
                     anchors.leftMargin: 15
                     anchors.top: cart_item_image.top
@@ -204,6 +226,7 @@ Rectangle {
                         font.pointSize: 15
                         font.wordSpacing: 5
                         font.bold: true
+
                         anchors.centerIn: parent
 
                     }
@@ -215,6 +238,7 @@ Rectangle {
                     id: delete_symbol
                     width: 10
                     height: 10
+
                     anchors.top: parent.top
                     anchors.right: parent.right
                     anchors.margins: 15

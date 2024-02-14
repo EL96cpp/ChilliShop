@@ -6,15 +6,8 @@ import QtQuick.Layouts 1.3
 Window {
 
     id: main_window
-    width: 1600
-    height: 1000
-    visible: true
+    visibility: "FullScreen"
     title: "Chilli World"
-
-    minimumWidth: width
-    minimumHeight: height
-    maximumWidth: width
-    maximumHeight: height
 
     property bool logged_in: false
 

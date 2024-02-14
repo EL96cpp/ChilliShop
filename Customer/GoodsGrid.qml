@@ -7,8 +7,8 @@ import QtQuick.Layouts 1.3
 Rectangle {
 
     id: grid_rectangle
-    width: 820
-    height: 700
+    width: 920
+    height: 860
 
     color: "#00000000"
 
@@ -204,8 +204,8 @@ Rectangle {
         anchors.fill: parent
         anchors.horizontalCenter: parent.horizontalCenter
 
-        cellWidth: 410
-        cellHeight: 580
+        cellWidth: 460
+        cellHeight: 650
 
         model: grid_rectangle.goods_model_copy
 

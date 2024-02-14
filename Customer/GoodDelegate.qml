@@ -7,7 +7,7 @@ import QtQuick.Layouts 1.3
 Rectangle {
 
     id: good_delegate_rectange
-    width: 400
+    width: 450
     height: good_delegate_image.paintedHeight + good_delegate_title_rect.height +
             good_delegate_scoville.paintedHeight + good_delegate_description.paintedHeight +
             good_delegate_title.anchors.margins + add_to_cart_button.height +
@@ -16,9 +16,9 @@ Rectangle {
     radius: 15
     clip: true
 
-    Layout.minimumWidth: 400
+    Layout.minimumWidth: 450
     Layout.minimumHeight: height
-    Layout.maximumWidth: 400
+    Layout.maximumWidth: 450
     Layout.maximumHeight: height
 
     signal addToCartSignal(var id, var name, var type, var text_description, var price, var image);
@@ -43,8 +43,11 @@ Rectangle {
     Image {
 
         id: good_delegate_image
+        sourceSize.width: parent.width
+        fillMode: Image.PreserveAspectFit
         source: model.image
         anchors.top: parent.top
+
     }
 
     Rectangle {

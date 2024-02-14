@@ -37,6 +37,7 @@ signals:
                           const QString& receive_code, const size_t& total_cost, const QJsonArray& order_data);
     void orderAccepted();
     void setOrderPrepeared(const int& order_id);
+    void cancelOrderAccepted(const int& order_id);
 
 public slots:
     void onLogin(const QString& phone_number, const QString& password);
