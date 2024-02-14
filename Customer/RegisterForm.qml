@@ -17,8 +17,7 @@ Rectangle {
     border.width: 5
     border.color: "#4e1800"
 
-    anchors.top: profile_header_image.bottom
-    anchors.topMargin: 95
+    anchors.verticalCenter:  parent.verticalCenter
     anchors.horizontalCenter: parent.horizontalCenter
 
     signal toLoginForm();

@@ -8,7 +8,9 @@ Rectangle {
 
     id: grid_rectangle
     width: 920
-    height: 860
+    //height: 860
+    height: main_page.height - header_image.height - header_rect.height -
+            header_rect.anchors.topMargin - anchors.topMargin
 
     color: "#00000000"
 

@@ -7,19 +7,19 @@ import QtQuick.Layouts 1.3
 Rectangle {
 
     id: cart_rectangle
-    width: (main_window.width - grid_rectangle.width - anchors.margins*4) / 2
+    width: (main_window.width - grid_rectangle.width - anchors.margins*4) / 2.2
     height: cart_title_rect.height + cart_title_rect.anchors.topMargin + cart_line.height + cart_line.anchors.topMargin +
             cart_list_rectangle.height + cart_list_rectangle.anchors.topMargin + order_button.height +
-            order_button.anchors.topMargin + cart_total_row.height + cart_total_row.anchors.bottomMargin*2
+            order_button.anchors.topMargin + cart_total_row.height + cart_total_row.anchors.topMargin*2
 
     color: main_window.forms_background_color
     border.width: 2
     border.color: main_window.forms_border_color
     radius: 15
 
-    anchors.top: header_rect.bottom
-    anchors.right: parent.right
-    anchors.margins: 20
+    anchors.top: grid_rectangle.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.horizontalCenterOffset: (grid_rectangle.width + (main_page.width - grid_rectangle.width)/2)/2
 
     property bool is_empty: cart_model.count === 0
 
@@ -101,7 +101,7 @@ Rectangle {
             State {
                 name: "shown"
                 when: cart_model.count !== 0
-                PropertyChanges { target: cart_list_rectangle; height: 420 }
+                PropertyChanges { target: cart_list_rectangle; height: 500 }
             },
             State {
                 name: "hidden"
@@ -131,7 +131,8 @@ Rectangle {
 
                 id: cart_item_delegate
                 width: cart_rectangle.width-20
-                height: 80
+                height: cart_item_image.height + cart_item_image.anchors.topMargin +
+                        custom_spinbox.height + custom_spinbox.anchors.topMargin * 2
                 radius: 15
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: "#90713103"
@@ -157,7 +158,7 @@ Rectangle {
                 Image {
 
                     id: cart_item_image
-                    sourceSize.height: 40
+                    sourceSize.height: 60
                     source: model.image
 
                     anchors.left: parent.left
@@ -170,7 +171,7 @@ Rectangle {
                 CustomSpinbox {
 
                     id: custom_spinbox
-                    height: 20
+                    height: 30
                     width: 70
                     spinbox_value: model.number_of_items
 
@@ -307,7 +308,7 @@ Rectangle {
         height: 40
 
         anchors.top: cart_list_rectangle.bottom
-        anchors.topMargin: 10
+        anchors.topMargin: 35
         anchors.horizontalCenter: parent.horizontalCenter
 
         background: Rectangle {
@@ -350,8 +351,8 @@ Rectangle {
 
         id: cart_total_row
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 15
+        anchors.top: order_button.bottom
+        anchors.topMargin: 35
 
         Text {
 

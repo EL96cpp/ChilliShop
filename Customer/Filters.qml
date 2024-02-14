@@ -7,16 +7,16 @@ import QtQuick.Layouts 1.3
 Rectangle {
 
     id: filters_column_rect
-    width: (main_window.width - grid_rectangle.width - anchors.margins*4) / 2
-    height: 680
+    width: (main_window.width - grid_rectangle.width - anchors.margins*4) / 2.2
+    height: 750
     color: main_window.forms_background_color
     radius: 15
     border.width: 2
     border.color: main_window.forms_border_color
 
-    anchors.top: header_rect.bottom
-    anchors.left: parent.left
-    anchors.margins: 20
+    anchors.top: grid_rectangle.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.horizontalCenterOffset: -(grid_rectangle.width + (main_page.width - grid_rectangle.width)/2)/2
 
     property string checkbox_background_color: "#ae5434"
     property string checkbox_select_color: "#ffffff"
