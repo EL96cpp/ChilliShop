@@ -116,6 +116,24 @@ void Client::onReadyRead() {
 
             }
 
+        } else if (resource_value.toString() == "Order") {
+
+            QJsonValue order_id_value = json_message_object.value(QLatin1String("order_id"));
+            QJsonValue receive_code = json_message_object.value(QLatin1String("receive_code"));
+            QJsonValue phone_number_value = json_message_object.value(QLatin1String("phone_number"));
+            QJsonValue timestamp_value = json_message_object.value(QLatin1String("ordered_timestamp"));
+            QJsonValue total_cost_value = json_message_object.value(QLatin1String("total_cost"));
+            QJsonValue order_json_value = json_message_object.value(QLatin1String("order_data"));
+            QJsonValue is_ready_value = json_message_object.value(QLatin1String("is_ready"));
+
+            if (!is_ready_value.toBool()) {
+
+                emit addOrderToOrderPrepearingModel(order_id_value.toInt(), phone_number_value.toString(),
+                                                    receive_code.toString(), timestamp_value.toString(),
+                                                    total_cost_value.toInt(), order_json_value.toArray());
+
+            }
+
         }
 
     } else if (method_value.toString() == "PUT") {

@@ -99,7 +99,16 @@ Item {
 
     }
 
+    Connections {
 
+        target: workspace_page
+        function addIssuingOrderToCopyModel(order_id, ordered_timestamp, receive_code, phone_number, total_cost, order_array) {
+
+            updateCopyModel();
+
+        }
+
+    }
 
 
     Rectangle {

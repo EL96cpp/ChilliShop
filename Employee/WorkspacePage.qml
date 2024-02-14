@@ -556,6 +556,14 @@ Page {
 
                 }
 
+                if (issuing_orders_list_model_copy.get(i).order_id === order_id) {
+
+                    issuing_orders_list_model.remove(i);
+                    return;
+
+                }
+
+
             }
 
             for (var j = 0; j < prepearing_orders_list_model.count; ++j) {
@@ -612,14 +620,24 @@ Page {
 
                 if (prepearing_orders_list_model.get(i).order_id === order_id) {
 
+                    var order_array = {"order_data" : []};
+
+                    for (var j = 0; j < prepearing_orders_list_model.get(i).order_data.order_data.length; ++j) {
+
+                        order_array.order_data.push(prepearing_orders_list_model.get(i).order_data.order_data[j]);
+
+                    }
+
                     issuing_orders_list_model.append({ order_id: prepearing_orders_list_model.get(i).order_id,
                                                        ordered_timestamp: prepearing_orders_list_model.get(i).ordered_timestamp,
                                                        receive_code: prepearing_orders_list_model.get(i).receive_code,
                                                        phone_number: prepearing_orders_list_model.get(i).phone_number,
                                                        total_cost: prepearing_orders_list_model.get(i).total_cost,
-                                                       order_data: prepearing_orders_list_model.get(i).order_array });
+                                                       order_data: order_array });
 
                     prepearing_orders_list_model.remove(i);
+
+                    issuing_orders_list_form.updateCopyModel();
 
                     workspace_rectangle.state = "prepearing_orders_list_state";
 

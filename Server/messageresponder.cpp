@@ -1099,6 +1099,25 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
 
             emit MessageResponce(message_byte_array);
 
+
+            QJsonObject employees_message;
+            employees_message[QStringLiteral("Method")] = QStringLiteral("POST");
+            employees_message[QStringLiteral("Resource")] = QStringLiteral("Order");
+
+            employees_message[QStringLiteral("order_id")] = order_id;
+            employees_message[QStringLiteral("phone_number")] = phone_number;
+            employees_message[QStringLiteral("ordered_timestamp")] = timestamp;
+            employees_message[QStringLiteral("receive_code")] = order_code;
+            employees_message[QStringLiteral("total_cost")] = total_cost;
+            employees_message[QStringLiteral("order_data")] = order_json_array;
+            employees_message[QStringLiteral("is_ready")] = false;
+
+            QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
+            employees_message_byte_array.append("\n");
+
+            emit SendToAllEmployees(employees_message_byte_array);
+
+
         } else {
 
             QJsonObject message;
