@@ -128,6 +128,7 @@ Rectangle {
         onClicked: {
 
             Client.onCancelOrder(order_view_model.order_id, orders_form.phone_number, order_view_model.receive_code);
+            order_cancel_form.visible = false;
 
         }
 

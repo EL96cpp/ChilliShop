@@ -379,7 +379,6 @@ void Client::onReadyRead() {
             if (code_value.toString() == "200") {
 
                 emit cancelOrderAccepted(json_message_object.value(QLatin1String("Order_id")).toInt());
-                //Add qml part slot to process cancle order accepted
 
             } else if (code_value.toString() == "403") {
 

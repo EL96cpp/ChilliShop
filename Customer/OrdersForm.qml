@@ -124,6 +124,40 @@ Item {
 
     }
 
+    Connections {
+
+        target: Client
+
+        function onCancelOrderAccepted(order_id) {
+
+            profile_page.showMessage("Отмена заказа", "Заказ " + order_id + " был\nуспешно отменён!");
+
+            if (order_view_model.order_id === order_id) {
+
+                order_view_model.clear();
+
+                order_confirm_form.visible = false;
+                deliveries_form.visible = true;
+                received_orders_form.visible = false;
+                order_view.visible = false;
+
+            }
+
+            for (var i = 0; i < active_orders_model.count; ++i) {
+
+                if (active_orders_model.get(i).order_id === order_id) {
+
+                    active_orders_model.remove(i);
+                    break;
+
+                }
+
+            }
+
+        }
+
+    }
+
     Rectangle {
 
         id: order_header_rectangle
