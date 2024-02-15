@@ -292,6 +292,18 @@ Rectangle {
             color: register_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
             radius: 20
 
+            layer.enabled: register_button.hovered
+            layer.effect: MultiEffect {
+
+                id: register_button_rectangle_shadow
+                blurEnabled: true
+                blurMax: 30
+                blur: 0.7
+                saturation: 0.5
+                contrast: 0.3
+
+            }
+
         }
 
         hoverEnabled: true

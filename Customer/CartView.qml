@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 
 Rectangle {
@@ -317,6 +318,18 @@ Rectangle {
             border.width: 2
             border.color: "#692b06"
             radius: 20
+
+            layer.enabled: order_button.hovered
+            layer.effect: MultiEffect {
+
+                id: cart_list_rectangle_shadow
+                blurEnabled: true
+                blurMax: 30
+                blur: 0.7
+                saturation: 0.5
+                contrast: 0.3
+
+            }
 
         }
 
