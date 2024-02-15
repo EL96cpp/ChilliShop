@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
-
+import QtQuick.Effects
 
 Page {
 
@@ -198,6 +198,7 @@ Page {
 
                 hoverEnabled: true
 
+
                 onClicked: {
 
                     stack_view.push(profile_page);
@@ -274,6 +275,18 @@ Page {
             anchors.right: seasonings_text.left
             anchors.rightMargin: 150
 
+            layer.enabled: sauce_mouse_area.containsMouse
+            layer.effect: MultiEffect {
+
+                id: sauce_text_shadow
+                blurEnabled: true
+                blurMax: 20
+                blur: 0.7
+                saturation: 0.5
+                contrast: 0.3
+
+            }
+
             MouseArea {
 
                 id: sauce_mouse_area
@@ -290,6 +303,7 @@ Page {
 
         }
 
+
         Text {
 
             id: seasonings_text
@@ -300,6 +314,18 @@ Page {
             font.bold: true
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
+
+            layer.enabled: seasonings_mouse_area.containsMouse
+            layer.effect: MultiEffect {
+
+                id: seasonings_text_shadow
+                blurEnabled: true
+                blurMax: 20
+                blur: 0.7
+                saturation: 0.5
+                contrast: 0.3
+
+            }
 
             MouseArea {
 
@@ -328,6 +354,18 @@ Page {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: seasonings_text.right
             anchors.leftMargin: 150
+
+            layer.enabled: seeds_mouse_area.containsMouse
+            layer.effect: MultiEffect {
+
+                id: seeds_text_shadow
+                blurEnabled: true
+                blurMax: 20
+                blur: 0.7
+                saturation: 0.5
+                contrast: 0.3
+
+            }
 
             MouseArea {
 
@@ -367,13 +405,26 @@ Page {
         text: "Очистить корзину"
         color: clear_cart_mouse_area.containsMouse ? hover_color : "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 12
+        font.pointSize: 13
         font.wordSpacing: 5
         font.bold: true
 
         anchors.horizontalCenter: cart_rectangle.horizontalCenter
         anchors.top: cart_rectangle.bottom
         anchors.topMargin: 10
+
+        layer.enabled: clear_cart_mouse_area.containsMouse
+        layer.effect: MultiEffect {
+
+            id: clear_cart_text_shadow
+            blurEnabled: true
+            blurMax: 12
+            blur: 0.6
+            saturation: 0.4
+            contrast: 0.2
+
+        }
+
 
         signal clearCartModel();
 

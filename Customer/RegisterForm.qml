@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 
 Rectangle {
@@ -332,7 +333,7 @@ Rectangle {
 
         id: login_text
         text: "Авторизация"
-        color: register_mouse_area.containsMouse ? hover_color : "#E2E2E2"
+        color: login_mouse_area.containsMouse ? hover_color : "#E2E2E2"
         font.family: regular_font.name
         font.pointSize: 15
 
@@ -342,10 +343,21 @@ Rectangle {
         anchors.top: register_rectangle.bottom
         anchors.topMargin: 25
 
+        layer.enabled: login_mouse_area.containsMouse
+        layer.effect: MultiEffect {
+
+            id: login_text_shadow
+            blurEnabled: true
+            blurMax: 12
+            blur: 0.6
+            saturation: 0.4
+            contrast: 0.2
+
+        }
 
         MouseArea {
 
-            id: register_mouse_area
+            id: login_mouse_area
             anchors.fill: parent
             hoverEnabled: true
 

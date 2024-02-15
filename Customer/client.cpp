@@ -455,8 +455,6 @@ void Client::onReadyRead() {
 
                     QJsonArray order_data_array = QJsonDocument::fromJson(order_data_string.toUtf8()).array();
 
-                    qDebug() << "Received order received_timestamp " << received_timestamp;
-                    qDebug() << "Received order received_timestamp_formated " << received_timestamp_formated;
 
                     emit addReceivedOrder(order_id, ordered_timestamp_formated, received_timestamp_formated, receive_code, total_cost, order_data_array);
 

@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 
 Page {
@@ -199,7 +200,6 @@ Page {
 
             for (var i = 0; i < order_data.length; ++i) {
 
-                console.log("add received order with order_data.length: " + order_data.length);
                 orders_json_array.order_positions.push(order_data[i]);
 
             }
@@ -207,8 +207,6 @@ Page {
 
             received_orders_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, received_timestamp: received_timestamp,
                                            receive_code: receive_code, total_cost: total_cost, order_data: orders_json_array });
-
-            console.log("Added received order " + order_id);
 
         }
 
@@ -309,6 +307,18 @@ Page {
                 text: "Меню"
                 color: menu_text_mouse_area.containsMouse ? hover_color : "#E2E2E2"
                 anchors.centerIn: parent
+
+                layer.enabled: menu_text_mouse_area.containsMouse
+                layer.effect: MultiEffect {
+
+                    id: menu_text_shadow
+                    blurEnabled: true
+                    blurMax: 20
+                    blur: 0.7
+                    saturation: 0.5
+                    contrast: 0.3
+
+                }
 
                 MouseArea {
 

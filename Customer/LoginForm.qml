@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 
 Rectangle {
@@ -242,6 +243,18 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: login_rectangle.bottom
         anchors.topMargin: 25
+
+        layer.enabled: register_mouse_area.containsMouse
+        layer.effect: MultiEffect {
+
+            id: register_text_shadow
+            blurEnabled: true
+            blurMax: 12
+            blur: 0.6
+            saturation: 0.4
+            contrast: 0.2
+
+        }
 
 
         MouseArea {
