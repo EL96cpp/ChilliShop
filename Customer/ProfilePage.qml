@@ -193,10 +193,20 @@ Page {
     Connections {
 
         target: Client
-        function onAddReceivedOrder(order_id, number_of_items, ordered_timestamp, received_timestamp, receive_code, total_cost, order_data) {
+        function onAddReceivedOrder(order_id, ordered_timestamp, received_timestamp, receive_code, total_cost, order_data) {
 
-            received_orders_model.append({ order_id: order_id, number_of_items: number_of_items, ordered_timestamp: ordered_timestamp,
-                                           received_timestamp: received_timestamp, receive_code: receive_code, total_cost: total_cost, order_data: order_data });
+            var orders_json_array = {"order_positions" : []};
+
+            for (var i = 0; i < order_data.length; ++i) {
+
+                console.log("add received order with order_data.length: " + order_data.length);
+                orders_json_array.order_positions.push(order_data[i]);
+
+            }
+
+
+            received_orders_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, received_timestamp: received_timestamp,
+                                           receive_code: receive_code, total_cost: total_cost, order_data: orders_json_array });
 
             console.log("Added received order " + order_id);
 

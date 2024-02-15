@@ -347,7 +347,7 @@ Item {
 
         visible: !order_view.is_active
 
-        anchors.horizontalCenter: received_timestamp_title.horizontalCenter
+        anchors.verticalCenter: received_timestamp_title.verticalCenter
         anchors.left: received_timestamp_title.right
         anchors.leftMargin: 5
 

@@ -64,6 +64,53 @@ Item {
 
     }
 
+    function showReceivedOrderView(order_id, ordered_timestamp, received_timestamp, receive_code, order_data, total_cost) {
+
+        order_view_model.clear();
+
+        order_view.is_active = false;
+
+        for (var i = 0; i < order_data.order_positions.length; ++i) {
+
+            console.log(order_data.order_positions[i].id + " " + order_data.order_positions[i].number_of_items);
+            var image_directory;
+
+            if (order_data.order_positions[i].type === "Sauce") {
+
+                image_directory = "Sauces";
+
+            } else if (order_data.order_positions[i].type === "Seasoning") {
+
+                image_directory = "Seasonings";
+
+            } else if (order_data.order_positions[i].type === "Seeds") {
+
+                image_directory = "Seeds";
+
+            }
+
+            order_view_model.append({ product_id: order_data.order_positions[i].id, name: order_data.order_positions[i].name,
+                                      description: order_data.order_positions[i].description, price: order_data.order_positions[i].price,
+                                      image: "file://" + applicationDirPath + "/../Images/Catalog/" + image_directory + "/" + order_data.order_positions[i].id + ".png",
+                                      number_of_items: order_data.order_positions[i].number_of_items});
+
+        }
+
+        order_view_model.order_id = order_id;
+        order_view_model.receive_code = receive_code;
+        order_view_model.ordered_timestamp = ordered_timestamp;
+        order_view_model.received_timestamp = received_timestamp;
+        order_view_model.total_cost = total_cost;
+
+        console.log("ShowReceivedOrder received_timestmap " + received_timestamp);
+
+        order_confirm_form.visible = false;
+        deliveries_form.visible = false;
+        received_orders_form.visible = false;
+        order_view.visible = true;
+
+    }
+
     Connections {
 
         target: order_view
