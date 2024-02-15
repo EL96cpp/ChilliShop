@@ -135,7 +135,7 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
                 QJsonValue total_cost_value = json_message_object.value(QLatin1String("Total_cost"));
                 QJsonValue order_json_value = json_message_object.value(QLatin1String("Order_data"));
 
-                AddOrder(phone_number_value.toString(), timestamp_value.toString(), total_cost_value.toString().toInt(), order_json_value);
+                AddOrder(phone_number_value.toString(), timestamp_value.toString(), total_cost_value.toInt(), order_json_value);
 
             } else {
 
@@ -693,6 +693,12 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
         if (resource_value.toString() == "Order_received") {
 
+            int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
+            QString phone_number = json_message_object.value(QLatin1String("Phone_number")).toString();
+            QString receive_code = json_message_object.value(QLatin1String("Receive_code")).toString();
+            QString received_timestamp = json_message_object.value(QLatin1String("Received_timestamp")).toString();
+
+            AddReceivedOrder(order_id, phone_number, receive_code, received_timestamp);
 
 
         } else if (resource_value.toString() == "Order_prepeared") {
@@ -1159,9 +1165,9 @@ void MessageResponder::AddOrder(const QString &phone_number, const QString &time
 
 }
 
-void MessageResponder::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString &ordered_timestamp, const QString& received_timestamp, const QString &receive_code, const int& total_cost, const QMap<int, int> &order_data) {
+void MessageResponder::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString& receive_code, const QString& received_timestamp) {
 
-    AddReceivedOrderResult result = sql_service->AddReceivedOrder(order_id, phone_number, ordered_timestamp, received_timestamp, receive_code, total_cost, order_data);
+    AddReceivedOrderResult result = sql_service->AddReceivedOrder(order_id, phone_number, receive_code, received_timestamp);
 
     if (result == AddReceivedOrderResult::SUCCESS) {
 
@@ -1169,11 +1175,35 @@ void MessageResponder::AddReceivedOrder(const int &order_id, const QString &phon
         message[QStringLiteral("Method")] = QStringLiteral("PUT");
         message[QStringLiteral("Resource")] = QStringLiteral("Order_received");
         message[QStringLiteral("Code")] = QStringLiteral("200");
-        message[QStringLiteral("Order_id")] = QString::number(order_id);
+        message[QStringLiteral("Order_id")] = order_id;
+        message[QStringLiteral("Phone_number")] = phone_number;
+        message[QStringLiteral("Receive_code")] = receive_code;
         QByteArray message_byte_array = QJsonDocument(message).toJson();
         message_byte_array.append("\n");
 
         emit MessageResponce(message_byte_array);
+
+
+        QJsonObject employees_message;
+        employees_message[QStringLiteral("Method")] = QStringLiteral("PUT");
+        employees_message[QStringLiteral("Resource")] = QStringLiteral("Set_order_received");
+        employees_message[QStringLiteral("Order_id")] = order_id;
+        QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
+        employees_message_byte_array.append("\n");
+
+        emit SendToAllEmployeesExceptOne(employees_message_byte_array, employee_data);
+
+
+        QJsonObject customer_message;
+        customer_message[QStringLiteral("Method")] = QStringLiteral("PUT");
+        customer_message[QStringLiteral("Resource")] = QStringLiteral("Set_order_received");
+        customer_message[QStringLiteral("Order_id")] = order_id;
+        customer_message[QStringLiteral("Received_timestamp")] = received_timestamp;
+        QByteArray customer_message_byte_array = QJsonDocument(customer_message).toJson();
+        customer_message_byte_array.append("\n");
+
+        emit SendToCustomer(phone_number, customer_message_byte_array);
+
 
     } else if (result == AddReceivedOrderResult::NO_ORDER_IN_DATABASE) {
 
@@ -1181,21 +1211,8 @@ void MessageResponder::AddReceivedOrder(const int &order_id, const QString &phon
         message[QStringLiteral("Method")] = QStringLiteral("PUT");
         message[QStringLiteral("Resource")] = QStringLiteral("Order_received");
         message[QStringLiteral("Code")] = QStringLiteral("403");
-        message[QStringLiteral("Order_id")] = QString::number(order_id);
+        message[QStringLiteral("Order_id")] = order_id;
         message[QStringLiteral("Error_description")] = QStringLiteral("No order in database");
-        QByteArray message_byte_array = QJsonDocument(message).toJson();
-        message_byte_array.append("\n");
-
-        emit MessageResponce(message_byte_array);
-
-    } else if (result == AddReceivedOrderResult::INCORRECT_PRODUCT_ID) {
-
-        QJsonObject message;
-        message[QStringLiteral("Method")] = QStringLiteral("PUT");
-        message[QStringLiteral("Resource")] = QStringLiteral("Order_received");
-        message[QStringLiteral("Code")] = QStringLiteral("403");
-        message[QStringLiteral("Order_id")] = QString::number(order_id);
-        message[QStringLiteral("Error_description")] = QStringLiteral("Order includes incorrect product ID's");
         QByteArray message_byte_array = QJsonDocument(message).toJson();
         message_byte_array.append("\n");
 

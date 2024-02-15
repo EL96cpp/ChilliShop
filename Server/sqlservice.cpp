@@ -430,7 +430,7 @@ bool SqlService::ChangeCustomerName(const QString &phone_number, const QString &
 
 }
 
-AddReceivedOrderResult SqlService::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString &ordered_timestamp, const QString& received_timestamp, const QString &receive_code, const int& total_cost, const QMap<int, int> &order_data) {
+AddReceivedOrderResult SqlService::AddReceivedOrder(const int &order_id, const QString &phone_number, const QString& receive_code, const QString& received_timestamp) {
 
     if (!CheckIfOrderExists(order_id, phone_number, receive_code)) {
 
@@ -438,30 +438,26 @@ AddReceivedOrderResult SqlService::AddReceivedOrder(const int &order_id, const Q
 
     } else {
 
-        QVector<int> product_ids;
+        QSqlQuery add_received_order_query(sql_database);
+        add_received_order_query.prepare("INSERT INTO received_orders (order_id, phone_number, ordered_timestamp, receive_code, total_cost, order_data)"
+                                         "(SELECT order_id, phone_number, ordered_timestamp, receive_code, total_cost, order_data FROM active_orders WHERE order_id = (?))");
+        add_received_order_query.addBindValue(order_id);
+        add_received_order_query.exec();
 
-        for (auto& id : order_data) {
+        QSqlQuery remove_received_order_query(sql_database);
+        remove_received_order_query.prepare("DELETE FROM active_orders WHERE order_id = (?) AND phone_number = (?) AND receive_code = (?)");
+        remove_received_order_query.addBindValue(order_id);
+        remove_received_order_query.addBindValue(phone_number);
+        remove_received_order_query.addBindValue(receive_code);
+        remove_received_order_query.exec();
 
-            product_ids.push_back(id);
+        QSqlQuery add_received_timestamp_query(sql_database);
+        add_received_timestamp_query.prepare("UPDATE received_orders SET received_timestamp = (?) WHERE order_id = (?)");
+        add_received_timestamp_query.addBindValue(received_timestamp);
+        add_received_timestamp_query.addBindValue(order_id);
+        add_received_timestamp_query.exec();
 
-        }
-
-        if (!CheckIfOrderIsCorrect(product_ids)) {
-
-            return AddReceivedOrderResult::INCORRECT_PRODUCT_ID;
-
-        } else {
-
-            QSqlQuery add_received_order_query(sql_database);
-            add_received_order_query.exec("INSERT INTO received_orders VALUES (order_id, phone_number, ordered_timestamp, receive_code, total_cost, order_data)"
-                                          "SELECT order_id, phone_number, ordered_timestamp, receive_code, total_cost, order_data FROM active_orders");
-            QSqlQuery add_received_timestamp_query;
-            add_received_timestamp_query.prepare("INSERT INTO received_orders (received_timestamp) VALUES (?)");
-            add_received_timestamp_query.addBindValue(received_timestamp);
-            add_received_timestamp_query.exec();
-            return AddReceivedOrderResult::SUCCESS;
-
-        }
+        return AddReceivedOrderResult::SUCCESS;
 
     }
 

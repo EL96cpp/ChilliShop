@@ -5,6 +5,7 @@
 #include <QTcpSocket>
 #include <QString>
 #include <QMap>
+#include <QDateTime>
 #include <QJsonParseError>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -32,6 +33,7 @@ signals:
     void stopIssuingOrderConfirmed();
     void orderPrepearedConfirmed(const int& order_id);
     void setOrderPrepeared(const int& order_id);
+    void setOrderReceived(const int& order_id);
     void orderReceivedConfirmed(const int& order_id, const QString& phone_number, const QString& receive_code);
     void showErrorMessage(const QString& error_title, const QString& error_description);
 

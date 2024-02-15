@@ -98,21 +98,10 @@ void ConnectionsVector::onSendToAllEmployeesExceptOne(const QByteArray &message_
 
     QMutexLocker locker(&mutex);
 
-    qDebug() << "Trying to send emplyee message except one: ";
-    employee_data.Debug();
-
     for (int i = 0; i < connections.size(); ++i) {
-
-        if (connections[i]->GetConnectionType() == ConnectionType::EMPLOYEE) {
-
-            qDebug() << "Check user: ";
-            connections[i]->GetEmployeeData().Debug();
-
-        }
 
         if (connections[i]->GetConnectionType() == ConnectionType::EMPLOYEE && connections[i]->GetEmployeeData() != employee_data) {
 
-            qDebug() << "Send employee message except one";
             connections[i]->SendMessage(message_byte_array);
 
         }

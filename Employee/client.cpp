@@ -118,6 +118,10 @@ void Client::onReadyRead() {
 
                 emit startIssuingOrderConfirmed(order_id);
 
+            } else if (code_value.toString() == "403") {
+
+                emit showErrorMessage("Ошибка выдачи заказа", json_message_object.value(QLatin1String("Error_description")).toString());
+
             }
 
         } else if (resource_value.toString() == "Order") {
@@ -153,12 +157,26 @@ void Client::onReadyRead() {
 
         } else if (resource_value.toString() == "Order_received") {
 
+            if (code_value.toString() == "200") {
 
+                qDebug() << "Order received confimed";
+                int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();
+                QString phone_number = json_message_object.value(QLatin1String("Phone_number")).toString();
+                QString receive_code = json_message_object.value(QLatin1String("Receive_code")).toString();
+
+                emit orderReceivedConfirmed(order_id, phone_number, receive_code);
+
+            }
 
         } else if (resource_value.toString() == "Set_order_prepeared") {
 
             qDebug() << "Set order prepeared";
             emit setOrderPrepeared(json_message_object.value(QLatin1String("Order_id")).toInt());
+
+        } else if (resource_value.toString() == "Set_order_received") {
+
+            qDebug() << "Order received";
+            emit setOrderReceived(json_message_object.value(QLatin1String("Order_id")).toInt());
 
         }
 
@@ -344,6 +362,7 @@ void Client::onOrderReceivedMessage(const int &order_id, const QString &phone_nu
     message[QStringLiteral("Order_id")] = order_id;
     message[QStringLiteral("Phone_number")] = phone_number;
     message[QStringLiteral("Receive_code")] = receive_code;
+    message[QStringLiteral("Received_timestamp")] = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");
 
