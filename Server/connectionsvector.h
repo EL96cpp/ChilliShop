@@ -20,6 +20,7 @@ public:
 
 public slots:
     void onSendToAllEmployees(const QByteArray& message_byte_array);
+    void onSendToAllEmployeesExceptOne(const QByteArray& message_byte_array, const EmployeeData& employee_data);
     void onSendToCustomer(const QString& phone_number, const QByteArray& message_byte_array);
 
 

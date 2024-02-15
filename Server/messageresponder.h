@@ -47,6 +47,7 @@ signals:
     void CheckIfOrderIsCorrect(const QVector<QString>& order_ids);
     void DeleteConnection();
     void SendToAllEmployees(const QByteArray& message_byte_array);
+    void SendToAllEmployeesExceptOne(const QByteArray& message_byte_array, const EmployeeData& employee_data);
     void SendToCustomer(const QString& phone_number, const QByteArray& message_byte_array);
 
 private:

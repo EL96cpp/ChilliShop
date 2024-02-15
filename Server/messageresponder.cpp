@@ -444,7 +444,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                     message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
                     message[QStringLiteral("Code")] = QStringLiteral("403");
                     message[QStringLiteral("Order_id")] = order_id;
-                    message[QStringLiteral("Error_description")] = QStringLiteral("Order is already prepearing by another employee");
+                    message[QStringLiteral("Error_description")] = QString("Заказ ") + QString::number(order_id) + QString(" уже подготавливается\nдругим сотрудником");
 
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
@@ -717,8 +717,17 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                             QByteArray message_byte_array = QJsonDocument(message).toJson();
                             message_byte_array.append("\n");
 
-                            //emit MessageResponce(message_byte_array);
-                            emit SendToAllEmployees(message_byte_array);
+                            emit MessageResponce(message_byte_array);
+
+
+                            QJsonObject employees_message;
+                            employees_message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                            employees_message[QStringLiteral("Resource")] = QStringLiteral("Set_order_prepeared");
+                            employees_message[QStringLiteral("Order_id")] = order_id;
+                            QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
+                            employees_message_byte_array.append("\n");
+
+                            emit SendToAllEmployeesExceptOne(employees_message_byte_array, employee_data);
 
 
                             QJsonObject customer_message;
@@ -979,6 +988,7 @@ void MessageResponder::LoginEmployee(const QString &name, const QString &surname
 
             qDebug() << "login employee 200";
             emit SetLoggedIn(true);
+            emit SetEmployeeData(EmployeeData(name, surname, position));
             emit MessageResponce(message_byte_array);
 
         } else if (login_result == EmployeeLoginResult::NO_EMPLOYEE_IN_DATABASE) {

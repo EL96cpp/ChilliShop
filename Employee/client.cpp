@@ -103,6 +103,10 @@ void Client::onReadyRead() {
 
                 emit startPrepearingOrderConfirmed(order_id);
 
+            } else if (code_value.toString() == "403") {
+
+                emit showErrorMessage("Ошибка подготовки заказа", json_message_object.value(QLatin1String("Error_description")).toString());
+
             }
 
 
@@ -150,6 +154,11 @@ void Client::onReadyRead() {
         } else if (resource_value.toString() == "Order_received") {
 
 
+
+        } else if (resource_value.toString() == "Set_order_prepeared") {
+
+            qDebug() << "Set order prepeared";
+            emit setOrderPrepeared(json_message_object.value(QLatin1String("Order_id")).toInt());
 
         }
 

@@ -122,6 +122,7 @@ void ClientConnection::onReadyRead() {
     connect(message_responder, &MessageResponder::SetCustomerData, this, &ClientConnection::OnSetCustomerData);
     connect(message_responder, &MessageResponder::SetEmployeeData, this, &ClientConnection::OnSetEmployeeData);
     connect(message_responder, &MessageResponder::SendToAllEmployees, &connections, &ConnectionsVector::onSendToAllEmployees);
+    connect(message_responder, &MessageResponder::SendToAllEmployeesExceptOne, &connections, &ConnectionsVector::onSendToAllEmployeesExceptOne);
     connect(message_responder, &MessageResponder::SendToCustomer, &connections, &ConnectionsVector::onSendToCustomer);
 
     QThreadPool::globalInstance()->start(message_responder);
