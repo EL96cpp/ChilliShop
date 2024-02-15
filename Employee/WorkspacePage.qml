@@ -695,4 +695,34 @@ Page {
 
     }
 
+    Connections {
+
+        target: Client
+        function onSetOrderReceived(order_id) {
+
+            for (var i = 0; i < issuing_orders_list_model.count; ++i) {
+
+                if (issuing_orders_list_model.get(i).order_id === order_id) {
+
+                    issuing_orders_list_model.remove(i);
+
+                }
+
+            }
+
+            for (var j = 0; j < issuing_orders_list_model_copy.count; ++j) {
+
+                if (issuing_orders_list_model_copy.get(j).order_id === order_id) {
+
+                    issuing_orders_list_model_copy.remove(j);
+
+                }
+
+            }
+
+
+        }
+
+    }
+
 }
