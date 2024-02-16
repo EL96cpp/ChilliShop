@@ -13,6 +13,7 @@ ListModel {
     property string phone_number;
     property int total_cost;
     property var order_data; //json array object
+    property bool is_processing;
 
     property string code_mask;
     property string phone_mask;

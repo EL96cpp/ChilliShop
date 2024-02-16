@@ -414,6 +414,36 @@ Item {
 
                     }
 
+                    Text {
+
+                        id: is_issuing_text
+
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        anchors.margins: 10
+
+                        visible: model.is_processing
+
+                        text: "ОБРАБАТЫВАЕТСЯ"
+                        font.family: regular_font.name
+                        font.pointSize: 16
+                        font.wordSpacing: 5
+                        color: "red"
+
+                        layer.enabled: true
+                        layer.effect: MultiEffect {
+
+                            id: is_issuing_text_shadow
+                            blurEnabled: true
+                            blurMax: 15
+                            blur: 0.5
+                            saturation: 0.5
+                            contrast: 0.3
+
+                        }
+
+                    }
+
                     MouseArea {
 
                         id: order_issuing_delegate_mouse_area

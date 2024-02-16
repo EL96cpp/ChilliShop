@@ -431,11 +431,20 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                     message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
                     message[QStringLiteral("Code")] = QStringLiteral("200");
                     message[QStringLiteral("Order_id")] = order_id;
-
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
 
                     emit MessageResponce(message_byte_array);
+
+                    QJsonObject employees_message;
+                    employees_message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                    employees_message[QStringLiteral("Resource")] = QStringLiteral("Start_prepearing_order");
+                    employees_message[QStringLiteral("Order_id")] = order_id;
+                    QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
+                    employees_message_byte_array.append("\n");
+
+                    emit SendToAllEmployeesExceptOne(employee_data, employees_message_byte_array);
+
 
                 } else {
 
@@ -483,11 +492,19 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                     message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
                     message[QStringLiteral("Code")] = QStringLiteral("200");
                     message[QStringLiteral("Order_id")] = order_id;
-
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
 
                     emit MessageResponce(message_byte_array);
+
+                    QJsonObject employees_message;
+                    employees_message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                    employees_message[QStringLiteral("Resource")] = QStringLiteral("Start_issuing_order");
+                    employees_message[QStringLiteral("Order_id")] = order_id;
+                    QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
+                    employees_message_byte_array.append("\n");
+
+                    emit SendToAllEmployeesExceptOne(employee_data, employees_message_byte_array);
 
                 } else {
 
@@ -531,11 +548,19 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
                 QJsonArray orders_array = sql_service->GetAllActiveOrders();
 
+                QJsonArray issuing_ids_json_array = issuing_order_ids.getAllOrderIDs();
+                QJsonArray prepearing_ids_json_array = prepearing_order_ids.getAllOrderIDs();
+
+                qDebug() << "Issuing order ids size " << issuing_ids_json_array.size();
+                qDebug() << "Prepearing order ids size " << prepearing_ids_json_array.size();
+
                 QJsonObject message;
                 message[QStringLiteral("Method")] = QStringLiteral("GET");
                 message[QStringLiteral("Resource")] = QStringLiteral("Orders");
                 message[QStringLiteral("Code")] = QStringLiteral("200");
                 message[QStringLiteral("Orders")] = orders_array;
+                message[QStringLiteral("Issuing_order_ids")] = issuing_ids_json_array;
+                message[QStringLiteral("Prepearing_order_ids")] = prepearing_ids_json_array;
 
                 QByteArray message_byte_array = QJsonDocument(message).toJson();
                 message_byte_array.append("\n");
@@ -597,11 +622,20 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                     message[QStringLiteral("Resource")] = QStringLiteral("Prepearing_order");
                     message[QStringLiteral("Code")] = QStringLiteral("200");
                     message[QStringLiteral("Order_id")] = order_id;
-
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
 
                     emit MessageResponce(message_byte_array);
+
+                    QJsonObject employees_message;
+                    employees_message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                    employees_message[QStringLiteral("Resource")] = QStringLiteral("Stop_prepearing_order");
+                    employees_message[QStringLiteral("Order_id")] = order_id;
+                    QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
+                    employees_message_byte_array.append("\n");
+
+                    emit SendToAllEmployeesExceptOne(employee_data, employees_message_byte_array);
+
 
                 } else {
 
@@ -648,11 +682,20 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                     message[QStringLiteral("Resource")] = QStringLiteral("Issuing_order");
                     message[QStringLiteral("Code")] = QStringLiteral("200");
                     message[QStringLiteral("Order_id")] = order_id;
-
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
 
                     emit MessageResponce(message_byte_array);
+
+                    QJsonObject employees_message;
+                    employees_message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                    employees_message[QStringLiteral("Resource")] = QStringLiteral("Stop_issuing_order");
+                    employees_message[QStringLiteral("Order_id")] = order_id;
+                    QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
+                    employees_message_byte_array.append("\n");
+
+                    emit SendToAllEmployeesExceptOne(employee_data, employees_message_byte_array);
+
 
                 } else {
 
@@ -733,7 +776,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
                             QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
                             employees_message_byte_array.append("\n");
 
-                            emit SendToAllEmployeesExceptOne(employees_message_byte_array, employee_data);
+                            emit SendToAllEmployeesExceptOne(employee_data, employees_message_byte_array);
 
 
                             QJsonObject customer_message;
@@ -1191,7 +1234,7 @@ void MessageResponder::AddReceivedOrder(const int &order_id, const QString &phon
         QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
         employees_message_byte_array.append("\n");
 
-        emit SendToAllEmployeesExceptOne(employees_message_byte_array, employee_data);
+        emit SendToAllEmployeesExceptOne(employee_data, employees_message_byte_array);
 
 
         QJsonObject customer_message;

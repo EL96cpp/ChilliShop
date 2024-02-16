@@ -138,7 +138,7 @@ void Client::onReadyRead() {
 
                 emit addOrderToOrderPrepearingModel(order_id_value.toInt(), phone_number_value.toString(),
                                                     receive_code.toString(), timestamp_value.toString(),
-                                                    total_cost_value.toInt(), order_json_value.toArray());
+                                                    total_cost_value.toInt(), order_json_value.toArray(), false);
 
             }
 
@@ -178,6 +178,26 @@ void Client::onReadyRead() {
             qDebug() << "Order received";
             emit setOrderReceived(json_message_object.value(QLatin1String("Order_id")).toInt());
 
+        } else if (resource_value.toString() == "Start_issuing_order") {
+
+            qDebug() << "Emit set start order issuing";
+            emit setOrderIssuing(json_message_object.value(QLatin1String("Order_id")).toInt(), true);
+
+        } else if (resource_value.toString() == "Stop_issuing_order") {
+
+            qDebug() << "Emit set stop order issuing";
+            emit setOrderIssuing(json_message_object.value(QLatin1String("Order_id")).toInt(), false);
+
+        } else if (resource_value.toString() == "Start_prepearing_order") {
+
+            qDebug() << "Emit set start order prepearing";
+            emit setOrderPrepearing(json_message_object.value(QLatin1String("Order_id")).toInt(), true);
+
+        } else if (resource_value.toString() == "Stop_prepearing_order") {
+
+            qDebug() << "Emit set stop order prepearing";
+            emit setOrderPrepearing(json_message_object.value(QLatin1String("Order_id")).toInt(), false);
+
         }
 
 
@@ -189,15 +209,22 @@ void Client::onReadyRead() {
 
                 QJsonArray orders_array = json_message_object.value(QLatin1String("Orders")).toArray();
 
+                QJsonArray issuing_order_ids_array = json_message_object.value(QLatin1String("Issuing_order_ids")).toArray();
+                QJsonArray prepearing_order_ids_array = json_message_object.value(QLatin1String("Prepearing_order_ids")).toArray();
+
+
                 for (int i = 0; i < orders_array.size(); ++i) {
 
-                    size_t order_id = orders_array[i].toObject().value("order_id").toInt();
+                    int order_id = orders_array[i].toObject().value("order_id").toInt();
                     QString ordered_timestamp = orders_array[i].toObject().value("ordered_timestamp").toString();
                     QString receive_code = orders_array[i].toObject().value("receive_code").toString();
                     QString phone_number = orders_array[i].toObject().value("phone_number").toString();
                     size_t total_cost = orders_array[i].toObject().value("total_cost").toInt();
                     QString order_data_string = orders_array[i].toObject().value("order_data").toString();
                     bool is_ready = orders_array[i].toObject().value("is_ready").toBool();
+
+                    bool is_processing = prepearing_order_ids_array.contains(QJsonValue(order_id)) ||
+                                         issuing_order_ids_array.contains(QJsonValue(order_id));
 
                     QString ordered_timestamp_formated = ordered_timestamp.replace("T", " ");
                     ordered_timestamp_formated = ordered_timestamp_formated.left(16);
@@ -206,13 +233,17 @@ void Client::onReadyRead() {
 
                     if (is_ready) {
 
+                        qDebug() << "Add order issuing " << order_id << " " << is_processing;
+
                         emit addOrderToOrederIssuingModel(order_id, ordered_timestamp_formated, receive_code,
-                                                          phone_number, total_cost, order_data_array);
+                                                          phone_number, total_cost, order_data_array, is_processing);
 
                     } else {
 
+                        qDebug() << "Add order prepearing " << order_id << " " << is_processing;
+
                         emit addOrderToOrderPrepearingModel(order_id, phone_number, receive_code, ordered_timestamp_formated,
-                                                            total_cost, order_data_array);
+                                                            total_cost, order_data_array, is_processing);
 
                     }
 

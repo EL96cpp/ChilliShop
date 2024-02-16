@@ -338,7 +338,7 @@ Page {
     Connections {
 
         target: Client
-        function onAddOrderToOrederIssuingModel(order_id, ordered_timestamp, receive_code, phone_number, total_cost, order_data) {
+        function onAddOrderToOrederIssuingModel(order_id, ordered_timestamp, receive_code, phone_number, total_cost, order_data, is_processing) {
 
             var order_array = {"order_data" : []};
 
@@ -349,18 +349,16 @@ Page {
             }
 
             issuing_orders_list_model.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
-                                               phone_number: phone_number, total_cost: total_cost, order_data: order_array });
+                                               phone_number: phone_number, total_cost: total_cost, order_data: order_array, is_processing: is_processing });
 
             issuing_orders_list_model_copy.append({ order_id: order_id, ordered_timestamp: ordered_timestamp, receive_code: receive_code,
-                                               phone_number: phone_number, total_cost: total_cost, order_data: order_array });
+                                               phone_number: phone_number, total_cost: total_cost, order_data: order_array, is_processing: is_processing });
 
             if (issuing_orders_list_model_copy.code_mask.length !== 0 || issuing_orders_list_model_copy.phone_mask.length !== 0) {
 
                 issuing_orders_list_form.updateCopyModel();
 
             }
-
-            console.log(order_id + " to issuing model");
 
         }
 
@@ -369,7 +367,7 @@ Page {
     Connections {
 
         target: Client
-        function onAddOrderToOrderPrepearingModel(order_id, phone_number, receive_code, ordered_timestamp, total_cost, order_data) {
+        function onAddOrderToOrderPrepearingModel(order_id, phone_number, receive_code, ordered_timestamp, total_cost, order_data, is_processing) {
 
             var order_array = {"order_data" : []};
 
@@ -380,9 +378,8 @@ Page {
             }
 
             prepearing_orders_list_model.append({ order_id: order_id, phone_number: phone_number, receive_code: receive_code,
-                                                  ordered_timestamp: ordered_timestamp, total_cost: total_cost, order_data: order_array });
+                                                  ordered_timestamp: ordered_timestamp, total_cost: total_cost, order_data: order_array, is_processing: is_processing });
 
-            console.log(order_id + " to prepearing model");
 
         }
 
@@ -392,8 +389,6 @@ Page {
 
         target: Client
         function onStartIssuingOrderConfirmed(order_id) {
-
-            console.log("start issuing inside qml " + order_id);
 
             for (var i = 0; i < issuing_orders_list_model.count; ++i) {
 
@@ -509,6 +504,57 @@ Page {
                     workspace_rectangle.state = "order_prepearing_state";
 
                     break;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onSetOrderIssuing(order_id, is_issuing) {
+
+            for (var i = 0; i < issuing_orders_list_model.count; ++i) {
+
+                if (issuing_orders_list_model.get(i).order_id === order_id) {
+
+                    issuing_orders_list_model.get(i).is_processing = is_issuing;
+                    console.log("set issuing order " + order_id + " to " + is_issuing);
+
+                }
+
+            }
+
+            for (var j = 0; j < issuing_orders_list_model_copy.count; ++j) {
+
+                if (issuing_orders_list_model_copy.get(j).order_id === order_id) {
+
+                    issuing_orders_list_model_copy.get(j).is_processing = is_issuing;
+                    console.log("set issuing order " + order_id + " to " + is_issuing);
+
+                }
+
+            }
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onSetOrderPrepearing(order_id, is_prepearing) {
+
+            for (var i = 0; i < prepearing_orders_list_model.count; ++i) {
+
+                if (prepearing_orders_list_model.get(i).order_id === order_id) {
+
+                    prepearing_orders_list_model.get(i).is_processing = is_prepearing;
+                    console.log("set prepearing order " + order_id + " to " + is_prepearing);
 
                 }
 
@@ -668,7 +714,7 @@ Page {
                                                        receive_code: prepearing_orders_list_model.get(i).receive_code,
                                                        phone_number: prepearing_orders_list_model.get(i).phone_number,
                                                        total_cost: prepearing_orders_list_model.get(i).total_cost,
-                                                       order_data: order_array });
+                                                       order_data: order_array, is_processing: false });
 
                     prepearing_orders_list_model.remove(i);
                     prepearing_order_model.clear();

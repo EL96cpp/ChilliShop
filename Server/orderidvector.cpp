@@ -53,3 +53,19 @@ void OrderIDVector::removeAllEmployeeIDs(const EmployeeData &employee_data) {
                      ids_vector.end());
 
 }
+
+QJsonArray OrderIDVector::getAllOrderIDs() {
+
+    QMutexLocker lock(&mutex);
+
+    QJsonArray ids_json_array;
+
+    for (int i = 0; i < ids_vector.size(); ++i) {
+
+        ids_json_array.push_back(QJsonValue(ids_vector[i].second));
+
+    }
+
+    return ids_json_array;
+
+}

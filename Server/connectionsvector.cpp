@@ -94,7 +94,7 @@ void ConnectionsVector::onSendToAllEmployees(const QByteArray &message_byte_arra
 
 }
 
-void ConnectionsVector::onSendToAllEmployeesExceptOne(const QByteArray &message_byte_array, const EmployeeData &employee_data) {
+void ConnectionsVector::onSendToAllEmployeesExceptOne(const EmployeeData& employee_data, const QByteArray &message_byte_array) {
 
     QMutexLocker locker(&mutex);
 
