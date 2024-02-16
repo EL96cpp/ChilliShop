@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 
 Rectangle {
@@ -854,9 +855,22 @@ Rectangle {
         font.pointSize: 11
         font.wordSpacing: 5
         font.bold: false
+
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: upper_limit_text.bottom
         anchors.topMargin: 25
+
+        layer.enabled: remove_filters_mouse_area.containsMouse
+        layer.effect: MultiEffect {
+
+            id: remove_filters_text_shadow
+            blurEnabled: true
+            blurMax: 12
+            blur: 0.6
+            saturation: 0.4
+            contrast: 0.2
+
+        }
 
 
         MouseArea {

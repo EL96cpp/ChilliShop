@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 
 Item {
@@ -232,9 +233,22 @@ Item {
             font.family: regular_font.name
             font.pointSize: 25
             font.bold: true
+
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.horizontalCenterOffset: -parent.width/6
+
+            layer.enabled: delivery_mouse_area.containsMouse
+            layer.effect: MultiEffect {
+
+                id: delivery_text_shadow
+                blurEnabled: true
+                blurMax: 20
+                blur: 0.7
+                saturation: 0.5
+                contrast: 0.3
+
+            }
 
             MouseArea {
 
@@ -268,9 +282,22 @@ Item {
             font.pointSize: 25
             font.wordSpacing: 10
             font.bold: true
+
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.horizontalCenterOffset: parent.width/6
+
+            layer.enabled: order_history_mouse_area.containsMouse
+            layer.effect: MultiEffect {
+
+                id: order_history_text_shadow
+                blurEnabled: true
+                blurMax: 20
+                blur: 0.7
+                saturation: 0.5
+                contrast: 0.3
+
+            }
 
             MouseArea {
 
@@ -418,9 +445,22 @@ Item {
         font.pointSize: 12
         font.wordSpacing: 5
         font.bold: false
+
         anchors.horizontalCenter: customer_data_rectangle.horizontalCenter
         anchors.top: customer_data_rectangle.bottom
         anchors.topMargin: 10
+
+        layer.enabled: change_name_mouse_area.containsMouse
+        layer.effect: MultiEffect {
+
+            id: change_name_text_shadow
+            blurEnabled: true
+            blurMax: 12
+            blur: 0.6
+            saturation: 0.4
+            contrast: 0.2
+
+        }
 
         MouseArea {
 

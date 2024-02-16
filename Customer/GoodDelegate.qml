@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 
 Rectangle {
@@ -135,6 +136,18 @@ Rectangle {
             anchors.centerIn: parent
             color: add_to_cart_button.hovered ? profile_page.button_hovered_color : profile_page.button_color
             radius: 20
+
+            layer.enabled: add_to_cart_button.hovered
+            layer.effect: MultiEffect {
+
+                id: add_to_cart_button_shadow
+                blurEnabled: true
+                blurMax: 12
+                blur: 0.6
+                saturation: 0.4
+                contrast: 0.2
+
+            }
 
         }
 

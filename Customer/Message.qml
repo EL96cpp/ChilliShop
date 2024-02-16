@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 
 Rectangle {
@@ -112,6 +113,18 @@ Rectangle {
             border.width: 1
             border.color: "#7D2000"
             radius: 20
+
+            layer.enabled: exit_message_button.hovered
+            layer.effect: MultiEffect {
+
+                id: exit_message_button_shadow
+                blurEnabled: true
+                blurMax: 12
+                blur: 0.6
+                saturation: 0.4
+                contrast: 0.2
+
+            }
 
         }
 
