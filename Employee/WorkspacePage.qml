@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 Page {
 
@@ -247,6 +248,18 @@ Page {
             anchors.topMargin: 20
             anchors.rightMargin: 150
 
+            layer.enabled: order_prepearing_mouse_area.containsMouse
+            layer.effect: MultiEffect {
+
+                id: order_prepearing_text_shadow
+                blurEnabled: true
+                blurMax: 12
+                blur: 0.6
+                saturation: 0.4
+                contrast: 0.2
+
+            }
+
             MouseArea {
 
                 id: order_prepearing_mouse_area
@@ -278,6 +291,18 @@ Page {
             anchors.right: parent.right
             anchors.topMargin: 20
             anchors.rightMargin: 150
+
+            layer.enabled: order_issuing_mouse_area.containsMouse
+            layer.effect: MultiEffect {
+
+                id: order_issuing_text_shadow
+                blurEnabled: true
+                blurMax: 12
+                blur: 0.6
+                saturation: 0.4
+                contrast: 0.2
+
+            }
 
             MouseArea {
 

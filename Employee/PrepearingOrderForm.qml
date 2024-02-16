@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 Rectangle {
 
@@ -240,6 +241,18 @@ Rectangle {
         anchors.top: prepearing_order_form.top
         anchors.horizontalCenter: set_prepeared_order_button.horizontalCenter
 
+        layer.enabled: to_prepearing_orders_list_mouse_area.containsMouse
+        layer.effect: MultiEffect {
+
+            id: to_prepearing_orders_list_text_shadow
+            blurEnabled: true
+            blurMax: 12
+            blur: 0.6
+            saturation: 0.4
+            contrast: 0.2
+
+        }
+
         MouseArea {
 
             id: to_prepearing_orders_list_mouse_area
@@ -446,6 +459,18 @@ Rectangle {
             border.width: 1
             border.color: "#7D2000"
             radius: 20
+
+            layer.enabled: set_prepeared_order_button.hovered
+            layer.effect: MultiEffect {
+
+                id: set_prepeared_order_button_shadow
+                blurEnabled: true
+                blurMax: 30
+                blur: 0.7
+                saturation: 0.5
+                contrast: 0.3
+
+            }
 
         }
 

@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 Rectangle {
 
@@ -106,6 +107,18 @@ Rectangle {
 
             color: exit_error_button.hovered ? main_window.button_hovered_color : main_window.button_color
             radius: 20
+
+            layer.enabled: exit_error_button.hovered
+            layer.effect: MultiEffect {
+
+                id: exit_error_button_shadow
+                blurEnabled: true
+                blurMax: 30
+                blur: 0.7
+                saturation: 0.5
+                contrast: 0.3
+
+            }
 
         }
 
