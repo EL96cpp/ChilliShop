@@ -219,7 +219,7 @@ Item {
             text: "Доставки"
             color: delivery_mouse_area.containsMouse ? hover_color : nonhover_color
             font.family: regular_font.name
-            font.pointSize: 25
+            font.pointSize: 35
             font.bold: true
 
             anchors.verticalCenter: parent.verticalCenter
@@ -267,7 +267,7 @@ Item {
             text: "История заказов"
             color: order_history_mouse_area.containsMouse ? hover_color : nonhover_color
             font.family: regular_font.name
-            font.pointSize: 25
+            font.pointSize: 35
             font.wordSpacing: 10
             font.bold: true
 
@@ -370,7 +370,7 @@ Item {
             text: "Имя: "
             color: "white"
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: 20
             font.wordSpacing: 5
 
             anchors.top: parent.top
@@ -385,7 +385,7 @@ Item {
             text: orders_form.name
             color: "white"
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: 20
             font.wordSpacing: 5
 
             anchors.top: customer_name_title.top
@@ -399,7 +399,7 @@ Item {
             text: "Телефон: "
             color: "white"
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: 20
             font.wordSpacing: 5
 
             anchors.left: customer_name_title.left
@@ -414,7 +414,7 @@ Item {
             text: orders_form.phone_number
             color: "white"
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: 20
             font.wordSpacing: 5
 
             anchors.top: customer_phone_title.top
@@ -430,7 +430,7 @@ Item {
         text: "Сменить имя"
         color: change_name_mouse_area.containsMouse ? hover_color : "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 12
+        font.pointSize: 16
         font.wordSpacing: 5
         font.bold: false
 
@@ -472,7 +472,7 @@ Item {
         text: "Выйти"
         color: logout_text_mouse_area.containsMouse ? hover_color : "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 12
+        font.pointSize: 16
         font.wordSpacing: 5
         font.bold: false
 

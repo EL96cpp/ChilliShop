@@ -52,7 +52,7 @@ Rectangle {
             text: "Корзина"
             color: "#E2E2E2"
             font.family: regular_font.name
-            font.pointSize: 18
+            font.pointSize: 25
             font.bold: true
             anchors.centerIn: parent
 
@@ -225,7 +225,7 @@ Rectangle {
                         text: model.name
                         color: "white"
                         font.family: regular_font.name
-                        font.pointSize: 15
+                        font.pointSize: 20
                         font.wordSpacing: 5
                         font.bold: true
 
@@ -286,7 +286,7 @@ Rectangle {
                     text: model.price/100 + "." + ((model.price%100 < 10) ? model.price%100 + "0" : model.price%100) + " ₽";
                     color: "white"
                     font.family: regular_font.name
-                    font.pointSize: 15
+                    font.pointSize: 20
                     font.wordSpacing: 5
                     font.bold: true
 
@@ -341,7 +341,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name
-            font.pointSize: 12
+            font.pointSize: 16
             font.letterSpacing: 5
             font.bold: true
             color: order_button.hovered ? hover_color : "#E2E2E2"
@@ -373,7 +373,7 @@ Rectangle {
             text: "Сумма заказа: "
             color: "white"
             font.family: regular_font.name
-            font.pointSize: 14
+            font.pointSize: 16
             font.wordSpacing: 5
             font.bold: true
 
@@ -387,7 +387,7 @@ Rectangle {
                   cart_model.total_price%100 + "0" : cart_model.total_price%100) + " ₽";
             color: "white"
             font.family: regular_font.name
-            font.pointSize: 14
+            font.pointSize: 16
             font.wordSpacing: 5
             font.bold: true
 

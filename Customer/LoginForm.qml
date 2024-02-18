@@ -58,7 +58,7 @@ Rectangle {
         text: "АВТОРИЗАЦИЯ"
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 25
+        font.pointSize: 27
         font.letterSpacing: 10
         font.bold: true
         anchors.horizontalCenter: parent.horizontalCenter
@@ -99,7 +99,7 @@ Rectangle {
         text: "Номер телефона"
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: 20
         font.wordSpacing: 5
 
         anchors.bottom: login_phone_rect.top
@@ -126,7 +126,7 @@ Rectangle {
             id: login_phone_input
             color: "black"
             font.family: regular_font.name
-            font.pointSize: 18
+            font.pointSize: 20
             font.bold: false
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.left: parent.left
@@ -145,7 +145,7 @@ Rectangle {
         text: "Пароль"
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: 20
         font.wordSpacing: 5
 
         anchors.bottom: login_password_rect.top
@@ -172,7 +172,7 @@ Rectangle {
             id: login_password_input
             color: profile_page.text_edit_color
             font.family: regular_font.name
-            font.pointSize: 18
+            font.pointSize: 20
             font.bold: false
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.left: parent.left
@@ -220,7 +220,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name
-            font.pointSize: 12
+            font.pointSize: 16
             font.letterSpacing: 5
             font.bold: true
             color: login_button.hovered ? hover_color : "#E2E2E2"
@@ -249,7 +249,7 @@ Rectangle {
         text: "Регистрация"
         color: register_mouse_area.containsMouse ? hover_color : "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: 16
         font.letterSpacing: 5
         font.bold: false
         anchors.horizontalCenter: parent.horizontalCenter

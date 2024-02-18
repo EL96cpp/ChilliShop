@@ -21,8 +21,8 @@ Rectangle {
 
     property string checkbox_background_color: "#ae5434"
     property string checkbox_select_color: "#ffffff"
-    property int titles_pointSize: 15
-    property int checkboxes_pointSize: 13
+    property int titles_pointSize: 20
+    property int checkboxes_pointSize: 16
 
     signal pepperFilterChangedSignal(var pepper_name, var filter_is_active);
     signal sortFilterChangedSignal(var sort_type);
@@ -76,7 +76,7 @@ Rectangle {
             text: "Фильтры"
             color: "#E2E2E2"
             font.family: regular_font.name
-            font.pointSize: 18
+            font.pointSize: 25
             font.bold: true
             anchors.centerIn: parent
 
@@ -828,7 +828,7 @@ Rectangle {
         text: "От"
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 12
+        font.pointSize: 14
         anchors.horizontalCenter: lower_limit_edit_rectangle.horizontalCenter
         anchors.top: lower_limit_edit_rectangle.bottom
         anchors.topMargin: 5
@@ -840,7 +840,7 @@ Rectangle {
         text: "До"
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 11
+        font.pointSize: 14
         anchors.horizontalCenter: upper_limit_edit_rectangle.horizontalCenter
         anchors.top: upper_limit_edit_rectangle.bottom
         anchors.topMargin: 5
@@ -852,7 +852,7 @@ Rectangle {
         text: "Очистить фильтры"
         color: remove_filters_mouse_area.containsMouse ? hover_color : "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 11
+        font.pointSize: 18
         font.wordSpacing: 5
         font.bold: false
 

@@ -32,8 +32,8 @@ Rectangle {
 
     }
 
-    property int text_edits_point_size: 16
-    property int header_texts_point_size: 14
+    property int text_edits_point_size: 20
+    property int header_texts_point_size: 18
     property int text_edits_distance: 55
     property int header_texts_bottom_margin: 10
 
@@ -314,7 +314,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name
-            font.pointSize: 10
+            font.pointSize: 14
             font.letterSpacing: 5
             font.bold: true
             color: register_button.hovered ? hover_color : "#E2E2E2"

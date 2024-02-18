@@ -67,7 +67,7 @@ Rectangle {
             color: "#E2E2E2"
             anchors.centerIn: parent
             font.family: regular_font.name
-            font.pointSize: 18
+            font.pointSize: 22
             font.wordSpacing: 10
             font.bold: true
             text: model.name
@@ -81,7 +81,7 @@ Rectangle {
         id: good_delegate_description
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: 16
         font.wordSpacing: 5
         font.bold: true
         text: model.text_description
@@ -95,7 +95,7 @@ Rectangle {
         id: good_delegate_scoville
         color: "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 12
+        font.pointSize: 14
         font.wordSpacing: 5
         font.bold: false
         text: "Острота: " + model.scoville + " shu"
@@ -160,7 +160,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: 18
             font.wordSpacing: 5
             font.bold: true
             color: add_to_cart_button.hovered ? hover_color : "#E2E2E2"

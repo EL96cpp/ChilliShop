@@ -269,7 +269,7 @@ Page {
             text: "Соусы"
             color: sauce_mouse_area.containsMouse ? hover_color : nonhover_color
             font.family: regular_font.name
-            font.pointSize: 25
+            font.pointSize: 35
             font.bold: true
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: seasonings_text.left
@@ -310,7 +310,7 @@ Page {
             text: "Приправы"
             color: seasonings_mouse_area.containsMouse ? hover_color : nonhover_color
             font.family: regular_font.name
-            font.pointSize: 25
+            font.pointSize: 35
             font.bold: true
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
@@ -349,7 +349,7 @@ Page {
             text: "Семена"
             color: seeds_mouse_area.containsMouse ? hover_color : nonhover_color
             font.family: regular_font.name
-            font.pointSize: 25
+            font.pointSize: 35
             font.bold: true
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: seasonings_text.right
@@ -405,7 +405,7 @@ Page {
         text: "Очистить корзину"
         color: clear_cart_mouse_area.containsMouse ? hover_color : "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 13
+        font.pointSize: 18
         font.wordSpacing: 5
         font.bold: true
 

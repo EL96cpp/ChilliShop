@@ -318,8 +318,8 @@ Page {
             Text {
 
                 id: menu_text
-                font.family: logo_font.name
-                font.pointSize: 20
+                font.family: regular_font.name
+                font.pointSize: 30
                 font.bold: true
                 text: "Меню"
                 color: menu_text_mouse_area.containsMouse ? hover_color : "#E2E2E2"
