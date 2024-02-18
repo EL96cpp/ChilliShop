@@ -114,18 +114,6 @@ Item {
 
     Connections {
 
-        target: order_view
-
-        function onShowOrderCancelForm() {
-
-            order_cancel_form.visible = true;
-
-        }
-
-    }
-
-    Connections {
-
         target: profile_page
 
         function onSetOrderConfirmState() {
@@ -478,9 +466,5 @@ Item {
 
     }
 
-    OrderCancelForm {
-        id: order_cancel_form
-        anchors.centerIn: parent
-    }
 
 }

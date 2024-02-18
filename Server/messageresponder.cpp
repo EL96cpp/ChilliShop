@@ -758,6 +758,8 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
                         if (sql_service->SetOrderIsReady(order_id)) {
 
+                            prepearing_order_ids.erase(employee_data, order_id);
+
                             QJsonObject message;
                             message[QStringLiteral("Method")] = QStringLiteral("PUT");
                             message[QStringLiteral("Resource")] = QStringLiteral("Order_prepeared");
@@ -1213,6 +1215,8 @@ void MessageResponder::AddReceivedOrder(const int &order_id, const QString &phon
     AddReceivedOrderResult result = sql_service->AddReceivedOrder(order_id, phone_number, receive_code, received_timestamp);
 
     if (result == AddReceivedOrderResult::SUCCESS) {
+
+        issuing_order_ids.erase(employee_data, order_id);
 
         QJsonObject message;
         message[QStringLiteral("Method")] = QStringLiteral("PUT");

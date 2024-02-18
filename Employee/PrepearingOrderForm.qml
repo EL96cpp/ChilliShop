@@ -44,13 +44,13 @@ Rectangle {
             delegate: Rectangle {
 
                 id: prepearing_order_item_delegate
-                width: prepearing_order_rectangle.width-20
+                width: prepearing_order_rectangle.width
                 height: 120
                 radius: 15
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: "#90A84700"
-                border.width: 1
-                border.color: "#ecbc99"
+                //border.width: 1
+                //border.color: "#ecbc99"
 
                 Image {
 

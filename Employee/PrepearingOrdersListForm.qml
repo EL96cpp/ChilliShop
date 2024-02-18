@@ -60,6 +60,7 @@ Item {
                 id: orders_listview
                 width: parent.width
                 height: parent.height
+                spacing: 5
 
                 model: prepearing_orders_list_model
 
@@ -67,13 +68,11 @@ Item {
 
                     id: order_prepearing_delegate
 
-                    width: order_prepearing_list_rectangle.width-20
+                    width: order_prepearing_list_rectangle.width
                     height: 120
-                    radius: 15
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: "#90431000"
-                    border.width: 1
-                    border.color: "#ecbc99"
+                    color: (!model.is_processing &&
+                           order_prepearing_delegate_mouse_area.containsMouse) ? "#90902200" : "#90400F00"
 
                     Rectangle {
 

@@ -275,14 +275,12 @@ Item {
 
                     id: order_issuing_delegate
 
-                    width: orders_rectangle.width-20
+                    width: orders_rectangle.width
                     height: order_id_title_rectangle.height + order_id_title_rectangle.anchors.margins +
                             phone_number_title_rectangle.height + phone_number_title_rectangle.anchors.topMargin*2
-                    radius: 15
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: "#90431000"
-                    border.width: 1
-                    border.color: "#ecbc99"
+                    color: (!model.is_processing &&
+                           order_issuing_delegate_mouse_area.containsMouse) ? "#90902200" : "#90400F00"
 
                     Rectangle {
 

@@ -164,6 +164,11 @@ Item {
 
         }
 
+        OrderCancelForm {
+            id: order_cancel_form
+            anchors.centerIn: parent
+        }
+
     }
 
     Rectangle {

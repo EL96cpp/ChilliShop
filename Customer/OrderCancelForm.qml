@@ -9,7 +9,9 @@ Rectangle {
 
     id: order_cancle_form
     width: main_window.width/3.9
-    height: width/1.6
+    height: order_cancle_rectangle.height + order_cancle_rectangle.anchors.topMargin + lower_line.height +
+            lower_line.anchors.topMargin + order_cancle_question.paintedHeight + order_cancle_question.anchors.topMargin +
+            order_cancle_cancle_button.height + order_cancle_cancle_button.anchors.margins*2
     radius: 10
     color: "#541500"
     border.width: 2
@@ -18,6 +20,18 @@ Rectangle {
     visible: false
 
     signal cancelOrder(var order_id, var phone_number, var receive_code);
+
+    Connections {
+
+        target: order_view
+
+        function onShowOrderCancelForm() {
+
+            order_cancel_form.visible = true;
+
+        }
+
+    }
 
     Rectangle {
 
@@ -150,7 +164,7 @@ Rectangle {
     Button {
 
         id: order_cancle_cancle_button
-        width: 100
+        width: 120
         height: 40
 
         anchors.right: parent.right
