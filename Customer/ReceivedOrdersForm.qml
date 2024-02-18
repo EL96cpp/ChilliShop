@@ -14,7 +14,7 @@ Item {
 
         width: 700
         height: 550
-        color: "#804c1200"
+        color: "#909a2901"
 
         anchors.top: parent.top
         anchors.left: parent.left
@@ -49,13 +49,10 @@ Item {
             delegate: Rectangle {
 
                 id: deliverie_delegate
-                width: received_orders_rectangle.width-20
+                width: received_orders_rectangle.width
                 height: 120
-                radius: 15
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: "#90431000"
-                border.width: 1
-                border.color: "#ecbc99"
 
                 Rectangle {
 

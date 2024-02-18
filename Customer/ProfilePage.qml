@@ -164,6 +164,8 @@ Page {
         target: Client
         function onChangeNameSuccess(name) {
 
+            console.log(name + " new name in qml");
+            //orders_form.setCustomerName(name);
             orders_form.name = name;
             showMessage("Смена имени", "Имя успешно изменено!");
 

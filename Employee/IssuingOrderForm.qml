@@ -47,8 +47,6 @@ Rectangle {
                 radius: 15
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: "#90A84700"
-                //border.width: 1
-                //border.color: "#ecbc99"
 
                 Image {
 

@@ -377,6 +377,8 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
                     QByteArray message_byte_array = QJsonDocument(message).toJson();
                     message_byte_array.append("\n");
 
+                    qDebug() << "Changed customer name to " << new_name;
+
                     emit MessageResponce(message_byte_array);
 
                 } else {

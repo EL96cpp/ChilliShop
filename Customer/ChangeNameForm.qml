@@ -237,8 +237,8 @@ Rectangle {
 
             } else {
 
-                new_name_input.text = ""
                 Client.onChangeName(new_name_input.text);
+                new_name_input.text = "";
                 change_name_rectangle.visible = false;
 
             }

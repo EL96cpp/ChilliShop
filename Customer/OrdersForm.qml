@@ -17,6 +17,13 @@ Item {
     property string phone_number
     property string name
 
+    function setCustomerName(new_name) {
+
+        orders_form.name = name;
+        customer_name.text = name;
+
+    }
+
     function showActiveOrderView(order_id, ordered_timestamp, receive_code, order_data, total_cost, is_ready) {
 
         order_view_model.clear();
@@ -320,9 +327,9 @@ Item {
         width: 1200
         height: 700
         radius: 15
-        color: "#909a2901"
+        color: "#804c1200"
         border.width: 1
-        border.color: "#de8a4d"
+        border.color: main_window.forms_border_color
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: order_header_rectangle.bottom
