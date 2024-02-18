@@ -29,6 +29,7 @@ signals:
     void registerSuccess();
     void showMessage(const QString& message_title, const QString& message_description);
     void loginSuccess(const QString& phone_number, const QString& name);
+    void logoutConfirmed();
     void changeNameSuccess(const QString& new_name);
 
     void addActiveOrder(const size_t& order_id, const QString& ordered_timestamp, const QString& receive_code,
@@ -42,6 +43,7 @@ signals:
 public slots:
     void onLogin(const QString& phone_number, const QString& password);
     void onRegister(const QString& phone_number, const QString& password, const QString& name);
+    void onLogout();
     void onMakeOrder(const QJsonArray& order_data, const int& total_cost);
     void onCancelOrder(const int &order_id, const QString& phone_number, const QString &receive_code);
     void onReadyRead();

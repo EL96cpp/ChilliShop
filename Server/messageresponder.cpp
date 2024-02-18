@@ -151,6 +151,35 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
             }
 
+        } else if (resource_value.toString() == "Logout_customer") {
+
+            if (connections.CheckIfCustomerAlreadyLogged(json_message_object.value("Phone_number").toString())) {
+
+                emit SetLoggedOut();
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("POST");
+                message[QStringLiteral("Resource")] = QStringLiteral("Logout_customer");
+                message[QStringLiteral("Code")] = QStringLiteral("200");
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
+
+            } else {
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("POST");
+                message[QStringLiteral("Resource")] = QStringLiteral("Logout_customer");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Error_description")] = QStringLiteral("Customer is not logged");
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
+
+            }
+
         }
 
     } else if (method_value.toString() == "GET") {

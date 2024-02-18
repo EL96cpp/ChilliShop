@@ -14,6 +14,7 @@ public:
 
     bool operator == (const EmployeeData& other) const;
     bool operator != (const EmployeeData& other) const;
+    void clear();
 
 private:
     QString name;

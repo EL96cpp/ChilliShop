@@ -81,6 +81,20 @@ void Client::onRegister(const QString& phone_number, const QString& password, co
 
 }
 
+void Client::onLogout() {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("POST");
+    message[QStringLiteral("Resource")] = QStringLiteral("Logout_customer");
+    message[QStringLiteral("Phone_number")] = phone_number;
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
+
+}
+
 void Client::onMakeOrder(const QJsonArray &order_data, const int& total_cost) {
 
     QJsonObject message;
@@ -345,6 +359,18 @@ void Client::onReadyRead() {
 
                 QString error_description = json_message_object.value(QLatin1String("Error_description")).toString();
                 emit showMessage("Ошибка заказа", error_description);
+
+            }
+
+        } else if (resource_value.toString() == "Logout_customer") {
+
+            if (code_value.toString() == "200") {
+
+                emit logoutConfirmed();
+
+            } else if (code_value.toString() == "403") {
+
+                emit showMessage("Ошибка выхода", json_message_object.value(QLatin1String("Error_description")).toString());
 
             }
 

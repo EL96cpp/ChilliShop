@@ -132,6 +132,8 @@ Page {
             orders_form.name = name;
             profile_page.state = "orders_state";
 
+            login_rectangle.clearForms();
+
             if (cart_model.total_price != 0) {
 
                 setOrderConfirmState();
@@ -162,10 +164,23 @@ Page {
     Connections {
 
         target: Client
+        function onLogoutConfirmed() {
+
+            orders_form.name = "";
+            orders_form.phone_number = "";
+            logged_in = false;
+            state = "login_state";
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
         function onChangeNameSuccess(name) {
 
             console.log(name + " new name in qml");
-            //orders_form.setCustomerName(name);
             orders_form.name = name;
             showMessage("Смена имени", "Имя успешно изменено!");
 

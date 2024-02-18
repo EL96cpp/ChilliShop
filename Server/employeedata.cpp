@@ -23,3 +23,11 @@ bool EmployeeData::operator !=(const EmployeeData &other) const {
     return (other.name != name) || (other.surname != surname) || (other.position != position);
 
 }
+
+void EmployeeData::clear() {
+
+    name.clear();
+    surname.clear();
+    position.clear();
+
+}

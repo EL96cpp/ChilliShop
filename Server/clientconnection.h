@@ -46,6 +46,7 @@ public slots:
     void OnMessageResponce(const QByteArray& message_byte_array);
     void OnSendCatalog();
     void OnSetLoggedIn(const bool& logged_in);
+    void OnSetLoggedOut();
 
 private slots:
     void onReadyRead();

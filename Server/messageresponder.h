@@ -39,6 +39,7 @@ public:
 signals:
     void MessageResponce(const QByteArray& message_byte_array);
     void SetLoggedIn(const bool& logged_in);
+    void SetLoggedOut();
     void SetCustomerData(const QString& phone_number, const QString& name);
     void SetEmployeeData(const EmployeeData& employee_data);
     void SendCatalog();

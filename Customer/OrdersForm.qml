@@ -17,13 +17,6 @@ Item {
     property string phone_number
     property string name
 
-    function setCustomerName(new_name) {
-
-        orders_form.name = name;
-        customer_name.text = name;
-
-    }
-
     function showActiveOrderView(order_id, ordered_timestamp, receive_code, order_data, total_cost, is_ready) {
 
         order_view_model.clear();
@@ -466,6 +459,48 @@ Item {
             onClicked: {
 
                 change_name_rectangle.visible = true;
+
+            }
+
+        }
+
+    }
+
+    Text {
+
+        id: logout_text
+        text: "Выйти"
+        color: logout_text_mouse_area.containsMouse ? hover_color : "#E2E2E2"
+        font.family: regular_font.name
+        font.pointSize: 12
+        font.wordSpacing: 5
+        font.bold: false
+
+        anchors.horizontalCenter: change_name_text.horizontalCenter
+        anchors.top: change_name_text.bottom
+        anchors.topMargin: 10
+
+        layer.enabled: logout_text_mouse_area.containsMouse
+        layer.effect: MultiEffect {
+
+            id: logout_text_shadow
+            blurEnabled: true
+            blurMax: 12
+            blur: 0.6
+            saturation: 0.4
+            contrast: 0.2
+
+        }
+
+        MouseArea {
+
+            id: logout_text_mouse_area
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onClicked: {
+
+                Client.onLogout();
 
             }
 

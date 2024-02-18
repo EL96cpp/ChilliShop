@@ -78,6 +78,15 @@ void ClientConnection::OnSetLoggedIn(const bool &logged_in) {
 
 }
 
+void ClientConnection::OnSetLoggedOut() {
+
+    logged_in = false;
+    name.clear();
+    phone_number.clear();
+    employee_data.clear();
+
+}
+
 void ClientConnection::OnMessageResponce(const QByteArray &message_byte_array) {
 
     qDebug() << message_byte_array;
@@ -119,6 +128,7 @@ void ClientConnection::onReadyRead() {
     connect(message_responder, &MessageResponder::MessageResponce, this, &ClientConnection::OnMessageResponce);
     connect(message_responder, &MessageResponder::SendCatalog, this, &ClientConnection::OnSendCatalog);
     connect(message_responder, &MessageResponder::SetLoggedIn, this, &ClientConnection::OnSetLoggedIn);
+    connect(message_responder, &MessageResponder::SetLoggedOut, this, &ClientConnection::OnSetLoggedOut);
     connect(message_responder, &MessageResponder::SetCustomerData, this, &ClientConnection::OnSetCustomerData);
     connect(message_responder, &MessageResponder::SetEmployeeData, this, &ClientConnection::OnSetEmployeeData);
     connect(message_responder, &MessageResponder::SendToAllEmployees, &connections, &ConnectionsVector::onSendToAllEmployees);
