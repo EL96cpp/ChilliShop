@@ -114,7 +114,7 @@ Rectangle {
 
                         id: issuing_item_name
                         text: model.name
-                        color: "white"
+                        color: title_color
                         font.family: regular_font.name
                         font.pointSize: 15
                         font.wordSpacing: 5

@@ -15,6 +15,8 @@ Window {
     property string button_text_color: "#E2E2E2"
     property string button_text_hovered_color: "#FF5403"
 
+    property string title_color: "#EAAC63"
+
     StackView {
 
         id: stack_view

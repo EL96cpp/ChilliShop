@@ -92,7 +92,7 @@ Item {
                             text: "Номер заказа: "
                             font.family: regular_font.name
                             font.pointSize: 16
-                            color: "#e4e4e4"
+                            color: title_color
 
                             anchors.centerIn: parent
 
@@ -134,7 +134,7 @@ Item {
                             text: "Итого:"
                             font.family: regular_font.name
                             font.pointSize: 16
-                            color: "#e4e4e4"
+                            color: title_color
 
                             anchors.centerIn: parent
 

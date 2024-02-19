@@ -18,6 +18,8 @@ Window {
     property string forms_border_color: "#4e1800"
     property string forms_line_color: "#561b00"
 
+    property string title_color: "#EAAC63"
+
     StackView {
 
         id: stack_view

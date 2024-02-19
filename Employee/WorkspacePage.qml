@@ -231,6 +231,12 @@ Page {
 
         EmployeeDataForm {
             id: employee_data_rectangle
+
+            anchors.top: parent.top
+            anchors.topMargin: 30
+            anchors.left: parent.left
+            anchors.leftMargin: ((workspace_rectangle.width - issuing_orders_list_form.width)/2 - width)/2
+
         }
 
 

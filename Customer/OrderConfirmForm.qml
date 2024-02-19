@@ -9,6 +9,11 @@ Item {
 
     id: order_confirm_form
 
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    anchors.topMargin: 15
+
+
     property int total_price
 
     // add values for order data
@@ -26,23 +31,38 @@ Item {
 
     }
 
+    Text {
+
+        id: order_confirm_title
+        font.family: regular_font.name
+        font.pointSize: 30
+        font.underline: true
+        font.wordSpacing: 7
+        color: "#e4e4e4"
+        text: "Оформление заказа"
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+
+    }
+
     Rectangle {
 
         id: order_confirm_rectangle
-        width: 700
-        height: 550
+        width: 800
+        height: 650
         color: "#804c1200"
 
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.margins: 30
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: order_confirm_title.bottom
+        anchors.topMargin: 20
 
         ListView {
 
             id: order_confirm_view
             model: cart_model
             width: order_confirm_rectangle.width - 10
-            height: 530
+            height: 650
             anchors.top: parent.top
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
@@ -243,7 +263,7 @@ Item {
 
             id: order_total_title
             text: "Итого: "
-            color: "white"
+            color: title_color
             font.family: regular_font.name
             font.pointSize: 20
             font.wordSpacing: 5
@@ -327,16 +347,32 @@ Item {
     Text {
 
         id: cancel_order_text
-        text: "Очистить корзину"
+        text: "Очистить\nкорзину"
         color: cancel_order_mouse_area.containsMouse ? hover_color : "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 14
+        font.pointSize: 16
         font.wordSpacing: 5
         font.bold: true
 
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+
         anchors.top: order_confirm_rectangle.top
         anchors.left: order_confirm_rectangle.right
-        anchors.leftMargin: 120
+        anchors.leftMargin: ((orders_rectangle.width - order_confirm_rectangle.width)/2 -
+                            cancel_order_text.paintedWidth)/2
+
+        layer.enabled: cancel_order_mouse_area.containsMouse
+        layer.effect: MultiEffect {
+
+            id: cancel_order_text_shadow
+            blurEnabled: true
+            blurMax: 12
+            blur: 0.6
+            saturation: 0.4
+            contrast: 0.2
+
+        }
 
         MouseArea {
 
@@ -347,6 +383,12 @@ Item {
             onClicked: {
 
                 cart_model.clearCart();
+
+                order_confirm_form.visible = false;
+                deliveries_form.visible = true;
+                received_orders_form.visible = false;
+                order_view.visible = false;
+
 
             }
 

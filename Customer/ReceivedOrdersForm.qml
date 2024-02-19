@@ -8,17 +8,36 @@ Item {
 
     id: received_orders_form
 
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    anchors.topMargin: 15
+
+    Text {
+
+        id: orders_history_title
+        font.family: regular_font.name
+        font.pointSize: 30
+        font.underline: true
+        font.wordSpacing: 7
+        color: "#e4e4e4"
+        text: "История заказов"
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+
+    }
+
     Rectangle {
 
         id: received_orders_rectangle
 
-        width: 700
-        height: 550
+        width: 800
+        height: 650
         color: "#909a2901"
 
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.margins: 30
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: orders_history_title.bottom
+        anchors.topMargin: 20
 
         Text {
 
@@ -39,7 +58,7 @@ Item {
             id: received_orders_view
             model: received_orders_model
             width: received_orders_rectangle.width - 10
-            height: 530
+            height: 650
             anchors.top: parent.top
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
@@ -71,8 +90,8 @@ Item {
                         id: order_id_title
                         text: "Номер заказа: "
                         font.family: regular_font.name
-                        font.pointSize: 16
-                        color: "#e4e4e4"
+                        font.pointSize: 20
+                        color: title_color
 
                         anchors.centerIn: parent
 
@@ -89,7 +108,7 @@ Item {
 
                     text: model.order_id
                     font.family: regular_font.name
-                    font.pointSize: 16
+                    font.pointSize: 20
                     color: "#e4e4e4"
 
                 }
@@ -113,8 +132,8 @@ Item {
 
                         text: "Итого:"
                         font.family: regular_font.name
-                        font.pointSize: 16
-                        color: "#e4e4e4"
+                        font.pointSize: 20
+                        color: title_color
 
                         anchors.centerIn: parent
 
@@ -133,7 +152,7 @@ Item {
                     text: model.total_cost/100 + "." + ((model.total_cost%100 < 10) ?
                           model.total_cost%100 + "0" : model.total_cost%100) + " ₽"
                     font.family: regular_font.name
-                    font.pointSize: 16
+                    font.pointSize: 20
                     color: "#e4e4e4"
 
                 }

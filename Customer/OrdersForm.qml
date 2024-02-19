@@ -318,7 +318,7 @@ Item {
 
         id: orders_rectangle
         width: 1200
-        height: 700
+        height: 850
         radius: 15
         color: "#804c1200"
         border.width: 1
@@ -379,7 +379,7 @@ Item {
 
                 id: customer_name_title
                 text: "Имя:"
-                color: "white"
+                color: title_color
                 font.family: regular_font.name
                 font.pointSize: 20
                 font.wordSpacing: 5
@@ -421,7 +421,7 @@ Item {
 
                 id: customer_phone_title
                 text: "Телефон:"
-                color: "white"
+                color: title_color
                 font.family: regular_font.name
                 font.pointSize: 20
                 font.wordSpacing: 5

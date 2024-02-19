@@ -8,18 +8,37 @@ Item {
 
     id: deliveries_form
 
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    anchors.topMargin: 15
+
     signal showActiveOrder();
+
+    Text {
+
+        id: deliveries_title
+        font.family: regular_font.name
+        font.pointSize: 30
+        font.underline: true
+        font.wordSpacing: 7
+        color: "#e4e4e4"
+        text: "Доставки"
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+
+    }
 
     Rectangle {
 
         id: deliveries_rectangle
-        width: 700
-        height: 550
+        width: 800
+        height: 650
         color: "#909a2901"
 
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.margins: 30
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: deliveries_title.bottom
+        anchors.topMargin: 20
 
         Text {
 
@@ -40,7 +59,7 @@ Item {
             id: deliveries_view
             model: active_orders_model
             width: deliveries_rectangle.width - 10
-            height: 530
+            height: 650
             anchors.top: parent.top
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
@@ -72,8 +91,8 @@ Item {
                         id: order_id_title
                         text: "Номер заказа: "
                         font.family: regular_font.name
-                        font.pointSize: 16
-                        color: "#e4e4e4"
+                        font.pointSize: 20
+                        color: title_color
 
                         anchors.centerIn: parent
 
@@ -90,7 +109,7 @@ Item {
 
                     text: model.order_id
                     font.family: regular_font.name
-                    font.pointSize: 16
+                    font.pointSize: 20
                     color: "#e4e4e4"
 
                 }
@@ -114,8 +133,8 @@ Item {
 
                         text: "Итого:"
                         font.family: regular_font.name
-                        font.pointSize: 16
-                        color: "#e4e4e4"
+                        font.pointSize: 20
+                        color: title_color
 
                         anchors.centerIn: parent
 
@@ -134,7 +153,7 @@ Item {
                     text: model.total_cost/100 + "." + ((model.total_cost%100 < 10) ?
                           model.total_cost%100 + "0" : model.total_cost%100) + " ₽"
                     font.family: regular_font.name
-                    font.pointSize: 16
+                    font.pointSize: 20
                     color: "#e4e4e4"
 
                 }
@@ -145,9 +164,9 @@ Item {
 
                     text: "Готов к выдаче:"
                     font.family: regular_font.name
-                    font.pointSize: 16
+                    font.pointSize: 20
                     font.wordSpacing: 5
-                    color: "#e4e4e4"
+                    color: title_color
 
                     anchors.right: check_box_rectangle.left
                     anchors.top: order_total_cost.bottom

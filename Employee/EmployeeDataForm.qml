@@ -7,26 +7,24 @@ import QtQuick.Effects
 Rectangle {
 
     id: employee_data_rectangle
-    width: employee_position.width + employee_name.anchors.leftMargin*4
-    height: employee_name.height*3 + employee_name.anchors.topMargin*4
+    width: Math.max(employee_name_title.paintedWidth, employee_surname_title.paintedWidth, employee_position_title.paintedWidth) +
+           employee_name_title.anchors.leftMargin*2 +
+           Math.max(employee_name.paintedWidth, employee_surname.paintedWidth, employee_position.paintedWidth) +
+           employee_name.anchors.leftMargin
+    height: employee_name_title.paintedHeight*3 + employee_name_title.anchors.topMargin*4
     color: "#d0480000"
     border.width: 1
     border.color: "#7F3A00"
     radius: 10
 
-    anchors.top: parent.top
-    anchors.topMargin: 30
-    anchors.left: parent.left
-    anchors.leftMargin: 25
-
     Text {
 
-        id: employee_name
+        id: employee_name_title
         font.family: regular_font.name
         font.pointSize: 14
         font.wordSpacing: 5
-        color: "white"
-        text: "Имя: " + workspace_page.name
+        color: title_color
+        text: "Имя:"
 
         anchors.top: parent.top
         anchors.left: parent.left
@@ -37,15 +35,60 @@ Rectangle {
 
     Text {
 
+        id: employee_name
+        font.family: regular_font.name
+        font.pointSize: 14
+        font.wordSpacing: 5
+        color: "white"
+        text: workspace_page.name
+
+        anchors.verticalCenter: employee_name_title.verticalCenter
+        anchors.left: employee_name_title.right
+        anchors.leftMargin: 5
+
+    }
+
+    Text {
+
+        id: employee_surname_title
+        font.family: regular_font.name
+        font.pointSize: 14
+        font.wordSpacing: 5
+        color: title_color
+        text: "Фамилия:"
+
+        anchors.top: employee_name_title.bottom
+        anchors.left: employee_name_title.left
+        anchors.topMargin: 10
+
+    }
+
+    Text {
+
         id: employee_surname
         font.family: regular_font.name
         font.pointSize: 14
         font.wordSpacing: 5
         color: "white"
-        text: "Фамилия: " + workspace_page.surname
+        text: workspace_page.surname
 
-        anchors.top: employee_name.bottom
-        anchors.left: employee_name.left
+        anchors.verticalCenter: employee_surname_title.verticalCenter
+        anchors.left: employee_surname_title.right
+        anchors.leftMargin: 5
+
+    }
+
+    Text {
+
+        id: employee_position_title
+        font.family: regular_font.name
+        font.pointSize: 14
+        font.wordSpacing: 5
+        color: title_color
+        text: "Должность:"
+
+        anchors.top: employee_surname_title.bottom
+        anchors.left: employee_surname_title.left
         anchors.topMargin: 10
 
     }
@@ -57,11 +100,11 @@ Rectangle {
         font.pointSize: 14
         font.wordSpacing: 5
         color: "white"
-        text: "Должность: " + workspace_page.position
+        text: workspace_page.position
 
-        anchors.top: employee_surname.bottom
-        anchors.left: employee_surname.left
-        anchors.topMargin: 10
+        anchors.verticalCenter: employee_position_title.verticalCenter
+        anchors.left: employee_position_title.right
+        anchors.leftMargin: 5
 
     }
 

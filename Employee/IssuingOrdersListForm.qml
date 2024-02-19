@@ -301,7 +301,7 @@ Item {
                             font.family: regular_font.name
                             font.pointSize: 16
                             font.wordSpacing: 5
-                            color: "#e4e4e4"
+                            color: title_color
 
                             anchors.centerIn: parent
 
@@ -343,7 +343,7 @@ Item {
                             font.family: regular_font.name
                             font.pointSize: 16
                             font.wordSpacing: 5
-                            color: "#e4e4e4"
+                            color: title_color
 
                             anchors.centerIn: parent
 
@@ -387,7 +387,7 @@ Item {
                             font.family: regular_font.name
                             font.pointSize: 16
                             font.wordSpacing: 5
-                            color: "#e4e4e4"
+                            color: title_color
 
                             anchors.centerIn: parent
 
