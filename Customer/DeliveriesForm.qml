@@ -10,7 +10,7 @@ Item {
 
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.top: parent.top
-    anchors.topMargin: 15
+    anchors.topMargin: 25
 
     signal showActiveOrder();
 
@@ -21,10 +21,10 @@ Item {
         font.pointSize: 30
         font.underline: true
         font.wordSpacing: 7
-        color: "#e4e4e4"
+        color: big_title_color
         text: "Доставки"
 
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: deliveries_rectangle.left
         anchors.top: parent.top
 
     }
@@ -32,9 +32,9 @@ Item {
     Rectangle {
 
         id: deliveries_rectangle
-        width: 800
+        width: 950
         height: 650
-        color: "#909a2901"
+        color: "#804c1200"
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: deliveries_title.bottom
@@ -44,7 +44,7 @@ Item {
 
             id: deliveries_empty_title
             font.family: regular_font.name
-            font.pointSize: 18
+            font.pointSize: 25
             font.wordSpacing: 7
             color: "#e4e4e4"
             text: "Здесь пока пусто..."
@@ -72,7 +72,7 @@ Item {
                 width: deliveries_rectangle.width
                 height: 120
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: "#90431000"
+                color: "#90A84700"
 
                 Rectangle {
 
@@ -92,7 +92,7 @@ Item {
                         text: "Номер заказа: "
                         font.family: regular_font.name
                         font.pointSize: 20
-                        color: title_color
+                        color: small_title_color
 
                         anchors.centerIn: parent
 
@@ -134,7 +134,7 @@ Item {
                         text: "Итого:"
                         font.family: regular_font.name
                         font.pointSize: 20
-                        color: title_color
+                        color: small_title_color
 
                         anchors.centerIn: parent
 
@@ -166,7 +166,7 @@ Item {
                     font.family: regular_font.name
                     font.pointSize: 20
                     font.wordSpacing: 5
-                    color: title_color
+                    color: "#e4e4e4"
 
                     anchors.right: check_box_rectangle.left
                     anchors.top: order_total_cost.bottom

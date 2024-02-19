@@ -50,7 +50,7 @@ Rectangle {
 
             id: cart_title
             text: "Корзина"
-            color: "#E2E2E2"
+            color: "#e2e2e2"
             font.family: regular_font.name
             font.pointSize: 25
             font.bold: true
@@ -223,7 +223,7 @@ Rectangle {
 
                         id: cart_item_name
                         text: model.name
-                        color: "white"
+                        color: small_title_color
                         font.family: regular_font.name
                         font.pointSize: 20
                         font.wordSpacing: 5

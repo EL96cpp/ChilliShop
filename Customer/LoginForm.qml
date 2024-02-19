@@ -97,7 +97,7 @@ Rectangle {
 
         id: login_phone_title
         text: "Номер телефона"
-        color: "#E2E2E2"
+        color: regular_text_color
         font.family: regular_font.name
         font.pointSize: 20
         font.wordSpacing: 5
@@ -143,7 +143,7 @@ Rectangle {
 
         id: login_password_title
         text: "Пароль"
-        color: "#E2E2E2"
+        color: regular_text_color
         font.family: regular_font.name
         font.pointSize: 20
         font.wordSpacing: 5

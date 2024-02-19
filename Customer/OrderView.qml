@@ -14,6 +14,26 @@ Item {
 
     signal showOrderCancelForm();
 
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.topMargin: 50
+    anchors.leftMargin: 70
+
+    Text {
+
+        id: deliverie_title
+        font.family: regular_font.name
+        font.pointSize: 30
+        font.underline: true
+        font.wordSpacing: 7
+        color: big_title_color
+        text: is_active ? "Доставка" : "Полученный заказ"
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+
+    }
+
     Rectangle {
 
         id: order_view_rectangle
@@ -21,9 +41,9 @@ Item {
         height: 550
         color: "#804c1200"
 
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.margins: 30
+        anchors.left: deliverie_title.left
+        anchors.top: deliverie_title.bottom
+        anchors.topMargin: 15
 
         ListView {
 
@@ -45,8 +65,6 @@ Item {
                 radius: 15
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: "#90A84700"
-                border.width: 1
-                border.color: "#ecbc99"
 
                 Image {
 
@@ -79,7 +97,7 @@ Item {
                         text: model.number_of_items
                         color: "white"
                         font.family: regular_font.name
-                        font.pointSize: 13
+                        font.pointSize: 15
                         font.wordSpacing: 5
                         font.bold: true
 
@@ -114,9 +132,9 @@ Item {
 
                         id: cart_item_name
                         text: model.name
-                        color: "white"
+                        color: regular_text_color
                         font.family: regular_font.name
-                        font.pointSize: 15
+                        font.pointSize: 20
                         font.wordSpacing: 5
                         font.bold: true
 
@@ -130,7 +148,7 @@ Item {
                         text: model.description
                         color: "white"
                         font.family: regular_font.name
-                        font.pointSize: 15
+                        font.pointSize: 18
                         font.wordSpacing: 5
                         font.bold: true
 
@@ -148,7 +166,7 @@ Item {
                     text: model.price/100 + "." + ((model.price%100 < 10) ? model.price%100 + "0" : model.price%100) + " ₽"
                     color: "white"
                     font.family: regular_font.name
-                    font.pointSize: 15
+                    font.pointSize: 18
                     font.wordSpacing: 5
                     font.bold: true
 
@@ -186,7 +204,7 @@ Item {
 
             id: order_total_title
             text: "Итого: "
-            color: "white"
+            color: small_title_color
             font.family: regular_font.name
             font.pointSize: 20
             font.wordSpacing: 5
@@ -228,9 +246,9 @@ Item {
 
             id: order_id_title
             text: "Номер заказа:"
-            color: "white"
+            color: small_title_color
             font.family: regular_font.name
-            font.pointSize: 18
+            font.pointSize: 20
             font.wordSpacing: 5
 
             anchors.centerIn: parent
@@ -245,7 +263,7 @@ Item {
         text: order_view_model.order_id
         color: "white"
         font.family: regular_font.name
-        font.pointSize: 18
+        font.pointSize: 20
         font.wordSpacing: 5
 
         anchors.verticalCenter: order_id_title_rectangle.verticalCenter
@@ -269,9 +287,9 @@ Item {
 
             id: receive_code_title
             text: "Код получения:"
-            color: "white"
+            color: small_title_color
             font.family: regular_font.name
-            font.pointSize: 18
+            font.pointSize: 20
             font.wordSpacing: 5
 
             anchors.centerIn: parent
@@ -286,7 +304,7 @@ Item {
         text: order_view_model.receive_code
         color: "white"
         font.family: regular_font.name
-        font.pointSize: 18
+        font.pointSize: 20
         font.wordSpacing: 5
 
         anchors.verticalCenter: receive_code_title_rectangle.verticalCenter
@@ -299,9 +317,9 @@ Item {
 
         id: ordered_timestamp_title
         text: "Дата заказа:"
-        color: "white"
+        color: small_title_color
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: 18
         font.wordSpacing: 5
 
         anchors.top: receive_code_title_rectangle.bottom
@@ -316,7 +334,7 @@ Item {
         text: order_view_model.ordered_timestamp
         color: "white"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: 18
         font.wordSpacing: 5
 
         anchors.verticalCenter: ordered_timestamp_title.verticalCenter
@@ -329,9 +347,9 @@ Item {
 
         id: received_timestamp_title
         text: "Дата получения:"
-        color: "white"
+        color: small_title_color
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: 18
         font.wordSpacing: 5
 
         visible: !order_view.is_active
@@ -348,7 +366,7 @@ Item {
         text: order_view_model.received_timestamp
         color: "white"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: 18
         font.wordSpacing: 5
 
         visible: !order_view.is_active
@@ -365,7 +383,7 @@ Item {
         text: "Отменить заказ"
         color: cancel_order_mouse_area.containsMouse ? hover_color : "#E2E2E2"
         font.family: regular_font.name
-        font.pointSize: 14
+        font.pointSize: 16
         font.wordSpacing: 5
         font.bold: true
 

@@ -74,7 +74,7 @@ Rectangle {
 
             id: filters_title
             text: "Фильтры"
-            color: "#E2E2E2"
+            color: "#e2e2e2"
             font.family: regular_font.name
             font.pointSize: 25
             font.bold: true
@@ -135,7 +135,7 @@ Rectangle {
 
             id: peppers_filter_title
             text: "Перцы:"
-            color: "#E2E2E2"
+            color: big_title_color
             font.family: regular_font.name
             font.pointSize: filters_column_rect.titles_pointSize
             font.bold: true
@@ -452,7 +452,7 @@ Rectangle {
 
             id: order_filters_title
             text: "Сортировать по:"
-            color: "#E2E2E2"
+            color: big_title_color
             font.family: regular_font.name
             font.wordSpacing: 5
             font.pointSize: filters_column_rect.titles_pointSize
@@ -730,7 +730,7 @@ Rectangle {
 
             id: limit_filter_text
             text: "Цена:"
-            color: "#E2E2E2"
+            color: big_title_color
             font.family: regular_font.name
             font.pointSize: filters_column_rect.titles_pointSize
             anchors.centerIn: parent
@@ -826,7 +826,7 @@ Rectangle {
 
         id: lower_limit_text
         text: "От"
-        color: "#E2E2E2"
+        color: small_title_color
         font.family: regular_font.name
         font.pointSize: 14
         anchors.horizontalCenter: lower_limit_edit_rectangle.horizontalCenter
@@ -838,7 +838,7 @@ Rectangle {
 
         id: upper_limit_text
         text: "До"
-        color: "#E2E2E2"
+        color: small_title_color
         font.family: regular_font.name
         font.pointSize: 14
         anchors.horizontalCenter: upper_limit_edit_rectangle.horizontalCenter

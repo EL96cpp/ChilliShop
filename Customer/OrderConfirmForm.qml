@@ -13,10 +13,8 @@ Item {
     anchors.top: parent.top
     anchors.topMargin: 15
 
-
     property int total_price
 
-    // add values for order data
     signal makeOrder(var order_array, var total_cost);
 
     Connections {
@@ -38,10 +36,10 @@ Item {
         font.pointSize: 30
         font.underline: true
         font.wordSpacing: 7
-        color: "#e4e4e4"
+        color: big_title_color
         text: "Оформление заказа"
 
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: order_confirm_rectangle.left
         anchors.top: parent.top
 
     }
@@ -263,7 +261,7 @@ Item {
 
             id: order_total_title
             text: "Итого: "
-            color: title_color
+            color: big_title_color
             font.family: regular_font.name
             font.pointSize: 20
             font.wordSpacing: 5

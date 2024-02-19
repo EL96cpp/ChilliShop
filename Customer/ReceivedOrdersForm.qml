@@ -10,7 +10,7 @@ Item {
 
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.top: parent.top
-    anchors.topMargin: 15
+    anchors.topMargin: 25
 
     Text {
 
@@ -19,10 +19,10 @@ Item {
         font.pointSize: 30
         font.underline: true
         font.wordSpacing: 7
-        color: "#e4e4e4"
+        color: big_title_color
         text: "История заказов"
 
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: received_orders_rectangle.left
         anchors.top: parent.top
 
     }
@@ -31,9 +31,9 @@ Item {
 
         id: received_orders_rectangle
 
-        width: 800
+        width: 950
         height: 650
-        color: "#909a2901"
+        color: "#804c1200"
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: orders_history_title.bottom
@@ -43,7 +43,7 @@ Item {
 
             id: received_orders_empty_title
             font.family: regular_font.name
-            font.pointSize: 18
+            font.pointSize: 25
             font.wordSpacing: 7
             color: "#e4e4e4"
             text: "Здесь пока пусто..."
@@ -71,7 +71,7 @@ Item {
                 width: received_orders_rectangle.width
                 height: 120
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: "#90431000"
+                color: "#90A84700"
 
                 Rectangle {
 
@@ -91,7 +91,7 @@ Item {
                         text: "Номер заказа: "
                         font.family: regular_font.name
                         font.pointSize: 20
-                        color: title_color
+                        color: small_title_color
 
                         anchors.centerIn: parent
 
@@ -133,7 +133,7 @@ Item {
                         text: "Итого:"
                         font.family: regular_font.name
                         font.pointSize: 20
-                        color: title_color
+                        color: small_title_color
 
                         anchors.centerIn: parent
 

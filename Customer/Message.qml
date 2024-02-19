@@ -43,7 +43,7 @@ Rectangle {
             font.pointSize: 20
             font.wordSpacing: 10
             font.bold: true
-            color: title_color
+            color: big_title_color
             text: message_rectangle.title
 
             anchors.centerIn: parent

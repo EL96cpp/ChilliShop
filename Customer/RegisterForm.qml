@@ -9,7 +9,9 @@ Rectangle {
 
     id: register_rectangle
     width: 500
-    height: 650
+    height: register_circle.height/2 + register_title.paintedHeight + register_title.anchors.topMargin +
+            register_name_rect.height*4 + text_edits_distance*3 +  register_name_rect.anchors.topMargin +
+            register_button.height + register_button.anchors.topMargin * 2
 
     visible: false
 
@@ -34,7 +36,7 @@ Rectangle {
 
     property int text_edits_point_size: 20
     property int header_texts_point_size: 18
-    property int text_edits_distance: 55
+    property int text_edits_distance: 60
     property int header_texts_bottom_margin: 10
 
     Rectangle {
@@ -106,7 +108,7 @@ Rectangle {
 
         id: register_name_title
         text: "Введите ваше имя"
-        color: "#E2E2E2"
+        color: regular_text_color
         font.family: regular_font.name
         font.pointSize: header_texts_point_size
         font.wordSpacing: 5
@@ -148,7 +150,7 @@ Rectangle {
 
         id: register_phone_title
         text: "Номер телефона"
-        color: "#E2E2E2"
+        color: regular_text_color
         font.family: regular_font.name
         font.pointSize: header_texts_point_size
         font.wordSpacing: 5
@@ -193,7 +195,7 @@ Rectangle {
 
         id: register_password_title
         text: "Придумайте пароль"
-        color: "#E2E2E2"
+        color: regular_text_color
         font.family: regular_font.name
         font.pointSize: header_texts_point_size
         font.wordSpacing: 5
@@ -237,7 +239,7 @@ Rectangle {
 
         id: register_password_confirm_title
         text: "Подтвердите  пароль"
-        color: "#E2E2E2"
+        color: regular_text_color
         font.family: regular_font.name
         font.pointSize: header_texts_point_size
         font.wordSpacing: 5
@@ -283,9 +285,10 @@ Rectangle {
         width: 200
         height: 35
 
-        anchors.bottom: register_rectangle.bottom
+        anchors.top: register_password_confirm_rect.bottom
         anchors.right: register_rectangle.right
-        anchors.margins: 30
+        anchors.rightMargin: 30
+        anchors.topMargin: 50
 
         background: Rectangle {
 

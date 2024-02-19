@@ -379,7 +379,7 @@ Item {
 
                 id: customer_name_title
                 text: "Имя:"
-                color: title_color
+                color: small_title_color
                 font.family: regular_font.name
                 font.pointSize: 20
                 font.wordSpacing: 5
@@ -421,7 +421,7 @@ Item {
 
                 id: customer_phone_title
                 text: "Телефон:"
-                color: title_color
+                color: small_title_color
                 font.family: regular_font.name
                 font.pointSize: 20
                 font.wordSpacing: 5

@@ -64,7 +64,7 @@ Rectangle {
         Text {
 
             id: good_delegate_title
-            color: "#E2E2E2"
+            color: small_title_color
             anchors.centerIn: parent
             font.family: regular_font.name
             font.pointSize: 22

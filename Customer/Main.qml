@@ -18,7 +18,9 @@ Window {
     property string forms_border_color: "#4e1800"
     property string forms_line_color: "#561b00"
 
-    property string title_color: "#EAAC63"
+    property string small_title_color: "#ffd59b"
+    property string big_title_color: "#EC9328"
+    property string regular_text_color: "#e2e2e2"
 
     StackView {
 

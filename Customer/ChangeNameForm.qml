@@ -46,7 +46,7 @@ Rectangle {
             font.pointSize: 20
             font.wordSpacing: 10
             font.bold: true
-            color: "white"
+            color: big_title_color
             text: "Изменение имени"
 
             anchors.centerIn: parent
@@ -89,7 +89,7 @@ Rectangle {
         font.pointSize: 15
         font.wordSpacing: 10
         font.bold: true
-        color: "white"
+        color: regular_text_color
         text: "Новое имя:"
 
         anchors.top: lower_line.bottom
