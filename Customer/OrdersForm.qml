@@ -327,7 +327,6 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: order_header_rectangle.bottom
         anchors.topMargin: 10
-        anchors.horizontalCenterOffset: 100
 
         OrderConfirmForm {            
             id: order_confirm_form
@@ -353,8 +352,9 @@ Item {
     Rectangle {
 
         id: customer_data_rectangle
-        width: 280
-        height: customer_name_title.height*2 + customer_name_title.anchors.margins*3
+        width: customer_phone_rectangle.width + customer_name_rectangle.anchors.margins*2 +
+               customer_phone.paintedWidth + customer_phone.anchors.leftMargin
+        height: customer_name_rectangle.height*2 + customer_name_rectangle.anchors.topMargin*3
         radius: 15
         color: "#907D2201"
         border.width: 2
@@ -362,20 +362,31 @@ Item {
 
         anchors.top: orders_rectangle.top
         anchors.right: orders_rectangle.left
-        anchors.rightMargin: 10
+        anchors.rightMargin: ((main_window.width - orders_rectangle.width)/2 - width)/2
 
-        Text {
+        Rectangle {
 
-            id: customer_name_title
-            text: "Имя: "
-            color: "white"
-            font.family: regular_font.name
-            font.pointSize: 20
-            font.wordSpacing: 5
+            id: customer_name_rectangle
+            width: customer_name_title.paintedWidth + 6
+            height: customer_name_title.paintedHeight + 6
+            color: "#903F1100"
 
             anchors.top: parent.top
             anchors.left: parent.left
-            anchors.margins: 10
+            anchors.margins: 15
+
+            Text {
+
+                id: customer_name_title
+                text: "Имя:"
+                color: "white"
+                font.family: regular_font.name
+                font.pointSize: 20
+                font.wordSpacing: 5
+
+                anchors.centerIn: parent
+
+            }
 
         }
 
@@ -388,23 +399,36 @@ Item {
             font.pointSize: 20
             font.wordSpacing: 5
 
-            anchors.top: customer_name_title.top
-            anchors.left: customer_name_title.right
+            anchors.top: customer_name_rectangle.top
+            anchors.left: customer_name_rectangle.right
+            anchors.leftMargin: 5
+            anchors.topMargin: 3
 
         }
 
-        Text {
+        Rectangle {
 
-            id: customer_phone_title
-            text: "Телефон: "
-            color: "white"
-            font.family: regular_font.name
-            font.pointSize: 20
-            font.wordSpacing: 5
+            id: customer_phone_rectangle
+            width: customer_phone_title.paintedWidth + 6
+            height: customer_phone_title.paintedHeight + 6
+            color: "#903F1100"
 
-            anchors.left: customer_name_title.left
-            anchors.top: customer_name.bottom
-            anchors.topMargin: 10
+            anchors.left: customer_name_rectangle.left
+            anchors.top: customer_name_rectangle.bottom
+            anchors.topMargin: 15
+
+            Text {
+
+                id: customer_phone_title
+                text: "Телефон:"
+                color: "white"
+                font.family: regular_font.name
+                font.pointSize: 20
+                font.wordSpacing: 5
+
+                anchors.centerIn: parent
+
+            }
 
         }
 
@@ -417,8 +441,10 @@ Item {
             font.pointSize: 20
             font.wordSpacing: 5
 
-            anchors.top: customer_phone_title.top
-            anchors.left: customer_phone_title.right
+            anchors.top: customer_phone_rectangle.top
+            anchors.left: customer_phone_rectangle.right
+            anchors.leftMargin: 5
+            anchors.topMargin: 3
 
         }
 
