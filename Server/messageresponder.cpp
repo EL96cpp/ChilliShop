@@ -633,12 +633,12 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
     } else if (method_value.toString() == "DELETE") {
 
-        if (resource_value.toString() == "Connection") {
+        if (resource_value.toString() == "Employee_connection") {
 
             qDebug() << "employee connection will be deleted!";
             prepearing_order_ids.removeAllEmployeeIDs(employee_data);
             issuing_order_ids.removeAllEmployeeIDs(employee_data);
-            //emit DeleteConnection();
+            connections.eraseByEmployeeData(employee_data);
 
         } else if (resource_value.toString() == "Prepearing_order") {
 

@@ -407,7 +407,7 @@ void Client::deleteConnection() {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("DELETE");
-    message[QStringLiteral("Resource")] = QStringLiteral("Connection");
+    message[QStringLiteral("Resource")] = QStringLiteral("Employee_connection");
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");
 

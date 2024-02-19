@@ -21,14 +21,23 @@ void ConnectionsVector::eraseByPhoneNumber(const QString &phone_number) {
 
     QMutexLocker locker(&mutex);
 
-    qDebug() << "Remove by phone " << connections.size();
     connections.erase(std::remove_if(connections.begin(), connections.end(),
                                      [&phone_number](ClientConnection* connection){
                                         return connection->GetPhoneNumber() == phone_number;
                                         }), connections.end());
 
-    qDebug() << "Remove by phone " << connections.size();
+}
 
+void ConnectionsVector::eraseByEmployeeData(const EmployeeData &employee_data) {
+
+    QMutexLocker locker(&mutex);
+
+    qDebug() << "Remove employee connection " << connections.size();
+    connections.erase(std::remove_if(connections.begin(), connections.end(),
+                                     [&employee_data](ClientConnection* connection){
+                                         return connection->GetEmployeeData() == employee_data;
+                                     }), connections.end());
+    qDebug() << "Remove employee connection " << connections.size();
 }
 
 bool ConnectionsVector::CheckIfCustomerAlreadyLogged(const QString &phone_number) {
