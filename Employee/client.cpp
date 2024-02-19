@@ -1,7 +1,7 @@
 #include "client.h"
 
 Client::Client(QObject *parent)
-    : QObject{parent}, socket(new QTcpSocket) {
+    : QObject{parent}, socket(new QTcpSocket), need_orders_data(true) {
 
     connect(socket, &QTcpSocket::readyRead, this, &Client::onReadyRead);
     connect(socket, &QTcpSocket::disconnected, this, &Client::onDisconnected);
@@ -101,6 +101,13 @@ void Client::onReadyRead() {
 
                 qDebug() << "Logged in successfully!";
                 emit loggedIn(name, surname, position);
+
+                if (need_orders_data) {
+
+                    GetOrders();
+                    need_orders_data = false;
+
+                }
 
             } else {
 
@@ -276,7 +283,6 @@ void Client::onReadyRead() {
                     }
 
                 }
-
 
             } else if (code_value.toString() == "503") {
 
@@ -469,7 +475,7 @@ void Client::SendConnectionType() {
 
 }
 
-void Client::getOrders() {
+void Client::GetOrders() {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("GET");
@@ -482,7 +488,7 @@ void Client::getOrders() {
 
 }
 
-void Client::getCatalog() {
+void Client::GetCatalog() {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("GET");

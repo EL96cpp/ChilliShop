@@ -100,6 +100,14 @@ Page {
 
     }
 
+    function clearOrderModels() {
+
+        active_orders_model.clear();
+        received_orders_model.clear();
+        order_view_model.clear();
+
+    }
+
     Connections {
 
         target: login_rectangle
@@ -170,6 +178,7 @@ Page {
             orders_form.phone_number = "";
             logged_in = false;
             state = "login_state";
+            clearOrderModels();
 
         }
 

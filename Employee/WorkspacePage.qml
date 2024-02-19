@@ -14,12 +14,6 @@ Page {
 
     signal showMessage(var messate_title, var message_description);
 
-    function needOrders() {
-
-        return (issuing_orders_list_model.count === 0 && prepearing_orders_list_model.count === 0);
-
-    }
-
     Image {
 
         id: workspace_background
