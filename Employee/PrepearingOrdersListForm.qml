@@ -174,18 +174,6 @@ Item {
                         font.wordSpacing: 5
                         color: "red"
 
-                        layer.enabled: true
-                        layer.effect: MultiEffect {
-
-                            id: is_prepearing_text_shadow
-                            blurEnabled: true
-                            blurMax: 15
-                            blur: 0.5
-                            saturation: 0.5
-                            contrast: 0.3
-
-                        }
-
                     }
 
 
