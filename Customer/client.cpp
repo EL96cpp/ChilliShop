@@ -7,7 +7,6 @@ Client::Client() : socket(new QSslSocket) {
 
 }
 
-
 void Client::ConnectToServer(const QString& address, const quint16& port) {
 
     socket->connectToHost(address, port);
@@ -87,6 +86,19 @@ void Client::onLogout() {
     message[QStringLiteral("Method")] = QStringLiteral("POST");
     message[QStringLiteral("Resource")] = QStringLiteral("Logout_customer");
     message[QStringLiteral("Phone_number")] = phone_number;
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
+
+}
+
+void Client::deleteConnection() {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("DELETE");
+    message[QStringLiteral("Resource")] = QStringLiteral("Customer_connection");
     QByteArray byte_array = QJsonDocument(message).toJson();
     byte_array.append("\n");
 

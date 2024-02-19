@@ -289,10 +289,10 @@ void MessageResponder::RespondToCustomer(const QJsonObject& json_message_object)
 
     } else if (method_value.toString() == "DELETE") {
 
-        if (resource_value.toString() == "Connection") {
+        if (resource_value.toString() == "Customer_connection") {
 
             qDebug() << "customer connection will be deleted!";
-            emit DeleteConnection();
+            connections.eraseByPhoneNumber(phone_number);
 
         } else if (resource_value.toString() == "Order") {
 
@@ -638,7 +638,7 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
             qDebug() << "employee connection will be deleted!";
             prepearing_order_ids.removeAllEmployeeIDs(employee_data);
             issuing_order_ids.removeAllEmployeeIDs(employee_data);
-            emit DeleteConnection();
+            //emit DeleteConnection();
 
         } else if (resource_value.toString() == "Prepearing_order") {
 

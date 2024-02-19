@@ -14,6 +14,7 @@ public:
     ConnectionsVector(QObject* parent = nullptr);
     void push(ClientConnection* client_connection);
     void erase(ClientConnection* client_connection);
+    void eraseByPhoneNumber(const QString& phone_number);
 
     bool CheckIfCustomerAlreadyLogged(const QString& phone_number);
     bool CheckIfEmployeeAlreadyLogged(const QString& name, const QString& surname, const QString& position);

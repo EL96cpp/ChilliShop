@@ -44,6 +44,7 @@ public slots:
     void onLogin(const QString& phone_number, const QString& password);
     void onRegister(const QString& phone_number, const QString& password, const QString& name);
     void onLogout();
+    void deleteConnection();
     void onMakeOrder(const QJsonArray& order_data, const int& total_cost);
     void onCancelOrder(const int &order_id, const QString& phone_number, const QString &receive_code);
     void onReadyRead();
