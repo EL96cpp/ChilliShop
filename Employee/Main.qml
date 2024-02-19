@@ -96,7 +96,20 @@ Window {
         target: Client
         function onLoggedIn() {
 
+            workspace_page.state = "issuing_orders_list_state";
             stack_view.push(workspace_page);
+
+        }
+
+    }
+
+    Connections {
+
+        target: Client
+        function onLogoutConfirmed() {
+
+            login_page.clearAllFields();
+            stack_view.pop(login_page);
 
         }
 

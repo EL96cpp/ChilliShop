@@ -97,8 +97,9 @@ Rectangle {
 
             onClicked: {
 
-                Client.deleteConnection();
-                Qt.callLater(Qt.quit);
+                Client.onLogout();
+                //Client.deleteConnection();
+                //Qt.callLater(Qt.quit);
 
             }
 

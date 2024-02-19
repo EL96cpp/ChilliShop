@@ -12,6 +12,14 @@ Page {
 
     signal showErrorMessage(string error_title, string error_description);
 
+    function clearAllFields() {
+
+        login_name_input.clear();
+        login_surname_input.clear();
+        login_password_input.clear();
+
+    }
+
     Image {
 
         id: main_background

@@ -48,6 +48,22 @@ void Client::onLogin(const QString& name, const QString& surname,
 
 }
 
+void Client::onLogout() {
+
+    QJsonObject message;
+    message[QStringLiteral("Method")] = QStringLiteral("POST");
+    message[QStringLiteral("Resource")] = QStringLiteral("Logout_employee");
+    message[QStringLiteral("Name")] = name;
+    message[QStringLiteral("Surname")] = surname;
+    message[QStringLiteral("Position")] = position;
+    QByteArray byte_array = QJsonDocument(message).toJson();
+    byte_array.append("\n");
+
+    qintptr bytes_written = socket->write(byte_array);
+    qDebug() << bytes_written;
+
+}
+
 void Client::onReadyRead() {
 
     QByteArray message_byte_array = socket->readAll();
@@ -92,6 +108,19 @@ void Client::onReadyRead() {
                 QJsonValue error_description_value = json_message_object.value(QLatin1String("Error_description"));
                 qDebug() << error_description_value;
                 emit showErrorMessage(QString::fromLatin1("Login error!"), error_description_value.toString());
+
+            }
+
+        } else if (resource_value.toString() == "Logout_employee") {
+
+            if (code_value.toString() == "200") {
+
+                emit logoutConfirmed();
+
+            } else {
+
+                QJsonValue error_description_value = json_message_object.value(QLatin1String("Error_description"));
+                emit showErrorMessage("Ошибка выхода", error_description_value.toString());
 
             }
 

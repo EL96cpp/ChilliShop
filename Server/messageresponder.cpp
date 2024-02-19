@@ -449,6 +449,42 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
             LoginEmployee(name_value.toString(), surname_value.toString(), position_value.toString(), password_value.toString());
 
+        } else if (resource_value.toString() == "Logout_employee") {
+
+            QString name = json_message_object.value(QLatin1String("Name")).toString();
+            QString surname = json_message_object.value(QLatin1String("Surname")).toString();
+            QString position = json_message_object.value(QLatin1String("Position")).toString();
+
+            if (connections.CheckIfEmployeeAlreadyLogged(name, surname, position)) {
+
+                emit SetLoggedOut();
+
+                issuing_order_ids.removeAllEmployeeIDs(EmployeeData(name, surname, position));
+                prepearing_order_ids.removeAllEmployeeIDs(EmployeeData(name, surname, position));
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("POST");
+                message[QStringLiteral("Resource")] = QStringLiteral("Logout_employee");
+                message[QStringLiteral("Code")] = QStringLiteral("200");
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
+
+            } else {
+
+                QJsonObject message;
+                message[QStringLiteral("Method")] = QStringLiteral("POST");
+                message[QStringLiteral("Resource")] = QStringLiteral("Logout_employee");
+                message[QStringLiteral("Code")] = QStringLiteral("403");
+                message[QStringLiteral("Error_description")] = QStringLiteral("Внутренняя ошибка сервера!");
+                QByteArray message_byte_array = QJsonDocument(message).toJson();
+                message_byte_array.append("\n");
+
+                emit MessageResponce(message_byte_array);
+
+            }
+
         } else if (resource_value.toString() == "Start_prepearing_order") {
 
             int order_id = json_message_object.value(QLatin1String("Order_id")).toInt();

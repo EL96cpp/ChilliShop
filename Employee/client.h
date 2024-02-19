@@ -23,6 +23,7 @@ signals:
     void removeOrder(const int& order_id);
     void errorOccurred(const QString& title, const QString& description);
     void loggedIn(const QString& name, const QString& surname, const QString& position);
+    void logoutConfirmed();
 
     void addOrderToOrederIssuingModel(const int& order_id, const QString& ordered_timestamp,
                                       const QString& receive_code, const QString& phone_number,
@@ -49,6 +50,7 @@ signals:
 public slots:
     void onLogin(const QString& name, const QString& surname,
                  const QString& position, const QString& password);
+    void onLogout();
     void onReadyRead();
     void onStartPrepearingOrder(const int& order_id);
     void onStartIssuingOrder(const int& order_id);

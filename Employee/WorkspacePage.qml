@@ -22,6 +22,154 @@ Page {
 
     }
 
+    states:  [
+
+        State {
+
+            name: "issuing_orders_list_state"
+
+            PropertyChanges {
+                target: issuing_orders_list_form
+                visible: true
+            }
+
+            PropertyChanges {
+                target: prepearing_orders_list_form
+                visible: false
+            }
+
+            PropertyChanges {
+                target: order_issuing_text
+                visible: false
+            }
+
+            PropertyChanges {
+                target: order_prepearing_text
+                visible: true
+            }
+
+            PropertyChanges {
+                target: issuing_order_form
+                visible: false
+            }
+
+            PropertyChanges {
+                target: prepearing_order_form
+                visible: false
+            }
+
+        },
+
+        State {
+
+            name: "prepearing_orders_list_state"
+
+            PropertyChanges {
+                target: issuing_orders_list_form
+                visible: false
+            }
+
+            PropertyChanges {
+                target: prepearing_orders_list_form
+                visible: true
+            }
+
+            PropertyChanges {
+                target: order_issuing_text
+                visible: true
+            }
+
+            PropertyChanges {
+                target: order_prepearing_text
+                visible: false
+            }
+
+            PropertyChanges {
+                target: issuing_order_form
+                visible: false
+            }
+
+            PropertyChanges {
+                target: prepearing_order_form
+                visible: false
+            }
+
+        },
+
+        State {
+
+            name: "order_prepearing_state"
+
+            PropertyChanges {
+                target: issuing_orders_list_form
+                visible: false
+            }
+
+            PropertyChanges {
+                target: prepearing_orders_list_form
+                visible: false
+            }
+
+            PropertyChanges {
+                target: order_issuing_text
+                visible: false
+            }
+
+            PropertyChanges {
+                target: order_prepearing_text
+                visible: false
+            }
+
+            PropertyChanges {
+                target: issuing_order_form
+                visible: false
+            }
+
+            PropertyChanges {
+                target: prepearing_order_form
+                visible: true
+            }
+
+        },
+
+        State {
+
+            name: "order_issuing_state"
+
+            PropertyChanges {
+                target: issuing_orders_list_form
+                visible: false
+            }
+
+            PropertyChanges {
+                target: prepearing_orders_list_form
+                visible: false
+            }
+
+            PropertyChanges {
+                target: order_issuing_text
+                visible: false
+            }
+
+            PropertyChanges {
+                target: order_prepearing_text
+                visible: false
+            }
+
+            PropertyChanges {
+                target: issuing_order_form
+                visible: true
+            }
+
+            PropertyChanges {
+                target: prepearing_order_form
+                visible: false
+            }
+
+        }
+
+    ]
+
     Rectangle {
 
         id: workspace_rectangle
@@ -40,154 +188,6 @@ Page {
             orientation: Gradient.Horizontal
 
         }
-
-        states:  [
-
-            State {
-
-                name: "issuing_orders_list_state"
-
-                PropertyChanges {
-                    target: issuing_orders_list_form
-                    visible: true
-                }
-
-                PropertyChanges {
-                    target: prepearing_orders_list_form
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: order_issuing_text
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: order_prepearing_text
-                    visible: true
-                }
-
-                PropertyChanges {
-                    target: issuing_order_form
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: prepearing_order_form
-                    visible: false
-                }
-
-            },
-
-            State {
-
-                name: "prepearing_orders_list_state"
-
-                PropertyChanges {
-                    target: issuing_orders_list_form
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: prepearing_orders_list_form
-                    visible: true
-                }
-
-                PropertyChanges {
-                    target: order_issuing_text
-                    visible: true
-                }
-
-                PropertyChanges {
-                    target: order_prepearing_text
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: issuing_order_form
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: prepearing_order_form
-                    visible: false
-                }
-
-            },
-
-            State {
-
-                name: "order_prepearing_state"
-
-                PropertyChanges {
-                    target: issuing_orders_list_form
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: prepearing_orders_list_form
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: order_issuing_text
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: order_prepearing_text
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: issuing_order_form
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: prepearing_order_form
-                    visible: true
-                }
-
-            },
-
-            State {
-
-                name: "order_issuing_state"
-
-                PropertyChanges {
-                    target: issuing_orders_list_form
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: prepearing_orders_list_form
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: order_issuing_text
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: order_prepearing_text
-                    visible: false
-                }
-
-                PropertyChanges {
-                    target: issuing_order_form
-                    visible: true
-                }
-
-                PropertyChanges {
-                    target: prepearing_order_form
-                    visible: false
-                }
-
-            }
-
-        ]
 
 
         IssuingOrdersListForm {
@@ -268,7 +268,7 @@ Page {
 
                 onClicked: {
 
-                    workspace_rectangle.state = "prepearing_orders_list_state";
+                    workspace_page.state = "prepearing_orders_list_state";
 
                 }
 
@@ -312,7 +312,7 @@ Page {
 
                 onClicked: {
 
-                    workspace_rectangle.state = "issuing_orders_list_state";
+                    workspace_page.state = "issuing_orders_list_state";
 
                 }
 
@@ -334,6 +334,7 @@ Page {
         }
 
     }
+
 
     Connections {
 
@@ -435,7 +436,7 @@ Page {
                     issuing_order_model.ordered_timestamp = issuing_orders_list_model.get(i).ordered_timestamp;
                     issuing_order_model.total_cost = issuing_orders_list_model.get(i).total_cost;
 
-                    workspace_rectangle.state = "order_issuing_state";
+                    workspace_page.state = "order_issuing_state";
 
                     break;
 
@@ -501,7 +502,7 @@ Page {
                     prepearing_order_model.ordered_timestamp = prepearing_orders_list_model.get(i).ordered_timestamp;
                     prepearing_order_model.total_cost = prepearing_orders_list_model.get(i).total_cost;
 
-                    workspace_rectangle.state = "order_prepearing_state";
+                    workspace_page.state = "order_prepearing_state";
 
                     break;
 
@@ -580,7 +581,7 @@ Page {
         target: Client
         function onStopPrepearingOrderConfirmed(order_id) {
 
-            workspace_rectangle.state = "prepearing_orders_list_state";
+            workspace_page.state = "prepearing_orders_list_state";
 
         }
 
@@ -591,7 +592,7 @@ Page {
         target: Client
         function onStopIssuingOrderConfirmed(order_id) {
 
-            workspace_rectangle.state = "issuing_orders_list_state";
+            workspace_page.state = "issuing_orders_list_state";
 
         }
 
@@ -607,14 +608,14 @@ Page {
                 Client.onStopIssuingOrder(order_id);
                 issuing_order_model.clear();
                 showMessage("Отмена заказа", "Пользователь отменил данный заказ!");
-                workspace_rectangle.state = "issuing_orders_list_state";
+                workspace_page.state = "issuing_orders_list_state";
 
             } else if (prepearing_order_model.order_id === order_id) {
 
                 Client.onStopPrepearingOrder(order_id);
                 prepearing_order_model.clear();
                 showMessage("Отмена заказа", "Пользователь отменил данный заказ!");
-                workspace_rectangle.state = "prepearing_orders_list_state";
+                workspace_page.state = "prepearing_orders_list_state";
 
             }
 
@@ -683,7 +684,7 @@ Page {
 
                 }
 
-                workspace_rectangle.state = "issuing_orders_list_state";
+                workspace_page.state = "issuing_orders_list_state";
 
             }
 
@@ -720,7 +721,7 @@ Page {
                     prepearing_order_model.clear();
                     issuing_orders_list_form.updateCopyModel();
 
-                    workspace_rectangle.state = "prepearing_orders_list_state";
+                    workspace_page.state = "prepearing_orders_list_state";
 
                 }
 
