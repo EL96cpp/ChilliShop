@@ -43,6 +43,24 @@ bool OrderIDVector::erase(const EmployeeData& employee_data, const int& id) {
 
 }
 
+int OrderIDVector::getEmployeeID(const EmployeeData &employee_data) {
+
+    QMutexLocker lock(&mutex);
+
+    for (auto& pair : ids_vector) {
+
+        if (pair.first == employee_data) {
+
+            return pair.second;
+
+        }
+
+    }
+
+    return -1;
+
+}
+
 
 void OrderIDVector::removeAllEmployeeIDs(const EmployeeData &employee_data) {
 

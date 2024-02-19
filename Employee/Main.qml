@@ -99,6 +99,12 @@ Window {
             workspace_page.state = "issuing_orders_list_state";
             stack_view.push(workspace_page);
 
+            if (workspace_page.needOrders()) {
+
+                Client.getOrders();
+
+            }
+
         }
 
     }

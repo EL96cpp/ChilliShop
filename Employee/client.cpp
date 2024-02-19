@@ -100,7 +100,6 @@ void Client::onReadyRead() {
             if (code_value.toString() == "200") {
 
                 qDebug() << "Logged in successfully!";
-                GetCatalog();
                 emit loggedIn(name, surname, position);
 
             } else {
@@ -297,8 +296,6 @@ void Client::onReadyRead() {
 
                 qDebug() << QJsonDocument(catalog_array.toObject()).toJson();
 
-                GetOrders();
-
             }
 
         }
@@ -472,7 +469,7 @@ void Client::SendConnectionType() {
 
 }
 
-void Client::GetOrders() {
+void Client::getOrders() {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("GET");
@@ -485,7 +482,7 @@ void Client::GetOrders() {
 
 }
 
-void Client::GetCatalog() {
+void Client::getCatalog() {
 
     QJsonObject message;
     message[QStringLiteral("Method")] = QStringLiteral("GET");

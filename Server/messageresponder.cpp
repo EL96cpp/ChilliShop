@@ -459,6 +459,36 @@ void MessageResponder::RespondToEmployee(const QJsonObject& json_message_object)
 
                 emit SetLoggedOut();
 
+                int issuing_order_id = issuing_order_ids.getEmployeeID(EmployeeData(name, surname, position));
+
+                if (issuing_order_id != -1) {
+
+                    QJsonObject employees_message;
+                    employees_message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                    employees_message[QStringLiteral("Resource")] = QStringLiteral("Stop_issuing_order");
+                    employees_message[QStringLiteral("Order_id")] = issuing_order_id;
+                    QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
+                    employees_message_byte_array.append("\n");
+
+                    emit SendToAllEmployeesExceptOne(employee_data, employees_message_byte_array);
+
+                }
+
+                int prepearing_order_id = prepearing_order_ids.getEmployeeID(EmployeeData(name, surname, position));
+
+                if (prepearing_order_id != -1) {
+
+                    QJsonObject employees_message;
+                    employees_message[QStringLiteral("Method")] = QStringLiteral("PUT");
+                    employees_message[QStringLiteral("Resource")] = QStringLiteral("Stop_prepearing_order");
+                    employees_message[QStringLiteral("Order_id")] = prepearing_order_id;
+                    QByteArray employees_message_byte_array = QJsonDocument(employees_message).toJson();
+                    employees_message_byte_array.append("\n");
+
+                    emit SendToAllEmployeesExceptOne(employee_data, employees_message_byte_array);
+
+                }
+
                 issuing_order_ids.removeAllEmployeeIDs(EmployeeData(name, surname, position));
                 prepearing_order_ids.removeAllEmployeeIDs(EmployeeData(name, surname, position));
 

@@ -17,6 +17,7 @@ public:
 
     bool push(const EmployeeData& employee_data, const int& id);
     bool erase(const EmployeeData& employee_data, const int& id);
+    int getEmployeeID(const EmployeeData& employee_data);
     void removeAllEmployeeIDs(const EmployeeData& employee_data);
     QJsonArray getAllOrderIDs();
 

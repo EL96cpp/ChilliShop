@@ -60,11 +60,11 @@ public slots:
     void onOrderReceivedMessage(const int& order_id, const QString& phone_number, const QString& receive_code);
     void deleteConnection();
     void onDisconnected();
+    void getOrders();
+    void getCatalog();
 
 private:
     void SendConnectionType();
-    void GetOrders();
-    void GetCatalog();
 
 private:
     QTcpSocket* socket;
