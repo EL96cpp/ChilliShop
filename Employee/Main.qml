@@ -15,7 +15,14 @@ Window {
     property string button_text_color: "#E2E2E2"
     property string button_text_hovered_color: "#FF5403"
 
-    property string title_color: "#EAAC63"
+    property string title_color: "#EAAC63"    
+    property string small_title_color: "#ffe6d6"
+    property string regular_text_color: "#e2e2e2"
+
+    property int title_font_size: 35
+    property int big_font_size: 25
+    property int medium_font_size: 20
+    property int small_font_size: 16
 
     StackView {
 

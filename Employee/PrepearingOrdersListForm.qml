@@ -31,11 +31,11 @@ Item {
 
             id: orders_title
             font.family: regular_font.name
-            font.pointSize: 20
+            font.pointSize: title_font_size
             font.wordSpacing: 5
             font.letterSpacing: 3
             color: "white"
-            text: "Заказы"
+            text: "Сборка заказов"
 
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
@@ -91,7 +91,7 @@ Item {
                             id: order_id_title
                             text: "Номер заказа: "
                             font.family: regular_font.name
-                            font.pointSize: 16
+                            font.pointSize: medium_font_size
                             color: title_color
 
                             anchors.centerIn: parent
@@ -109,7 +109,7 @@ Item {
 
                         text: model.order_id
                         font.family: regular_font.name
-                        font.pointSize: 16
+                        font.pointSize: medium_font_size
                         color: "#e4e4e4"
 
                     }
@@ -133,7 +133,7 @@ Item {
 
                             text: "Итого:"
                             font.family: regular_font.name
-                            font.pointSize: 16
+                            font.pointSize: medium_font_size
                             color: title_color
 
                             anchors.centerIn: parent
@@ -153,7 +153,7 @@ Item {
                         text: model.total_cost/100 + "." + ((model.total_cost%100 < 10) ?
                               model.total_cost%100 + "0" : model.total_cost%100) + " ₽"
                         font.family: regular_font.name
-                        font.pointSize: 16
+                        font.pointSize: medium_font_size
                         color: "#e4e4e4"
 
                     }
@@ -170,7 +170,7 @@ Item {
 
                         text: "ОБРАБАТЫВАЕТСЯ"
                         font.family: regular_font.name
-                        font.pointSize: 16
+                        font.pointSize: medium_font_size
                         font.wordSpacing: 5
                         color: "red"
 

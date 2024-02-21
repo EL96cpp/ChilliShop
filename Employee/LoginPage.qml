@@ -68,7 +68,7 @@ Page {
 
             id: authorization_title
             font.family: regular_font.name
-            font.pointSize: 30
+            font.pointSize: title_font_size
             font.bold: true
             font.letterSpacing: 5
             text: "АВТОРИЗАЦИЯ"
@@ -110,7 +110,7 @@ Page {
 
             id: login_name_title
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: medium_font_size
             text: "Имя"
             color: "white"
 
@@ -152,7 +152,7 @@ Page {
 
             id: login_surname_title
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: medium_font_size
             text: "Фамилия"
             color: "white"
 
@@ -194,7 +194,7 @@ Page {
 
             id: login_position_title
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: medium_font_size
             text: "Должность"
             color: "white"
 
@@ -221,7 +221,7 @@ Page {
 
             id: login_password_title
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: medium_font_size
             text: "Пароль"
             color: "white"
 
@@ -297,7 +297,7 @@ Page {
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 font.family: regular_font.name
-                font.pointSize: 12
+                font.pointSize: medium_font_size
                 font.letterSpacing: 5
                 font.bold: true
                 color: "#E2E2E2"

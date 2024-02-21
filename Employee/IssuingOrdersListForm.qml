@@ -159,7 +159,7 @@ Item {
 
                     id: code_search_input
                     font.family: regular_font.name
-                    font.pointSize: 20
+                    font.pointSize: medium_font_size
                     font.letterSpacing: 10
 
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -183,7 +183,7 @@ Item {
 
                 id: code_search_title
                 font.family: regular_font.name
-                font.pointSize: 14
+                font.pointSize: medium_font_size
                 font.wordSpacing: 5
                 color: "white"
                 text: "Код заказа"
@@ -213,7 +213,7 @@ Item {
 
                     id: phone_search_input
                     font.family: regular_font.name
-                    font.pointSize: 20
+                    font.pointSize: medium_font_size
                     font.letterSpacing: 10
 
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -237,7 +237,7 @@ Item {
 
                 id: phone_search_title
                 font.family: regular_font.name
-                font.pointSize: 14
+                font.pointSize: medium_font_size
                 color: "white"
                 text: "Телефон"
 
@@ -299,7 +299,7 @@ Item {
                             id: order_id_title
                             text: "Номер заказа: "
                             font.family: regular_font.name
-                            font.pointSize: 16
+                            font.pointSize: medium_font_size
                             font.wordSpacing: 5
                             color: title_color
 
@@ -318,7 +318,7 @@ Item {
 
                         text: model.order_id
                         font.family: regular_font.name
-                        font.pointSize: 16
+                        font.pointSize: medium_font_size
                         font.wordSpacing: 5
                         color: "#e4e4e4"
 
@@ -341,7 +341,7 @@ Item {
                             id: phone_number_title
                             text: "Номер телефона: "
                             font.family: regular_font.name
-                            font.pointSize: 16
+                            font.pointSize: medium_font_size
                             font.wordSpacing: 5
                             color: title_color
 
@@ -360,7 +360,7 @@ Item {
 
                         text: model.phone_number
                         font.family: regular_font.name
-                        font.pointSize: 16
+                        font.pointSize: medium_font_size
                         font.wordSpacing: 5
                         color: "#e4e4e4"
 
@@ -385,7 +385,7 @@ Item {
 
                             text: "Итого:"
                             font.family: regular_font.name
-                            font.pointSize: 16
+                            font.pointSize: medium_font_size
                             font.wordSpacing: 5
                             color: title_color
 
@@ -406,7 +406,7 @@ Item {
                         text: model.total_cost/100 + "." + ((model.total_cost%100 < 10) ?
                               model.total_cost%100 + "0" : model.total_cost%100) + " ₽"
                         font.family: regular_font.name
-                        font.pointSize: 16
+                        font.pointSize: medium_font_size
                         font.wordSpacing: 5
                         color: "#e4e4e4"
 
@@ -424,7 +424,7 @@ Item {
 
                         text: "ОБРАБАТЫВАЕТСЯ"
                         font.family: regular_font.name
-                        font.pointSize: 16
+                        font.pointSize: medium_font_size
                         font.wordSpacing: 5
                         color: "red"
 

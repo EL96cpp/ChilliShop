@@ -21,7 +21,7 @@ Rectangle {
 
         id: employee_name_title
         font.family: regular_font.name
-        font.pointSize: 14
+        font.pointSize: small_font_size
         font.wordSpacing: 5
         color: title_color
         text: "Имя:"
@@ -37,7 +37,7 @@ Rectangle {
 
         id: employee_name
         font.family: regular_font.name
-        font.pointSize: 14
+        font.pointSize: small_font_size
         font.wordSpacing: 5
         color: "white"
         text: workspace_page.name
@@ -52,7 +52,7 @@ Rectangle {
 
         id: employee_surname_title
         font.family: regular_font.name
-        font.pointSize: 14
+        font.pointSize: small_font_size
         font.wordSpacing: 5
         color: title_color
         text: "Фамилия:"
@@ -67,7 +67,7 @@ Rectangle {
 
         id: employee_surname
         font.family: regular_font.name
-        font.pointSize: 14
+        font.pointSize: small_font_size
         font.wordSpacing: 5
         color: "white"
         text: workspace_page.surname
@@ -82,7 +82,7 @@ Rectangle {
 
         id: employee_position_title
         font.family: regular_font.name
-        font.pointSize: 14
+        font.pointSize: small_font_size
         font.wordSpacing: 5
         color: title_color
         text: "Должность:"
@@ -97,7 +97,7 @@ Rectangle {
 
         id: employee_position
         font.family: regular_font.name
-        font.pointSize: 14
+        font.pointSize: small_font_size
         font.wordSpacing: 5
         color: "white"
         text: workspace_page.position
@@ -112,7 +112,7 @@ Rectangle {
 
         id: exit_workspace_test
         font.family: regular_font.name
-        font.pointSize: 14
+        font.pointSize: small_font_size
         text: "Выход"
         color: exit_mouse_area.containsMouse ? "#FF5403" : "white"
 
@@ -140,8 +140,16 @@ Rectangle {
 
             onClicked: {
 
-                Client.onLogout();
-                //Client.deleteConnection();
+                if (!issuing_order_form.visible && !prepearing_order_form.visible) {
+
+                    Client.onLogout();
+
+                } else {
+
+                    workspace_page.showMessage("Ошибка логгирования!", "Завершите обработку зазака!");
+
+                }
+                    //Client.deleteConnection();
                 //Qt.callLater(Qt.quit);
 
             }

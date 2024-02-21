@@ -244,7 +244,7 @@ Page {
 
             id: order_prepearing_text
             font.family: regular_font.name
-            font.pointSize: 12
+            font.pointSize: medium_font_size
             font.wordSpacing: 5
             text: "Сборка заказов"
             color: order_prepearing_mouse_area.containsMouse ? "#FF5403" : "white"
@@ -286,7 +286,7 @@ Page {
 
             id: order_issuing_text
             font.family: regular_font.name
-            font.pointSize: 12
+            font.pointSize: medium_font_size
             font.wordSpacing: 5
             text: "Выдача заказов"
             color: order_issuing_mouse_area.containsMouse ? "#FF5403" : "white"

@@ -79,7 +79,7 @@ Rectangle {
                         text: model.number_of_items
                         color: "white"
                         font.family: regular_font.name
-                        font.pointSize: 14
+                        font.pointSize: medium_font_size
                         font.wordSpacing: 5
                         font.bold: true
 
@@ -116,7 +116,7 @@ Rectangle {
                         text: model.name
                         color: title_color
                         font.family: regular_font.name
-                        font.pointSize: 15
+                        font.pointSize: medium_font_size
                         font.wordSpacing: 5
                         font.bold: true
 
@@ -130,7 +130,7 @@ Rectangle {
                         text: model.description
                         color: "white"
                         font.family: regular_font.name
-                        font.pointSize: 15
+                        font.pointSize: medium_font_size
                         font.wordSpacing: 5
                         font.bold: true
 
@@ -148,7 +148,7 @@ Rectangle {
                     text: model.price/100 + "." + ((model.price%100 < 10) ? model.price%100 + "0" : model.price%100) + " ₽"
                     color: "white"
                     font.family: regular_font.name
-                    font.pointSize: 15
+                    font.pointSize: medium_font_size
                     font.wordSpacing: 5
                     font.bold: true
 
@@ -168,7 +168,7 @@ Rectangle {
         id: to_issuing_orders_list_text
         color: to_issuing_orders_list_mouse_area.containsMouse ? "#FF5403" : "white"
         font.family: regular_font.name
-        font.pointSize: 18
+        font.pointSize: big_font_size
         font.wordSpacing: 5
         font.bold: true
         text: "К спискy заказов"
@@ -221,9 +221,9 @@ Rectangle {
         Text {
 
             id: order_id_title
-            color: "white"
+            color: small_title_color
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: medium_font_size
             font.wordSpacing: 5
             font.bold: true
             text: "Номер заказа:"
@@ -239,7 +239,7 @@ Rectangle {
         id: order_id_text
         color: "white"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: medium_font_size
         font.wordSpacing: 5
         font.bold: true
         text: issuing_order_model.order_id
@@ -264,9 +264,9 @@ Rectangle {
         Text {
 
             id: receive_code_title
-            color: "white"
+            color: small_title_color
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: medium_font_size
             font.wordSpacing: 5
             font.bold: true
             text: "Код получения:"
@@ -282,7 +282,7 @@ Rectangle {
         id: receive_code_text
         color: "white"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: medium_font_size
         font.wordSpacing: 5
         font.bold: true
         text: issuing_order_model.receive_code
@@ -308,9 +308,9 @@ Rectangle {
         Text {
 
             id: ordered_timestamp_title
-            color: "white"
+            color: small_title_color
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: medium_font_size
             font.wordSpacing: 5
             font.bold: true
             text: "Дата заказа:"
@@ -326,7 +326,7 @@ Rectangle {
         id: ordered_timestamp_text
         color: "white"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: medium_font_size
         font.wordSpacing: 5
         font.bold: true
         text: issuing_order_model.ordered_timestamp
@@ -351,9 +351,9 @@ Rectangle {
         Text {
 
             id: phone_number_title
-            color: "white"
+            color: small_title_color
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: medium_font_size
             font.wordSpacing: 5
             font.bold: true
             text: "Номер телефона:"
@@ -369,7 +369,7 @@ Rectangle {
         id: phone_number_text
         color: "white"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: medium_font_size
         font.wordSpacing: 5
         font.bold: true
         text: issuing_order_model.phone_number
@@ -394,9 +394,9 @@ Rectangle {
         Text {
 
             id: total_cost_title
-            color: "white"
+            color: small_title_color
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: medium_font_size
             font.wordSpacing: 5
             font.bold: true
             text: "Итого:"
@@ -412,7 +412,7 @@ Rectangle {
         id: total_cost_text
         color: "white"
         font.family: regular_font.name
-        font.pointSize: 15
+        font.pointSize: medium_font_size
         font.wordSpacing: 5
         font.bold: true
         text: issuing_order_model.total_cost/100 + "." + ((issuing_order_model.total_cost%100 < 10) ?
@@ -463,7 +463,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name
-            font.pointSize: 15
+            font.pointSize: medium_font_size
             font.wordSpacing: 5
             font.bold: true
             color: issue_order_button.hovered ? "#c23e00" : "#E2E2E2"

@@ -38,7 +38,7 @@ Rectangle {
 
             id: error_title
             font.family: regular_font.name
-            font.pointSize: 20
+            font.pointSize: big_font_size
             font.wordSpacing: 10
             font.bold: true
             color: title_color
@@ -80,7 +80,7 @@ Rectangle {
 
         id: error_description
         font.family: regular_font.name
-        font.pointSize: 18
+        font.pointSize: medium_font_size
         font.wordSpacing: 10
         font.bold: false
         color: "white"
@@ -131,7 +131,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.family: regular_font.name
-            font.pointSize: 12
+            font.pointSize: medium_font_size
             font.letterSpacing: 5
             font.bold: true
             color: exit_error_button.hovered ? main_window.button_text_hovered_color : main_window.button_text_color
