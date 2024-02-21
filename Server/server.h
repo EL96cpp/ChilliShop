@@ -29,8 +29,6 @@ public:
 
 public slots:
     void RespondToMessage(ClientConnection* client, QByteArray& message_byte_array);
-    void onOrderPrepeared(const int& order_id, const QString& phone_number);
-    void onOrderReceived(const int& order_id, const QString& phone_number);
 
 private:
     void incomingConnection(qintptr handle);

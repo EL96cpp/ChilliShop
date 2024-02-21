@@ -21,17 +21,6 @@ void Server::RespondToMessage(ClientConnection* client, QByteArray &message_byte
 
 }
 
-void Server::onOrderPrepeared(const int &order_id, const QString &phone_number) {
-
-
-
-}
-
-void Server::onOrderReceived(const int &order_id, const QString &phone_number) {
-
-
-
-}
 
 void Server::incomingConnection(qintptr handle) {
 
