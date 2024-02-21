@@ -206,6 +206,224 @@ Rectangle {
 
     }
 
+    Rectangle {
+
+        id: order_id_rectangle
+        width: order_id_title.paintedWidth + 10
+        height: order_id_title.paintedHeight + 10
+        color: "#290A00"
+
+        anchors.top: to_issuing_orders_list_text.bottom
+        anchors.left: issuing_order_form.right
+        anchors.topMargin: 25
+        anchors.leftMargin: 10
+
+        Text {
+
+            id: order_id_title
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 15
+            font.wordSpacing: 5
+            font.bold: true
+            text: "Номер заказа:"
+
+            anchors.centerIn: parent
+
+        }
+
+    }
+
+    Text {
+
+        id: order_id_text
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 15
+        font.wordSpacing: 5
+        font.bold: true
+        text: issuing_order_model.order_id
+
+        anchors.verticalCenter: order_id_rectangle.verticalCenter
+        anchors.left: order_id_rectangle.right
+        anchors.leftMargin: 10
+
+    }
+
+    Rectangle {
+
+        id: receive_code_rectangle
+        width: receive_code_title.paintedWidth + 10
+        height: receive_code_title.paintedHeight + 10
+        color: "#290A00"
+
+        anchors.top: order_id_rectangle.bottom
+        anchors.left: order_id_rectangle.left
+        anchors.topMargin: 10
+
+        Text {
+
+            id: receive_code_title
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 15
+            font.wordSpacing: 5
+            font.bold: true
+            text: "Код получения:"
+
+            anchors.centerIn: parent
+
+        }
+
+    }
+
+    Text {
+
+        id: receive_code_text
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 15
+        font.wordSpacing: 5
+        font.bold: true
+        text: issuing_order_model.receive_code
+
+        anchors.verticalCenter: receive_code_rectangle.verticalCenter
+        anchors.left: receive_code_rectangle.right
+        anchors.leftMargin: 10
+
+    }
+
+
+    Rectangle {
+
+        id: ordered_timestamp_rectangle
+        width: ordered_timestamp_title.paintedWidth + 10
+        height: ordered_timestamp_title.paintedHeight + 10
+        color: "#290A00"
+
+        anchors.left: receive_code_rectangle.left
+        anchors.top: receive_code_rectangle.bottom
+        anchors.topMargin: 10
+
+        Text {
+
+            id: ordered_timestamp_title
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 15
+            font.wordSpacing: 5
+            font.bold: true
+            text: "Дата заказа:"
+
+            anchors.centerIn: parent
+
+        }
+
+    }
+
+    Text {
+
+        id: ordered_timestamp_text
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 15
+        font.wordSpacing: 5
+        font.bold: true
+        text: issuing_order_model.ordered_timestamp
+
+        anchors.verticalCenter: ordered_timestamp_rectangle.verticalCenter
+        anchors.left: ordered_timestamp_rectangle.right
+        anchors.leftMargin: 10
+
+    }
+
+    Rectangle {
+
+        id: phone_number_rectangle
+        width: phone_number_title.paintedWidth + 10
+        height: phone_number_title.paintedHeight + 10
+        color: "#290A00"
+
+        anchors.left: ordered_timestamp_rectangle.left
+        anchors.top: ordered_timestamp_rectangle.bottom
+        anchors.topMargin: 10
+
+        Text {
+
+            id: phone_number_title
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 15
+            font.wordSpacing: 5
+            font.bold: true
+            text: "Номер телефона:"
+
+            anchors.centerIn: parent
+
+        }
+
+    }
+
+    Text {
+
+        id: phone_number_text
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 15
+        font.wordSpacing: 5
+        font.bold: true
+        text: issuing_order_model.phone_number
+
+        anchors.verticalCenter: phone_number_rectangle.verticalCenter
+        anchors.left: phone_number_rectangle.right
+        anchors.leftMargin: 10
+
+    }
+
+    Rectangle {
+
+        id: total_cost_rectangle
+        width: total_cost_title.paintedWidth + 10
+        height: total_cost_title.paintedHeight + 10
+        color: "#290A00"
+
+        anchors.left: phone_number_rectangle.left
+        anchors.top: phone_number_rectangle.bottom
+        anchors.topMargin: 10
+
+        Text {
+
+            id: total_cost_title
+            color: "white"
+            font.family: regular_font.name
+            font.pointSize: 15
+            font.wordSpacing: 5
+            font.bold: true
+            text: "Итого:"
+
+            anchors.centerIn: parent
+
+        }
+
+    }
+
+    Text {
+
+        id: total_cost_text
+        color: "white"
+        font.family: regular_font.name
+        font.pointSize: 15
+        font.wordSpacing: 5
+        font.bold: true
+        text: issuing_order_model.total_cost/100 + "." + ((issuing_order_model.total_cost%100 < 10) ?
+              issuing_order_model.total_cost%100 + "0" : issuing_order_model.total_cost%100) + " ₽"
+
+        anchors.verticalCenter: total_cost_rectangle.verticalCenter
+        anchors.left: total_cost_rectangle.right
+        anchors.leftMargin: 10
+
+    }
+
     Button {
 
         id: issue_order_button
