@@ -18,9 +18,11 @@
 #include "orderidvector.h"
 #include "sqlservice.h"
 
+
 class Server : public QTcpServer
 {
     Q_OBJECT
+    friend class CustomerServerFixture;
 
 public:
     Server();

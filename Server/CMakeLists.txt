@@ -30,8 +30,8 @@ add_executable(Server
   product.h
   employeedata.cpp
   employeedata.h
-
 )
+
 target_link_libraries(Server Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network
                              Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::Gui)
 

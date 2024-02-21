@@ -10,13 +10,15 @@
 #include <QByteArray>
 #include <QDateTime>
 
-class Client : public QObject
-{
+
+class Client : public QObject {
+
     Q_OBJECT
+    friend class CustomerServerFixture;
+
 public:
     Client();
     void ConnectToServer(const QString& address, const quint16& port);
-
 
 signals:
     void addSauceProductToModel(const int& id, const QString& name, const QString& type, const int& price, const int& scoville,
@@ -57,6 +59,7 @@ private:
     void GetActiveOrders();
     void GetReceivedOrders();
     void AddCatalogDataToModels(const QJsonArray& catalog_json_array);
+
 
 private:
     QSslSocket* socket;

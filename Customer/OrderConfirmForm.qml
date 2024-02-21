@@ -70,13 +70,11 @@ Item {
             delegate: Rectangle {
 
                 id: cart_item_delegate
-                width: order_confirm_rectangle.width-20
+                width: order_confirm_rectangle.width
                 height: 120
                 radius: 15
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: "#90A84700"
-                border.width: 1
-                border.color: "#ecbc99"
 
                 Connections {
 

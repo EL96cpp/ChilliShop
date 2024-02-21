@@ -5,7 +5,7 @@ project(ChilliWorld VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Network)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Network Sql)
 
 qt_standard_project_setup()
 
@@ -27,6 +27,7 @@ qt_add_qml_module(appChilliWorld
               OrderConfirmForm.qml DeliveriesForm.qml ReceivedOrdersForm.qml DeliveriesModel.qml
               ReceivedOrdersModel.qml OrderView.qml OrderViewModel.qml OrderCancelForm.qml
 
+
 )
 
 set_target_properties(appChilliWorld PROPERTIES
@@ -38,7 +39,7 @@ set_target_properties(appChilliWorld PROPERTIES
 )
 
 target_link_libraries(appChilliWorld
-    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Quick Qt${QT_VERSION_MAJOR}::Sql
 )
 
 install(TARGETS appChilliWorld

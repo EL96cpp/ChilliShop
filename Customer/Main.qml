@@ -18,7 +18,7 @@ Window {
     property string forms_border_color: "#4e1800"
     property string forms_line_color: "#561b00"
 
-    property string small_title_color: "#ffd59b"
+    property string small_title_color: "#ffe6d6"
     property string big_title_color: "#EC9328"
     property string regular_text_color: "#e2e2e2"
 
