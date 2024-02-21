@@ -149,8 +149,6 @@ Rectangle {
                     workspace_page.showMessage("Ошибка логгирования!", "Завершите обработку зазака!");
 
                 }
-                    //Client.deleteConnection();
-                //Qt.callLater(Qt.quit);
 
             }
 

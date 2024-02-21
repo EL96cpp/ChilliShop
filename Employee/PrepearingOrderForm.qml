@@ -164,8 +164,8 @@ Rectangle {
                 Rectangle {
 
                     id: prepeared_check_box_rectangle
-                    width: 25
-                    height: 25
+                    width: 30
+                    height: 30
                     radius: 5
                     color: "#290A00"
 

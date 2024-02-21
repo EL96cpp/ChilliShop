@@ -322,4 +322,46 @@ Page {
 
     }
 
+    Text {
+
+        id: exit_text
+        color: exit_mouse_area.containsMouse ? "#FF5403" : "white"
+        font.family: regular_font.name
+        font.pointSize: small_font_size
+        font.letterSpacing: 10
+        text: "ВЫХОД"
+
+        anchors.horizontalCenter: login_rectangle.horizontalCenter
+        anchors.top: login_rectangle.bottom
+        anchors.topMargin: 25
+
+        layer.enabled: exit_mouse_area.containsMouse
+        layer.effect: MultiEffect {
+
+            id: exit_text_shadow
+            blurEnabled: true
+            blurMax: 12
+            blur: 0.6
+            saturation: 0.4
+            contrast: 0.2
+
+        }
+
+        MouseArea {
+
+            id: exit_mouse_area
+            hoverEnabled: true
+            anchors.fill: parent
+
+            onClicked: {
+
+                Client.deleteConnection();
+                Qt.callLater(Qt.quit);
+
+            }
+
+        }
+
+    }
+
 }

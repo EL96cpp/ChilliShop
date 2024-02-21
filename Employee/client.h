@@ -16,7 +16,6 @@ class Client : public QObject
     Q_OBJECT
 public:
     explicit Client(QObject *parent = nullptr);
-
     void ConnectToServer(const QString& address, const quint16& port);
 
 signals:
