@@ -4,7 +4,8 @@ ChilliShop is a system for delivery of chilli sauces, seeds and seasonings. It i
 ## <ins>Server</ins>
 Server application works with customer and employee connections. For every new message it creates object (MessageResponder), that runs in separate thread and responds to message. Maximum thread count is set to 10.
 ### Database 
-Server application uses PostgreSQL database. Database 'chilli_shop' includes five tables: active_orders, received_orders, catalog, employees and customers.<br /> To setup database, corresponding tables and fill them with data run next line in terminal: ```  psql -U user_name < InitFile.sql ```
+Server application uses PostgreSQL database. Database 'chilli_shop' includes five tables: active_orders, received_orders, catalog, employees and customers.<br /> To setup database, corresponding tables and fill them with data, run next line in terminal: <br />```  psql -U user_name < InitFile.sql ```
+<br />
 
 ## <ins>Customer</ins> 
 Customer application provides user the ability to view different groups of products, make orders and check their status or cancel them, if needed. 
