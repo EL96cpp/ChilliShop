@@ -354,13 +354,15 @@ html {
     width: 500px;
     height: 600px;
 
+    
     display: flex;
     flex-direction: column;
-    gap: 45px;
-
+    justify-content:safe;
+    gap: 40px;
+    
 }
 
-.login_title {
+.login_title, .register_title {
 
     font-family: "Jost", sans-serif;
     color: aliceblue;
@@ -368,29 +370,33 @@ html {
     text-transform: uppercase;
     text-decoration: underline;
     letter-spacing: 5px;
-    margin: 50px auto;
+    margin: 45px auto;
     font-weight: bold;
 
 }
 
-.login_login_item, .login_password_item {
+
+.login_password_item, .login_login_item, .register_nickname_item,
+.register_password_item, .register_conf_password_item {
 
     margin: 0 auto;
     width: 350px;
 
 }
 
-.login_nickname_title, .login_password_title {
+.login_nickname_title, .login_password_title, .register_nickname_title,
+.register_password_title, .register_conf_password_title {
 
     font-family: "Jost", sans-serif;
     color: #ffeee0;
     font-size: 20px;
     text-transform: 5px;
+    margin-bottom: 10px;
 
 }
 
-
-.login_nickname_input, .login_password_input {
+.login_nickname_input, .login_password_input, .register_nickname_input, 
+.register_password_input, .register_conf_password_input {
 
     font-family: "Jost", sans-serif;
     font-size: 18px;
@@ -409,7 +415,7 @@ html {
     border-width: 1px;
     border-color: #ff6d29;
     border-radius: 10px;
-    margin: 0 auto;
+    margin: 0px auto;
 
     font-family: "Jost", sans-serif;
     color:#100B07;
@@ -419,16 +425,34 @@ html {
 
 }
 
-.login_button:hover {
+.login_button:hover, .register_button:hover {
 
     background-color: #e04700;
     box-shadow: 1px 1px 10px 2px #b15000,
                 1px 1px 10px 2px #b15000,
                 1px 1px 10px 2px #b15000,
                 1px 1px 10px 2px #b15000;
-
     color:aliceblue;
     text-shadow: aliceblue 1px 1px 10px;
+
+}
+
+.register_button {
+
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #f9c0a6;
+    border-width: 1px;
+    border-color: #ff6d29;
+    border-radius: 10px;
+    margin: 15px auto;
+
+    font-family: "Jost", sans-serif;
+    color:#100B07;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 4px;
 
 }
 
@@ -449,4 +473,21 @@ html {
     text-shadow: #8d4000 1px 1px 3px,
                  #552600 1px 1px 4px,
                  
+}
+
+.register_form {
+
+    margin: 100px auto;
+    background-color: #100B07;
+    border-color: #802900;
+    border-width: 3px;
+    border-radius: 10px;
+    width: 500px;
+    height: 700px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: safe;
+    gap: 35px;
+
 }
