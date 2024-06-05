@@ -1,0 +1,306 @@
+html {
+    box-sizing: border-box;
+    background-color: #feeae1;
+}
+
+*, *::after, *::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+.areas_wrapper {
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.left_area {
+
+    float: left
+
+}
+
+.main_area {
+
+    float: left
+
+}
+
+.right_area {
+
+    float: left
+
+}
+
+.main_title {
+
+    color:#ffeee0;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 90px;
+    letter-spacing: 7px;
+    text-shadow: #f14c00 7px 7px 0px;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+
+}
+
+.main_wrapper {
+
+    background-color: #100B07;
+    width: 100%;    
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.filters_wrapper, .cart_wrapper {
+
+    background-color: #100B07;
+    border-color: #802900;
+    border-width: 3px;
+    border-radius: 10px;
+    width: 400px;
+    height: 500px;
+    margin: 10px 40px 0 40px;
+    position: sticky;
+    top: 10px;
+
+}
+
+.filters_title, .cart_title {
+
+    color:#ffeee0;
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-align: center;
+    text-decoration: underline;
+    vertical-align: top;
+    padding-top: 20px;
+    
+}
+
+.clear_filters_btn, .make_order_btn {
+
+    width: 120px;
+    height: 40px;
+    background-color: #922e00;
+    border-width: 1px;
+    border-color: #ffb491;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: block;
+
+    font-family: "Jost", sans-serif;
+    color:#100B07;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+
+}
+
+.clear_filters_btn:hover, .make_order_btn:hover {
+
+    background-color: #e04700;
+    box-shadow: 1px 1px 20px 3px #552600,
+                1px 1px 20px 3px #5b2900,
+                1px 1px 20px 3px #8d4000,
+                1px 1px 20px 3px #502400;
+
+    color:aliceblue;
+    text-shadow: aliceblue 1px 1px 10px;
+
+}
+
+.filters_element {
+
+    max-width: 300px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+}
+
+.filters_text {
+
+    color: aliceblue;
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+
+}
+
+.filters_checkbox {
+
+    transform: scale(1.5);
+
+}
+
+.price_filter_title {
+
+    color:aliceblue;
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+
+}
+
+.price_from_label {
+
+    color: aliceblue;
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+
+}
+
+.price_to_label {
+
+    color: aliceblue;
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+
+}
+
+.filter_price_input {
+
+    max-width: 100px;
+
+}
+
+.price_limit {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.container {
+
+    width: 100%;
+    max-width: 1000px;
+    max-height: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+
+}
+
+.container_cards {
+
+    display: grid;
+    grid-column-gap: 70px;
+    grid-row-gap: 10px;
+    width: 100%;
+    grid-template: repeat(3, 1fr) / repeat(2, 2fr);
+    justify-content: center;
+    justify-items: center;
+    overflow: scroll;
+
+}
+
+.card {
+
+    margin: 0 auto;
+    vertical-align: center;
+    margin-top: 10px;
+    width: 400px;
+    min-height: 590px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border-radius: 7px;
+    position: relative;
+    transition: 0.2s;
+    background-color: #3e1f00;
+
+}
+
+.card_button {
+
+    width: 120px;
+    height: 35px;
+    background-color: #f9c0a6;
+    border-width: 1px;
+    border-color: #ff6d29;
+    border-radius: 10px;
+
+    font-family: "Jost", sans-serif;
+    color:#100B07;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 15px;
+    margin-bottom: 30px;
+
+}
+
+.card_button:hover {
+
+    background-color: #e04700;
+    box-shadow: 1px 1px 10px 2px #b15000,
+                1px 1px 10px 2px #b15000,
+                1px 1px 10px 2px #b15000,
+                1px 1px 10px 2px #b15000;
+
+    color:aliceblue;
+    text-shadow: aliceblue 1px 1px 10px;
+
+}
+
+.card_price_no_discount, .card_price_discount {
+
+    font-family: "Jost", sans-serif;
+    color: aliceblue;
+    padding-left: 15px;
+
+}
+
+.card_price_no_discount {
+
+    font-size: 16px;
+    text-decoration: line-through;
+
+}
+
+.card_price_discount {
+
+    font-size: 18px;
+    
+}
+
+.card_title {
+
+    text-decoration: underline;
+    font-family: "Jost", sans-serif;
+    color: #f14c00;
+    font-size: 24px;
+    padding-left: 15px;
+
+}
+
+.card_scoville_value {
+
+    font-family: "Jost", sans-serif;
+    color: #ffeee0;
+    font-size: 18px;
+    padding-left: 15px;
+
+}
+
+.card_image {
+
+    max-width: 400px;
+
+}
+

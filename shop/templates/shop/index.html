@@ -1,0 +1,123 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block left_area %}
+
+<div class="filters_wrapper">
+    <div class="filters_title">Фильтры</div>
+    <ul class="filters_list">
+        <li class="filters_element"><div class="filters_text">Carolina Reaper</div><input type="checkbox" class="filters_checkbox"></li>
+        <li class="filters_element"><div class="filters_text">Scorpion Moruga</div><input type="checkbox" class="filters_checkbox"></li>
+        <li class="filters_element"><div class="filters_text">Habanero</div><input type="checkbox" class="filters_checkbox"></li>
+        <li class="filters_element">
+            <div class="price_filter_title">Цена</div>
+            <div class="price_limit">
+                <input type="text" class="filter_price_input">
+                <div class="price_from_label">От</div>
+            </div>
+            <div class="price_limit">
+                <input type="text" class="filter_price_input">
+                <div class="price_to_label">До</div>
+            </div>
+        </li>
+    </ul>
+    <button class="clear_filters_btn">Очистить</button>
+</div>
+
+{% endblock left_area %}
+
+{% block main_area %}
+
+<div class="container">
+    <div class="container_cards">
+
+        <div class="card">
+            <div class="card_top">
+                <image class="card_image" src="{% static 'shop/images/carolina_reaper_red.jpg' %}"></image>
+            </div>
+            <div class="card_bottom">
+                <div class="card_prices">
+                    <div class="card_price_discount">420 ₽</div>
+                    <div class="card_price_no_discount">550 ₽</div>
+                </div>
+                <div class="card_title">Carolina Reaper red, 5 seeds</div>
+                <div class="card_scoville_value">2.200.000 shu</div>
+            </div>
+            <button class="card_button">В корзину</button>
+        </div>      
+        
+        <div class="card">
+            <div class="card_top">
+                <image class="card_image" src="{% static 'shop/images/carolina_reaper_orange.jpg' %}"></image>
+            </div>
+            <div class="card_bottom">
+                <div class="card_prices">
+                    <div class="card_price_discount">460 ₽</div>
+                    <div class="card_price_no_discount">620 ₽</div>
+                </div>
+                <div class="card_title">Carolina Reaper orange, 5 seeds</div>
+                <div class="card_scoville_value">2.200.000 shu</div>
+            </div>
+            <button class="card_button">В корзину</button>
+        </div>        
+
+        <div class="card">
+            <div class="card_top">
+                <image class="card_image" src="{% static 'shop/images/habanero_chocolate.jpg' %}"></image>
+            </div>
+            <div class="card_bottom">
+                <div class="card_prices">
+                    <div class="card_price_discount">320 ₽</div>
+                    <div class="card_price_no_discount">420 ₽</div>
+                </div>
+                <div class="card_title">Habanero Chocolate, 5 seeds</div>
+                <div class="card_scoville_value">400.000 shu</div>
+            </div>
+            <button class="card_button">В корзину</button>
+        </div>  
+
+        <div class="card">
+            <div class="card_top">
+                <image class="card_image" src="{% static 'shop/images/carolina_reaper_peach.jpg' %}"></image>
+            </div>
+            <div class="card_bottom">
+                <div class="card_prices">
+                    <div class="card_price_discount">520 ₽</div>
+                    <div class="card_price_no_discount">580 ₽</div>
+                </div>
+                <div class="card_title">Habanero Peach, 5 seeds</div>
+                <div class="card_scoville_value">2.200.000 shu</div>
+            </div>
+            <button class="card_button">В корзину</button>
+        </div>  
+
+        <div class="card">
+            <div class="card_top">
+                <image class="card_image" src="{% static 'shop/images/scorpion_red.jpg' %}"></image>
+            </div>
+            <div class="card_bottom">
+                <div class="card_prices">
+                    <div class="card_price_discount">540 ₽</div>
+                    <div class="card_price_no_discount">590 ₽</div>
+                </div>
+                <div class="card_title">Scorpion Moruga red, 5 seeds</div>
+                <div class="card_scoville_value">2.200.000 shu</div>
+            </div>
+            <button class="card_button">В корзину</button>
+        </div>  
+
+
+    </div>
+</div>         
+
+{% endblock main_area %}
+
+{% block right_area %}
+
+<div class="cart_wrapper">
+    <div class="cart_title">Корзина</div>
+    <button class="make_order_btn">Заказать</button>
+</div>
+
+{% endblock right_area %}
