@@ -2,6 +2,12 @@
 
 {% load static %}
 
+{% block header_right_area %}
+
+<a href="{% url 'login' %}" class="profile_ref">Профиль</a>
+
+{% endblock header_right_area %}
+
 {% block left_area %}
 
 <div class="filters_wrapper">
