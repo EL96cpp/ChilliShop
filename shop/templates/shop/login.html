@@ -1,6 +1,27 @@
 {% extends 'shop/base.html'%}
 
-{% block content %}
-<h1>{{title}}</h1>
-<ul>{{menu_title}}</ul>
-{% endblock %}
+{% block header_right_area %}
+
+<a href="{% url 'home' %}" class="return_to_home_ref">На главную</a>
+
+{% endblock header_right_area %}
+
+{% block main_area %}
+
+<div class="login_wrapper">
+    <div class="login_form">
+        <div class="login_title">Авторизация</div>
+        <div class="login_login_item">
+            <div class="login_nickname_title">Логин</div>
+            <input type="text" class="login_nickname_input">
+        </div>
+        <div class="login_password_item">
+            <div class="login_password_title">Пароль</div>
+            <input type="password" class="login_password_input">
+        </div>
+        <button class="login_button">Вход</button>
+        <a href="{% url 'register' %}" class="register_ref">Регистрация</a>
+    </div>
+</div>
+
+{% endblock main_area %}

@@ -1,6 +1,6 @@
 html {
     box-sizing: border-box;
-    background-color: #feeae1;
+    background-color: #fff1e7;
 }
 
 *, *::after, *::before {
@@ -46,8 +46,7 @@ html {
 .profile_ref {
 
     text-decoration: none;
-    text-transform: uppercase;
-    color: #ffeee0;
+    color: aliceblue;
     font-family: "Jost", sans-serif;
     font-size: 32px;
     font-weight: 400;
@@ -55,7 +54,18 @@ html {
 
 }
 
-.profile_ref:hover {
+.return_to_home_ref {
+
+    text-decoration: none;
+    color: aliceblue;
+    font-family: "Jost", sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 2px;
+
+}
+
+.profile_ref:hover, .return_to_home_ref:hover {
 
     color: #e04700;
     text-shadow: #8d4000 1px 1px 3px,
@@ -334,3 +344,109 @@ html {
 
 }
 
+.login_form {
+
+    margin: 100px auto;
+    background-color: #100B07;
+    border-color: #802900;
+    border-width: 3px;
+    border-radius: 10px;
+    width: 500px;
+    height: 600px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+
+}
+
+.login_title {
+
+    font-family: "Jost", sans-serif;
+    color: aliceblue;
+    font-size: 42px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    letter-spacing: 5px;
+    margin: 50px auto;
+    font-weight: bold;
+
+}
+
+.login_login_item, .login_password_item {
+
+    margin: 0 auto;
+    width: 350px;
+
+}
+
+.login_nickname_title, .login_password_title {
+
+    font-family: "Jost", sans-serif;
+    color: #ffeee0;
+    font-size: 20px;
+    text-transform: 5px;
+
+}
+
+
+.login_nickname_input, .login_password_input {
+
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+    width: 350px;
+    height: 30px;
+    margin: 0 auto;
+
+}
+
+.login_button {
+
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #f9c0a6;
+    border-width: 1px;
+    border-color: #ff6d29;
+    border-radius: 10px;
+    margin: 0 auto;
+
+    font-family: "Jost", sans-serif;
+    color:#100B07;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 4px;
+
+}
+
+.login_button:hover {
+
+    background-color: #e04700;
+    box-shadow: 1px 1px 10px 2px #b15000,
+                1px 1px 10px 2px #b15000,
+                1px 1px 10px 2px #b15000,
+                1px 1px 10px 2px #b15000;
+
+    color:aliceblue;
+    text-shadow: aliceblue 1px 1px 10px;
+
+}
+
+.register_ref {
+
+    text-decoration: none;
+    color: aliceblue;
+    font-family: "Jost", sans-serif;
+    font-size: 20px;
+    letter-spacing: 4px;
+    margin: 0 auto;
+
+}
+
+.register_ref:hover {
+
+    color: #e04700;
+    text-shadow: #8d4000 1px 1px 3px,
+                 #552600 1px 1px 4px,
+                 
+}
