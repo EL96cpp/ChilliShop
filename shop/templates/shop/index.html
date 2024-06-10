@@ -10,12 +10,12 @@
 
 {% block left_area %}
 
-<div class="filters_wrapper">
+<form class="filters_form" method="get">
     <div class="filters_title">Фильтры</div>
     <ul class="filters_list">
         {% for pepper in pepper_list %}
         <li class="filters_element"><div class="filters_text">{{pepper.pepper_type}}</div>
-            <input type="checkbox" class="filters_checkbox" data-pepper_name = {{pepper.pepper_type}} onclick="pepperFilterClicked(pepper_name)"></li>
+            <input type="checkbox" class="filters_checkbox" name = {{pepper.pepper_type}} ></li>
         {% endfor %}
         <li class="filters_element">
             <div class="price_filter_title">Цена</div>
@@ -29,8 +29,9 @@
             </div>
         </li>
     </ul>
-    <button id="clear_filters_btn" class="index_btn" onclick="clearFilters()">Очистить</button>
-</div>
+    <button id="add_filters_btn" class="index_btn" onclick="applyFilters()">Применить</button>
+    <div id="clear_filters_text" onclick="clearFilters()">Очистить фильтры</div>
+</form>
 
 {% endblock left_area %}
 
@@ -48,7 +49,7 @@
                     <span class="card_discount">-{{pepper.discount}}%</span>
                 </div>
                 {% endif %}
-                <image class="card_image" src="{% static 'shop/images/carolina_reaper_orange.jpg' %}"></image>
+                <image class="card_image" src="{{pepper.image.url}}" alt={{pepper.pepper_type}}></image>
             </div>
             <div class="card_bottom">
                 <div class="card_prices">
@@ -57,7 +58,7 @@
                     <div class="card_price_no_discount">{{pepper.price_no_discount}} ₽</div>
                     {% endif %}
                 </div>
-                {% with pepper.pepper_type|add:' '|add:pepper.pepper_color|add:' '|add:', '|add:pepper.number_of_seeds|add:' seeds' as name %}
+                {% with pepper.pepper_type|add:' '|add:pepper.pepper_color|add:', '|add:pepper.number_of_seeds|add:' seeds' as name %}
                     <div class="card_title">{{name}}</div>
                     <div class="card_scoville_value">2.200.000 shu</div>
                 </div>
@@ -74,9 +75,9 @@
 
 {% block right_area %}
 
-<div class="cart_wrapper">
+<form class="cart_form">
     <div class="cart_title">Корзина</div>
     <button id="make_order_btn" class="index_btn">Заказать</button>
-</div>
+</form>
 
 {% endblock right_area %}

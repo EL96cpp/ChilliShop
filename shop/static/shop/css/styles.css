@@ -1,12 +1,18 @@
 html {
     box-sizing: border-box;
-    background-color: #fff1e7;
 }
 
 *, *::after, *::before {
     box-sizing: inherit;
     margin: 0;
     padding: 0;
+}
+
+body {
+
+    background-image: url('../images/background3.jpg');
+    background-repeat: repeat-y;
+    height: 100%;
 }
 
 .areas_wrapper {
@@ -99,7 +105,7 @@ html {
 
 }
 
-.filters_wrapper, .cart_wrapper {
+.filters_form, .cart_form {
 
     background-color: #100B07;
     border-color: #802900;
@@ -137,7 +143,7 @@ html {
     border-color: #ffb491;
     border-radius: 10px;
     display: block;
-    margin: 40px auto;
+    margin: 20px auto;
 
     font-family: "Jost", sans-serif;
     color:#100B07;
@@ -154,12 +160,32 @@ html {
                 1px 1px 20px 3px #5b2900,
                 1px 1px 20px 3px #8d4000,
                 1px 1px 20px 3px #502400;
-
     color:aliceblue;
     text-shadow: aliceblue 1px 1px 10px;
 
 }
 
+#clear_filters_text {
+
+    display: block;
+    margin: 20px auto;
+    width: fit-content;
+    text-transform: uppercase;
+    color: aliceblue;
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+
+}
+
+#clear_filters_text:hover {
+
+    color: #e04700;
+    text-shadow: #8d4000 1px 1px 3px,
+                 #552600 1px 1px 4px,
+
+}
 
 .filters_element {
 

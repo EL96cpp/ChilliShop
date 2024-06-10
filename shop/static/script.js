@@ -14,10 +14,11 @@ function pepperFilterClicked(pepper_name) {
 
 function clearFilters() {
 
-    console.log($("card_image").attr('src'))
+    console.log("Clear filters")
 
-    console.log("Clear filters");
-    console.log($(".filters_checkbox").is(':checked'));
-    console.log($(".filters_element").each(".filters_checkbox").is(":checked"));
+}
+
+function applyFilters() {
+
 
 }
