@@ -106,8 +106,9 @@ html {
     border-width: 3px;
     border-radius: 10px;
     width: 400px;
-    height: 500px;
-    margin: 10px 40px 0 40px;
+    max-height: 100%;
+    margin: 10px 40px 10px 40px;
+    padding: 10px;
     position: sticky;
     top: 10px;
 
@@ -127,7 +128,7 @@ html {
     
 }
 
-.clear_filters_btn, .make_order_btn {
+.index_btn {
 
     width: 120px;
     height: 40px;
@@ -135,8 +136,8 @@ html {
     border-width: 1px;
     border-color: #ffb491;
     border-radius: 10px;
-    margin: 0 auto;
     display: block;
+    margin: 40px auto;
 
     font-family: "Jost", sans-serif;
     color:#100B07;
@@ -146,7 +147,7 @@ html {
 
 }
 
-.clear_filters_btn:hover, .make_order_btn:hover {
+.index_btn:hover {
 
     background-color: #e04700;
     box-shadow: 1px 1px 20px 3px #552600,
@@ -158,6 +159,7 @@ html {
     text-shadow: aliceblue 1px 1px 10px;
 
 }
+
 
 .filters_element {
 
@@ -219,6 +221,14 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+}
+
+.price_filter_element {
+
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
 
 }
 
@@ -298,25 +308,58 @@ html {
 
 }
 
-.card_price_no_discount, .card_price_discount {
+.card_discount_wrapper {
+
+    width: 70px;
+    height: 30px;
+
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background-color:#e04700;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: #501900;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.card_discount {
 
     font-family: "Jost", sans-serif;
     color: aliceblue;
+    font-size: 18px;
+    margin: 0 auto;
+
+}
+
+.card_prices {
+
+    display: flex;
+    align-items: center;
+
+}
+
+.card_final_price {
+
+    font-family: "Jost", sans-serif;
+    color: aliceblue;
+    font-size: 18px;
     padding-left: 15px;
 
 }
 
 .card_price_no_discount {
 
+    font-family: "Jost", sans-serif;
+    color: aliceblue;
     font-size: 16px;
     text-decoration: line-through;
+    padding-left: 15px;
 
-}
-
-.card_price_discount {
-
-    font-size: 18px;
-    
 }
 
 .card_title {
