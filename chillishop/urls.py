@@ -20,10 +20,12 @@ from chillishop import settings
 from django.contrib import admin
 from django.urls import path, include
 from shop.views import *
+from users.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("shop.urls")),
+    path('users/', include('users.urls'))
 ]
 
 if settings.DEBUG:

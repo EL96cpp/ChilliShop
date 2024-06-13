@@ -9,7 +9,7 @@
 {% block main_area %}
 
 <div class="register_wrapper">
-    <div class="register_form">
+    <form class="register_form">
         <div class="register_title">Регистрация</div>
         <div class="register_nickname_item">
             <div class="register_nickname_title">Логин</div>
@@ -24,8 +24,8 @@
             <input type="password" class="register_conf_password_input">
         </div>
         <button class="register_button">Регистрация</button>
-        <a href="{% url 'login' %}" class="register_ref">Авторизация</a>
-    </div>
+        <a href="{% url 'users:login' %}" class="register_ref">Авторизация</a>
+    </form>
 </div>
 
 {% endblock main_area %}
