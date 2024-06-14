@@ -9,23 +9,32 @@
 {% block main_area %}
 
 <div class="register_wrapper">
-    <form class="register_form">
-        <div class="register_title">Регистрация</div>
-        <div class="register_nickname_item">
-            <div class="register_nickname_title">Логин</div>
-            <input type="text" class="register_nickname_input">
+    <form class="register_form" method="POST">
+        {% csrf_token %}
+
+        <div class="register_main_title">Регистрация</div>
+        <div class="register_item">
+            <div class="register_title">Имя</div>
+            {{ form.username }}
         </div>
-        <div class="register_password_item">
-            <div class="register_password_title">Пароль</div>
-            <input type="password" class="register_password_input">
+        <div class="register_item">
+            <div class="register_title">Почта</div>
+            {{ form.email }}
         </div>
-        <div class="register_conf_password_item">
-            <div class="register_conf_password_title">Подтвердите пароль</div>
-            <input type="password" class="register_conf_password_input">
+        <div class="register_item">
+            <div class="register_title">Пароль</div>
+            {{ form.password1 }}
         </div>
-        <button class="register_button">Регистрация</button>
+        <div class="register_item">
+            <div class="register_title">Подтверждение пароля</div>
+            {{ form.password2 }}
+        </div>
+        <button class="register_button" type="submit">Регистрация</button>
         <a href="{% url 'users:login' %}" class="register_ref">Авторизация</a>
+
     </form>
 </div>
+
+{{form.errors}}
 
 {% endblock main_area %}

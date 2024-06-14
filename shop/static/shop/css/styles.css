@@ -413,25 +413,7 @@ body {
 
 }
 
-.login_form {
-
-    margin: 100px auto;
-    background-color: #100B07;
-    border-color: #802900;
-    border-width: 3px;
-    border-radius: 10px;
-    width: 500px;
-    height: 600px;
-
-    
-    display: flex;
-    flex-direction: column;
-    justify-content:safe;
-    gap: 40px;
-    
-}
-
-.login_title, .register_title {
+.login_main_title, .register_main_title {
 
     font-family: "Jost", sans-serif;
     color: aliceblue;
@@ -444,17 +426,23 @@ body {
 
 }
 
-
-.login_password_item, .login_login_item, .register_nickname_item,
-.register_password_item, .register_conf_password_item {
+.login_item, .register_item {
 
     margin: 0 auto;
     width: 350px;
 
 }
 
-.login_nickname_title, .login_password_title, .register_nickname_title,
-.register_password_title, .register_conf_password_title {
+.form_label {
+
+    font-family: "Jost", sans-serif;
+    color: #ffeee0;
+    font-size: 20px;
+    text-transform: 5px;
+
+}
+
+.login_title, .register_title {
 
     font-family: "Jost", sans-serif;
     color: #ffeee0;
@@ -464,8 +452,7 @@ body {
 
 }
 
-.login_nickname_input, .login_password_input, .register_nickname_input, 
-.register_password_input, .register_conf_password_input {
+.login_input, .register_input {
 
     font-family: "Jost", sans-serif;
     font-size: 18px;
@@ -515,7 +502,7 @@ body {
     border-width: 1px;
     border-color: #ff6d29;
     border-radius: 10px;
-    margin: 15px auto;
+    margin: 0px auto;
 
     font-family: "Jost", sans-serif;
     color:#100B07;
@@ -533,6 +520,7 @@ body {
     font-size: 20px;
     letter-spacing: 4px;
     margin: 0 auto;
+    margin-bottom: 30px;
 
 }
 
@@ -544,19 +532,21 @@ body {
                  
 }
 
-.register_form {
+.login_form, .register_form {
 
-    margin: 100px auto;
     background-color: #100B07;
     border-color: #802900;
     border-width: 3px;
     border-radius: 10px;
     width: 500px;
-    height: 700px;
+    max-height: 100%;
+    margin: 40px 40px 10px 40px;
+    padding: 10px;
+    position: sticky;
+    top: 10px;
 
     display: flex;
     flex-direction: column;
-    justify-content: safe;
-    gap: 35px;
+    gap:25px;
 
 }
