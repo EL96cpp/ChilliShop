@@ -10,26 +10,34 @@
 
 {% block left_area %}
 
-<form class="filters_form" method="get">
+<form class="filters_form" action="{% url 'home' %}" method="get">
     <div class="filters_title">Фильтры</div>
     <ul class="filters_list">
-        {% for pepper in pepper_list %}
-        <li class="filters_element"><div class="filters_text">{{pepper.pepper_type}}</div>
-            <input type="checkbox" class="filters_checkbox" name = {{pepper.pepper_type}} ></li>
-        {% endfor %}
+        <li class="filters_element"><div class="filters_text">Товары со скидкой</div>
+            <input type="checkbox" class="filters_checkbox" name="only_sales" value="on">
+        </li>
+        <li class="filters_element"><div class="filters_text">По убыванию цены</div>
+            <input type="radio" class="filters_radio" name="order_by" value="-price">
+        </li>
+        <li class="filters_element"><div class="filters_text">По возрастанию цены</div>
+            <input type="radio" class="filters_radio" name="order_by" value="price">
+        </li>
+        <li class="filters_element"><div class="filters_text">По умолчанию</div>
+            <input type="radio" class="filters_radio" name="order_by" value="default">
+        </li>
         <li class="filters_element">
             <div class="price_filter_title">Цена</div>
             <div class="price_limit">
-                <input type="text" class="filter_price_input">
+                <input type="text" class="filter_price_input" name="lower_price_limit">
                 <div class="price_from_label">От</div>
             </div>
             <div class="price_limit">
-                <input type="text" class="filter_price_input">
+                <input type="text" class="filter_price_input" name="upper_price_limit">
                 <div class="price_to_label">До</div>
             </div>
         </li>
     </ul>
-    <button id="add_filters_btn" class="index_btn" onclick="applyFilters()">Применить</button>
+    <button id="add_filters_btn" type="submit" class="index_btn" onclick="applyFilters()">Применить</button>
     <div id="clear_filters_text" onclick="clearFilters()">Очистить фильтры</div>
 </form>
 
@@ -53,7 +61,7 @@
             </div>
             <div class="card_bottom">
                 <div class="card_prices">
-                    <div class="card_final_price">{{pepper.get_final_price}} ₽</div>
+                    <div class="card_final_price">{{pepper.final_price}} ₽</div>
                     {% if pepper.discount %}
                     <div class="card_price_no_discount">{{pepper.price_no_discount}} ₽</div>
                     {% endif %}

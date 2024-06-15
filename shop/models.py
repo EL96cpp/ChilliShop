@@ -10,7 +10,7 @@ class Product(models.Model):
     scoville_value = models.IntegerField(max_length=8, null=False, verbose_name='Шкала Сковилла')
     discount = models.IntegerField(null=False, verbose_name='Скидка')
 
-    def get_final_price(self):
+    def final_price(self):
         if self.discount:
             print(round(self.price_no_discount*self.discount/100))
             return round(self.price_no_discount - (self.price_no_discount*self.discount/100))
