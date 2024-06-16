@@ -5,3 +5,36 @@
 <a href="{% url 'home' %}" class="return_to_home_ref">На главную</a>
 
 {% endblock header_right_area %}
+
+<div class="profile_header"></div>
+
+
+{% block left_area %}
+
+    <form class="user_data_form">
+        <span class="user_data_title">Профиль</span>
+        <ul class="user_data_list">
+            <li class="user_data_element">
+                <div class="user_data_label">Логин</div>
+                <div class="user_data_value">{{ user.get_username }}</div>
+            </li>
+            <li class="user_data_element">
+                <div class="user_data_label">Почта</div>
+                <div class="user_data_value">{{ user.email }}</div>
+            </li>
+        </ul>
+        <a href="{% url 'users:logout' %}" class="logout_ref">Выйти</a>
+        <button class="index_btn" href="{% url 'users:logout' %}">Выйти</button>
+    </form>
+
+{% endblock left_area %}
+
+{% block main_area %}
+
+<form action="" class="make_order_form">
+    <div class="make_order_title">Оформление заказа</div>
+    
+
+</form>
+
+{% endblock main_area %}

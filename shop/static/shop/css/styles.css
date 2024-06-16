@@ -120,7 +120,8 @@ body {
 
 }
 
-.filters_title, .cart_title {
+
+.filters_title, .cart_title, .user_data_title {
 
     color:#ffeee0;
     font-family: "Jost", sans-serif;
@@ -197,13 +198,31 @@ body {
 
 }
 
-.filters_text {
+.user_data_element {
+
+    max-width: 200px;
+    margin: 40px auto;
+    display: flex;
+    justify-content:left;
+    gap: 15px;
+
+}
+
+.filters_text, .user_data_value {
 
     color: aliceblue;
     font-family: "Jost", sans-serif;
     font-size: 18px;
     letter-spacing: 2px;
 
+}
+
+.user_data_label {
+
+    color:#b15000;
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
 }
 
 .filters_checkbox {
@@ -250,7 +269,7 @@ body {
 
 }
 
-.price_filter_element {
+.price_filter_element, .user_data_element {
 
     display: flex;
     margin: 0 auto;
@@ -548,5 +567,36 @@ body {
     display: flex;
     flex-direction: column;
     gap:25px;
+
+}
+
+.user_data_form {
+
+    background-color: #100B07;
+    border-color: #802900;
+    border-width: 3px;
+    border-radius: 10px;
+    width: 250px;
+    max-height: 100%;
+    margin: 40px 40px 10px 40px;
+    padding: 10px;
+    position: sticky;
+    top: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap:25px;
+
+}
+
+.profile_header {
+
+    background-color: #632d00;
+    width: 100%;    
+    height: 150px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
