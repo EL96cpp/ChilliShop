@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
 class Product(models.Model):
     pepper_type = models.CharField(max_length=255, null=False, verbose_name='Тип перца')
     pepper_color = models.CharField(max_length=20, null=False, verbose_name='Цвет перца')
@@ -14,6 +14,11 @@ class Product(models.Model):
         if self.discount:
             print(round(self.price_no_discount*self.discount/100))
             return round(self.price_no_discount - (self.price_no_discount*self.discount/100))
+        
         return self.price_no_discount
+    
+
+    def __str__(self) -> str:
+        return self.pepper_type + " " + self.pepper_color + ", " + self.number_of_seeds
 
 

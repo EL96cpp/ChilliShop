@@ -531,7 +531,7 @@ body {
 
 }
 
-.register_ref {
+.register_ref, .logout_ref {
 
     text-decoration: none;
     color: aliceblue;
@@ -543,7 +543,7 @@ body {
 
 }
 
-.register_ref:hover {
+.register_ref:hover, .logout_ref:hover {
 
     color: #e04700;
     text-shadow: #8d4000 1px 1px 3px,

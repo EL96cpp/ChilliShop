@@ -41,3 +41,7 @@ def logout_user(request):
     auth.logout(request)
     print("Logout call!!!")
     return redirect('home')
+
+
+def order_confirmation(request):
+    pass
