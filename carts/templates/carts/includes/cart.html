@@ -1,1 +1,9 @@
 {% load static %}
+
+{% for cart in carts %}
+
+<div class="cart_product_wrapper">
+    <div class="cart_product_title">{{ cart.product }}</div>
+</div>
+
+{% endfor %}

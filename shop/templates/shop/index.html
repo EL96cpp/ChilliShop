@@ -73,14 +73,14 @@
                     <div class="card_price_no_discount">{{pepper.price_no_discount}} ₽</div>
                     {% endif %}
                 </div>
-                {% with pepper.pepper_type|add:' '|add:pepper.pepper_color|add:', '|add:pepper.number_of_seeds|add:' seeds' as name %}
-                    <div class="card_title">{{name}}</div>
+                    <div class="card_title">{{pepper}}</div>
                     <div class="card_scoville_value">2.200.000 shu</div>
                 </div>
-            <button class="card_button">В корзину</button>
+            <button class="btn card_button" href='{% url "cart:cart_add" %}' data-product-id="{{pepper.pk}}">
+                {% csrf_token %}
+                В корзину</button>
         </div>      
         
-        {% endwith %}
         {% endfor %}
 
     </div>
@@ -92,6 +92,9 @@
 
 <form class="cart_form">
     <div class="cart_title">Корзина</div>
+        <div id="cart-items-container">
+            {% include "carts/includes/cart.html" %}
+        </div>
     <button id="make_order_btn" class="index_btn">Заказать</button>
 </form>
 

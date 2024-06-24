@@ -7,7 +7,7 @@ class Product(models.Model):
     number_of_seeds = models.CharField(max_length=2, null=False, verbose_name='Число семян')
     image = models.ImageField(upload_to=f'shop/images/', verbose_name='Изображение')
     price_no_discount = models.IntegerField(null=False, verbose_name='Цена без скидки')
-    scoville_value = models.IntegerField(max_length=8, null=False, verbose_name='Шкала Сковилла')
+    scoville_value = models.IntegerField(null=False, verbose_name='Шкала Сковилла')
     discount = models.IntegerField(null=False, verbose_name='Скидка')
 
     def final_price(self):
