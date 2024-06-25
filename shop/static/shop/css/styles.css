@@ -600,3 +600,90 @@ body {
     align-items: center;
 
 }
+
+.cart_product_wrapper {
+
+    max-width: 90%;
+    max-height: 100%;
+    border-radius: 5px;
+    background-color: #3e1f00;
+    margin: 0 auto;
+
+}
+
+.cart_product_title {
+
+    font-family: "Jost", sans-serif;
+    color:#ff6d29;
+    font-size: 20px;
+    text-transform: 5px;
+    text-decoration: underline;
+    margin-top: 10px;
+    margin-left: 5px;
+
+}
+
+.cart_top_row, .cart_bottom_row {
+
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.cart_quantity_row {
+
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+}
+
+.cart_quantity_value {
+
+    color: #ffeee0;
+
+}
+
+#cart_decrease_button, #cart_increase_button {
+
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    background-color: #100B07;
+    color:aliceblue;
+    border: none;
+
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+    
+}
+
+#cart_decrease_button:hover, #cart_increase_button:hover {
+
+    background-color:#b15000;
+    color:#100B07;
+
+}
+
+.cart_product_total {
+
+    font-family: "Jost", sans-serif;
+    color: #ffeee0;
+    font-size: 18px;
+    text-transform: 5px;
+    margin-right: 5px;
+
+}
+
+.cart_main_quantity, .cart_main_total {
+
+    font-family: "Jost", sans-serif;
+    color: #ffeee0;
+    font-size: 18px;
+
+}
