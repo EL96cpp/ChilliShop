@@ -3,13 +3,20 @@
 {% for cart in carts %}
 
 <div class="cart_product_wrapper">
-    <div class="cart_product_title">{{ cart.product }}</div>
     <div class="cart_top_row">
+        <div class="cart_product_title">{{ cart.product }}</div>
+        <div href='{% url "cart:cart_remove" %}' class="remove_from_cart" data-cart-id="{{ cart.product.pk }}">
+            {% csrf_token %}
+            <svg id="cart_trash_svg" width="25" height="25" viewbox="0 0 25 25"><path id="cart_trash_svg_path" d="M 5,5 L 20,20 M 20,5 L 5,20" 
+            stroke="black" stroke-width="2" /></svg>
+        </div>
+    </div>
+    <div class="cart_middle_row">
         <div class="cart_quantity_row">
-            <button class="btn cart_decrement_button" id="cart_decrease_button" data-cart-id="{{ cart.id }}"
+            <button class="btn cart_decrement_button" id="cart_decrease_button" data-cart-id="{{ cart.product.pk }}"
             data-cart-change-url='{% url "cart:cart_change" %}'>-</button>
             <div class="cart_quantity_value">{{ cart.quantity }}</div>
-            <button class="btn cart_increment_button" id="cart_increase_button" data-cart-id="{{ cart.id }}"
+            <button class="btn cart_increment_button" id="cart_increase_button" data-cart-id="{{ cart.product.pk }}"
             data-cart-change-url='{% url "cart:cart_change" %}'>+</button>
         </div>
         <div class="cart_product_total">{{ cart.product_price }} ₽</div>
@@ -19,6 +26,6 @@
 {% endfor %}
 
 <div class="cart_bottom_row">
-    <p class="cart_main_quantity">Итого <strong>{{ carts.total_quantity }}</strong> товар(а) на сумму</p>
+    <p class="cart_main_quantity">Итого <strong id="cart_total_quantity">{{ carts.total_quantity }}</strong> товар(а) на сумму</p>
     <h4 class="cart_main_total"><strong>{{ carts.total_price }} ₽</strong></h4>
 </div>
