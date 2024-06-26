@@ -13,11 +13,17 @@
     </div>
     <div class="cart_middle_row">
         <div class="cart_quantity_row">
-            <button class="btn cart_decrement_button" id="cart_decrease_button" data-cart-id="{{ cart.product.pk }}"
-            data-cart-change-url='{% url "cart:cart_change" %}'>-</button>
-            <div class="cart_quantity_value">{{ cart.quantity }}</div>
-            <button class="btn cart_increment_button" id="cart_increase_button" data-cart-id="{{ cart.product.pk }}"
-            data-cart-change-url='{% url "cart:cart_change" %}'>+</button>
+            <button class="btn cart_decrement_button" data-product-id="{{ cart.product.pk }}"
+            data-cart-change-url='{% url "cart:cart_change" %}' data-cart-quantity="{{ cart.quantity }}">
+                {% csrf_token %}
+                -
+            </button>
+            <div id="cart_quantity_value">{{ cart.quantity }}</div>
+            <button class="btn cart_increment_button" data-product-id="{{ cart.product.pk }}"
+            data-cart-change-url='{% url "cart:cart_change" %}' data-cart-quantity="{{ cart.quantity }}">
+                {% csrf_token %}
+                +
+            </button>
         </div>
         <div class="cart_product_total">{{ cart.product_price }} ₽</div>
     </div>

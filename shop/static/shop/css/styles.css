@@ -647,14 +647,14 @@ body {
 
 }
 
-.cart_quantity_value {
+#cart_quantity_value {
 
     font-family: "Jost", sans-serif;
     color:aliceblue;
 
 }
 
-#cart_decrease_button, #cart_increase_button {
+.cart_decrement_button, .cart_increment_button {
 
     width: 30px;
     height: 30px;
@@ -668,7 +668,7 @@ body {
     
 }
 
-#cart_decrease_button:hover, #cart_increase_button:hover {
+.cart_decrement_button:hover, .cart_increment_button:hover {
 
     background-color:#b15000;
     color:#100B07;

@@ -78,7 +78,8 @@
                 </div>
             <button class="btn card_button" href='{% url "cart:cart_add" %}' data-product-id="{{pepper.pk}}">
                 {% csrf_token %}
-                В корзину</button>
+                В корзину
+            </button>
         </div>      
         
         {% endfor %}
