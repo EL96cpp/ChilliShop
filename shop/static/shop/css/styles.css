@@ -105,7 +105,7 @@ body {
 
 }
 
-.filters_form, .cart_form {
+.filters_form, .cart_form, .profile_navigation_wrapper {
 
     background-color: #100B07;
     border-color: #802900;
@@ -121,7 +121,7 @@ body {
 }
 
 
-.filters_title, .cart_title, .user_data_title {
+.filters_title, .cart_title, .user_data_title, .order_confirmation_title {
 
     color:#ffeee0;
     font-family: "Jost", sans-serif;
@@ -201,7 +201,7 @@ body {
 .user_data_element {
 
     max-width: 200px;
-    margin: 40px auto;
+    margin: 10px auto;
     display: flex;
     justify-content:left;
     gap: 15px;
@@ -689,5 +689,16 @@ body {
     font-family: "Jost", sans-serif;
     color: #ffeee0;
     font-size: 18px;
+
+}
+
+.profile_order_confirmation_form {
+
+    width: 1000px;
+    margin: 10px auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color:#100B07;
+    border-radius: 10px;
 
 }

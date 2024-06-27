@@ -28,12 +28,28 @@
 
 {% endblock left_area %}
 
+
 {% block main_area %}
 
-<form action="" class="make_order_form">
-    <div class="make_order_title">Оформление заказа</div>
-    
-
-</form>
+{% if carts %}
+    {% include "users/includes/order_confirmation.html" %}
+{% else %}
+    {% include "users/includes/deliveries.html" %}
+{% endif %}
 
 {% endblock main_area %}
+
+
+{% block right_area %}
+
+<div class="profile_navigation_wrapper">
+    <ul class="profile_navigation_list">
+        {% if carts %}
+        <a class="profile_navigation_text" id="order_confirmation_navigation">Оформление заказа</a>
+        {% endif %}
+        <a class="profile_navigation_text" id="deliveries_navigation">Доставки</a>
+        <a class="profile_navigation_text" id="received_orders_navigation">Полученные заказы</a>
+    </ul>
+</div>
+
+{% endblock right_area %}

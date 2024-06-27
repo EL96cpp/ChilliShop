@@ -8,6 +8,7 @@ from django.urls import reverse, reverse_lazy
 
 from users.forms import *
 from users.models import *
+from carts.utils import get_user_carts
 
 
 class RegisterUser(CreateView):
@@ -34,7 +35,8 @@ class LoginUser(LoginView):
 
 
 def profile(request):
-    return render(request, 'users/profile.html')
+    user_carts = get_user_carts(request)
+    return render(request, 'users/profile.html', {"carts": user_carts})
 
 
 def logout_user(request):
@@ -44,4 +46,12 @@ def logout_user(request):
 
 
 def order_confirmation(request):
+    pass
+
+
+def deliveries(request):
+    pass
+
+
+def received_orders(request):
     pass

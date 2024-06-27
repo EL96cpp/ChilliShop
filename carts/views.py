@@ -9,7 +9,6 @@ from .utils import get_user_carts
 def cart_add(request):
 
     product_id = request.POST.get("product_id")
-    print(product_id)
 
     product = Product.objects.get(id=product_id)
 
@@ -43,15 +42,16 @@ def cart_change(request):
     
     cart_id = request.POST.get("cart_id")
     quantity = request.POST.get("quantity")
-    
 
     cart = Cart.objects.get(product=cart_id)
 
     if quantity != '0':
+        print("quantity is ", quantity)
         cart.quantity = quantity
         cart.save()
         updated_quantity = cart.quantity
     else:
+        print("quantity is zero ", quantity)
         cart.delete()
         updated_quantity = 0
 
@@ -77,14 +77,10 @@ def cart_change(request):
 def cart_remove(request):
     
     cart_id = request.POST.get("cart_id")
-    print("keker!")
-    print(cart_id)
 
     cart = Cart.objects.get(product=cart_id)
     quantity = cart.quantity
     cart.delete()
-
-    print(quantity, " quantity")
 
     user_cart = get_user_carts(request)
     cart_items_html = render_to_string("carts/includes/cart.html", {"carts": user_cart}, request=request)

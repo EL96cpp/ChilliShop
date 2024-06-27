@@ -58,8 +58,13 @@ $(document).ready(function () {
                 cart_count -= data.quantity_deleted;
                 goods_in_cart_count.text(cart_count);
 
+                console.log(data.cart_items_html);
+
                 var cart_items_container = $("#cart-items-container");
                 cart_items_container.html(data.cart_items_html);
+
+                var orderConfirmationWrapper = $("#order_confirmation_wrapper");
+                orderConfirmationWrapper.html(data.cart_items_html);
 
             }
             
@@ -74,15 +79,13 @@ $(document).ready(function () {
         var product_id = $(this).data("product-id");
         var url = $(this).data("cart-change-url");
 
-        var quantity = $(this).data("cart-quantity");
 
-        console.log("Increment clicked!");
-        console.log(product_id, url, quantity);
+        //var quantity = $(this).data("cart-quantity");
+        var quantity = parseInt($(this).prev().text());
 
+        console.log("increment ", product_id, quantity);
 
         updateCart(product_id, quantity + 1, 1, url);
-
-        
 
     });
 
@@ -93,14 +96,12 @@ $(document).ready(function () {
         var product_id = $(this).data("product-id");
         var url = $(this).data("cart-change-url");
 
-        var quantity = $(this).data("cart-quantity");
 
-        console.log("Decrement clicked!");
-        console.log(product_id, url, quantity);
-
+        //var quantity = $(this).data("cart-quantity");
+        var quantity = parseInt($(this).next().text());
+        console.log("decrement ", product_id, quantity);
 
         updateCart(product_id, quantity - 1, -1, url);
-
 
     });
 
@@ -117,16 +118,23 @@ $(document).ready(function () {
             success: function (data) {
 
                 console.log("Success!");
+                console.log("update ", product_id, quantity, change);
 
                 // Изменяем количество товаров в корзине
                 var goodsInCartCount = $("#cart_quantity_value");
+                
                 var cartCount = parseInt(goodsInCartCount.text() || 0);
                 cartCount += change;
                 goodsInCartCount.text(cartCount);
+                
 
                 // Меняем содержимое корзины
                 var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
+
+                var orderConfirmationWrapper = $("#order_confirmation_wrapper");
+                orderConfirmationWrapper.html(data.cart_items_html);
+
 
             },
             error: function (data) {
