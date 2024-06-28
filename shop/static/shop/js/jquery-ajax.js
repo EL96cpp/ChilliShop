@@ -80,7 +80,6 @@ $(document).ready(function () {
         var url = $(this).data("cart-change-url");
 
 
-        //var quantity = $(this).data("cart-quantity");
         var quantity = parseInt($(this).prev().text());
 
         console.log("increment ", product_id, quantity);
@@ -97,7 +96,6 @@ $(document).ready(function () {
         var url = $(this).data("cart-change-url");
 
 
-        //var quantity = $(this).data("cart-quantity");
         var quantity = parseInt($(this).next().text());
         console.log("decrement ", product_id, quantity);
 
@@ -106,6 +104,7 @@ $(document).ready(function () {
     });
 
     function updateCart(product_id, quantity, change, url) {
+
         $.ajax({
             type: "POST",
             url: url,
@@ -138,9 +137,96 @@ $(document).ready(function () {
 
             },
             error: function (data) {
-                console.log("Ошибка при добавлении товара в корзину");
+                console.log("Ошибка при обновлении корзины");
             },
         });
+        
     }
+
+
+    $(document).on("click", "#order_confirmation_navigation", function (e) {
+
+        e.preventDefault();
+
+        console.log("Order confirmation clicked!");
+
+        var url = $(this).attr("href");
+
+        console.log(url);
+
+        $.ajax({
+            
+            type: "GET",
+            url: url,
+            data: {
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+            },
+
+            success: function (data) {
+                var cartItemsContainer = $(".profile_main_wrapper");
+                cartItemsContainer.html(data.cart_items_html);
+                console.log("Success confirmation");
+            }
+            
+        });
+
+    });
+
+    $(document).on("click", "#deliveries_navigation", function (e) {
+
+        e.preventDefault();
+
+        console.log("Deliveries clicked!");
+
+        var url = $(this).attr("href");
+
+        console.log(url);
+
+        $.ajax({
+            
+            type: "GET",
+            url: url,
+            data: {
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+            },
+
+            success: function (data) {
+                var cartItemsContainer = $(".profile_main_wrapper");
+                cartItemsContainer.html(data.cart_items_html);
+                console.log("Success deliveries");
+            }
+            
+        });
+
+    });
+
+    $(document).on("click", "#received_orders_navigation", function (e) {
+
+        e.preventDefault();
+
+        console.log("Received orders clicked!");
+
+        var url = $(this).attr("href");
+
+        console.log(url);
+
+        $.ajax({
+            
+            type: "GET",
+            url: url,
+            data: {
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+            },
+
+            success: function (data) {
+                var cartItemsContainer = $(".profile_main_wrapper");
+                cartItemsContainer.html(data.cart_items_html);
+                console.log("Success received orders!");
+            }
+            
+        });
+
+    });
+
 
 });

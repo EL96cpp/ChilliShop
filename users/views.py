@@ -5,6 +5,8 @@ from django.views.generic import CreateView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse, reverse_lazy
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 from users.forms import *
 from users.models import *
@@ -46,12 +48,40 @@ def logout_user(request):
 
 
 def order_confirmation(request):
-    pass
+
+    user_carts = get_user_carts(request)
+    cart_items_html = render_to_string(
+        "users/includes/order_confirmation.html", {"carts": user_carts}, request=request
+    )
+    response_data = {
+        "message": "Товар добавлен в корзину",
+        "cart_items_html": cart_items_html,
+    }
+
+    return JsonResponse(response_data)
 
 
 def deliveries(request):
-    pass
+    user_carts = get_user_carts(request)
+    cart_items_html = render_to_string(
+        "users/includes/deliveries.html", {"carts": user_carts}, request=request
+    )
+    response_data = {
+        "message": "Товар добавлен в корзину",
+        "cart_items_html": cart_items_html,
+    }
+
+    return JsonResponse(response_data)
 
 
 def received_orders(request):
-    pass
+    user_carts = get_user_carts(request)
+    cart_items_html = render_to_string(
+        "users/includes/received_orders.html", {"carts": user_carts}, request=request
+    )
+    response_data = {
+        "message": "Товар добавлен в корзину",
+        "cart_items_html": cart_items_html,
+    }
+
+    return JsonResponse(response_data)

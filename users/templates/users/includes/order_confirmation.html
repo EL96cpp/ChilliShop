@@ -1,11 +1,9 @@
 {% load static %}
 
-<form action="" class="profile_order_confirmation_form">
-    {% csrf_token %}
-    <div class="order_confirmation_title">Оформление заказа</div>
+{% csrf_token %}
+<h2 class="profile_includes_title">Оформление заказа</h2>
 
-    <div id="order_confirmation_wrapper">
-        {% include "carts/includes/cart.html" %}
-    </div>
-
-</form>
+<div id="order_confirmation_wrapper">
+    {% include "carts/includes/cart.html" %}
+</div>
+<button id="profile_order_button">Заказать</button>

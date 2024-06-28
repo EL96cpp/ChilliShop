@@ -121,7 +121,7 @@ body {
 }
 
 
-.filters_title, .cart_title, .user_data_title, .order_confirmation_title {
+.filters_title, .cart_title, .user_data_title, .profile_includes_title {
 
     color:#ffeee0;
     font-family: "Jost", sans-serif;
@@ -578,10 +578,9 @@ body {
     border-radius: 10px;
     width: 250px;
     max-height: 100%;
-    margin: 40px 40px 10px 40px;
+    margin: 10px 40px 10px 40px;
     padding: 10px;
     position: sticky;
-    top: 10px;
 
     display: flex;
     flex-direction: column;
@@ -692,7 +691,8 @@ body {
 
 }
 
-.profile_order_confirmation_form {
+
+.profile_main_wrapper {
 
     width: 1000px;
     margin: 10px auto;
@@ -700,5 +700,71 @@ body {
     padding-bottom: 20px;
     background-color:#100B07;
     border-radius: 10px;
+
+}
+
+#profile_order_button {
+
+    width: 120px;
+    height: 40px;
+    background-color: #922e00;
+    border-width: 1px;
+    border-color: #ffb491;
+    border-radius: 10px;
+
+    margin-left: 860px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    font-family: "Jost", sans-serif;
+    color:#100B07;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+
+}
+
+#profile_order_button:hover {
+
+    background-color: #e04700;
+    box-shadow: 1px 1px 10px 2px #b15000,
+                1px 1px 10px 2px #b15000,
+                1px 1px 10px 2px #b15000,
+                1px 1px 10px 2px #b15000;
+    color:aliceblue;
+    text-shadow: aliceblue 1px 1px 10px;
+
+}
+
+.profile_navigation_list {
+
+    width: 300px;
+    margin: 0 auto;
+
+}
+
+.profile_navigation_li {
+
+    display: block;
+    margin: 10px auto;
+
+}
+
+.profile_navigation_text {
+
+    text-decoration: none;
+    color:#ffeee0;
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 2px;
+
+}
+
+.profile_navigation_text:hover {
+
+    color: #e04700;
+    text-shadow: #8d4000 1px 1px 3px,
+                 #552600 1px 1px 4px,
 
 }

@@ -31,11 +31,11 @@
 
 {% block main_area %}
 
-{% if carts %}
-    {% include "users/includes/order_confirmation.html" %}
-{% else %}
+<div class="profile_main_wrapper">
+
     {% include "users/includes/deliveries.html" %}
-{% endif %}
+
+</div>
 
 {% endblock main_area %}
 
@@ -45,10 +45,16 @@
 <div class="profile_navigation_wrapper">
     <ul class="profile_navigation_list">
         {% if carts %}
-        <a class="profile_navigation_text" id="order_confirmation_navigation">Оформление заказа</a>
+        <li class="profile_navigation_li">
+            <a class="profile_navigation_text" id="order_confirmation_navigation" href="{% url 'users:order_confirmation' %}">Оформление заказа</a>
+        </li>
         {% endif %}
-        <a class="profile_navigation_text" id="deliveries_navigation">Доставки</a>
-        <a class="profile_navigation_text" id="received_orders_navigation">Полученные заказы</a>
+        <li class="profile_navigation_li"></li>
+            <a class="profile_navigation_text" id="deliveries_navigation" href="{% url 'users:deliveries' %}">Доставки</a>
+        </li>
+        <li class="profile_navigation_li"></li>
+            <a class="profile_navigation_text" id="received_orders_navigation" href="{% url 'users:received_orders' %}">Полученные заказы</a>
+        </li>
     </ul>
 </div>
 

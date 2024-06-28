@@ -46,12 +46,10 @@ def cart_change(request):
     cart = Cart.objects.get(product=cart_id)
 
     if quantity != '0':
-        print("quantity is ", quantity)
         cart.quantity = quantity
         cart.save()
         updated_quantity = cart.quantity
     else:
-        print("quantity is zero ", quantity)
         cart.delete()
         updated_quantity = 0
 
