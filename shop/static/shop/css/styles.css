@@ -8,6 +8,34 @@ html {
     padding: 0;
 }
 
+#info_message {
+
+    border:1px solid black;
+
+    background-color:#b4ffa7;
+    border-radius: 10px;
+    max-width: 500px;
+    
+    position: fixed;
+    top: 150px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    
+    z-index: 1000;
+
+    color: black;
+    font-family: "Jost", sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    vertical-align: middle;
+    text-align: center;
+
+    
+}
+
 body {
 
     background-image: url('../images/background3.jpg');
