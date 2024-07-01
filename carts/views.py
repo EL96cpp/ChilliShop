@@ -16,12 +16,27 @@ def cart_add(request):
         carts = Cart.objects.filter(user=request.user, product=product)
 
         if carts.exists():
+            print("User logged, cart exists")
             cart = carts.first()
             if cart:
                 cart.quantity += 1
                 cart.save()
         else:
+            print("User logged, cart doesn't exist")
             Cart.objects.create(user=request.user, product=product, quantity=1)
+
+    else:
+        carts = Cart.objects.filter(session_key=request.session.session_key, product=product)
+
+        if carts.exists():
+            print("User is not logged, cart exists")
+            cart = carts.first()
+            cart.quantity += 1
+            cart.save()
+        else:
+            print("User is not logged, cart does not exits")
+            Cart.objects.create(session_key=request.session.session_key, product=product, quantity=1)
+
 
     user_cart = get_user_carts(request)
 
@@ -43,7 +58,10 @@ def cart_change(request):
     cart_id = request.POST.get("cart_id")
     quantity = request.POST.get("quantity")
 
-    cart = Cart.objects.get(product=cart_id)
+    print(quantity, " on cart change")
+    print("cart id ", cart_id)
+
+    cart = Cart.objects.get(id=cart_id)
 
     if quantity != '0':
         cart.quantity = quantity
@@ -76,7 +94,12 @@ def cart_remove(request):
     
     cart_id = request.POST.get("cart_id")
 
-    cart = Cart.objects.get(product=cart_id)
+    print(cart_id, " is cart id")
+
+    cart = Cart.objects.get(id=cart_id)
+
+    print("Delete from cart ", cart_id, cart.quantity)
+
     quantity = cart.quantity
     cart.delete()
 

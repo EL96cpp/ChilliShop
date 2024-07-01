@@ -5,7 +5,7 @@
 <div class="cart_product_wrapper">
     <div class="cart_top_row">
         <div class="cart_product_title">{{ cart.product }}</div>
-        <div href='{% url "cart:cart_remove" %}' class="remove_from_cart" data-cart-id="{{ cart.product.pk }}">
+        <div href='{% url "cart:cart_remove" %}' class="remove_from_cart" data-cart-id="{{ cart.id }}">
             {% csrf_token %}
             <svg id="cart_trash_svg" width="25" height="25" viewbox="0 0 25 25"><path id="cart_trash_svg_path" d="M 5,5 L 20,20 M 20,5 L 5,20" 
             stroke="black" stroke-width="2" /></svg>
@@ -13,13 +13,13 @@
     </div>
     <div class="cart_middle_row">
         <div class="cart_quantity_row">
-            <button class="btn cart_decrement_button" data-product-id="{{ cart.product.pk }}"
+            <button class="btn cart_decrement_button" data-cart-id="{{ cart.id }}"
             data-cart-change-url='{% url "cart:cart_change" %}' data-cart-quantity="{{ cart.quantity }}">
                 {% csrf_token %}
                 -
             </button>
             <div id="cart_quantity_value">{{ cart.quantity }}</div>
-            <button class="btn cart_increment_button" data-product-id="{{ cart.product.pk }}"
+            <button class="btn cart_increment_button" data-cart-id="{{ cart.id }}"
             data-cart-change-url='{% url "cart:cart_change" %}' data-cart-quantity="{{ cart.quantity }}">
                 {% csrf_token %}
                 +

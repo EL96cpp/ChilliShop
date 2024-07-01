@@ -70,6 +70,10 @@ $(document).ready(function () {
                 var orderConfirmationWrapper = $("#order_confirmation_wrapper");
                 orderConfirmationWrapper.html(data.cart_items_html);
 
+            },
+
+            error: function (data) {
+                console.log("Ошибка при удалении корзины");
             }
             
         });
@@ -80,15 +84,15 @@ $(document).ready(function () {
     
         e.preventDefault();
 
-        var product_id = $(this).data("product-id");
+        var cart_id = $(this).data("cart-id");
         var url = $(this).data("cart-change-url");
 
 
         var quantity = parseInt($(this).prev().text());
 
-        console.log("increment ", product_id, quantity);
+        console.log("increment ", cart_id, quantity);
 
-        updateCart(product_id, quantity + 1, 1, url);
+        updateCart(cart_id, quantity + 1, 1, url);
 
     });
 
@@ -96,24 +100,24 @@ $(document).ready(function () {
     
         e.preventDefault();
 
-        var product_id = $(this).data("product-id");
+        var cart_id = $(this).data("cart-id");
         var url = $(this).data("cart-change-url");
 
 
         var quantity = parseInt($(this).next().text());
-        console.log("decrement ", product_id, quantity);
+        console.log("decrement ", cart_id, quantity);
 
-        updateCart(product_id, quantity - 1, -1, url);
+        updateCart(cart_id, quantity - 1, -1, url);
 
     });
 
-    function updateCart(product_id, quantity, change, url) {
+    function updateCart(cart_id, quantity, change, url) {
 
         $.ajax({
             type: "POST",
             url: url,
             data: {
-                cart_id: product_id,
+                cart_id: cart_id,
                 quantity: quantity,
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
@@ -121,7 +125,7 @@ $(document).ready(function () {
             success: function (data) {
 
                 console.log("Success!");
-                console.log("update ", product_id, quantity, change);
+                console.log("update ", cart_id, quantity, change);
 
                 // Изменяем количество товаров в корзине
                 var goodsInCartCount = $("#cart_quantity_value");
@@ -230,7 +234,7 @@ $(document).ready(function () {
                 var cartItemsContainer = $(".profile_main_wrapper");
                 cartItemsContainer.html(data.cart_items_html);
                 console.log("Success received orders!");
-                
+
             }
             
         });

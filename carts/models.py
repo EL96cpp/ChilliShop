@@ -32,4 +32,7 @@ class Cart(models.Model):
 
 
     def __str__(self) -> str:
-        return f'Корзина {self.user.username} | Товар {self.product.pepper_type}{self.product.number_of_seeds} | Количество {self.quantity}'
+        if self.user:
+            return f'Корзина {self.user.username} | Товар {self.product.pepper_type}{self.product.number_of_seeds} | Количество {self.quantity}'
+        else:
+            return f'Анонимная корзина | Товар {self.product.pepper_type}{self.product.number_of_seeds} | Количество {self.quantity}'
