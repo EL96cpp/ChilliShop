@@ -23,7 +23,7 @@ class Product(models.Model):
         return self.price_no_discount
     
 
-    # def __str__(self) -> str:
-    #     return self.pepper_type + " " + self.pepper_color + ", " + self.number_of_seeds
+    def __str__(self) -> str:
+        return self.pepper_type + " " + self.pepper_color + ", " + self.number_of_seeds
 
 

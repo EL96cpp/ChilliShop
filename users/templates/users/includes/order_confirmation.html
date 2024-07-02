@@ -8,7 +8,48 @@
 </div>
 
 <h2 class="profile_includes_title">Детали заказа</h2>
+    <form action='{% url "orders:confirm_order" %}' method="post" id="create_order_form">
+        {% csrf_token %}
 
+        <label for="id_first_name" class="form_label">Имя*:</label>
+        <input type="text" class="form_control" id="id_first_name" required>
+        <label for="id_last_name" class="form_label">Фамилия*:</label>
+        <input type="text" class="form_control" id="id_last_name" required>
+        <label for="id_phone_number" class="form_label">Номер телефона*</label>
+        <input type="text" class="form_control" id="id_phone_number" name="phone_number"
+            value='{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}'
+        placeholder="(000) 000-0000" required>
 
+        <label for="delivery" class="form_label">Способ доставки:</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="requires_delivery"
+                id="id_requires_delivery" value="1" checked>
+            <label class="form_choice_label" for="id_requires_delivery">Нужна доставка</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="requires_delivery"
+                id="id_requires_delivery" value="0">
+            <label class="form_choice_label" for="id_requires_delivery">Самовывоз</label>
+        </div>
 
+        <label for="id_delivery_address" class="form_label">Адрес доставки*:</label>
+        <textarea class="form_control" id="id_delivery_address"
+            value="{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"
+            name="delivery_address" rows="2" required></textarea>
+
+            <label class="form_label">Способ оплаты: </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="payment_on_get"
+                    id="id_payment_on_get" value="0" checked>
+                <label class="form_choice_label" for="id_payment_on_get">Оплата
+                    картой</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="payment_on_get"
+                    id="id_payment_on_get" value="1">
+                <label class="form_choice_label" for="id_payment_on_get">Наличными/картой
+                    при плучении</label>
+            </div>
+
+    </form>
 <button id="profile_order_button">Заказать</button>

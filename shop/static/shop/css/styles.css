@@ -159,7 +159,8 @@ body {
     text-align: center;
     text-decoration: underline;
     vertical-align: top;
-    padding-top: 20px;
+    padding-top: 30px;
+    padding-bottom: 20px;
     
 }
 
@@ -489,6 +490,15 @@ body {
 
 }
 
+.form_choice_label {
+
+    font-family: "Jost", sans-serif;
+    color:aliceblue;
+    font-size: 18px;
+    text-transform: 5px;
+
+}
+
 .login_title, .register_title {
 
     font-family: "Jost", sans-serif;
@@ -740,9 +750,9 @@ body {
     border-color: #ffb491;
     border-radius: 10px;
 
-    margin-left: 860px;
+    margin-left: 800px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 
     font-family: "Jost", sans-serif;
     color:#100B07;
@@ -786,6 +796,7 @@ body {
     font-size: 24px;
     font-weight: 400;
     letter-spacing: 2px;
+    padding-bottom: 30px;
 
 }
 
@@ -794,5 +805,31 @@ body {
     color: #e04700;
     text-shadow: #8d4000 1px 1px 3px,
                  #552600 1px 1px 4px,
+
+}
+
+#create_order_form {
+
+    width: 700px;
+    max-height: 100%;
+    margin: 10px auto;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap:25px;
+
+}
+
+.form_control {
+
+    font-family: "Jost", sans-serif;
+    font-size: 20px;
+
+}
+
+.form-check-inline {
+
+    padding-left: 40px;
 
 }
