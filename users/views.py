@@ -91,13 +91,15 @@ def order_confirmation(request):
 
 
 def deliveries(request):
+    
+    print("deliveries!")
     user_carts = get_user_carts(request)
-    cart_items_html = render_to_string(
+    deliveries_html = render_to_string(
         "users/includes/deliveries.html", {"carts": user_carts}, request=request
     )
     response_data = {
         "message": "Товар добавлен в корзину",
-        "cart_items_html": cart_items_html,
+        "deliveries_html": deliveries_html,
     }
 
     return JsonResponse(response_data)
@@ -105,12 +107,12 @@ def deliveries(request):
 
 def received_orders(request):
     user_carts = get_user_carts(request)
-    cart_items_html = render_to_string(
+    received_orders_html = render_to_string(
         "users/includes/received_orders.html", {"carts": user_carts}, request=request
     )
     response_data = {
         "message": "Товар добавлен в корзину",
-        "cart_items_html": cart_items_html,
+        "received_orders_html": received_orders_html,
     }
 
     return JsonResponse(response_data)

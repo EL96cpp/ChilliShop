@@ -153,6 +153,16 @@ $(document).ready(function () {
 
                 var orderConfirmationWrapper = $("#order_confirmation_wrapper");
                 orderConfirmationWrapper.html(data.cart_items_html);
+                
+
+                if (data.deliveries_html) {
+
+                    var profileWrapper = $(".profile_main_wrapper");
+                    profileWrapper.html(data.deliveries_html);
+
+                    $("#order_confirmation_navigation").remove();
+
+                }
 
             },
 
@@ -220,9 +230,19 @@ $(document).ready(function () {
 
                 var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
-
+                
                 var orderConfirmationWrapper = $("#order_confirmation_wrapper");
                 orderConfirmationWrapper.html(data.cart_items_html);
+
+                if (data.deliveries_html) {
+
+                    var profileWrapper = $(".profile_main_wrapper");
+                    profileWrapper.html(data.deliveries_html);
+
+                    $("#order_confirmation_navigation").remove();
+
+                }
+        
 
             },
             error: function (data) {
@@ -286,10 +306,8 @@ $(document).ready(function () {
 
             success: function (data) {
 
-                var cartItemsContainer = $(".profile_main_wrapper");
-                cartItemsContainer.html(data.cart_items_html);
-
-                //window.history.pushState(null, null, "/deliveries/")
+                var profileWrapper = $(".profile_main_wrapper");
+                profileWrapper.html(data.deliveries_html);
 
                 console.log("Success deliveries");
 
@@ -319,10 +337,8 @@ $(document).ready(function () {
 
             success: function (data) {
 
-                var cartItemsContainer = $(".profile_main_wrapper");
-                cartItemsContainer.html(data.cart_items_html);
-
-                //window.history.pushState(null, null, "/received_orders/")
+                var profileWrapper = $(".profile_main_wrapper");
+                profileWrapper.html(data.received_orders_html);
 
                 console.log("Success received orders!");
 

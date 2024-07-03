@@ -33,7 +33,11 @@
 
 <div class="profile_main_wrapper">
 
-    {% include "users/includes/deliveries.html" %}
+    {% if carts %}
+        {% include "users/includes/order_confirmation.html" %}
+    {% else %}
+        {% include "users/includes/deliveries.html" %}
+    {% endif %}
 
 </div>
 

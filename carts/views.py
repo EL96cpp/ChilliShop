@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from shop.models import Product
@@ -74,19 +74,20 @@ def cart_change(request):
 
     user_cart = get_user_carts(request)
 
-    context = {"carts": user_cart}
+    if user_cart.count():
 
+        context = {"carts": user_cart}
+        cart_items_html = render_to_string("carts/includes/cart.html", context, request=request)
+        response_data = {
+            "message": "Количество изменено",
+            "cart_items_html": cart_items_html,
+            "quantity": updated_quantity,
+        }
 
-    cart_items_html = render_to_string(
-        "carts/includes/cart.html", context, request=request)
-
-    response_data = {
-        "message": "Количество изменено",
-        "cart_items_html": cart_items_html,
-        "quantity": updated_quantity,
-    }
-
-    return JsonResponse(response_data)
+        return JsonResponse(response_data)
+    
+    else:
+        return redirect('users:deliveries')
 
 
 
@@ -104,13 +105,15 @@ def cart_remove(request):
     cart.delete()
 
     user_cart = get_user_carts(request)
-    cart_items_html = render_to_string("carts/includes/cart.html", {"carts": user_cart}, request=request)
 
-    response_data = {
-        "message": "Товар удалён",
-        "cart_items_html": cart_items_html,
-        "quantity_deleted": quantity        
-    }
-
-    return JsonResponse(response_data)
-
+    if user_cart.count():
+        cart_items_html = render_to_string("carts/includes/cart.html", {"carts": user_cart}, request=request)
+        response_data = {
+            "message": "Товар удалён",
+            "cart_items_html": cart_items_html,
+            "quantity_deleted": quantity        
+        }
+        return JsonResponse(response_data)
+    
+    else:
+        return redirect('users:deliveries')
