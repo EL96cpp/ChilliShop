@@ -2,6 +2,76 @@ $(document).ready(function () {
 
     var infoMessage = $("#info_message");
 
+    //Filter functions
+    $(document).on("click", "#sales_filters", function(e) {
+
+        filterProducts();
+
+    });
+
+    $('input[name="order_by"]').on("click", function(e) {
+
+        filterProducts();
+
+    });
+
+    $('#lower_price_limit').on("input", function(e) {
+
+        filterProducts();
+
+    });
+
+    $('#upper_price_limit').on("input", function(e) {
+
+        filterProducts();
+
+    });
+
+
+    function filterProducts() {
+
+        var sales_only = $("#sales_filters").is(":checked");
+
+        console.log("Filters sales clicked! ", sales_only);
+
+        var order_by_text = $('input[name="order_by"]:checked').val();
+        var lower_price_text = $("#lower_price_limit").val();
+        var upper_price_text = $("#upper_price_limit").val();
+
+        console.log(order_by_text, lower_price_text, upper_price_text);
+
+        $.ajax({
+            
+            type: "GET",
+            url: 'filter_products',
+            data: {
+                sales_only: sales_only,
+                order_by: order_by_text,
+                lower_price_limit: lower_price_text,
+                upper_price_limit: upper_price_text,
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+            },
+
+            success: function (data) {
+                console.log("Filtered successfully!");
+                
+                var productsContainer = $("#products_container");
+                productsContainer.html(data.products_html);                
+
+            },
+
+            error: function (data) {
+                console.log("Ошибка при удалении корзины");
+            }
+            
+        });
+
+
+    }
+
+
+    //Add product to the cart
+
     $(document).on("click", ".card_button", function(e) {
 
         e.preventDefault();
@@ -62,7 +132,6 @@ $(document).ready(function () {
                 cart_count -= data.quantity_deleted;
                 goods_in_cart_count.text(cart_count);
 
-                console.log(data.cart_items_html);
 
                 var cart_items_container = $("#cart-items-container");
                 cart_items_container.html(data.cart_items_html);
@@ -127,7 +196,6 @@ $(document).ready(function () {
                 console.log("Success!");
                 console.log("update ", cart_id, quantity, change);
 
-                // Изменяем количество товаров в корзине
                 var goodsInCartCount = $("#cart_quantity_value");
                 
                 var cartCount = parseInt(goodsInCartCount.text() || 0);
@@ -135,7 +203,6 @@ $(document).ready(function () {
                 goodsInCartCount.text(cartCount);
                 
 
-                // Меняем содержимое корзины
                 var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
 
@@ -173,6 +240,9 @@ $(document).ready(function () {
 
                 var cartItemsContainer = $(".profile_main_wrapper");
                 cartItemsContainer.html(data.cart_items_html);
+
+                //window.history.pushState(null, null, "order_confirmation/")
+
                 console.log("Success confirmation");
 
             }
@@ -203,6 +273,9 @@ $(document).ready(function () {
 
                 var cartItemsContainer = $(".profile_main_wrapper");
                 cartItemsContainer.html(data.cart_items_html);
+
+                //window.history.pushState(null, null, "/deliveries/")
+
                 console.log("Success deliveries");
 
             }
@@ -233,6 +306,9 @@ $(document).ready(function () {
 
                 var cartItemsContainer = $(".profile_main_wrapper");
                 cartItemsContainer.html(data.cart_items_html);
+
+                //window.history.pushState(null, null, "/received_orders/")
+
                 console.log("Success received orders!");
 
             }

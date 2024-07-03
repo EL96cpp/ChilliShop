@@ -14,7 +14,7 @@
     <div class="filters_title">Фильтры</div>
     <ul class="filters_list">
         <li class="filters_element"><div class="filters_text">Товары со скидкой</div>
-            <input type="checkbox" class="filters_checkbox" name="only_sales" value="on">
+            <input type="checkbox" class="filters_checkbox" id="sales_filters" name="only_sales" value="on">
         </li>
         <li class="filters_element"><div class="filters_text">По убыванию цены</div>
             <input type="radio" class="filters_radio" name="order_by" value="-price">
@@ -28,11 +28,11 @@
         <li class="filters_element">
             <div class="price_filter_title">Цена</div>
             <div class="price_limit">
-                <input type="text" class="filter_price_input" name="lower_price_limit">
+                <input type="text" class="filter_price_input" id="lower_price_limit" name="lower_price_limit">
                 <div class="price_from_label">От</div>
             </div>
             <div class="price_limit">
-                <input type="text" class="filter_price_input" name="upper_price_limit">
+                <input type="text" class="filter_price_input" id="upper_price_limit" name="upper_price_limit">
                 <div class="price_to_label">До</div>
             </div>
         </li>
@@ -45,36 +45,9 @@
 {% block main_area %}
 
 <div class="container">
-    <div class="container_cards">
+    <div class="container_cards" id="products_container">
 
-        {% for pepper in products %}
-
-        <div class="card">
-            <div class="card_top">
-                {% if pepper.discount %}
-                <div class="card_discount_wrapper">
-                    <span class="card_discount">-{{pepper.discount}}%</span>
-                </div>
-                {% endif %}
-                <image class="card_image" src="{{pepper.image.url}}" alt={{pepper.pepper_type}}></image>
-            </div>
-            <div class="card_bottom">
-                <div class="card_prices">
-                    <div class="card_final_price">{{pepper.final_price}} ₽</div>
-                    {% if pepper.discount %}
-                    <div class="card_price_no_discount">{{pepper.price_no_discount}} ₽</div>
-                    {% endif %}
-                </div>
-                    <div class="card_title">{{pepper}}</div>
-                    <div class="card_scoville_value">2.200.000 shu</div>
-                </div>
-            <button class="btn card_button" href='{% url "cart:cart_add" %}' data-product-id="{{pepper.pk}}">
-                {% csrf_token %}
-                В корзину
-            </button>
-        </div>      
-        
-        {% endfor %}
+        {% include "shop/includes/products.html" %}
 
     </div>
 </div>         

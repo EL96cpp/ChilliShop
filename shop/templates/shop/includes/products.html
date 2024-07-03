@@ -1,0 +1,30 @@
+{% load static %}
+
+{% for pepper in products %}
+
+<div class="card">
+    <div class="card_top">
+        {% if pepper.discount %}
+        <div class="card_discount_wrapper">
+            <span class="card_discount">-{{pepper.discount}}%</span>
+        </div>
+        {% endif %}
+        <image class="card_image" src="{{pepper.image.url}}" alt={{pepper.pepper_type}}></image>
+    </div>
+    <div class="card_bottom">
+        <div class="card_prices">
+            <div class="card_final_price">{{pepper.final_price}} ₽</div>
+            {% if pepper.discount %}
+            <div class="card_price_no_discount">{{pepper.price_no_discount}} ₽</div>
+            {% endif %}
+        </div>
+            <div class="card_title">{{pepper}}</div>
+            <div class="card_scoville_value">{{ pepper.scoville_value }} shu</div>
+        </div>
+    <button class="btn card_button" href='{% url "cart:cart_add" %}' data-product-id="{{pepper.pk}}">
+        {% csrf_token %}
+        В корзину
+    </button>
+</div>      
+
+{% endfor %}
