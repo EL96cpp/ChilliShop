@@ -69,6 +69,21 @@ $(document).ready(function () {
 
     }
 
+    //Clear prduct filters
+    $(document).on("click", "#clear_filters_btn", function(e) {
+
+        e.preventDefault();
+
+        $("#sales_filters").prop("checked", false);;
+
+        $('input[name="order_by"]:checked').prop('checked', false);
+        $("#lower_price_limit").val('');
+        $("#upper_price_limit").val('');
+
+        filterProducts();
+
+    });
+
 
     //Add product to the cart
 
