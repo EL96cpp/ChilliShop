@@ -41,14 +41,18 @@ class LoginUser(LoginView):
         session_key = self.request.session.session_key
         user = form.get_user()
         if user:
+
             auth.login(self.request, user)
+
             if session_key:
+            
                 forgot_carts = Cart.objects.filter(user=user)
+            
                 if forgot_carts.exists():
+            
                     forgot_carts.delete()
                 
                 Cart.objects.filter(session_key=session_key).update(user=user)
-
                 messages.success(self.request, f"{user.username}, Вы вошли в аккаунт!")
 
                 return HttpResponseRedirect(self.get_success_url())
@@ -59,18 +63,21 @@ class LoginUser(LoginView):
 
 
 def profile(request):
-    user_carts = get_user_carts(request)
-    return render(request, 'users/profile.html', {"carts": user_carts})
+    if request.user.is_authenticated:
+        print("authenticatied")
+        user_carts = get_user_carts(request)
+        return render(request, 'users/profile.html', {"carts": user_carts})
+    else:
+        print("non authenticated")
+        return redirect('users:login')
 
 
 def logout_user(request):
     auth.logout(request)
-    print("Logout call!!!")
     return redirect('home')
 
 
 def order_confirmation(request):
-
     user_carts = get_user_carts(request)
     cart_items_html = render_to_string(
         "users/includes/order_confirmation.html", {"carts": user_carts}, request=request
