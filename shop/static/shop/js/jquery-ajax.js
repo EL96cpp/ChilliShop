@@ -155,12 +155,10 @@ $(document).ready(function () {
                 orderConfirmationWrapper.html(data.cart_items_html);
                 
 
-                if (data.deliveries_html) {
+                if (data.redirect) {
 
-                    var profileWrapper = $(".profile_main_wrapper");
-                    profileWrapper.html(data.deliveries_html);
-
-                    $("#order_confirmation_navigation").remove();
+                    console.log("Redirect!");
+                    window.location.href = "/users/profile/deliveries";
 
                 }
 
@@ -234,15 +232,12 @@ $(document).ready(function () {
                 var orderConfirmationWrapper = $("#order_confirmation_wrapper");
                 orderConfirmationWrapper.html(data.cart_items_html);
 
-                if (data.deliveries_html) {
+                if (data.redirect) {
 
-                    var profileWrapper = $(".profile_main_wrapper");
-                    profileWrapper.html(data.deliveries_html);
-
-                    $("#order_confirmation_navigation").remove();
+                    console.log("Redirect!");
+                    window.location.href = "/users/profile/deliveries";
 
                 }
-        
 
             },
             error: function (data) {
@@ -253,6 +248,7 @@ $(document).ready(function () {
     }
 
 
+    /*
     $(document).on("click", "#order_confirmation_navigation", function (e) {
 
         e.preventDefault();
@@ -346,6 +342,50 @@ $(document).ready(function () {
             
         });
 
+    });
+    
+    */
+
+    // Обработчик события радиокнопки выбора способа доставки
+    $('input[name="requires_delivery"]').change(function () {
+
+        console.log("Requires delivery changed!");
+
+        var selectedValue = $(this).val();
+
+        console.log(selectedValue);
+
+        // Скрываем или отображаем input ввода адреса доставки
+        if (selectedValue === "1") {
+            $("#id_delivery_address").show();
+            $("#delivery_address_label").show();
+        } else {
+            $("#id_delivery_address").hide();
+            $("#delivery_address_label").hide();
+        }
+    });
+
+    // Форматирования ввода номера телефона в форме (xxx) xxx-хххx
+    document.getElementById('id_phone_number').addEventListener('input', function (e) {
+        var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+
+    // Проверяем на стороне клинта коррекность номера телефона в форме xxx-xxx-хх-хx
+    $('#create_order_form').on('submit', function (event) {
+        var phoneNumber = $('#id_phone_number').val();
+        var regex = /^\(\d{3}\) \d{3}-\d{4}$/;
+
+        if (!regex.test(phoneNumber)) {
+            $('#phone_number_error').show();
+            event.preventDefault();
+        } else {
+            $('#phone_number_error').hide();
+
+            // Очистка номера телефона от скобок и тире перед отправкой формы
+            var cleanedPhoneNumber = phoneNumber.replace(/[()\-\s]/g, '');
+            $('#id_phone_number').val(cleanedPhoneNumber);
+        }
     });
 
 

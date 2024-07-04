@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 
 from users.forms import *
+from orders.forms import CreateOrderForm
 from users.models import *
 from carts.models import Cart
 from carts.utils import get_user_carts
@@ -64,11 +65,12 @@ class LoginUser(LoginView):
 
 def profile(request):
     if request.user.is_authenticated:
-        print("authenticatied")
         user_carts = get_user_carts(request)
-        return render(request, 'users/profile.html', {"carts": user_carts})
+        if user_carts.exists():
+            return redirect('users:order_confirmation')
+        else:
+            return redirect('users:deliveries')
     else:
-        print("non authenticated")
         return redirect('users:login')
 
 
@@ -78,41 +80,25 @@ def logout_user(request):
 
 
 def order_confirmation(request):
-    user_carts = get_user_carts(request)
-    cart_items_html = render_to_string(
-        "users/includes/order_confirmation.html", {"carts": user_carts}, request=request
-    )
-    response_data = {
-        "message": "Товар добавлен в корзину",
-        "cart_items_html": cart_items_html,
+
+    initial = {
+        'first_name': request.user.first_name,
+        'last_name': request.user.last_name,
     }
 
-    return JsonResponse(response_data)
+    form = CreateOrderForm(initial=initial)
+
+
+    user_carts = get_user_carts(request)
+    return render(request, 'users/profile.html', {"carts": user_carts, "form": form})
+
 
 
 def deliveries(request):
-    
-    print("deliveries!")
     user_carts = get_user_carts(request)
-    deliveries_html = render_to_string(
-        "users/includes/deliveries.html", {"carts": user_carts}, request=request
-    )
-    response_data = {
-        "message": "Товар добавлен в корзину",
-        "deliveries_html": deliveries_html,
-    }
-
-    return JsonResponse(response_data)
+    return render(request, 'users/profile.html', {"carts": user_carts})
 
 
 def received_orders(request):
     user_carts = get_user_carts(request)
-    received_orders_html = render_to_string(
-        "users/includes/received_orders.html", {"carts": user_carts}, request=request
-    )
-    response_data = {
-        "message": "Товар добавлен в корзину",
-        "received_orders_html": received_orders_html,
-    }
-
-    return JsonResponse(response_data)
+    return render(request, 'users/profile.html', {"carts": user_carts})

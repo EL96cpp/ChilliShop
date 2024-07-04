@@ -16,25 +16,21 @@ def cart_add(request):
         carts = Cart.objects.filter(user=request.user, product=product)
 
         if carts.exists():
-            print("User logged, cart exists")
             cart = carts.first()
             if cart:
                 cart.quantity += 1
                 cart.save()
         else:
-            print("User logged, cart doesn't exist")
             Cart.objects.create(user=request.user, product=product, quantity=1)
 
     else:
         carts = Cart.objects.filter(session_key=request.session.session_key, product=product)
 
         if carts.exists():
-            print("User is not logged, cart exists")
             cart = carts.first()
             cart.quantity += 1
             cart.save()
         else:
-            print("User is not logged, cart does not exits")
             Cart.objects.create(session_key=request.session.session_key, product=product, quantity=1)
 
 
@@ -58,9 +54,6 @@ def cart_change(request):
     cart_id = request.POST.get("cart_id")
     quantity = request.POST.get("quantity")
 
-    print(quantity, " on cart change")
-    print("cart id ", cart_id)
-
     cart = Cart.objects.get(id=cart_id)
 
     if quantity != '0':
@@ -74,46 +67,56 @@ def cart_change(request):
 
     user_cart = get_user_carts(request)
 
-    if user_cart.count():
-
+    if user_cart.exists():
         context = {"carts": user_cart}
         cart_items_html = render_to_string("carts/includes/cart.html", context, request=request)
         response_data = {
             "message": "Количество изменено",
             "cart_items_html": cart_items_html,
             "quantity": updated_quantity,
+            "redirect": 0
+        }
+    else:
+        context = {"carts": user_cart}
+        cart_items_html = render_to_string("carts/includes/cart.html", context, request=request)
+        response_data = {
+            "message": "Количество изменено",
+            "cart_items_html": cart_items_html,
+            "quantity": updated_quantity,
+            "redirect": 1
         }
 
-        return JsonResponse(response_data)
+    return JsonResponse(response_data)
     
-    else:
-        return redirect('users:deliveries')
-
 
 
 def cart_remove(request):
     
     cart_id = request.POST.get("cart_id")
 
-    print(cart_id, " is cart id")
-
     cart = Cart.objects.get(id=cart_id)
-
-    print("Delete from cart ", cart_id, cart.quantity)
 
     quantity = cart.quantity
     cart.delete()
 
     user_cart = get_user_carts(request)
 
-    if user_cart.count():
+    if user_cart.exists():
         cart_items_html = render_to_string("carts/includes/cart.html", {"carts": user_cart}, request=request)
         response_data = {
             "message": "Товар удалён",
             "cart_items_html": cart_items_html,
-            "quantity_deleted": quantity        
+            "quantity_deleted": quantity,
+            "redirect": 0        
         }
-        return JsonResponse(response_data)
-    
     else:
-        return redirect('users:deliveries')
+        cart_items_html = render_to_string("carts/includes/cart.html", {"carts": user_cart}, request=request)
+        response_data = {
+            "message": "Товар удалён",
+            "cart_items_html": cart_items_html,
+            "quantity_deleted": quantity, 
+            "redirect": 1       
+        } 
+
+    return JsonResponse(response_data)
+    

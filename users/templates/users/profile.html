@@ -33,10 +33,12 @@
 
 <div class="profile_main_wrapper">
 
-    {% if carts %}
+    {% if request.get_full_path == "/users/profile/order_confirmation" %}
         {% include "users/includes/order_confirmation.html" %}
-    {% else %}
+    {% elif request.get_full_path == "/users/profile/deliveries" %}
         {% include "users/includes/deliveries.html" %}
+    {% elif request.get_full_path == "/users/profile/received_orders" %}
+        {% include "users/includes/received_orders.html" %}
     {% endif %}
 
 </div>

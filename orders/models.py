@@ -3,6 +3,17 @@ from users.models import User
 from shop.models import Product
 
 
+class OrderitemQueryset(models.QuerySet):
+    
+    def total_price(self):
+        return sum(cart.products_price() for cart in self)
+
+    def total_quantity(self):
+        if self:
+            return sum(cart.quantity for cart in self)
+        return 0
+
+
 class Order(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, blank=True, null=True, 
                              verbose_name="Пользователь", default=None)
@@ -39,6 +50,7 @@ class OrderItem(models.Model):
         verbose_name_plural = "Проданные товары"
         ordering = ("id",)
 
+    objects = OrderitemQueryset.as_manager()
 
     def products_price(self):
         return round(self.product.sell_price() * self.quantity, 2)

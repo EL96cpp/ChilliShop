@@ -151,7 +151,7 @@ body {
 
 .filters_title, .cart_title, .user_data_title, .profile_includes_title {
 
-    color:#ffeee0;
+    color:#ff7300;
     font-family: "Jost", sans-serif;
     font-size: 24px;
     text-transform: uppercase;
@@ -611,7 +611,6 @@ body {
 .user_data_form {
 
     background-color: #100B07;
-    border-color: #802900;
     border-width: 3px;
     border-radius: 10px;
     width: 250px;
@@ -644,6 +643,7 @@ body {
     max-height: 100%;
     border-radius: 5px;
     background-color: #3e1f00;
+    border:1px solid rgb(255, 235, 226);
     margin: 10px auto;
 
 }
@@ -651,7 +651,7 @@ body {
 .cart_product_title {
 
     font-family: "Jost", sans-serif;
-    color:#ff6d29;
+    color:#ff915e;
     font-size: 20px;
     text-transform: 5px;
     text-decoration: underline;

@@ -12,9 +12,11 @@
         {% csrf_token %}
 
         <label for="id_first_name" class="form_label">Имя*:</label>
-        <input type="text" class="form_control" id="id_first_name" required>
+        <input type="text" class="form_control" id="id_first_name" name="first_name"
+        value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" required>
         <label for="id_last_name" class="form_label">Фамилия*:</label>
-        <input type="text" class="form_control" id="id_last_name" required>
+        <input type="text" class="form_control" id="id_last_name" name="last_name"
+        value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" required>
         <label for="id_phone_number" class="form_label">Номер телефона*</label>
         <input type="text" class="form_control" id="id_phone_number" name="phone_number"
             value='{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}'
@@ -32,10 +34,10 @@
             <label class="form_choice_label" for="id_requires_delivery">Самовывоз</label>
         </div>
 
-        <label for="id_delivery_address" class="form_label">Адрес доставки*:</label>
+        <label for="id_delivery_address" class="form_label" id="delivery_address_label">Адрес доставки*:</label>
         <textarea class="form_control" id="id_delivery_address"
             value="{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"
-            name="delivery_address" rows="2" required></textarea>
+            name="delivery_address" rows="2"></textarea>
 
             <label class="form_label">Способ оплаты: </label>
             <div class="form-check form-check-inline">
@@ -47,9 +49,8 @@
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="payment_on_get"
                     id="id_payment_on_get" value="1">
-                <label class="form_choice_label" for="id_payment_on_get">Наличными/картой
-                    при плучении</label>
+                <label class="form_choice_label" for="id_payment_on_get">Наличными/картой при плучении</label>
             </div>
 
+        <button id="profile_order_button" type="submit">Заказать</button>
     </form>
-<button id="profile_order_button">Заказать</button>
