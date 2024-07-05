@@ -833,3 +833,35 @@ body {
     padding-left: 40px;
 
 }
+
+.order_wrapper {
+
+    max-width: 90%;
+    max-height: 100%;
+    border-radius: 5px;
+    background-color: #ffdcba;
+    border:1px solid rgb(13, 4, 0);
+    margin: 10px auto;
+
+}
+
+.order_id_row, .order_total_row {
+
+    display: flex;
+    padding: 10px 10px;
+
+}
+
+.order_id_title {
+
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+
+}
+
+.order_id_value {
+
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+
+}

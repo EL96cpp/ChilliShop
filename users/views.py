@@ -14,6 +14,7 @@ from orders.forms import CreateOrderForm
 from users.models import *
 from carts.models import Cart
 from carts.utils import get_user_carts
+from orders.utils import get_user_deliveries, get_user_received_orders
 
 
 class RegisterUser(CreateView):
@@ -31,12 +32,13 @@ class LoginUser(LoginView):
     form_class = LoginUserForm
     model = User
     template_name = 'users/login.html'
+    success_url = reverse_lazy("users:profile") 
 
     def get_success_url(self):
         redirect_page = self.request.POST.get('next', None)
         if redirect_page and redirect_page != reverse('user:logout'):
             return redirect_page
-        return reverse_lazy('home')
+        return reverse_lazy("users:profile")
 
     def form_valid(self, form):
         session_key = self.request.session.session_key
@@ -96,9 +98,13 @@ def order_confirmation(request):
 
 def deliveries(request):
     user_carts = get_user_carts(request)
-    return render(request, 'users/profile.html', {"carts": user_carts})
+    user_deliveries = get_user_deliveries(request)
+    print(user_deliveries)
+    return render(request, 'users/profile.html', {"carts": user_carts, "deliveries": user_deliveries})
 
 
 def received_orders(request):
     user_carts = get_user_carts(request)
-    return render(request, 'users/profile.html', {"carts": user_carts})
+    user_received_orders = get_user_received_orders(request)
+    print(user_received_orders)
+    return render(request, 'users/profile.html', {"carts": user_carts, "received_orders": user_received_orders})

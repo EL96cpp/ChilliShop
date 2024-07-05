@@ -26,7 +26,7 @@ def confirm_order(request):
                     cart_items = Cart.objects.filter(user=user)
 
                     if cart_items.exists():
-                        # Создать заказ
+                        
                         order = Order.objects.create(
                             user=user,
                             phone_number=form.cleaned_data['phone_number'],
@@ -34,13 +34,15 @@ def confirm_order(request):
                             delivery_address=form.cleaned_data['delivery_address'],
                             payment_on_get=form.cleaned_data['payment_on_get'],
                         )
-                        # Создать заказанные товары
+                        
+                        total_price = 0
+
                         for cart_item in cart_items:
                             product=cart_item.product
                             name=cart_item.product.__str__()
                             price=cart_item.product.final_price()
                             quantity=cart_item.quantity
-
+                            total_price += cart_item.product.final_price()
 
                             OrderItem.objects.create(
                                 order=order,
@@ -50,8 +52,9 @@ def confirm_order(request):
                                 quantity=quantity,
                             )
                         
+                        order.total = total_price
+                        order.save()
 
-                        # Очистить корзину пользователя после создания заказа
                         cart_items.delete()
 
                         messages.success(request, 'Заказ оформлен!')
@@ -60,7 +63,6 @@ def confirm_order(request):
             except ValidationError as e:
                 print(e, "Error!")
                 messages.success(request, str(e))
-                #return redirect('orders:confirm_order')
         else:
             print("Form validation error!", form.data, form.errors)
     else:

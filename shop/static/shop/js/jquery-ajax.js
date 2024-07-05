@@ -155,7 +155,7 @@ $(document).ready(function () {
                 orderConfirmationWrapper.html(data.cart_items_html);
                 
 
-                if (data.redirect) {
+                if (data.redirect && window.location.href=="/users/profile/order_confirmation") {
 
                     console.log("Redirect!");
                     window.location.href = "/users/profile/deliveries";
@@ -232,8 +232,9 @@ $(document).ready(function () {
                 var orderConfirmationWrapper = $("#order_confirmation_wrapper");
                 orderConfirmationWrapper.html(data.cart_items_html);
 
-                if (data.redirect) {
+                if (data.redirect && window.location.href=="/users/profile/order_confirmation") {
 
+                    console.log(window.location.href);
                     console.log("Redirect!");
                     window.location.href = "/users/profile/deliveries";
 

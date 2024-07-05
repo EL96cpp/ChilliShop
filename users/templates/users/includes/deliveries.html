@@ -1,3 +1,21 @@
 {% load static %}
 
 <h2 class="profile_includes_title">Доставки</h2>
+
+{% for delivery in deliveries %}
+
+<div class="order_wrapper">
+
+    <div class="order_id_row">
+        <div class="order_id_title">Номер заказа:</div>
+        <div class="order_id_value">{{ delivery.id }}</div>
+    </div>
+
+    <div class="order_total_row">
+        <div class="order_total_title">Сумма заказа:</div>
+        <div class="order_id_value">{{ delivery.total }}</div>
+    </div>
+
+</div>
+
+{% endfor %}
