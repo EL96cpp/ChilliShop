@@ -15,7 +15,7 @@
         <div class="cart_quantity_row">
             <button class="btn cart_decrement_button" data-cart-id="{{ cart.id }}"
             data-cart-change-url='{% url "cart:cart_change" %}' data-cart-quantity="{{ cart.quantity }}">
-                {% csrf_token %}
+                {% csrf_token %} 
                 -
             </button>
             <div id="cart_quantity_value">{{ cart.quantity }}</div>

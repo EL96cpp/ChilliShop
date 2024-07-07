@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.db.models import F
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 from .models import *
 from carts.utils import get_user_carts
 
@@ -31,7 +32,10 @@ def index(request):
 
     user_cart = get_user_carts(request)
 
-    return render(request, 'shop/index.html', {"products": products, "carts": user_cart})
+    paginator = Paginator(products, 6)
+    current_page = paginator.page(1)
+
+    return render(request, 'shop/index.html', {"products": current_page, "carts": user_cart})
 
 
 

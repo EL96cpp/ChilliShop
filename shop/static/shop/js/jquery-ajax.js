@@ -126,7 +126,9 @@ $(document).ready(function () {
 
         var cart_id = $(this).data("cart-id");
         var remove_url = $(this).attr("href");
+        var current_url = $(this).data("current-url");
 
+        console.log(current_url);
         console.log(cart_id, remove_url);
         console.log(cart_count);
 
@@ -155,10 +157,9 @@ $(document).ready(function () {
                 orderConfirmationWrapper.html(data.cart_items_html);
                 
 
-                if (data.redirect && window.location.href=="/users/profile/order_confirmation") {
+                if (data.redirect) {
 
-                    console.log("Redirect!");
-                    window.location.href = "/users/profile/deliveries";
+                    window.location = "/";
 
                 }
 
@@ -232,11 +233,9 @@ $(document).ready(function () {
                 var orderConfirmationWrapper = $("#order_confirmation_wrapper");
                 orderConfirmationWrapper.html(data.cart_items_html);
 
-                if (data.redirect && window.location.href=="/users/profile/order_confirmation") {
+                if (data.redirect) {
 
-                    console.log(window.location.href);
-                    console.log("Redirect!");
-                    window.location.href = "/users/profile/deliveries";
+                    window.location.href = "/";
 
                 }
 

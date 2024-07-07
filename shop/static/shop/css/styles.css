@@ -310,7 +310,6 @@ body {
 
     width: 100%;
     max-width: 1000px;
-    max-height: 100%;
     padding: 0 15px;
     margin: 0 auto;
 
@@ -322,6 +321,7 @@ body {
     grid-column-gap: 70px;
     grid-row-gap: 10px;
     width: 100%;
+    height: 100%;
     grid-template: repeat(3, 1fr) / repeat(2, 2fr);
     justify-content: center;
     justify-items: center;
@@ -329,7 +329,7 @@ body {
 
 }
 
-.card {
+.product_card {
 
     margin: 0 auto;
     vertical-align: center;
@@ -346,14 +346,57 @@ body {
 
 }
 
+.pagination {
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+/*=====*/
+
+.pagination > li > a
+{
+    background-color: rgb(255, 9, 9);
+    color: #5A4181;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: #e83333;
+    border-color: #ddd;
+}
+
+.pagination > .page-item > .active > a
+{
+    color: white;
+    background-color: #04ff43 !Important;
+    border: solid 1px #5A4181 !Important;
+}
+
+.pagination > .page-item > .active > a:hover
+{
+    background-color: #4d00c9 !Important;
+    border: solid 1px #5A4181;
+}
+
+
+/*=====*/
+
 .card_button {
 
-    width: 120px;
+    width: 170px;
     height: 35px;
-    background-color: #f9c0a6;
+    background: #922e00;
     border-width: 1px;
-    border-color: #ff6d29;
+    border-color: #ffb491;
     border-radius: 10px;
+    display: block;
+    margin: 20px auto;
 
     font-family: "Jost", sans-serif;
     color:#100B07;
@@ -664,7 +707,6 @@ body {
 
 }
 
-
 .cart_top_row, .cart_middle_row, .cart_bottom_row {
 
     max-width: 90%;
@@ -845,22 +887,30 @@ body {
 
 }
 
-.order_id_row, .order_total_row {
+.order_header {
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.order_id_row, .order_status_row, .order_total_row {
 
     display: flex;
     padding: 10px 10px;
 
 }
 
-.order_id_title {
+.order_id_title, .order_status_title, .order_total_title {
 
     font-family: "Jost", sans-serif;
     font-size: 24px;
 
 }
 
-.order_id_value {
+.order_id_value, .order_status_value, .order_total_value {
 
+    padding-left: 5px;
     font-family: "Jost", sans-serif;
     font-size: 24px;
 
