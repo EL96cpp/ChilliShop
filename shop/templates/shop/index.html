@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load shop_extras %}
 
 {% block header_right_area %}
 
@@ -14,7 +15,7 @@
     <div class="filters_title">Фильтры</div>
     <ul class="filters_list">
         <li class="filters_element"><div class="filters_text">Товары со скидкой</div>
-            <input type="checkbox" class="filters_checkbox" id="sales_filters" name="only_sales" value="on">
+            <input type="checkbox" class="filters_checkbox" id="sales_filters" name='sales_only' value="on">
         </li>
         <li class="filters_element"><div class="filters_text">По убыванию цены</div>
             <input type="radio" class="filters_radio" name="order_by" value="-price">
@@ -37,7 +38,7 @@
             </div>
         </li>
     </ul>
-    <button id="clear_filters_btn" type="submit" class="index_btn">Очистить</button>
+    <button id="filter_btn" type="submit" class="index_btn">Применить</button>
 </form>
 
 {% endblock left_area %}
@@ -55,8 +56,9 @@
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a class="first_page" href="?page=1">&laquo; Первая</a>
-            <a class="previous_page" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+            <a class="first_page" href="{% my_url 1 'page' request.GET.urlencode %}">&laquo; Первая</a>
+            <a class="previous_page" href="{% my_url page_obj.previous_page_number 'page' request.GET.urlencode %}">
+            {{ page_obj.previous_page_number }}</a>
         {% endif %}
 
         <span class="current">
@@ -64,8 +66,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a class="next_page" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
-            <a class="last_page" href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+            <a class="next_page" href="{% my_url page_obj.next_page_number 'page' request.GET.urlencode %}">{{ page_obj.next_page_number }}</a>
+            <a class="last_page" href="{% my_url page_obj.paginator.num_pages 'page' request.GET.urlencode %}">Последняя &raquo;</a>
         {% endif %}
     </span>
 </div>

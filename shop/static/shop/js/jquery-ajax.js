@@ -2,8 +2,15 @@ $(document).ready(function () {
 
     var infoMessage = $("#info_message");
 
+    localStorage.setItem("#sales_filters", $(this).val());
+
+
+
+    /*
     //Filter functions
     $(document).on("click", "#sales_filters", function(e) {
+
+        localStorage.setItem("#sales_filters", $(this).val());
 
         filterProducts();
 
@@ -43,7 +50,7 @@ $(document).ready(function () {
         $.ajax({
             
             type: "GET",
-            url: 'filter_products',
+            url: '/',
             data: {
                 sales_only: sales_only,
                 order_by: order_by_text,
@@ -68,6 +75,7 @@ $(document).ready(function () {
 
 
     }
+    
 
     //Clear prduct filters
     $(document).on("click", "#clear_filters_btn", function(e) {
@@ -84,6 +92,7 @@ $(document).ready(function () {
 
     });
 
+    */
 
     //Add product to the cart
 

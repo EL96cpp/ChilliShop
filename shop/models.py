@@ -26,4 +26,3 @@ class Product(models.Model):
     def __str__(self) -> str:
         return self.pepper_type + " " + self.pepper_color + ", " + self.number_of_seeds
 
-
