@@ -1,3 +1,29 @@
 {% load static %}
 
 <h2 class="profile_includes_title">История заказов</h2>
+
+{% for order in received_orders %}
+
+<div class="order_wrapper">
+
+    <div class="order_header">
+        <div class="order_id_row">
+            <div class="order_id_title">Номер заказа: </div>
+            <div class="order_id_value">{{ order.id }}</div>
+        </div>
+    </div>
+
+    <div class="order_bottom_row">
+        <div class="order_received_timestamp_row">
+            <div class="order_received_timestamp_title">Дата получения: </div>
+            <div class="order_received_timestamp_value">{{ order.received_timestamp }}</div>
+        </div>
+        <div class="order_received_total_row">
+            <div class="order_total_title">Сумма заказа: </div>
+            <div class="order_total_value">{{ order.total }} ₽</div>
+        </div>
+    </div>
+
+</div>
+
+{% endfor %}

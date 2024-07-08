@@ -357,31 +357,19 @@ body {
 
 .pagination > li > a
 {
-    background-color: rgb(255, 9, 9);
-    color: #5A4181;
+    background-color:#3e1f00;
+    color:#ffeee0;
 }
+
 
 .pagination > li > a:focus,
 .pagination > li > a:hover,
 .pagination > li > span:focus,
 .pagination > li > span:hover
 {
-    color: #5a5a5a;
-    background-color: #e83333;
+    color:#100B07;
+    background-color:#922e00;
     border-color: #ddd;
-}
-
-.pagination > .page-item > .active > a
-{
-    color: white;
-    background-color: #04ff43 !Important;
-    border: solid 1px #5A4181 !Important;
-}
-
-.pagination > .page-item > .active > a:hover
-{
-    background-color: #4d00c9 !Important;
-    border: solid 1px #5A4181;
 }
 
 
@@ -792,7 +780,7 @@ body {
     border-color: #ffb491;
     border-radius: 10px;
 
-    margin-left: 800px;
+    /*margin-left: 800px;*/
     margin-top: 10px;
     margin-bottom: 40px;
 
@@ -887,28 +875,28 @@ body {
 
 }
 
-.order_header {
+.order_header, .order_bottom_row {
 
     display: flex;
     justify-content: space-between;
 
 }
 
-.order_id_row, .order_status_row, .order_total_row {
+.order_id_row, .order_status_row, .order_total_row, .order_received_timestamp_row, .order_received_total_row {
 
     display: flex;
     padding: 10px 10px;
 
 }
 
-.order_id_title, .order_status_title, .order_total_title {
+.order_id_title, .order_status_title, .order_total_title, .order_received_timestamp_title {
 
     font-family: "Jost", sans-serif;
     font-size: 24px;
 
 }
 
-.order_id_value, .order_status_value, .order_total_value {
+.order_id_value, .order_status_value, .order_total_value, .order_received_timestamp_value {
 
     padding-left: 5px;
     font-family: "Jost", sans-serif;

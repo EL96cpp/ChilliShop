@@ -20,7 +20,7 @@ class Cart(models.Model):
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name="Количество")
     session_key = models.CharField(max_length=32, null=True, blank=True)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
-
+    
     class Meta:
         verbose_name = "Корзина"
         verbose_name_plural = "Корзины"
