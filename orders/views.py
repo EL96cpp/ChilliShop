@@ -50,7 +50,6 @@ def confirm_order(request):
                             )
                         
                         order.total = total_price
-                        print(total_price, "is total price!")
                         order.save()
 
                         cart_items.delete()
@@ -78,10 +77,12 @@ def confirm_order(request):
 
 
 @login_required
-def deliveries(request):
-    pass
+def delivery(request, delivery_id):
+    print(delivery_id, "delivery")
+    return render(request, 'orders/delivery.html')
 
 
 @login_required
-def received_orders(request):
-    pass
+def received_order(request, order_id):
+    print(order_id)
+    return render(request, 'orders/received_order.html')

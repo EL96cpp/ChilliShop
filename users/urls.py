@@ -11,4 +11,5 @@ urlpatterns = [
     path('profile/order_confirmation', order_confirmation, name='order_confirmation'),
     path('profile/deliveries', deliveries, name='deliveries'),
     path('profile/received_orders', received_orders, name='received_orders')
+    
 ]

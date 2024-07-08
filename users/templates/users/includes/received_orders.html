@@ -4,6 +4,7 @@
 
 {% for order in received_orders %}
 
+<a href="{% url 'orders:received_order' order.id %}" class="received_order_ref">
 <div class="order_wrapper">
 
     <div class="order_header">
@@ -25,5 +26,6 @@
     </div>
 
 </div>
+</a>
 
 {% endfor %}

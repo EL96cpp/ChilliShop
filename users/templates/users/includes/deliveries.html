@@ -3,25 +3,26 @@
 <h2 class="profile_includes_title">Доставки</h2>
 
 {% for delivery in deliveries %}
+<a href="{% url 'orders:delivery' delivery.id %}" class="delivery_ref">
+    <div class="order_wrapper">
 
-<div class="order_wrapper">
-
-    <div class="order_header">
-        <div class="order_id_row">
-            <div class="order_id_title">Номер заказа: </div>
-            <div class="order_id_value">{{ delivery.id }}</div>
+        <div class="order_header">
+            <div class="order_id_row">
+                <div class="order_id_title">Номер заказа: </div>
+                <div class="order_id_value">{{ delivery.id }}</div>
+            </div>
+            <div class="order_status_row">
+                <div class="order_status_title">Статус: </div>
+                <div class="order_status_value">{{ delivery.status }}</div>
+            </div>
         </div>
-        <div class="order_status_row">
-            <div class="order_status_title">Статус: </div>
-            <div class="order_status_value">{{ delivery.status }}</div>
+
+        <div class="order_total_row">
+            <div class="order_total_title">Сумма заказа: </div>
+            <div class="order_total_value">{{ delivery.total }} ₽</div>
         </div>
-    </div>
 
-    <div class="order_total_row">
-        <div class="order_total_title">Сумма заказа: </div>
-        <div class="order_total_value">{{ delivery.total }} ₽</div>
     </div>
-
-</div>
+</a>
 
 {% endfor %}
