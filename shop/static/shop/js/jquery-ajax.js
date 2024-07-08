@@ -2,97 +2,6 @@ $(document).ready(function () {
 
     var infoMessage = $("#info_message");
 
-    localStorage.setItem("#sales_filters", $(this).val());
-
-
-
-    /*
-    //Filter functions
-    $(document).on("click", "#sales_filters", function(e) {
-
-        localStorage.setItem("#sales_filters", $(this).val());
-
-        filterProducts();
-
-    });
-
-    $('input[name="order_by"]').on("click", function(e) {
-
-        filterProducts();
-
-    });
-
-    $('#lower_price_limit').on("input", function(e) {
-
-        filterProducts();
-
-    });
-
-    $('#upper_price_limit').on("input", function(e) {
-
-        filterProducts();
-
-    });
-
-
-    function filterProducts() {
-
-        var sales_only = $("#sales_filters").is(":checked");
-
-        console.log("Filters sales clicked! ", sales_only);
-
-        var order_by_text = $('input[name="order_by"]:checked').val();
-        var lower_price_text = $("#lower_price_limit").val();
-        var upper_price_text = $("#upper_price_limit").val();
-
-        console.log(order_by_text, lower_price_text, upper_price_text);
-
-        $.ajax({
-            
-            type: "GET",
-            url: '/',
-            data: {
-                sales_only: sales_only,
-                order_by: order_by_text,
-                lower_price_limit: lower_price_text,
-                upper_price_limit: upper_price_text,
-                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
-            },
-
-            success: function (data) {
-                console.log("Filtered successfully!");
-                
-                var productsContainer = $("#products_container");
-                productsContainer.html(data.products_html);                
-
-            },
-
-            error: function (data) {
-                console.log("Ошибка при удалении корзины");
-            }
-            
-        });
-
-
-    }
-    
-
-    //Clear prduct filters
-    $(document).on("click", "#clear_filters_btn", function(e) {
-
-        e.preventDefault();
-
-        $("#sales_filters").prop("checked", false);;
-
-        $('input[name="order_by"]:checked').prop('checked', false);
-        $("#lower_price_limit").val('');
-        $("#upper_price_limit").val('');
-
-        filterProducts();
-
-    });
-
-    */
 
     //Add product to the cart
 
@@ -355,7 +264,6 @@ $(document).ready(function () {
     
     */
 
-    // Обработчик события радиокнопки выбора способа доставки
     $('input[name="requires_delivery"]').change(function () {
 
         console.log("Requires delivery changed!");
@@ -364,7 +272,7 @@ $(document).ready(function () {
 
         console.log(selectedValue);
 
-        // Скрываем или отображаем input ввода адреса доставки
+        
         if (selectedValue === "1") {
             $("#id_delivery_address").show();
             $("#delivery_address_label").show();
@@ -374,13 +282,13 @@ $(document).ready(function () {
         }
     });
 
-    // Форматирования ввода номера телефона в форме (xxx) xxx-хххx
+    
     document.getElementById('id_phone_number').addEventListener('input', function (e) {
         var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
         e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
     });
 
-    // Проверяем на стороне клинта коррекность номера телефона в форме xxx-xxx-хх-хx
+    
     $('#create_order_form').on('submit', function (event) {
         var phoneNumber = $('#id_phone_number').val();
         var regex = /^\(\d{3}\) \d{3}-\d{4}$/;
@@ -391,7 +299,7 @@ $(document).ready(function () {
         } else {
             $('#phone_number_error').hide();
 
-            // Очистка номера телефона от скобок и тире перед отправкой формы
+           
             var cleanedPhoneNumber = phoneNumber.replace(/[()\-\s]/g, '');
             $('#id_phone_number').val(cleanedPhoneNumber);
         }
