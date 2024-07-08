@@ -57,7 +57,7 @@
     <span class="step-links">
         {% if page_obj.has_previous %}
             <a class="first_page" href="{% my_url 1 'page' request.GET.urlencode %}">&laquo; Первая</a>
-            <a class="previous_page" href="{% my_url page_obj.previous_page_number 'page' request.GET.urlencode %}">
+            <a class="previous_page" href="{% my_url page_obj.paginator.previous_page_number 'page' request.GET.urlencode %}">
             {{ page_obj.previous_page_number }}</a>
         {% endif %}
 

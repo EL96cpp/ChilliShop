@@ -55,6 +55,7 @@ class OrderItem(models.Model):
     objects = OrderitemQueryset.as_manager()
 
     def products_price(self):
+        print(round(self.product.sell_price() * self.quantity, 2), "order item ", self.product)
         return round(self.product.sell_price() * self.quantity, 2)
 
 
