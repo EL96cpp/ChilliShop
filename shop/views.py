@@ -32,10 +32,16 @@ def index(request):
 
     user_cart = get_user_carts(request)
 
-    paginator = Paginator(products, 6)
-    current_page = paginator.page(1)
+    paginator = Paginator(products, 4)
 
-    return render(request, 'shop/index.html', {"products": current_page, "carts": user_cart})
+    page_number = request.GET.get('page')
+    print("page number", page_number)
+
+    current_page = paginator.get_page(page_number)
+
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'shop/index.html', {"products": current_page, "carts": user_cart, "page_obj": page_obj})
 
 
 
@@ -64,7 +70,15 @@ def filter_products(request):
         products = products.annotate(price=F('price_no_discount')-F('price_no_discount')*F('discount')/100).order_by("-price")
 
 
-    products_html = render_to_string("shop/includes/products.html", {"products": products}, request=request)
+    paginator = Paginator(products, 4)
+
+    page_number = request.GET.get('page')
+    print("page number", page_number)
+
+    current_page = paginator.get_page(page_number)
+
+    products_html = render_to_string("shop/includes/products.html", {"products": current_page}, request=request)
+
 
     response_data = {
         "message": "Количество изменено",

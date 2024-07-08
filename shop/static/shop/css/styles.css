@@ -869,7 +869,7 @@ body {
     max-width: 90%;
     max-height: 100%;
     border-radius: 5px;
-    background-color: #ffdcba;
+    background-color: #fcf5ee;
     border:1px solid rgb(13, 4, 0);
     margin: 10px auto;
 
@@ -893,6 +893,8 @@ body {
 
     font-family: "Jost", sans-serif;
     font-size: 24px;
+    text-decoration: underline;
+    color:#552600;
 
 }
 
@@ -901,5 +903,6 @@ body {
     padding-left: 5px;
     font-family: "Jost", sans-serif;
     font-size: 24px;
+    color:#802900;
 
 }
