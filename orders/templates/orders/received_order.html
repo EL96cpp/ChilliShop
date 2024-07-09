@@ -4,6 +4,64 @@
 
 <div class="profile_main_wrapper">
     <h2 class="profile_includes_title">Полученный заказ</h2>
-</div>
+    <div class="delivery_items_container">
+        <div class="delivery_row">
+            <div class="delivery_title">Номер заказа:</div>
+            <div class="delivery_value">{{ order.id }}</div>
+        </div>
+        {% for item in order_items %}
+        <div class="delivery_item_wrapper">
+            <div class="delivery_item_row">
+                <div class="delivery_item_title">Название товара:</div>
+                <div class="delivery_item_value">{{ item.name }}</div>
+            </div>  
+            <div class="delivery_item_row">
+                <div class="delivery_item_title">Количество:</div>
+                <div class="delivery_item_value">{{ item.quantity }}</div>
+            </div>  
+            <div class="delivery_item_row">
+                <div class="delivery_item_title">Стоимость:</div>
+                <div class="delivery_item_value">{{ item.price }} ₽</div>
+            </div>  
+        </div>
+        {% endfor %}
 
+        <div class="delivery_row">
+            <div class="delivery_title">Итого:</div>
+            <div class="delivery_value">{{ order.total }} ₽</div>
+        </div>
+        <div class="delivery_row">
+            <div class="delivery_title">Телефон:</div>
+            <div class="delivery_value">{{ order.phone_number }}</div>
+        </div>
+        <div class="delivery_row">
+            <div class="delivery_title">Дата оформления:</div>
+            <div class="delivery_value">{{ order.created_timestamp }}</div>
+        </div>
+        <div class="delivery_row">
+            <div class="delivery_title">Дата получения:</div>
+            <div class="delivery_value">{{ order.received_timestamp }}</div>
+        </div>
+        <div class="delivery_row">
+            <div class="delivery_title">Тип оплаты:</div>
+            <div class="delivery_value">{% if order.payment_on_get %}При получении{% else %}Предоплата{% endif %}</div>
+        </div>
+        {% if not order.payment_on_get %}
+        <div class="delivery_row">
+            <div class="delivery_title">Оплата:</div>
+            <div class="delivery_value">{% if order.is_paid %}Оплачен{% else %}Не оплачен{% endif %}</div>
+        </div>
+        {% endif %}
+        <div class="delivery_row">
+            <div class="delivery_title">Способ получения:</div>
+            <div class="delivery_value">{% if order.requires_delivery %}Доставка{% else %}Самовывоз{% endif %}</div>
+        </div>
+        {% if order.requires_delivery %}
+        <div class="delivery_row">
+            <div class="delivery_title">Адрес доставки:</div>
+            <div class="delivery_value">{{ order.delivery_address }}</div>
+        </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

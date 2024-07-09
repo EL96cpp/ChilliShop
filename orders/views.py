@@ -87,5 +87,8 @@ def delivery(request, delivery_id):
 
 @login_required
 def received_order(request, order_id):
-    print(order_id)
-    return render(request, 'orders/received_order.html')
+    order = Order.objects.filter(id=order_id)
+    order_items = OrderItem.objects.filter(order=order_id)
+    print(order_items.count(), "order items")
+    print(order[0].pk, "order")
+    return render(request, 'orders/received_order.html', {"order": order[0], "order_items": order_items})
