@@ -78,8 +78,11 @@ def confirm_order(request):
 
 @login_required
 def delivery(request, delivery_id):
-    print(delivery_id, "delivery")
-    return render(request, 'orders/delivery.html')
+    delivery = Order.objects.filter(id=delivery_id)
+    delivery_items = OrderItem.objects.filter(order=delivery_id)
+    print(delivery_items.count(), "delivery items")
+    print(delivery[0].pk, "delivery")
+    return render(request, 'orders/delivery.html', {"delivery": delivery[0], "delivery_items": delivery_items})
 
 
 @login_required

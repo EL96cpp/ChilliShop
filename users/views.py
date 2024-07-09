@@ -99,12 +99,10 @@ def order_confirmation(request):
 def deliveries(request):
     user_carts = get_user_carts(request)
     user_deliveries = get_user_deliveries(request)
-    print(user_deliveries)
     return render(request, 'users/profile.html', {"carts": user_carts, "deliveries": user_deliveries})
 
 
 def received_orders(request):
     user_carts = get_user_carts(request)
     user_received_orders = get_user_received_orders(request)
-    print(user_received_orders)
     return render(request, 'users/profile.html', {"carts": user_carts, "received_orders": user_received_orders})

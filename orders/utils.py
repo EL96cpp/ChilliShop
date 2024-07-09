@@ -1,7 +1,7 @@
 from .models import Order, OrderItem
 
 def get_user_deliveries(request):
-    orders = Order.objects.filter(user=request.user, status='В обработке')
+    orders = Order.objects.filter(user=request.user).exclude(status='Получен')
     return orders
 
 

@@ -8,18 +8,22 @@
 
         <div class="order_header">
             <div class="order_id_row">
-                <div class="order_id_title">Номер заказа: </div>
-                <div class="order_id_value">{{ delivery.id }}</div>
+                <div class="order_title">Номер заказа: </div>
+                <div class="order_value">{{ delivery.id }}</div>
             </div>
             <div class="order_status_row">
-                <div class="order_status_title">Статус: </div>
-                <div class="order_status_value">{{ delivery.status }}</div>
+                <div class="order_title">Статус: </div>
+                {% if delivery.status == "В обработке" %}
+                    <div class="order_status_processing_value">{{ delivery.status }}</div>
+                {% else %}
+                    <div class="order_status_prepeared_value">{{ delivery.status }}</div>
+                {% endif %}
             </div>
         </div>
 
         <div class="order_total_row">
-            <div class="order_total_title">Сумма заказа: </div>
-            <div class="order_total_value">{{ delivery.total }} ₽</div>
+            <div class="order_title">Сумма заказа: </div>
+            <div class="order_value">{{ delivery.total }} ₽</div>
         </div>
 
     </div>

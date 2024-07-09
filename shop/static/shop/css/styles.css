@@ -901,14 +901,23 @@ body {
 
 }
 
-.order_id_row, .order_status_row, .order_total_row, .order_received_timestamp_row, .order_received_total_row {
+.order_id_row, .order_status_row, .order_total_row, .order_received_timestamp_row, .order_received_total_row, .order_row, 
+.delivery_item_row {
 
     display: flex;
     padding: 10px 10px;
 
 }
 
-.order_id_title, .order_status_title, .order_total_title, .order_received_timestamp_title {
+.delivery_row {
+
+    display: flex;
+    padding: 10px 10px;
+    margin-left: 50px;
+
+}
+
+.order_title, .delivery_item_title {
 
     font-family: "Jost", sans-serif;
     font-size: 24px;
@@ -917,11 +926,76 @@ body {
 
 }
 
-.order_id_value, .order_status_value, .order_total_value, .order_received_timestamp_value {
+.delivery_title {
+
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+    text-decoration: underline;
+    color:hsl(19, 82%, 56%);
+
+}
+
+.order_value, .delivery_item_value {
 
     padding-left: 5px;
     font-family: "Jost", sans-serif;
     font-size: 24px;
     color:#802900;
+
+}
+
+.order_status_processing_value {
+
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+    color:rgb(232, 104, 0);
+    padding-left: 5px;
+
+}
+
+.order_status_prepeared_value {
+
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+	color: green;
+    padding-left: 5px;
+}
+
+.delivery_value {
+
+    padding-left: 5px;
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+    color:#fcf5ee;
+
+}
+
+.delivery_status_processing_value {
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+    color:rgb(255, 152, 68);
+    padding-left: 5px;
+}
+
+.delivery_status_ready_value {
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+	color: green;
+    padding-left: 5px;
+}
+
+.delivery_item_wrapper {
+
+    max-width: 90%;
+    max-height: 100%;
+    border-radius: 5px;
+    background-color:#ffeee0;
+    margin: 10px auto;
+
+}
+
+.delivery_items_container {
+
+    margin: 0 auto;
 
 }

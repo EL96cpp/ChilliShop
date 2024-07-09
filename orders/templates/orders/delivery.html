@@ -3,7 +3,70 @@
 {% block main_area %}
 
 <div class="profile_main_wrapper">
-<h2 class="profile_includes_title">Доставка</h2>
+    <h2 class="profile_includes_title">Доставка</h2>
+    <div class="delivery_items_container">
+        <div class="delivery_row">
+            <div class="delivery_title">Номер заказа:</div>
+            <div class="delivery_value">{{ delivery.id }}</div>
+        </div>
+        {% for item in delivery_items %}
+        <div class="delivery_item_wrapper">
+            <div class="delivery_item_row">
+                <div class="delivery_item_title">Название товара:</div>
+                <div class="delivery_item_value">{{ item.name }}</div>
+            </div>  
+            <div class="delivery_item_row">
+                <div class="delivery_item_title">Количество:</div>
+                <div class="delivery_item_value">{{ item.quantity }}</div>
+            </div>  
+            <div class="delivery_item_row">
+                <div class="delivery_item_title">Стоимость:</div>
+                <div class="delivery_item_value">{{ item.price }} ₽</div>
+            </div>  
+        </div>
+        {% endfor %}
+
+        <div class="delivery_row">
+            <div class="delivery_title">Итого:</div>
+            <div class="delivery_value">{{ delivery.total }} ₽</div>
+        </div>
+        <div class="delivery_row">
+            <div class="delivery_title">Телефон:</div>
+            <div class="delivery_value">{{ delivery.phone_number }}</div>
+        </div>
+        <div class="delivery_row">
+            <div class="delivery_title">Дата оформления:</div>
+            <div class="delivery_value">{{ delivery.created_timestamp }}</div>
+        </div>
+        <div class="delivery_row">
+            <div class="delivery_title">Статус:</div>
+            {% if delivery.status == "В обработке" %}
+                <div class="delivery_status_processing_value" >{{ delivery.status }}</div>
+            {% else %}
+                <div class="delivery_status_ready_value" >{{ delivery.status }}</div>
+            {% endif %}
+        </div>
+        <div class="delivery_row">
+            <div class="delivery_title">Тип оплаты:</div>
+            <div class="delivery_value">{% if delivery.payment_on_get %}При получении{% else %}Предоплата{% endif %}</div>
+        </div>
+        {% if not delivery.payment_on_get %}
+        <div class="delivery_row">
+            <div class="delivery_title">Оплата:</div>
+            <div class="delivery_value">{% if delivery.is_paid %}Оплачен{% else %}Не оплачен{% endif %}</div>
+        </div>
+        {% endif %}
+        <div class="delivery_row">
+            <div class="delivery_title">Способ получения:</div>
+            <div class="delivery_value">{% if delivery.requires_delivery %}Доставка{% else %}Самовывоз{% endif %}</div>
+        </div>
+        {% if delivery.requires_delivery %}
+        <div class="delivery_row">
+            <div class="delivery_title">Адрес доставки:</div>
+            <div class="delivery_value">{{ delivery.delivery_address }}</div>
+        </div>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}
